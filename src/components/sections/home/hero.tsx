@@ -1,282 +1,209 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-import { ArrowRight } from "lucide-react"
+import { useRef, useState, useEffect, useLayoutEffect } from "react"
+import Link from "next/link"
 import Image from "next/image"
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect"
+import { ArrowRight } from "lucide-react"
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null)
-  const [loadingPhase, setLoadingPhase] = useState(0)
+  const [showIntro, setShowIntro] = useState(true)
+  const [contentReady, setContentReady] = useState(false)
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
   
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"])
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
+  // Disable scrolling during intro and reset scroll position
+  useLayoutEffect(() => {
+    if (showIntro) {
+      // Lock scroll completely - this works with Lenis too
+      const scrollY = window.scrollY
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollY}px`
+      document.body.style.left = '0'
+      document.body.style.right = '0'
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Unlock scroll
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+      window.scrollTo(0, 0)
+    }
+    
+    return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
+      document.body.style.overflow = ''
+    }
+  }, [showIntro])
 
   useEffect(() => {
-    const t1 = setTimeout(() => setLoadingPhase(1), 800)
-    const t2 = setTimeout(() => setLoadingPhase(2), 1600)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    const timer1 = setTimeout(() => setShowIntro(false), 1800)
+    const timer2 = setTimeout(() => setContentReady(true), 2000)
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+    }
   }, [])
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#0A0A0A]">
-      
-      {/* === CINEMATIC INTRO === */}
+    <section 
+      ref={containerRef} 
+      className="relative h-screen w-full overflow-hidden bg-[#1a1a1a]"
+    >
+      {/* ═══════════════════════════════════════════════════════════════
+          INTRO OVERLAY
+      ═══════════════════════════════════════════════════════════════ */}
       <AnimatePresence>
-        {loadingPhase < 2 && (
-          <>
-            {/* Split curtains */}
+        {showIntro && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-[#1a1a1a] flex items-center justify-center"
+          >
             <motion.div
-              initial={{ x: 0 }}
-              animate={{ x: "-100%" }}
-              exit={{ x: "-100%" }}
-              transition={{ duration: 1.2, delay: 0.6, ease: [0.76, 0, 0.24, 1] }}
-              className="fixed inset-y-0 left-0 w-1/2 bg-[#0A0A0A] z-[100] pointer-events-none"
-            />
-            <motion.div
-              initial={{ x: 0 }}
-              animate={{ x: "100%" }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 1.2, delay: 0.6, ease: [0.76, 0, 0.24, 1] }}
-              className="fixed inset-y-0 right-0 w-1/2 bg-[#0A0A0A] z-[100] pointer-events-none"
-            />
-            
-            {/* Center logo reveal */}
-            <motion.div
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="fixed inset-0 z-[101] flex items-center justify-center pointer-events-none"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <Image 
-                  src="/logo-prooptica.svg" 
-                  alt="Prooptica" 
-                  width={280} 
-                  height={60}
-                  className="h-14 md:h-16 w-auto"
-                  priority
-                />
-              </motion.div>
+              <Image 
+                src="/logo-prooptica.svg" 
+                alt="Prooptica" 
+                width={280} 
+                height={60}
+                className="h-10 md:h-14 w-auto"
+                priority
+              />
             </motion.div>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* === BACKGROUND === */}
-      <motion.div 
-        className="absolute inset-0"
-        initial={{ scale: 1.3, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 2, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.div
+      {/* Video Background */}
+      <div className="absolute inset-0">
+        <motion.div 
           className="absolute inset-0"
-          style={{ scale: imageScale, y: imageY }}
+          style={{ scale }}
         >
-          <Image
-            src="/salons/warszawa-1.webp"
-            alt="Salon optyczny Prooptica"
-            fill
-            className="object-cover"
-            priority
-          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={contentReady ? { opacity: 1 } : {}}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative h-full w-full"
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/hero.webm" type="video/webm" />
+            </video>
+          </motion.div>
         </motion.div>
         
-        {/* Sophisticated overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-[#0A0A0A]/30" />
-      </motion.div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#1a1a1a]/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-[#1a1a1a]/40" />
+      </div>
 
-      {/* === MAIN CONTENT === */}
+      {/* Content */}
       <motion.div 
-        className="relative z-20 h-full"
-        style={{ opacity: contentOpacity }}
+        className="relative z-10 h-full flex flex-col justify-center"
+        style={{ opacity }}
       >
-        <div className="h-full flex flex-col">
-          
-          {/* Main content area */}
-          <div className="flex-1 flex items-center">
-            <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-              <div className="max-w-3xl">
-                
-                {/* Eyebrow */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={loadingPhase >= 2 ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="flex items-center gap-6 mb-10"
-                >
-                  <span className="text-[#E31F25] text-[11px] font-semibold tracking-[0.5em] uppercase">
-                    Prooptica
-                  </span>
-                  <div className="h-px flex-1 max-w-[100px] bg-[#E31F25]" />
-                </motion.div>
+        <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full">
+          <div className="max-w-3xl">
+            
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={contentReady ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-10"
+            >
+              <span className="text-[#C4A77D] text-[10px] sm:text-xs font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+                Od 2004 roku
+              </span>
+              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+            </motion.div>
 
-                {/* Main headline with TextGenerateEffect */}
-                {loadingPhase >= 2 && (
-                  <div className="space-y-2 mb-8">
-                    <h1 className="font-display text-[clamp(2.5rem,8vw,7rem)] font-light text-white leading-[1] tracking-[-0.02em]">
-                      <TextGenerateEffect 
-                        words="Twoje oczy."
-                        delay={0.3}
-                        duration={0.8}
-                        staggerDelay={0.12}
-                        filter={true}
-                      />
-                    </h1>
-                    
-                    <h1 className="font-display text-[clamp(2.5rem,8vw,7rem)] font-semibold leading-[1] tracking-[-0.02em]">
-                      <span className="text-white">
-                        <TextGenerateEffect 
-                          words="Nasza"
-                          delay={0.6}
-                          duration={0.8}
-                          staggerDelay={0.12}
-                          filter={true}
-                          className="inline"
-                        />
-                      </span>
-                      {" "}
-                      <motion.span 
-                        className="relative inline-block"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1 }}
-                      >
-                        <span className="italic text-[#E31F25]">
-                          <TextGenerateEffect 
-                            words="pasja"
-                            delay={0.9}
-                            duration={0.8}
-                            staggerDelay={0.12}
-                            filter={true}
-                            className="inline"
-                          />
-                        </span>
-                      </motion.span>
-                      <motion.span 
-                        className="text-white/30"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5, delay: 1.3 }}
-                      >.</motion.span>
-                    </h1>
-                  </div>
-                )}
-
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={loadingPhase >= 2 ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 1.4 }}
-                  className="text-white/60 text-lg md:text-xl max-w-md mb-12 leading-relaxed"
-                >
-                  20 lat doświadczenia. Najnowsze technologie. 
-                  Cztery salony w Polsce. Ponad 50 prestiżowych marek.
-                </motion.p>
-
-                {/* CTAs */}
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={loadingPhase >= 2 ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.8, delay: 1.6 }}
-                  className="flex flex-wrap items-center gap-4"
-                >
-                  <Button 
-                    size="lg" 
-                    className="bg-[#E31F25] hover:bg-[#B91C1C] text-white border-0 rounded-none h-14 px-10 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-500 hover:tracking-[0.25em]"
-                  >
-                    Umów wizytę
-                  </Button>
-                  
-                  <Link href="/salony" className="group">
-                    <Button 
-                      variant="ghost" 
-                      size="lg" 
-                      className="text-white hover:text-white hover:bg-white/10 rounded-none h-14 px-8 text-xs font-medium tracking-[0.15em] uppercase"
-                    >
-                      Odkryj salony
-                      <ArrowRight className="w-4 h-4 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                    </Button>
-                  </Link>
-                </motion.div>
-              </div>
+            {/* Headline */}
+            <div className="overflow-hidden mb-2 sm:mb-3">
+              <motion.h1
+                initial={{ y: "100%" }}
+                animate={contentReady ? { y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display text-[clamp(2.5rem,10vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+              >
+                Doskonałość
+              </motion.h1>
             </div>
+            <div className="overflow-hidden mb-6 sm:mb-10">
+              <motion.h1
+                initial={{ y: "100%" }}
+                animate={contentReady ? { y: 0 } : {}}
+                transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display text-[clamp(2.5rem,10vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
+              >
+                <span className="relative inline-block">
+                  <span className="italic text-[#C4A77D]">widzenia</span>
+                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
+                    <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                </span>
+              </motion.h1>
+            </div>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={contentReady ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-white/60 text-base sm:text-lg lg:text-xl leading-[1.7] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light"
+            >
+              Ponad 50 światowych marek. Najnowocześniejsza diagnostyka. 
+              Cztery ekskluzywne salony w Polsce.
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={contentReady ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
+            >
+              <Link href="/umow-wizyte" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto bg-[#C4A77D] text-[#1a1a1a] px-6 sm:px-8 py-4 text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-white transition-all duration-500">
+                  Umów wizytę
+                </button>
+              </Link>
+              
+              <Link href="/salony" className="group inline-flex items-center gap-4">
+                <span className="text-white/70 text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-white transition-colors duration-300">
+                  Nasze salony
+                </span>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 sm:w-8 h-px bg-white/30 group-hover:bg-[#C4A77D] group-hover:w-10 sm:group-hover:w-12 transition-all duration-500" />
+                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                </div>
+              </Link>
+            </motion.div>
           </div>
-
-          {/* Bottom bar with stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={loadingPhase >= 2 ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 1.8 }}
-            className="border-t border-white/10 bg-[#0A0A0A]/50 backdrop-blur-sm"
-          >
-            <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-              <div className="flex items-center justify-between py-5">
-                
-                {/* Locations */}
-                <div className="hidden md:flex items-center gap-4">
-                  <span className="text-[10px] tracking-[0.3em] text-white/30 uppercase">Lokalizacje</span>
-                  <div className="h-4 w-px bg-white/20" />
-                  <span className="text-sm text-white/70 tracking-wide">
-                    Warszawa · Piaseczno · Grójec
-                  </span>
-                </div>
-
-                {/* Stats */}
-                <div className="flex items-center gap-8 md:gap-12">
-                  {[
-                    { num: "20", suffix: "+", label: "LAT" },
-                    { num: "4", suffix: "", label: "SALONY" },
-                    { num: "50", suffix: "+", label: "MAREK" },
-                  ].map((s, i) => (
-                    <motion.div
-                      key={s.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={loadingPhase >= 2 ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: 2 + i * 0.1 }}
-                      className="text-center"
-                    >
-                      <div className="flex items-baseline justify-center">
-                        <span className="font-display text-3xl md:text-4xl font-semibold text-white">{s.num}</span>
-                        {s.suffix && <span className="text-[#E31F25] text-lg md:text-xl font-display">{s.suffix}</span>}
-                      </div>
-                      <span className="text-[9px] tracking-[0.25em] text-white/40">{s.label}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
-      </motion.div>
-
-      {/* Scroll hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={loadingPhase >= 2 ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 2.3 }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 z-30 hidden lg:flex flex-col items-center"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-16 bg-gradient-to-b from-transparent via-white/50 to-transparent"
-        />
       </motion.div>
     </section>
   )

@@ -1,33 +1,33 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 const LENS_TYPES = [
   {
     id: "progressive",
-    number: "01",
     name: "Progresywne",
+    subtitle: "Wieloogniskowe",
     description: "Płynna korekcja na każdą odległość. Jedno rozwiązanie zamiast kilku par okularów.",
   },
   {
     id: "photochromic",
-    number: "02",
     name: "Fotochromowe",
-    description: "Inteligentne soczewki adaptujące się do światła. Pełna ochrona UV.",
+    subtitle: "Adaptacyjne",
+    description: "Inteligentne soczewki reagujące na światło. Automatyczna ochrona UV.",
   },
   {
     id: "bluecontrol",
-    number: "03",
     name: "Blue Control",
-    description: "Ochrona przed niebieskim światłem z ekranów. Mniej zmęczenia oczu.",
+    subtitle: "Ochronne",
+    description: "Zaawansowana filtracja niebieskiego światła. Redukcja zmęczenia oczu.",
   },
   {
     id: "antireflective",
-    number: "04",
     name: "Antyrefleksyjne",
+    subtitle: "Klarowne",
     description: "Eliminacja odbić i odblasków. Krystalicznie czyste widzenie.",
   },
 ]
@@ -40,162 +40,174 @@ const PARTNERS = [
   { id: "alcon", name: "ALCON", logo: "/lenses/alcon.jpg" },
 ]
 
+const AUTO_ROTATE_INTERVAL = 4000 // 4 seconds
+
 export function LensesSection() {
   const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, amount: 0.1 })
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const isInView = useInView(containerRef, { once: true, amount: 0.2 })
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
+  // Auto-rotate effect
+  useEffect(() => {
+    if (isPaused) return
 
-  const lineWidth = useTransform(scrollYProgress, [0, 0.3], ["0%", "100%"])
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % LENS_TYPES.length)
+    }, AUTO_ROTATE_INTERVAL)
+
+    return () => clearInterval(interval)
+  }, [isPaused])
+
+  const handleCardClick = (index: number) => {
+    setActiveIndex(index)
+    setIsPaused(true)
+    // Resume auto-rotation after 10 seconds of inactivity
+    setTimeout(() => setIsPaused(false), 10000)
+  }
 
   return (
     <section 
       ref={containerRef} 
-      className="relative py-32 lg:py-48 bg-[#FAFAFA] overflow-hidden"
+      className="relative py-16 sm:py-24 lg:py-32 bg-[#fafafa] overflow-hidden"
     >
-      {/* Top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[#E5E5E5]" />
-
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
+      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
         
-        {/* Header - Editorial Asymmetric Layout */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 mb-20 lg:mb-32">
-          
-          <div className="lg:col-span-8">
-            {/* Label */}
+        {/* Header row */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 mb-10 sm:mb-14 lg:mb-20">
+          <div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-              className="flex items-center gap-4 mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-3 mb-4 sm:mb-5"
             >
-              <div className="h-px w-8 bg-[#E31F25]" />
-              <span className="text-xs font-medium tracking-[0.3em] text-[#E31F25] uppercase">
+              <div className="w-6 sm:w-8 h-px bg-[#E31F25]" />
+              <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] text-[#E31F25] uppercase font-medium">
                 Technologie
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "100%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-display text-display-lg text-[#0A0A0A]"
-              >
-                Soczewki nowej
-              </motion.h2>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "100%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                className="font-display text-display-lg text-[#0A0A0A]"
-              >
-                generacji<span className="text-[#E31F25]">.</span>
-              </motion.h2>
-            </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
+            >
+              Soczewki nowej generacji
+            </motion.h2>
           </div>
 
-          {/* Side text */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-4 flex flex-col justify-end"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-[#666] text-base sm:text-lg leading-relaxed font-light max-w-sm lg:text-right"
           >
-            <p className="text-[#737373] text-base lg:text-lg leading-relaxed">
-              Współpracujemy z najlepszymi producentami na świecie, 
-              dostarczając rozwiązania dopasowane do Twojego stylu życia.
-            </p>
-          </motion.div>
+            Najnowsze technologie od światowych liderów, dopasowane do Twojego stylu życia.
+          </motion.p>
         </div>
 
-        {/* Animated line divider */}
+        {/* Lens cards with progress indicator */}
         <motion.div
-          style={{ width: lineWidth }}
-          className="h-px bg-[#E5E5E5] mb-16 lg:mb-24"
-        />
-
-        {/* Lens types - Elegant List */}
-        <div className="grid lg:grid-cols-2 gap-px bg-[#E5E5E5] mb-24 lg:mb-32">
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12"
+        >
           {LENS_TYPES.map((lens, index) => (
-            <motion.article
+            <button
               key={lens.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => handleCardClick(index)}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
               className={cn(
-                "relative bg-[#FAFAFA] p-8 lg:p-12 cursor-pointer group transition-colors duration-500",
-                hoveredIndex === index && "bg-white"
+                "relative sm:flex-1 sm:min-w-[160px] p-4 sm:p-5 lg:p-6 text-left transition-all duration-500 group overflow-hidden",
+                activeIndex === index 
+                  ? "bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] ring-1 ring-[#1a1a1a]/10" 
+                  : "bg-white/60 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] ring-1 ring-[#1a1a1a]/5"
               )}
             >
-              <div className="flex items-start gap-6 lg:gap-8">
-                {/* Number */}
-                <span className={cn(
-                  "text-xs tracking-widest font-medium transition-colors duration-300 pt-2",
-                  hoveredIndex === index ? "text-[#E31F25]" : "text-[#A3A3A3]"
-                )}>
-                  {lens.number}
-                </span>
+              {/* Progress bar for active card */}
+              <div className="absolute top-0 left-0 w-full h-0.5 bg-[#eee]">
+                <motion.div
+                  className="h-full bg-[#E31F25]"
+                  initial={{ width: "0%" }}
+                  animate={{ 
+                    width: activeIndex === index && !isPaused ? "100%" : activeIndex === index ? "100%" : "0%" 
+                  }}
+                  transition={{ 
+                    duration: activeIndex === index && !isPaused ? AUTO_ROTATE_INTERVAL / 1000 : 0.3,
+                    ease: "linear"
+                  }}
+                  key={activeIndex === index ? `active-${activeIndex}` : `inactive-${index}`}
+                />
+              </div>
 
-                <div className="flex-1">
-                  {/* Name */}
-                  <h3 className="font-display text-2xl lg:text-3xl xl:text-4xl text-[#0A0A0A] mb-4 tracking-tight group-hover:text-[#E31F25] transition-colors duration-300">
-                    {lens.name}
-                  </h3>
+              <span className={cn(
+                "block text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1.5 sm:mb-2 transition-colors duration-300",
+                activeIndex === index ? "text-[#E31F25]" : "text-[#999] group-hover:text-[#E31F25]"
+              )}>
+                {lens.subtitle}
+              </span>
+              <span className={cn(
+                "block font-display text-lg sm:text-xl lg:text-2xl transition-colors duration-300",
+                activeIndex === index ? "text-[#1a1a1a]" : "text-[#666] group-hover:text-[#1a1a1a]"
+              )}>
+                {lens.name}
+              </span>
+            </button>
+          ))}
+        </motion.div>
 
-                  {/* Description */}
-                  <p className={cn(
-                    "text-sm lg:text-base leading-relaxed transition-colors duration-300 max-w-md",
-                    hoveredIndex === index ? "text-[#525252]" : "text-[#737373]"
-                  )}>
-                    {lens.description}
+        {/* Active lens description */}
+        <div className="relative min-h-[120px] sm:min-h-[140px] lg:min-h-[120px] mb-10 sm:mb-14 pb-10 sm:pb-14 border-b border-[#e5e5e5]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0"
+            >
+              <div className="flex items-start gap-4 sm:gap-6 lg:gap-10">
+                {/* Large number */}
+                <div className="hidden sm:block">
+                  <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-extralight text-[#1a1a1a]/[0.07] leading-none select-none">
+                    {String(activeIndex + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                
+                <div className="flex-1 pt-0 sm:pt-2">
+                  <p className="text-[#555] text-base sm:text-lg lg:text-xl leading-relaxed font-light max-w-xl">
+                    {LENS_TYPES[activeIndex].description}
                   </p>
                 </div>
               </div>
-
-              {/* Hover indicator line */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: hoveredIndex === index ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute bottom-0 left-8 right-8 lg:left-12 lg:right-12 h-px bg-[#E31F25] origin-left"
-              />
-            </motion.article>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Partners section */}
+        {/* Partners */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 lg:gap-10"
         >
-          {/* Partners label */}
-          <div className="flex items-center gap-8 mb-10">
-            <span className="text-xs tracking-[0.2em] text-[#A3A3A3] uppercase">
-              Nasi Partnerzy
-            </span>
-            <div className="flex-1 h-px bg-[#E5E5E5]" />
-          </div>
+          <p className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#888] uppercase font-medium">
+            Partnerzy
+          </p>
           
-          {/* Partners logos */}
-          <div className="flex flex-wrap items-center justify-start gap-8 lg:gap-16">
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-10">
             {PARTNERS.map((partner, i) => (
               <motion.div
                 key={partner.id}
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.9 + i * 0.1 }}
-                className="relative h-8 lg:h-10 w-24 lg:w-32 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                transition={{ duration: 0.4, delay: 0.6 + i * 0.05 }}
+                className="relative h-4 sm:h-5 lg:h-6 w-12 sm:w-14 lg:w-18 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-500"
               >
                 <Image
                   src={partner.logo}
@@ -203,7 +215,7 @@ export function LensesSection() {
                   fill
                   className={cn(
                     "object-contain",
-                    partner.id === 'acuvue' && "invert"
+                    partner.id === 'acuvue' && "invert opacity-60"
                   )}
                 />
               </motion.div>
@@ -211,9 +223,6 @@ export function LensesSection() {
           </div>
         </motion.div>
       </div>
-
-      {/* Bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-[#E5E5E5]" />
     </section>
   )
 }

@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build
+build/
+dist/
+.cache/
+.tmp/
+
+# Environment
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Strapi
+.strapi/
+exports/
+
+# Uploads (if storing locally and not wanting in git)
+# public/uploads/
+

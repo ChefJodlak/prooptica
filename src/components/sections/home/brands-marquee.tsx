@@ -1,19 +1,19 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState } from "react"
 
 // Premium brands - displayed prominently
 const FEATURED_BRANDS = [
   "TOM FORD",
-  "DIOR", 
+  "DIOR",
   "GUCCI",
   "PRADA",
   "VERSACE",
   "RAY-BAN",
 ]
 
-// All available brands for marquee
+// All brands for the flowing marquee
 const ALL_BRANDS = [
   "TOM FORD", "DIOR", "GUCCI", "DSQUARED2", "CHLOE", "ANA HICKMANN",
   "BYBLOS MILANO", "CALVIN KLEIN", "CAROLINA HERRERA", "CARRERA", 
@@ -28,190 +28,283 @@ const ALL_BRANDS = [
   "VOGUE", "WES", "XAVIER GARCIA"
 ]
 
+// Individual featured brand with elegant hover
+function FeaturedBrand({ 
+  name, 
+  index, 
+  isInView 
+}: { 
+  name: string
+  index: number
+  isInView: boolean 
+}) {
+  const [isHovered, setIsHovered] = useState(false)
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ 
+        duration: 0.8, 
+        delay: 0.3 + index * 0.08,
+        ease: [0.16, 1, 0.3, 1] 
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative group cursor-pointer"
+    >
+      <span className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light tracking-[-0.02em] text-[#1a1a1a] transition-all duration-500 group-hover:text-[#C4A77D]">
+        {name}
+      </span>
+      
+      {/* Elegant underline on hover */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#C4A77D] origin-left"
+      />
+    </motion.div>
+  )
+}
+
 export function BrandsMarquee() {
   const containerRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-10%" })
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-  
-  // Parallax for the marquee - moves opposite directions
-  const marqueeX1 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"])
-  const marqueeX2 = useTransform(scrollYProgress, [0, 1], ["-10%", "0%"])
 
   return (
-    <section ref={containerRef} className="relative py-24 lg:py-40 bg-white overflow-hidden">
+    <section 
+      ref={containerRef} 
+      className="relative min-h-screen bg-[#FAFAFA] overflow-hidden flex items-center"
+    >
+      {/* === DECORATIVE LINES === */}
       
-      {/* Top border line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-[#E5E5E5]" />
+      {/* Elegant line - top left corner accent */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-6 left-0 w-[25%] h-[1px] bg-gradient-to-r from-[#C4A77D]/50 via-[#C4A77D]/25 to-transparent origin-left hidden lg:block"
+      />
       
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 mb-20 lg:mb-32">
+      {/* Vertical accent - left side */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={isInView ? { scaleY: 1 } : {}}
+        transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-6 left-[25%] w-[1px] h-16 bg-gradient-to-b from-[#C4A77D]/25 to-transparent origin-top hidden lg:block"
+      />
+      
+      {/* Elegant line - bottom right corner accent */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute bottom-6 right-0 w-[20%] h-[1px] bg-gradient-to-l from-[#C4A77D]/40 via-[#C4A77D]/20 to-transparent origin-right hidden lg:block"
+      />
+      
+      {/* Vertical accent - right side */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={isInView ? { scaleY: 1 } : {}}
+        transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute bottom-6 right-[20%] w-[1px] h-16 bg-gradient-to-t from-[#C4A77D]/20 to-transparent origin-bottom hidden lg:block"
+      />
+
+      {/* === MAIN CONTENT === */}
+      <div className="relative z-10 w-full py-12 sm:py-16 lg:py-20">
         
-        {/* Section Header - Editorial Style */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-20">
+        {/* Header Section */}
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-10 sm:mb-16 lg:mb-20">
           
-          <div className="flex-1">
-            {/* Label */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 sm:gap-6 lg:gap-16">
+            
+            <div className="flex-1">
+              {/* Elegant label */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-5"
+              >
+                <div className="h-px w-8 sm:w-10 bg-[#C4A77D]" />
+                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.25em] sm:tracking-[0.4em] uppercase">
+                  Kolekcja Premium
+                </span>
+              </motion.div>
+              
+              {/* Main headline */}
+              <div className="space-y-0">
+                <div className="overflow-hidden pb-0.5 sm:pb-1">
+                  <motion.h2
+                    initial={{ y: "100%" }}
+                    animate={isInView ? { y: 0 } : {}}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                    className="font-display text-[clamp(1.75rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
+                  >
+                    Światowe marki
+                  </motion.h2>
+                </div>
+                <div className="overflow-hidden pb-0.5 sm:pb-1">
+                  <motion.h2
+                    initial={{ y: "100%" }}
+                    animate={isInView ? { y: 0 } : {}}
+                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+                    className="font-display text-[clamp(1.75rem,6vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
+                  >
+                    w naszej <span className="text-[#C4A77D] italic">ofercie</span>
+                  </motion.h2>
+                </div>
+              </div>
+            </div>
+            
+            {/* Side description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
-              className="flex items-center gap-4 mb-6"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="lg:max-w-xs lg:text-right"
             >
-              <div className="h-px w-8 bg-[#E31F25]" />
-              <span className="text-xs font-medium tracking-[0.3em] text-[#E31F25] uppercase">
-                Ponad 50 marek
-              </span>
+              <p className="text-[#737373] text-base sm:text-lg leading-[1.7] font-light">
+                Starannie wyselekcjonowana oferta od najbardziej prestiżowych domów mody i producentów okularów.
+              </p>
+              <div className="mt-2 sm:mt-3 flex items-center gap-2 sm:gap-3 lg:justify-end">
+                <div className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full" />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#A3A3A3] uppercase">
+                  Oryginalne produkty
+                </span>
+              </div>
             </motion.div>
-            
-            {/* Headline */}
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "100%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-display text-display-lg text-[#0A0A0A]"
-              >
-                Światowe marki
-              </motion.h2>
-            </div>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "100%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                className="font-display text-display-lg text-[#A3A3A3]"
-              >
-                w naszej ofercie
-              </motion.h2>
-            </div>
+          </div>
+        </div>
+
+        {/* Featured Brands - Elegant Display */}
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-10 sm:mb-16 lg:mb-20">
+          {/* First row - 3 brands */}
+          <div className="flex flex-wrap justify-center items-center gap-x-5 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6 mb-6 sm:mb-8 lg:mb-12">
+            {FEATURED_BRANDS.slice(0, 3).map((name, i) => (
+              <div key={name} className="flex items-center">
+                <FeaturedBrand 
+                  name={name} 
+                  index={i} 
+                  isInView={isInView} 
+                />
+                {i < 2 && (
+                  <motion.span 
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="hidden lg:block mx-12 xl:mx-16 text-[#C4A77D]/30 text-2xl font-light"
+                  >
+                    ·
+                  </motion.span>
+                )}
+              </div>
+            ))}
           </div>
           
-          {/* Side description */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-[#737373] text-base lg:text-lg leading-relaxed max-w-sm lg:text-right"
+          {/* Second row - 3 brands */}
+          <div className="flex flex-wrap justify-center items-center gap-x-5 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6">
+            {FEATURED_BRANDS.slice(3, 6).map((name, i) => (
+              <div key={name} className="flex items-center">
+                <FeaturedBrand 
+                  name={name} 
+                  index={i + 3} 
+                  isInView={isInView} 
+                />
+                {i < 2 && (
+                  <motion.span 
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.8, delay: 0.7 }}
+                    className="hidden lg:block mx-12 xl:mx-16 text-[#C4A77D]/30 text-2xl font-light"
+                  >
+                    ·
+                  </motion.span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Marquee Section - Infinite Flowing Elegance */}
+        <div className="relative">
+          
+          {/* Fade edges */}
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 lg:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 lg:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent" />
+          
+          {/* First Row */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="flex overflow-hidden py-3"
           >
-            Oferujemy oprawy od najbardziej prestiżowych domów mody i czołowych producentów okularów na świecie.
-          </motion.p>
+            <div className="flex animate-marquee items-center">
+              {[...ALL_BRANDS, ...ALL_BRANDS].map((brand, i) => (
+                <span 
+                  key={`row1-${i}`} 
+                  className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10 transition-colors duration-300 hover:text-[#C4A77D]"
+                >
+                  {brand}
+                </span>
+              ))}
+            </div>
+            <div className="flex animate-marquee items-center" aria-hidden>
+              {[...ALL_BRANDS, ...ALL_BRANDS].map((brand, i) => (
+                <span 
+                  key={`row1-dup-${i}`} 
+                  className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10"
+                >
+                  {brand}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          
+          {/* Second Row - Reverse direction */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="flex overflow-hidden py-3"
+          >
+            <div className="flex animate-marquee-reverse items-center">
+              {[...ALL_BRANDS.slice().reverse(), ...ALL_BRANDS.slice().reverse()].map((brand, i) => (
+                <span 
+                  key={`row2-${i}`} 
+                  className="text-sm font-medium text-[#D4D4D4] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10"
+                >
+                  {brand}
+                </span>
+              ))}
+            </div>
+            <div className="flex animate-marquee-reverse items-center" aria-hidden>
+              {[...ALL_BRANDS.slice().reverse(), ...ALL_BRANDS.slice().reverse()].map((brand, i) => (
+                <span 
+                  key={`row2-dup-${i}`} 
+                  className="text-sm font-medium text-[#D4D4D4] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10"
+                >
+                  {brand}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </div>
 
-      {/* Featured Brands - Large Typography */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 1, delay: 0.4 }}
-        className="mb-16 lg:mb-24"
-      >
-        <div className="flex flex-wrap justify-center items-center gap-x-8 lg:gap-x-16 gap-y-4 px-6">
-          {FEATURED_BRANDS.map((brand, i) => (
-            <motion.span
-              key={brand}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.5 + i * 0.08 }}
-              className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium text-[#0A0A0A] tracking-tight hover:text-[#E31F25] transition-colors duration-500 cursor-default"
-            >
-              {brand}
-            </motion.span>
-          ))}
-        </div>
-      </motion.div>
-      
-      {/* Elegant Divider */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 mb-16">
+        {/* Footer Note */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 1.2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="h-px bg-[#E5E5E5] origin-left"
-        />
-      </div>
-
-      {/* Marquee - All Brands */}
-      <div className="relative">
-        {/* Fade edges */}
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent" />
-        
-        {/* First Row */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.7 }}
-          style={{ x: marqueeX1 }}
-          className="flex overflow-hidden mb-3"
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="text-center px-5 sm:px-6 mt-10 sm:mt-16 lg:mt-20"
         >
-          <div className="flex animate-marquee items-center">
-            {[...ALL_BRANDS, ...ALL_BRANDS].map((brand, i) => (
-              <span 
-                key={`row1-${i}`} 
-                className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.15em] whitespace-nowrap px-6 lg:px-8"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-          <div className="flex animate-marquee items-center" aria-hidden>
-            {[...ALL_BRANDS, ...ALL_BRANDS].map((brand, i) => (
-              <span 
-                key={`row1-dup-${i}`} 
-                className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.15em] whitespace-nowrap px-6 lg:px-8"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-        
-        {/* Second Row - Reverse */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1, delay: 0.8 }}
-          style={{ x: marqueeX2 }}
-          className="flex overflow-hidden"
-        >
-          <div className="flex animate-marquee-reverse items-center">
-            {[...ALL_BRANDS.slice().reverse(), ...ALL_BRANDS.slice().reverse()].map((brand, i) => (
-              <span 
-                key={`row2-${i}`} 
-                className="text-sm font-medium text-[#D4D4D4] uppercase tracking-[0.15em] whitespace-nowrap px-6 lg:px-8"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-          <div className="flex animate-marquee-reverse items-center" aria-hidden>
-            {[...ALL_BRANDS.slice().reverse(), ...ALL_BRANDS.slice().reverse()].map((brand, i) => (
-              <span 
-                key={`row2-dup-${i}`} 
-                className="text-sm font-medium text-[#D4D4D4] uppercase tracking-[0.15em] whitespace-nowrap px-6 lg:px-8"
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
+          <p className="text-xs sm:text-sm text-[#A3A3A3] tracking-[0.1em] sm:tracking-[0.15em] uppercase">
+            Wszystkie oprawy oryginalne · Pełna gwarancja producenta
+          </p>
         </motion.div>
       </div>
-
-      {/* Note */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 1 }}
-        className="text-center text-xs text-[#A3A3A3] tracking-wider mt-16 px-6"
-      >
-        Wszystkie oprawy dostępne w naszych salonach są oryginalne i objęte pełną gwarancją producenta.
-      </motion.p>
-      
-      {/* Bottom border line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-[#E5E5E5]" />
     </section>
   )
 }

@@ -4,6 +4,8 @@ import { LocationsPreview } from "@/components/sections/home/locations-preview";
 import { BrandsMarquee } from "@/components/sections/home/brands-marquee";
 import { LensesSection } from "@/components/sections/home/lenses-section";
 import { EyeExamSection } from "@/components/sections/home/eye-exam-section";
+import { InstagramSection } from "@/components/sections/home/instagram-section";
+import { ArticlesSection } from "@/components/sections/home/articles-section";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <EyeExamSection />
       <LensesSection />
       <LocationsPreview />
+      <InstagramSection />
+      <ArticlesSection />
     </div>
   );
 }

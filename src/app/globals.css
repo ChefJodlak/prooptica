@@ -95,6 +95,15 @@
       transform: translateY(0);
     }
   }
+  
+  @keyframes progress {
+    from {
+      stroke-dashoffset: 37.7;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 }
 
 :root {
@@ -201,22 +210,28 @@
    LUXURY UTILITY CLASSES
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Elegant Scrollbar */
+/* Elegant Gold Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAFA;
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4D4D4;
-  border-radius: 3px;
+  background: linear-gradient(180deg, #C4A77D 0%, #9A7B5A 100%);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #E31F25;
+  background: linear-gradient(180deg, #D4B78D 0%, #C4A77D 100%);
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #C4A77D #1a1a1a;
 }
 
 /* Focus States */

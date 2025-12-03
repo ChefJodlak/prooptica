@@ -6,266 +6,442 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
-import { ArrowUpRight, Mail, Phone, MapPin, Clock, Instagram, Facebook, Linkedin, Send } from "lucide-react"
+import { ArrowRight, Mail, Phone, MapPin, Clock, Instagram, Facebook, Send, ArrowUpRight } from "lucide-react"
+
+// TikTok icon (not available in lucide-react)
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+)
 import Image from "next/image"
 
 const FOOTER_LINKS = {
   company: [
     { label: "O Nas", href: "/o-nas" },
-    { label: "Kariera", href: "#" },
     { label: "Blog", href: "/artykuly" },
     { label: "Kontakt", href: "/kontakt" },
+    { label: "Salony", href: "/salony" },
   ],
   services: [
     { label: "Badanie Wzroku", href: "/oferta/badanie-wzroku" },
-    { label: "Okulary Korekcyjne", href: "#" },
-    { label: "Okulary Przeciwsłoneczne", href: "#" },
-    { label: "Soczewki Kontaktowe", href: "#" },
+    { label: "Marki", href: "/marki" },
+    { label: "Umów Wizytę", href: "/umow-wizyte" },
   ],
   legal: [
     { label: "Polityka Prywatności", href: "#" },
-    { label: "Regulamin", href: "#" },
-    { label: "Cookies", href: "#" },
   ]
 }
 
 const SOCIAL_LINKS = [
   { icon: Instagram, href: "#", label: "Instagram" },
   { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: TikTokIcon, href: "#", label: "TikTok" },
 ]
 
 export function Footer() {
   const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" })
+  const isInView = useInView(containerRef, { once: true, margin: "-5%" })
 
   return (
-    <footer ref={containerRef} className="relative bg-[#0A0A0A] text-white overflow-hidden">
+    <footer 
+      ref={containerRef} 
+      className="relative bg-[#1a1a1a] text-white overflow-hidden"
+      role="contentinfo"
+      aria-label="Stopka strony"
+      itemScope
+      itemType="https://schema.org/WPFooter"
+    >
+      
+      {/* Subtle texture overlay like other sections */}
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+      }} />
+      
+      {/* Top decorative line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A77D]/40 to-transparent origin-center"
+      />
+      
+      {/* Decorative large text - background */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 0.015 } : {}}
+        transition={{ duration: 1.5, delay: 0.3 }}
+        className="absolute top-32 -right-12 font-display text-[12vw] font-bold text-white leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em] whitespace-nowrap"
+      >
+        PROOPTICA
+      </motion.div>
       
       {/* Newsletter Section */}
-      <div className="relative border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 py-20 lg:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10"
-          >
-            <div>
+      <div className="relative">
+        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 py-24 lg:py-32">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+            
+            {/* Left - Newsletter */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-6"
+            >
               {/* Label */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px w-8 bg-[#E31F25]" />
-                <span className="text-xs font-medium tracking-[0.3em] text-[#E31F25] uppercase">
+              <div className="flex items-center gap-5 mb-8">
+                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
                   Newsletter
                 </span>
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
               </div>
               
-              <h3 className="font-display text-4xl lg:text-5xl xl:text-6xl text-white tracking-tight mb-4">
-                Bądź na bieżąco
-              </h3>
-              <p className="text-white/50 max-w-md text-base">
-                Zapisz się do newslettera i otrzymuj ekskluzywne oferty oraz porady ekspertów.
-              </p>
-            </div>
-            
-            <div className="w-full lg:w-auto">
-              <div className="flex gap-3 max-w-md">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-                  <Input 
-                    type="email" 
-                    placeholder="Twój email" 
-                    className="w-full pl-12 pr-4 py-6 bg-white/5 border-white/10 rounded-none text-white placeholder:text-white/30 focus:border-[#E31F25] focus:ring-0"
-                  />
-                </div>
-                <Button className="rounded-none bg-[#E31F25] hover:bg-[#c91b20] px-6 h-[52px]">
-                  <Send className="w-4 h-4" />
-                </Button>
+              {/* Headline */}
+              <div className="overflow-hidden mb-2">
+                <motion.h3
+                  initial={{ y: "110%" }}
+                  animate={isInView ? { y: 0 } : {}}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                  className="font-display text-[clamp(2.5rem,5vw,4rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+                >
+                  Bądź na
+                </motion.h3>
               </div>
-            </div>
-          </motion.div>
+              <div className="overflow-hidden mb-8">
+                <motion.h3
+                  initial={{ y: "110%" }}
+                  animate={isInView ? { y: 0 } : {}}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                  className="font-display text-[clamp(2.5rem,5vw,4rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
+                >
+                  <span className="relative inline-block">
+                    <span className="italic text-[#C4A77D]">bieżąco</span>
+                    <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
+                      <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                    </svg>
+                  </span>
+                </motion.h3>
+              </div>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-white/50 text-base lg:text-lg leading-[1.8] mb-10 max-w-md font-light"
+              >
+                Zapisz się do newslettera i otrzymuj ekskluzywne oferty oraz porady naszych ekspertów.
+              </motion.p>
+              
+              {/* Newsletter Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="max-w-md"
+              >
+                <div className="flex gap-3">
+                  <div className="relative flex-1 group">
+                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-[#C4A77D] transition-colors" />
+                    <Input 
+                      type="email" 
+                      placeholder="Twój adres email" 
+                      className="w-full pl-14 pr-5 py-7 bg-white/5 border border-white/10 rounded-none text-white placeholder:text-white/30 focus:border-[#C4A77D] focus:ring-0 focus:bg-white/[0.07] transition-all duration-300"
+                    />
+                  </div>
+                  <Button className="rounded-none bg-[#C4A77D] text-[#1a1a1a] hover:bg-white px-6 h-[58px] font-semibold tracking-[0.1em] uppercase text-[10px] transition-all duration-500">
+                    <Send className="w-4 h-4 mr-2" />
+                    Zapisz
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+            
+            {/* Right - Quick Locations */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="lg:col-span-6"
+            >
+              <div className="flex items-center gap-5 mb-8">
+                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                  Nasze Salony
+                </span>
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {LOCATIONS.map((loc, index) => (
+                  <motion.div
+                    key={loc.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                  >
+                    <Link 
+                      href="/salony"
+                      className="group block p-5 border border-white/10 hover:border-[#C4A77D]/40 hover:bg-white/[0.03] transition-all duration-500"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 bg-[#C4A77D]/10 text-[#C4A77D] group-hover:bg-[#C4A77D] group-hover:text-[#1a1a1a] transition-all duration-300">
+                          <MapPin className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="block font-display text-lg text-white font-medium tracking-tight mb-1 group-hover:text-[#C4A77D] transition-colors">
+                            {loc.city}
+                          </span>
+                          <span className="text-xs text-white/40 font-light line-clamp-1">{loc.address}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+        
+        {/* Divider */}
+        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </div>
       </div>
       
-      {/* Main Footer */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 py-20 lg:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+      {/* Main Footer Content */}
+      <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 py-20 lg:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="lg:col-span-2"
-          >
-            <Link href="/" className="inline-block mb-8">
-              <Image 
-                src="/logo-prooptica.svg" 
-                alt="Prooptica" 
-                width={160} 
-                height={35}
-                className="h-8 w-auto invert"
-              />
-            </Link>
-            <p className="text-white/50 mb-10 max-w-sm leading-relaxed">
-              Rodzinna tradycja, nowoczesna precyzja i ekspertyza medyczna. 
-              Dbamy o Twój wzrok od 20 lat.
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex gap-3">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="p-3 border border-white/10 text-white/50 hover:bg-[#E31F25] hover:border-[#E31F25] hover:text-white transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Company Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white/30 mb-8">
-              Firma
-            </h4>
-            <ul className="space-y-4">
-              {FOOTER_LINKS.company.map((link) => (
-                <li key={link.label}>
-                  <Link 
-                    href={link.href}
-                    className="group flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Services Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white/30 mb-8">
-              Usługi
-            </h4>
-            <ul className="space-y-4">
-              {FOOTER_LINKS.services.map((link) => (
-                <li key={link.label}>
-                  <Link 
-                    href={link.href}
-                    className="group flex items-center gap-1 text-white/70 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact */}
+          {/* Brand - 4 columns */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-4"
           >
-            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white/30 mb-8">
-              Kontakt
-            </h4>
-            <ul className="space-y-5">
-              <li>
-                <a 
-                  href="tel:+4822XXXXXXX"
-                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-[#E31F25]" />
-                  +48 22 XXX XX XX
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="mailto:kontakt@prooptica.pl"
-                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
-                >
-                  <Mail className="w-4 h-4 text-[#E31F25]" />
-                  kontakt@prooptica.pl
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-white/70">
-                <Clock className="w-4 h-4 text-[#E31F25] mt-0.5" />
-                <span>Pn-Pt: 10:00 - 18:00<br/>Sob: 10:00 - 14:00</span>
-              </li>
-            </ul>
-          </motion.div>
-        </div>
-        
-        {/* Locations Strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 pt-12 border-t border-white/10"
-        >
-          <div className="flex items-center gap-8 mb-8">
-            <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-white/30">
-              Nasze Salony
-            </h4>
-            <div className="flex-1 h-px bg-white/10" />
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {LOCATIONS.map((loc) => (
-              <Link 
-                key={loc.id}
-                href="/salony"
-                className="group flex items-start gap-4 p-5 border border-white/10 hover:border-[#E31F25]/30 hover:bg-white/5 transition-all duration-300"
-              >
-                <div className="p-2 bg-[#E31F25]/10 text-[#E31F25] group-hover:bg-[#E31F25] group-hover:text-white transition-colors">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block font-medium text-white mb-1">{loc.city}</span>
-                  <span className="text-sm text-white/50">{loc.address}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-      
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} Prooptica. Wszelkie prawa zastrzeżone.
+            <Link href="/" className="inline-block mb-8 group">
+              <div className="relative">
+                <Image 
+                  src="/logo-prooptica.svg" 
+                  alt="Prooptica" 
+                  width={180} 
+                  height={40}
+                  className="h-9 w-auto transition-all duration-500 group-hover:opacity-80"
+                />
+              </div>
+            </Link>
+            
+            <p className="text-white/50 mb-10 max-w-xs leading-[1.9] text-[15px] font-light">
+              Rodzinna tradycja połączona z nowoczesną precyzją i ekspertyzą medyczną. 
+              Dbamy o Twój wzrok od ponad 20 lat.
             </p>
-            <div className="flex items-center gap-8">
-              {FOOTER_LINKS.legal.map((link) => (
-                <Link 
-                  key={link.label}
-                  href={link.href}
-                  className="text-sm text-white/40 hover:text-white transition-colors"
+            
+            {/* Social Links - Elegant */}
+            <div className="flex items-center gap-2">
+              {SOCIAL_LINKS.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  className="group relative p-4 overflow-hidden"
+                  aria-label={social.label}
                 >
-                  {link.label}
-                </Link>
+                  {/* Border frame */}
+                  <div className="absolute inset-0 border border-white/10 group-hover:border-[#C4A77D]/50 transition-colors duration-500" />
+                  
+                  {/* Background on hover */}
+                  <div className="absolute inset-0 bg-[#C4A77D] scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500" />
+                  
+                  <social.icon className="relative w-5 h-5 text-white/60 group-hover:text-[#1a1a1a] transition-colors duration-300" />
+                </motion.a>
               ))}
             </div>
+          </motion.div>
+
+          {/* Navigation Links - 6 columns */}
+          <div className="lg:col-span-5 lg:pl-12">
+            <div className="grid grid-cols-2 gap-8 lg:gap-12">
+              
+              {/* Company Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+                  Firma
+                </h4>
+                <ul className="space-y-4">
+                  {FOOTER_LINKS.company.map((link, i) => (
+                    <motion.li 
+                      key={link.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.6 + i * 0.05 }}
+                    >
+                      <Link 
+                        href={link.href}
+                        className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300"
+                      >
+                        <span className="w-0 h-px bg-[#C4A77D] group-hover:w-3 transition-all duration-300" />
+                        <span className="text-[15px] font-light">{link.label}</span>
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#C4A77D]" />
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Services Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+                  Usługi
+                </h4>
+                <ul className="space-y-4">
+                  {FOOTER_LINKS.services.map((link, i) => (
+                    <motion.li 
+                      key={link.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.7 + i * 0.05 }}
+                    >
+                      <Link 
+                        href={link.href}
+                        className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300"
+                      >
+                        <span className="w-0 h-px bg-[#C4A77D] group-hover:w-3 transition-all duration-300" />
+                        <span className="text-[15px] font-light">{link.label}</span>
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#C4A77D]" />
+                      </Link>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Contact - 3 columns */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="lg:col-span-3"
+          >
+            <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+              Kontakt
+            </h4>
+            
+            <div className="space-y-6">
+              <a 
+                href="tel:+4822XXXXXXX"
+                className="group flex items-center gap-4 text-white/60 hover:text-white transition-colors"
+              >
+                <div className="p-3 border border-white/10 group-hover:border-[#C4A77D]/50 group-hover:bg-[#C4A77D]/10 transition-all duration-300">
+                  <Phone className="w-4 h-4 text-[#C4A77D]" />
+                </div>
+                <div>
+                  <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Telefon</span>
+                  <span className="font-display text-lg text-white font-light">+48 22 XXX XX XX</span>
+                </div>
+              </a>
+              
+              <a 
+                href="mailto:kontakt@prooptica.pl"
+                className="group flex items-center gap-4 text-white/60 hover:text-white transition-colors"
+              >
+                <div className="p-3 border border-white/10 group-hover:border-[#C4A77D]/50 group-hover:bg-[#C4A77D]/10 transition-all duration-300">
+                  <Mail className="w-4 h-4 text-[#C4A77D]" />
+                </div>
+                <div>
+                  <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Email</span>
+                  <span className="font-display text-lg text-white font-light">kontakt@prooptica.pl</span>
+                </div>
+              </a>
+              
+              <div className="flex items-center gap-4">
+                <div className="p-3 border border-white/10">
+                  <Clock className="w-4 h-4 text-[#C4A77D]" />
+                </div>
+                <div>
+                  <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Godziny</span>
+                  <span className="text-white/70 text-sm font-light">Pn-Pt: 10:00 - 18:00</span>
+                  <span className="text-white/70 text-sm font-light block">Sob: 10:00 - 14:00</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      
+      {/* Bottom Bar - Refined */}
+      <div className="relative">
+        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        </div>
+        
+        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            
+            {/* Copyright */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="text-white/30 text-[13px] font-light"
+            >
+              © {new Date().getFullYear()} Prooptica. Wszelkie prawa zastrzeżone.
+            </motion.p>
+            
+            {/* Legal Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="flex items-center gap-1"
+            >
+              {FOOTER_LINKS.legal.map((link, i) => (
+                <span key={link.label} className="flex items-center">
+                  <Link 
+                    href={link.href}
+                    className="text-[13px] text-white/30 hover:text-[#C4A77D] transition-colors duration-300 font-light px-3 py-1"
+                  >
+                    {link.label}
+                  </Link>
+                  {i < FOOTER_LINKS.legal.length - 1 && (
+                    <span className="text-white/20">·</span>
+                  )}
+                </span>
+              ))}
+            </motion.div>
+            
+            {/* Back to top - Elegant */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.6, delay: 1 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="group flex items-center gap-3"
+            >
+              <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 group-hover:text-[#C4A77D] transition-colors duration-300">
+                Powrót na górę
+              </span>
+              <div className="relative w-10 h-10 border border-white/10 group-hover:border-[#C4A77D]/50 transition-colors duration-300 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[#C4A77D] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                <ArrowRight className="relative w-4 h-4 text-white/40 -rotate-90 group-hover:text-[#1a1a1a] transition-colors duration-300" />
+              </div>
+            </motion.button>
           </div>
         </div>
       </div>
+      
+      {/* Elegant corner accents */}
+      <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-[#C4A77D]/20 pointer-events-none hidden lg:block" />
+      <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-[#C4A77D]/20 pointer-events-none hidden lg:block" />
     </footer>
   )
 }
