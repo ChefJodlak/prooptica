@@ -5,8 +5,8 @@ import { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 // Smooth easing curves
-const smoothEasing = [0.16, 1, 0.3, 1]
-const bounceEasing = [0.34, 1.56, 0.64, 1]
+const smoothEasing = [0.16, 1, 0.3, 1] as const
+const bounceEasing = [0.34, 1.56, 0.64, 1] as const
 
 // ═══════════════════════════════════════════════════════════════════════════
 // FADE UP ANIMATION

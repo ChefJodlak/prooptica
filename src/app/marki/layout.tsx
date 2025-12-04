@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { BrandsPageSchema } from "@/components/seo/schema-org";
 
 export const metadata: Metadata = generatePageMetadata("brands");
 
@@ -8,6 +9,11 @@ export default function BrandsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <BrandsPageSchema />
+      {children}
+    </>
+  );
 }
 

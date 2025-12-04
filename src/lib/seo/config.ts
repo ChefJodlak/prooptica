@@ -506,7 +506,7 @@ export const SERVICES = [
       "Powłoki premium w cenie",
     ],
   },
-] as const;
+];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // FAQ ITEMS

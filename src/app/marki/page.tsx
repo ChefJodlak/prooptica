@@ -11,7 +11,6 @@ import {
   BRANDS,
   NOISE_TEXTURE_BG
 } from "@/components/sections/marki"
-import { BrandsPageSchema } from "@/components/seo/schema-org"
 
 export default function BrandsPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -27,7 +26,6 @@ export default function BrandsPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
-      <BrandsPageSchema />
       {/* Subtle texture overlay */}
       <div 
         className="fixed inset-0 opacity-[0.03] pointer-events-none" 

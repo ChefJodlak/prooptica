@@ -9,7 +9,6 @@ import {
   FormAndLocationsSection,
   CtaBanner
 } from "@/components/sections/kontakt"
-import { ContactPageSchema } from "@/components/seo/schema-org"
 
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -17,7 +16,6 @@ export default function ContactPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
-      <ContactPageSchema />
       {/* Subtle texture overlay */}
       <div 
         className="fixed inset-0 opacity-[0.03] pointer-events-none" 

@@ -201,7 +201,7 @@ export function generatePageMetadata(
   return {
     title: pageSeo.title,
     description: pageSeo.description,
-    keywords: pageSeo.keywords,
+    keywords: [...pageSeo.keywords],
     
     openGraph: {
       title: pageSeo.title,

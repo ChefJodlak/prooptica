@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { 
@@ -28,6 +28,37 @@ import { SALONS, SPECIALISTS, SERVICES, containerVariants } from "@/components/b
 import type { Salon, Specialist, Service, TimeSlot } from "@/components/booking/types"
 
 // ═══════════════════════════════════════════════════════════════════════════
+// SEARCH PARAMS HANDLER (needs to be wrapped in Suspense)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function SearchParamsHandler({ 
+  onSalonSelect,
+  formSectionRef 
+}: { 
+  onSalonSelect: (salon: Salon) => void
+  formSectionRef: React.RefObject<HTMLElement | null>
+}) {
+  const searchParams = useSearchParams()
+  
+  useEffect(() => {
+    const salonId = searchParams.get('salon')
+    if (salonId) {
+      const salon = SALONS.find(s => s.id === salonId)
+      if (salon) {
+        onSalonSelect(salon)
+        
+        // Scroll to form section after a short delay
+        setTimeout(() => {
+          formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+    }
+  }, [searchParams, onSalonSelect, formSectionRef])
+  
+  return null
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // MAIN PAGE COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -35,7 +66,6 @@ export default function BookingPage() {
   const containerRef = useRef<HTMLDivElement>(null)
   const formSectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-10%" })
-  const searchParams = useSearchParams()
   
   const [step, setStep] = useState(1)
   const [selectedSalon, setSelectedSalon] = useState<Salon | null>(null)
@@ -44,21 +74,10 @@ export default function BookingPage() {
   const [selectedSlot, setSelectedSlot] = useState<{ slot: TimeSlot; date: string } | null>(null)
   
   // Handle salon pre-selection from URL parameter
-  useEffect(() => {
-    const salonId = searchParams.get('salon')
-    if (salonId) {
-      const salon = SALONS.find(s => s.id === salonId)
-      if (salon) {
-        setSelectedSalon(salon)
-        setStep(2) // Go to service selection
-        
-        // Scroll to form section after a short delay
-        setTimeout(() => {
-          formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }, 100)
-      }
-    }
-  }, [searchParams])
+  const handleSalonFromUrl = (salon: Salon) => {
+    setSelectedSalon(salon)
+    setStep(2) // Go to service selection
+  }
 
   // Filter services by selected salon
   const availableServices = selectedSalon
@@ -122,6 +141,14 @@ export default function BookingPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
+      {/* Handle URL search params in Suspense boundary */}
+      <Suspense fallback={null}>
+        <SearchParamsHandler 
+          onSalonSelect={handleSalonFromUrl} 
+          formSectionRef={formSectionRef}
+        />
+      </Suspense>
+      
       {/* Subtle texture overlay */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`

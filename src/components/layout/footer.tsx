@@ -49,8 +49,6 @@ export function Footer() {
       className="relative bg-[#1a1a1a] text-white overflow-hidden"
       role="contentinfo"
       aria-label="Stopka strony"
-      itemScope
-      itemType="https://schema.org/WPFooter"
     >
       
       {/* Subtle texture overlay like other sections */}

@@ -10,7 +10,6 @@ import {
   CtaSection,
   TextureOverlay
 } from "@/components/sections/badanie-wzroku"
-import { EyeExamPageSchema } from "@/components/seo/schema-org"
 
 export default function EyeExamPage() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -25,7 +24,6 @@ export default function EyeExamPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
-      <EyeExamPageSchema />
       <TextureOverlay fixed />
       <HeroSection />
       <FeaturesSection isInView={isInView} imageY={imageY} />

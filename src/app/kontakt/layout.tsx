@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { generatePageMetadata } from "@/lib/seo/metadata";
+import { ContactPageSchema } from "@/components/seo/schema-org";
 
 export const metadata: Metadata = generatePageMetadata("contact");
 
@@ -8,6 +9,11 @@ export default function ContactLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <ContactPageSchema />
+      {children}
+    </>
+  );
 }
 

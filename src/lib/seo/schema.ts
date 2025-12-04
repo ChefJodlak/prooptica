@@ -208,7 +208,7 @@ export function generateLocalBusinessSchema(location: Location): object {
               valueAddedTaxIncluded: true,
             },
             availability: "https://schema.org/InStock",
-            validFrom: new Date().toISOString(),
+            validFrom: `${SITE_CONFIG.foundingDate}-01-01T00:00:00.000Z`,
           },
         },
       })),
@@ -369,7 +369,7 @@ export function generateServiceSchema(): object[] {
         valueAddedTaxIncluded: true,
       },
       availability: "https://schema.org/InStock",
-      validFrom: new Date().toISOString(),
+      validFrom: `${SITE_CONFIG.foundingDate}-01-01T00:00:00.000Z`,
     },
     // Duration
     ...(service.duration && {
@@ -398,7 +398,6 @@ export function generateFAQSchema(): object {
       acceptedAnswer: {
         "@type": "Answer",
         text: item.answer,
-        dateCreated: new Date().toISOString(),
         author: {
           "@id": `${SITE_CONFIG.url}/#organization`,
         },
@@ -445,8 +444,8 @@ export function generateWebPageSchema(page: {
       "@id": `${SITE_CONFIG.url}/#organization`,
     },
     inLanguage: SITE_CONFIG.locale,
-    datePublished: page.datePublished || new Date().toISOString(),
-    dateModified: page.dateModified || new Date().toISOString(),
+    ...(page.datePublished && { datePublished: page.datePublished }),
+    ...(page.dateModified && { dateModified: page.dateModified }),
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: `${SITE_CONFIG.url}${SITE_CONFIG.defaultOgImage}`,
@@ -475,8 +474,8 @@ export function generateArticleSchema(article: {
     headline: article.title,
     description: article.description,
     url: `${SITE_CONFIG.url}/artykuly/${article.slug}`,
-    datePublished: article.publishedTime || new Date().toISOString(),
-    dateModified: article.modifiedTime || article.publishedTime || new Date().toISOString(),
+    ...(article.publishedTime && { datePublished: article.publishedTime }),
+    ...(article.modifiedTime ? { dateModified: article.modifiedTime } : article.publishedTime ? { dateModified: article.publishedTime } : {}),
     author: {
       "@type": "Person",
       name: article.author || "Zespół Prooptica",
@@ -501,7 +500,7 @@ export function generateArticleSchema(article: {
     copyrightHolder: {
       "@id": `${SITE_CONFIG.url}/#organization`,
     },
-    copyrightYear: new Date().getFullYear(),
+    copyrightYear: parseInt(SITE_CONFIG.foundingDate, 10),
   };
 }
 
