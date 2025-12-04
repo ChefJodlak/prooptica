@@ -1,25 +1,21 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
+// GPU-optimized styles for Safari
+const gpuStyles = {
+  backfaceVisibility: "hidden" as const,
+  WebkitBackfaceVisibility: "hidden" as const,
+}
+
 export function EyeExamSection() {
   const containerRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-10%" })
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-  
-  // Parallax effects
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"])
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1.05, 1])
-  const contentY = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"])
 
   return (
     <section ref={containerRef} className="relative bg-[#0A0A0A] overflow-hidden">
@@ -27,19 +23,16 @@ export function EyeExamSection() {
       {/* Full-height split layout */}
       <div className="grid lg:grid-cols-2 min-h-screen">
         
-        {/* Left - Image with Parallax */}
+        {/* Left - Image (removed parallax for Safari performance) */}
         <div className="relative h-[50vh] sm:h-[60vh] lg:h-auto overflow-hidden order-2 lg:order-1">
-          <motion.div
-            style={{ y: imageY, scale: imageScale }}
-            className="absolute inset-0"
-          >
+          <div className="absolute inset-0 transform-gpu" style={gpuStyles}>
             <Image
               src="/exams/exam2.png"
               alt="Profesjonalne badanie wzroku"
               fill
-              className="object-cover"
+              className="object-cover scale-105"
             />
-          </motion.div>
+          </div>
           
           {/* Subtle overlay */}
           <div className="absolute inset-0 bg-[#0A0A0A]/30" />
@@ -67,9 +60,8 @@ export function EyeExamSection() {
           </motion.div>
         </div>
 
-        {/* Right - Content */}
-        <motion.div 
-          style={{ y: contentY }}
+        {/* Right - Content (removed parallax for Safari performance) */}
+        <div 
           className="relative flex flex-col justify-center px-5 sm:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 lg:py-32 order-1 lg:order-2"
         >
           
@@ -167,16 +159,13 @@ export function EyeExamSection() {
             </Link>
           </motion.div>
 
-          {/* Large decorative text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 0.03 } : {}}
-            transition={{ duration: 1.5, delay: 0.5 }}
-            className="absolute -bottom-10 right-0 font-display text-[12vw] font-bold text-white leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em]"
+          {/* Large decorative text - using CSS animation instead of Framer Motion */}
+          <div
+            className="absolute -bottom-10 right-0 font-display text-[12vw] font-bold text-white leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em] opacity-[0.03]"
           >
             BADANIA
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -42,6 +42,12 @@ const PARTNERS = [
 
 const AUTO_ROTATE_INTERVAL = 4000 // 4 seconds
 
+// GPU-optimized styles for Safari
+const gpuStyles = {
+  backfaceVisibility: "hidden" as const,
+  WebkitBackfaceVisibility: "hidden" as const,
+}
+
 export function LensesSection() {
   const containerRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, amount: 0.2 })
@@ -165,11 +171,12 @@ export function LensesSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 transform-gpu"
+              style={gpuStyles}
             >
               <div className="flex items-start gap-4 sm:gap-6 lg:gap-10">
                 {/* Large number */}
@@ -201,13 +208,10 @@ export function LensesSection() {
           </p>
           
           <div className="flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-10">
-            {PARTNERS.map((partner, i) => (
-              <motion.div
+            {PARTNERS.map((partner) => (
+              <div
                 key={partner.id}
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.6 + i * 0.05 }}
-                className="relative h-4 sm:h-5 lg:h-6 w-12 sm:w-14 lg:w-18 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-500"
+                className="relative h-4 sm:h-5 lg:h-6 w-12 sm:w-14 lg:w-18 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-300"
               >
                 <Image
                   src={partner.logo}
@@ -218,7 +222,7 @@ export function LensesSection() {
                     partner.id === 'acuvue' && "invert opacity-60"
                   )}
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>

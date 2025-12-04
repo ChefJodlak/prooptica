@@ -42,6 +42,12 @@ const ARTICLES = [
   }
 ]
 
+// GPU-optimized styles for Safari
+const gpuStyles = {
+  backfaceVisibility: "hidden" as const,
+  WebkitBackfaceVisibility: "hidden" as const,
+}
+
 export function ArticlesSection() {
   const containerRef = useRef<HTMLElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-10%" })
@@ -118,10 +124,11 @@ export function ArticlesSection() {
           
           {/* Featured Article - Left */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-7"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            style={gpuStyles}
+            className="lg:col-span-7 transform-gpu"
           >
             <Link href={`/artykuly/${featuredArticle.id}`} className="group block relative">
               {/* Artistic frame - Hidden on mobile for cleaner look */}
@@ -198,13 +205,14 @@ export function ArticlesSection() {
               {sideArticles.map((article, index) => (
                 <motion.div
                   key={article.id}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ 
-                    duration: 0.7, 
-                    delay: 0.5 + index * 0.15, 
-                    ease: [0.16, 1, 0.3, 1] 
+                    duration: 0.4, 
+                    delay: 0.3 + index * 0.1
                   }}
+                  style={gpuStyles}
+                  className="transform-gpu"
                 >
                   <Link href={`/artykuly/${article.id}`} className="group flex gap-3 sm:gap-5">
                     {/* Thumbnail */}

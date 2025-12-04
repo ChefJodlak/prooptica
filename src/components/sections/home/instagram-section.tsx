@@ -24,6 +24,12 @@ const PLACEHOLDER_POSTS = [
   { id: "6", gradient: "from-[#5851DB] via-[#405DE6] to-[#833AB4]" },
 ]
 
+// GPU-optimized styles for Safari
+const gpuStyles = {
+  backfaceVisibility: "hidden" as const,
+  WebkitBackfaceVisibility: "hidden" as const,
+}
+
 function PlaceholderPost({ 
   post, 
   index, 
@@ -38,14 +44,14 @@ function PlaceholderPost({
       href={INSTAGRAM_URL}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ 
-        duration: 0.8, 
-        delay: 0.3 + index * 0.1, 
-        ease: [0.16, 1, 0.3, 1] 
+        duration: 0.4, 
+        delay: 0.2 + index * 0.05
       }}
-      className="group relative aspect-square overflow-hidden cursor-pointer"
+      style={gpuStyles}
+      className="group relative aspect-square overflow-hidden cursor-pointer transform-gpu"
     >
       {/* Instagram gradient background */}
       <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient} opacity-20 group-hover:opacity-30 transition-opacity duration-500`} />
@@ -114,22 +120,16 @@ export function InstagramSection() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
       }} />
       
-      {/* Decorative large text - background */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 0.02 } : {}}
-        transition={{ duration: 1.5, delay: 0.3 }}
-        className="absolute top-16 left-8 font-display text-[8vw] font-bold text-[#1a1a1a] leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em]"
+      {/* Decorative large text - background (static for Safari performance) */}
+      <div
+        className="absolute top-16 left-8 font-display text-[8vw] font-bold text-[#1a1a1a] leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em] opacity-[0.02]"
       >
         INSTAGRAM
-      </motion.div>
+      </div>
       
       {/* Top decorative line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent origin-center"
+      <div
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent"
       />
       
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">

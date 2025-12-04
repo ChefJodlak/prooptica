@@ -27,6 +27,12 @@ import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 
+// GPU-optimized styles for Safari
+const gpuStyles = {
+  backfaceVisibility: "hidden" as const,
+  WebkitBackfaceVisibility: "hidden" as const,
+}
+
 function LocationCard({ 
   location, 
   isSelected, 
@@ -42,12 +48,13 @@ function LocationCard({
 }) {
   return (
     <motion.button
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay: 0.4 + index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
       onClick={onClick}
+      style={gpuStyles}
       className={cn(
-        "relative w-full text-left overflow-hidden transition-all duration-700 group",
+        "transform-gpu relative w-full text-left overflow-hidden transition-all duration-500 group",
         isSelected 
           ? "bg-white scale-[1.02] z-10" 
           : "bg-white/60 hover:bg-white"
@@ -395,22 +402,16 @@ export function LocationsPreview() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
       }} />
       
-      {/* Decorative large text - background */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 0.02 } : {}}
-        transition={{ duration: 1.5, delay: 0.3 }}
-        className="absolute top-20 right-8 font-display text-[8vw] font-bold text-[#1a1a1a] leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em]"
+      {/* Decorative large text - background (static for Safari performance) */}
+      <div
+        className="absolute top-20 right-8 font-display text-[8vw] font-bold text-[#1a1a1a] leading-none pointer-events-none select-none hidden xl:block tracking-[-0.02em] opacity-[0.02]"
       >
         LOKALIZACJE
-      </motion.div>
+      </div>
       
       {/* Top decorative line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent origin-center"
+      <div
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent"
       />
       
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
@@ -501,10 +502,11 @@ export function LocationsPreview() {
           
           {/* Map - Left (larger) */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="lg:col-span-7 order-2 lg:order-1"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            style={gpuStyles}
+            className="lg:col-span-7 order-2 lg:order-1 transform-gpu"
           >
             <div className="relative bg-white h-full">
               
@@ -520,8 +522,9 @@ export function LocationsPreview() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0"
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0 transform-gpu"
+                    style={gpuStyles}
                   >
                     <EmbeddedMap selectedLocation={selectedLocation} />
                   </motion.div>
@@ -546,11 +549,12 @@ export function LocationsPreview() {
                       <AnimatePresence mode="wait">
                         <motion.div 
                           key={selectedId}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.3 }}
-                          className="min-w-0 overflow-hidden"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="min-w-0 overflow-hidden transform-gpu"
+                          style={gpuStyles}
                         >
                           <h3 className="font-display text-lg text-white font-medium tracking-tight truncate">
                             {selectedLocation.city}
