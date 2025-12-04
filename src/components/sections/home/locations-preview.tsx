@@ -52,16 +52,16 @@ function LocationCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
       onClick={onClick}
-      style={gpuStyles}
+      style={{
+        ...gpuStyles,
+        boxShadow: isSelected ? '0 20px 40px -12px rgba(196, 167, 125, 0.35), 0 8px 16px -8px rgba(0, 0, 0, 0.1)' : 'none'
+      }}
       className={cn(
         "transform-gpu relative w-full text-left overflow-hidden transition-all duration-500 group",
         isSelected 
           ? "bg-white scale-[1.02] z-10" 
           : "bg-white/60 hover:bg-white"
       )}
-      style={{
-        boxShadow: isSelected ? '0 20px 40px -12px rgba(196, 167, 125, 0.35), 0 8px 16px -8px rgba(0, 0, 0, 0.1)' : 'none'
-      }}
     >
       {/* Elegant border */}
       <div className={cn(
