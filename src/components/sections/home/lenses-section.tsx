@@ -1,6 +1,5 @@
 "use client"
 
-import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -42,15 +41,8 @@ const PARTNERS = [
 
 const AUTO_ROTATE_INTERVAL = 4000 // 4 seconds
 
-// GPU-optimized styles for Safari
-const gpuStyles = {
-  backfaceVisibility: "hidden" as const,
-  WebkitBackfaceVisibility: "hidden" as const,
-}
-
 export function LensesSection() {
   const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, amount: 0.2 })
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
@@ -82,45 +74,25 @@ export function LensesSection() {
         {/* Header row */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 mb-10 sm:mb-14 lg:mb-20">
           <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-3 mb-4 sm:mb-5"
-            >
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
               <div className="w-6 sm:w-8 h-px bg-[#E31F25]" />
               <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] text-[#E31F25] uppercase font-medium">
                 Technologie
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
-            >
+            <h2 className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]">
               Soczewki nowej generacji
-            </motion.h2>
+            </h2>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-[#666] text-base sm:text-lg leading-relaxed font-light max-w-sm lg:text-right"
-          >
+          <p className="text-[#666] text-base sm:text-lg leading-relaxed font-light max-w-sm lg:text-right">
             Najnowsze technologie od światowych liderów, dopasowane do Twojego stylu życia.
-          </motion.p>
+          </p>
         </div>
 
         {/* Lens cards with progress indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12"
-        >
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
           {LENS_TYPES.map((lens, index) => (
             <button
               key={lens.id}
@@ -128,81 +100,66 @@ export function LensesSection() {
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
               className={cn(
-                "relative sm:flex-1 sm:min-w-[160px] p-4 sm:p-5 lg:p-6 text-left transition-all duration-500 group overflow-hidden",
+                "relative sm:flex-1 sm:min-w-[160px] p-4 sm:p-5 lg:p-6 text-left transition-all duration-300 group overflow-hidden transform-gpu",
                 activeIndex === index 
                   ? "bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] ring-1 ring-[#1a1a1a]/10" 
                   : "bg-white/60 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] ring-1 ring-[#1a1a1a]/5"
               )}
             >
-              {/* Progress bar for active card */}
+              {/* Progress bar for active card - CSS animation */}
               <div className="absolute top-0 left-0 w-full h-0.5 bg-[#eee]">
-                <motion.div
-                  className="h-full bg-[#E31F25]"
-                  initial={{ width: "0%" }}
-                  animate={{ 
-                    width: activeIndex === index && !isPaused ? "100%" : activeIndex === index ? "100%" : "0%" 
+                <div
+                  className={cn(
+                    "h-full bg-[#E31F25] transition-all",
+                    activeIndex === index && !isPaused 
+                      ? "w-full" 
+                      : activeIndex === index 
+                        ? "w-full" 
+                        : "w-0"
+                  )}
+                  style={{
+                    transitionDuration: activeIndex === index && !isPaused ? `${AUTO_ROTATE_INTERVAL}ms` : '200ms',
+                    transitionTimingFunction: 'linear'
                   }}
-                  transition={{ 
-                    duration: activeIndex === index && !isPaused ? AUTO_ROTATE_INTERVAL / 1000 : 0.3,
-                    ease: "linear"
-                  }}
-                  key={activeIndex === index ? `active-${activeIndex}` : `inactive-${index}`}
                 />
               </div>
 
               <span className={cn(
-                "block text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1.5 sm:mb-2 transition-colors duration-300",
+                "block text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-1.5 sm:mb-2 transition-colors duration-200",
                 activeIndex === index ? "text-[#E31F25]" : "text-[#999] group-hover:text-[#E31F25]"
               )}>
                 {lens.subtitle}
               </span>
               <span className={cn(
-                "block font-display text-lg sm:text-xl lg:text-2xl transition-colors duration-300",
+                "block font-display text-lg sm:text-xl lg:text-2xl transition-colors duration-200",
                 activeIndex === index ? "text-[#1a1a1a]" : "text-[#666] group-hover:text-[#1a1a1a]"
               )}>
                 {lens.name}
               </span>
             </button>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Active lens description */}
+        {/* Active lens description - CSS transition instead of AnimatePresence */}
         <div className="relative min-h-[120px] sm:min-h-[140px] lg:min-h-[120px] mb-10 sm:mb-14 pb-10 sm:pb-14 border-b border-[#e5e5e5]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 transform-gpu"
-              style={gpuStyles}
-            >
-              <div className="flex items-start gap-4 sm:gap-6 lg:gap-10">
-                {/* Large number */}
-                <div className="hidden sm:block">
-                  <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-extralight text-[#1a1a1a]/[0.07] leading-none select-none">
-                    {String(activeIndex + 1).padStart(2, '0')}
-                  </span>
-                </div>
-                
-                <div className="flex-1 pt-0 sm:pt-2">
-                  <p className="text-[#555] text-base sm:text-lg lg:text-xl leading-relaxed font-light max-w-xl">
-                    {LENS_TYPES[activeIndex].description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div className="flex items-start gap-4 sm:gap-6 lg:gap-10">
+            {/* Large number */}
+            <div className="hidden sm:block">
+              <span className="font-display text-5xl sm:text-7xl lg:text-8xl font-extralight text-[#1a1a1a]/[0.07] leading-none select-none">
+                {String(activeIndex + 1).padStart(2, '0')}
+              </span>
+            </div>
+            
+            <div className="flex-1 pt-0 sm:pt-2">
+              <p className="text-[#555] text-base sm:text-lg lg:text-xl leading-relaxed font-light max-w-xl">
+                {LENS_TYPES[activeIndex].description}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Partners */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 lg:gap-10"
-        >
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 lg:gap-10">
           <p className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#888] uppercase font-medium">
             Partnerzy
           </p>
@@ -211,7 +168,7 @@ export function LensesSection() {
             {PARTNERS.map((partner) => (
               <div
                 key={partner.id}
-                className="relative h-4 sm:h-5 lg:h-6 w-12 sm:w-14 lg:w-18 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-300"
+                className="relative h-4 sm:h-5 lg:h-6 w-12 sm:w-14 lg:w-18 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-200"
               >
                 <Image
                   src={partner.logo}
@@ -225,7 +182,7 @@ export function LensesSection() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

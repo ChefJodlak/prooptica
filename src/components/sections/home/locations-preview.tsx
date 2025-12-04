@@ -21,43 +21,28 @@ declare global {
 import { LOCATIONS, Location } from "@/lib/constants/locations"
 import { Button } from "@/components/ui/button"
 import { MapPin, ArrowRight, Phone, Clock, ExternalLink, Calendar } from "lucide-react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 
-// GPU-optimized styles for Safari
-const gpuStyles = {
-  backfaceVisibility: "hidden" as const,
-  WebkitBackfaceVisibility: "hidden" as const,
-}
-
 function LocationCard({ 
   location, 
   isSelected, 
-  onClick,
-  index,
-  isInView
+  onClick
 }: { 
   location: Location
   isSelected: boolean
   onClick: () => void
-  index: number
-  isInView: boolean
 }) {
   return (
-    <motion.button
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+    <button
       onClick={onClick}
       style={{
-        ...gpuStyles,
         boxShadow: isSelected ? '0 20px 40px -12px rgba(196, 167, 125, 0.35), 0 8px 16px -8px rgba(0, 0, 0, 0.1)' : 'none'
       }}
       className={cn(
-        "transform-gpu relative w-full text-left overflow-hidden transition-all duration-500 group",
+        "transform-gpu relative w-full text-left overflow-hidden transition-all duration-300 group",
         isSelected 
           ? "bg-white scale-[1.02] z-10" 
           : "bg-white/60 hover:bg-white"
@@ -142,7 +127,7 @@ function LocationCard({
           isSelected ? "text-[#C4A77D]" : "text-[#aaa] group-hover:text-[#999]"
         )}>{location.postal} {location.city}</span>
       </div>
-    </motion.button>
+    </button>
   )
 }
 
@@ -354,7 +339,6 @@ function EmbeddedMap({ selectedLocation }: { selectedLocation: Location }) {
 
 export function LocationsPreview() {
   const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" })
   const [selectedId, setSelectedId] = useState<string>(LOCATIONS[0].id)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -363,7 +347,7 @@ export function LocationsPreview() {
   
   // Auto-cycling effect
   useEffect(() => {
-    if (isAutoPlaying && isInView) {
+    if (isAutoPlaying) {
       autoPlayIntervalRef.current = setInterval(() => {
         setSelectedId(currentId => {
           const currentIndex = LOCATIONS.findIndex(loc => loc.id === currentId)
@@ -378,7 +362,7 @@ export function LocationsPreview() {
         clearInterval(autoPlayIntervalRef.current)
       }
     }
-  }, [isAutoPlaying, isInView])
+  }, [isAutoPlaying])
   
   // Handle user selection - stops auto-play
   const handleLocationSelect = (locationId: string) => {
@@ -422,36 +406,21 @@ export function LocationsPreview() {
           {/* Left - Title */}
           <div className="lg:col-span-6">
             {/* Label */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8 }}
-              className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8"
-            >
+            <div className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8">
               <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                 Nasze Salony
               </span>
               <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
-            </motion.div>
+            </div>
             
             {/* Headline */}
-            <div className="overflow-hidden mb-1 sm:mb-2">
-              <motion.h2
-                initial={{ y: "110%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-display text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]"
-              >
+            <div className="mb-1 sm:mb-2">
+              <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
                 Znajdź nas
-              </motion.h2>
+              </h2>
             </div>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "110%" }}
-                animate={isInView ? { y: 0 } : {}}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-                className="font-display text-[clamp(2rem,5vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em]"
-              >
+            <div>
+              <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
                 blisko{" "}
                 <span className="relative inline-block">
                   <span className="italic text-[#C4A77D]">siebie</span>
@@ -459,29 +428,19 @@ export function LocationsPreview() {
                     <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
                   </svg>
                 </span>
-              </motion.h2>
+              </h2>
             </div>
           </div>
           
           {/* Right - Description & Stats */}
           <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end">
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light"
-            >
+            <p className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light">
               Cztery eleganckie salony w kluczowych lokalizacjach. 
               Wszędzie ta sama jakość obsługi i pasja do doskonałości.
-            </motion.p>
+            </p>
             
             {/* Quick stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex items-center gap-5 sm:gap-8"
-            >
+            <div className="flex items-center gap-5 sm:gap-8">
               {[
                 { value: "4", label: "Lokalizacje" },
                 { value: "3", label: "Miasta" },
@@ -493,7 +452,7 @@ export function LocationsPreview() {
                   <span className="block text-[8px] sm:text-[9px] tracking-[0.12em] sm:tracking-[0.15em] text-[#999] uppercase mt-1">{stat.label}</span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
@@ -501,13 +460,7 @@ export function LocationsPreview() {
         <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
           
           {/* Map - Left (larger) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            style={gpuStyles}
-            className="lg:col-span-7 order-2 lg:order-1 transform-gpu"
-          >
+          <div className="lg:col-span-7 order-2 lg:order-1 transform-gpu">
             <div className="relative bg-white h-full">
               
               {/* Artistic frame like Intro - Hidden on mobile for cleaner look */}
@@ -516,19 +469,9 @@ export function LocationsPreview() {
               
               {/* Map Container */}
               <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selectedId}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 transform-gpu"
-                    style={gpuStyles}
-                  >
-                    <EmbeddedMap selectedLocation={selectedLocation} />
-                  </motion.div>
-                </AnimatePresence>
+                <div className="absolute inset-0 transform-gpu">
+                  <EmbeddedMap selectedLocation={selectedLocation} />
+                </div>
               </div>
               
               {/* Location Details Bar - Compact Luxurious Design */}
@@ -546,24 +489,14 @@ export function LocationsPreview() {
                       <div className="w-1 h-10 bg-[#C4A77D] flex-shrink-0" />
                       
                       {/* Text info */}
-                      <AnimatePresence mode="wait">
-                        <motion.div 
-                          key={selectedId}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                          className="min-w-0 overflow-hidden transform-gpu"
-                          style={gpuStyles}
-                        >
-                          <h3 className="font-display text-lg text-white font-medium tracking-tight truncate">
-                            {selectedLocation.city}
-                          </h3>
-                          <p className="text-white/50 text-xs truncate max-w-[280px]">
-                            {selectedLocation.address}
-                          </p>
-                        </motion.div>
-                      </AnimatePresence>
+                      <div className="min-w-0 overflow-hidden transform-gpu">
+                        <h3 className="font-display text-lg text-white font-medium tracking-tight truncate">
+                          {selectedLocation.city}
+                        </h3>
+                        <p className="text-white/50 text-xs truncate max-w-[280px]">
+                          {selectedLocation.address}
+                        </p>
+                      </div>
                     </div>
                     
                     {/* Contact info - visible on mobile */}
@@ -613,31 +546,24 @@ export function LocationsPreview() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Location Cards - Right */}
           <div className="lg:col-span-5 order-1 lg:order-2">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
-              {LOCATIONS.map((location, index) => (
+              {LOCATIONS.map((location) => (
                 <LocationCard
                   key={location.id}
                   location={location}
                   isSelected={selectedId === location.id}
                   onClick={() => handleLocationSelect(location.id)}
-                  index={index}
-                  isInView={isInView}
                 />
               ))}
             </div>
             
             {/* Auto-play indicator dots */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="flex items-center justify-center gap-2 mt-4 sm:mt-6"
-            >
-              {LOCATIONS.map((location, index) => (
+            <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6">
+              {LOCATIONS.map((location) => (
                 <button
                   key={location.id}
                   onClick={() => handleLocationSelect(location.id)}
@@ -645,7 +571,7 @@ export function LocationsPreview() {
                   aria-label={`Wybierz ${location.city}`}
                 >
                   <div className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-500",
+                    "w-2 h-2 rounded-full transition-all duration-300",
                     selectedId === location.id 
                       ? "bg-[#C4A77D] scale-125" 
                       : "bg-[#d0d0d0] group-hover:bg-[#C4A77D]/50"
@@ -673,32 +599,27 @@ export function LocationsPreview() {
               ))}
               {/* Auto-play status indicator */}
               <div className={cn(
-                "ml-2 text-[9px] tracking-[0.1em] uppercase transition-opacity duration-300",
+                "ml-2 text-[9px] tracking-[0.1em] uppercase transition-opacity duration-200",
                 isAutoPlaying ? "text-[#C4A77D] opacity-100" : "text-[#999] opacity-50"
               )}>
                 {isAutoPlaying ? "Auto" : "Pauza"}
               </div>
-            </motion.div>
+            </div>
             
             {/* CTA Link */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#e0ded8]"
-            >
+            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#e0ded8]">
               <Link href="/salony" className="group inline-flex items-center gap-4 sm:gap-6">
                 <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.25em] uppercase">
                   Wszystkie lokalizacje
                 </span>
                 <div className="relative overflow-hidden">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-16 transition-all duration-500" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-16 transition-all duration-200" />
+                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-200" />
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

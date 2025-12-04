@@ -1,15 +1,13 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { ArrowRight, Clock, BookOpen, Eye, Monitor, Sun } from "lucide-react"
+import { ArrowRight, Clock, BookOpen } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
 const CATEGORIES = [
-  { id: "zdrowie", name: "Zdrowie oczu", icon: Eye },
-  { id: "technologia", name: "Technologia", icon: Monitor },
-  { id: "styl", name: "Styl życia", icon: Sun }
+  { id: "zdrowie", name: "Zdrowie oczu" },
+  { id: "technologia", name: "Technologia" },
+  { id: "styl", name: "Styl życia" }
 ]
 
 const ARTICLES = [
@@ -42,24 +40,12 @@ const ARTICLES = [
   }
 ]
 
-// GPU-optimized styles for Safari
-const gpuStyles = {
-  backfaceVisibility: "hidden" as const,
-  WebkitBackfaceVisibility: "hidden" as const,
-}
-
 export function ArticlesSection() {
-  const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" })
-  
   const featuredArticle = ARTICLES[0]
   const sideArticles = ARTICLES.slice(1)
 
   return (
-    <section 
-      ref={containerRef} 
-      className="relative min-h-[calc(100vh-88px)] bg-[#fafafa] overflow-hidden flex flex-col justify-center py-10 sm:py-12"
-    >
+    <section className="relative min-h-[calc(100vh-88px)] bg-[#fafafa] overflow-hidden flex flex-col justify-center py-10 sm:py-12">
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
@@ -67,27 +53,17 @@ export function ArticlesSection() {
       
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
         
-        {/* Header row - similar to lenses section */}
+        {/* Header row */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 mb-10 sm:mb-14 lg:mb-20">
           <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-3 mb-4 sm:mb-5"
-            >
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
               <div className="w-6 sm:w-8 h-px bg-[#C4A77D]" />
               <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C4A77D] uppercase font-medium">
                 Blog & Porady
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
-            >
+            <h2 className="font-display text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]">
               Wiedza o zdrowym{" "}
               <span className="relative inline-block">
                 <span className="italic text-[#C4A77D] font-medium">wzroku</span>
@@ -95,15 +71,10 @@ export function ArticlesSection() {
                   <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
                 </svg>
               </span>
-            </motion.h2>
+            </h2>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 lg:gap-8"
-          >
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 lg:gap-8">
             <p className="text-[#666] text-sm sm:text-base leading-relaxed font-light max-w-xs lg:text-right">
               Porady ekspertów, nowości ze świata optyki i inspiracje dla Twoich oczu.
             </p>
@@ -114,22 +85,16 @@ export function ArticlesSection() {
               <span className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] text-[#1a1a1a] uppercase font-medium">
                 Wszystkie
               </span>
-              <div className="w-5 sm:w-6 h-px bg-[#1a1a1a] group-hover:w-8 sm:group-hover:w-10 group-hover:bg-[#C4A77D] transition-all duration-300" />
+              <div className="w-5 sm:w-6 h-px bg-[#1a1a1a] group-hover:w-8 sm:group-hover:w-10 group-hover:bg-[#C4A77D] transition-all duration-200" />
             </Link>
-          </motion.div>
+          </div>
         </div>
 
         {/* Content: Featured + List Layout */}
         <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
           
           {/* Featured Article - Left */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            style={gpuStyles}
-            className="lg:col-span-7 transform-gpu"
-          >
+          <div className="lg:col-span-7 transform-gpu">
             <Link href={`/artykuly/${featuredArticle.id}`} className="group block relative">
               {/* Artistic frame - Hidden on mobile for cleaner look */}
               <div className="hidden sm:block absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/20 pointer-events-none" />
@@ -140,7 +105,7 @@ export function ArticlesSection() {
                   <img 
                     src={featuredArticle.image}
                     alt={featuredArticle.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/60 via-transparent to-transparent" />
                   
@@ -160,7 +125,7 @@ export function ArticlesSection() {
                       </span>
                       <span>{featuredArticle.date}</span>
                     </div>
-                    <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-medium text-white leading-tight group-hover:text-[#C4A77D] transition-colors duration-300">
+                    <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-medium text-white leading-tight group-hover:text-[#C4A77D] transition-colors duration-200">
                       {featuredArticle.title}
                     </h3>
                   </div>
@@ -173,56 +138,41 @@ export function ArticlesSection() {
                   </p>
                   
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] text-[#1a1a1a] uppercase font-medium group-hover:text-[#C4A77D] transition-colors duration-300">
+                    <span className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] text-[#1a1a1a] uppercase font-medium group-hover:text-[#C4A77D] transition-colors duration-200">
                       Czytaj artykuł
                     </span>
-                    <div className="w-6 sm:w-8 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-10 sm:group-hover:w-12 transition-all duration-500" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                    <div className="w-6 sm:w-8 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-10 sm:group-hover:w-12 transition-all duration-200" />
+                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-200" />
                   </div>
                 </div>
               </div>
             </Link>
-          </motion.div>
+          </div>
 
           {/* Side Articles List - Right */}
           <div className="lg:col-span-5 flex flex-col">
             
             {/* Section label */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
-            >
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <BookOpen className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-[#C4A77D]" />
               <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#999] uppercase font-medium">
                 Więcej artykułów
               </span>
-            </motion.div>
+            </div>
             
             {/* Article list */}
             <div className="flex-1 flex flex-col gap-4 sm:gap-6">
               {sideArticles.map((article, index) => (
-                <motion.div
-                  key={article.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 0.3 + index * 0.1
-                  }}
-                  style={gpuStyles}
-                  className="transform-gpu"
-                >
+                <div key={article.id} className="transform-gpu">
                   <Link href={`/artykuly/${article.id}`} className="group flex gap-3 sm:gap-5">
                     {/* Thumbnail */}
                     <div className="relative w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 flex-shrink-0 overflow-hidden">
                       <img 
                         src={article.image}
                         alt={article.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
                       />
-                      <div className="absolute inset-0 bg-[#1a1a1a]/10 group-hover:bg-transparent transition-colors duration-300" />
+                      <div className="absolute inset-0 bg-[#1a1a1a]/10 group-hover:bg-transparent transition-colors duration-200" />
                     </div>
                     
                     {/* Content */}
@@ -240,7 +190,7 @@ export function ArticlesSection() {
                       </div>
                       
                       {/* Title */}
-                      <h4 className="font-display text-sm sm:text-base lg:text-lg font-medium text-[#1a1a1a] leading-snug mb-1.5 sm:mb-2 group-hover:text-[#C4A77D] transition-colors duration-300 line-clamp-2">
+                      <h4 className="font-display text-sm sm:text-base lg:text-lg font-medium text-[#1a1a1a] leading-snug mb-1.5 sm:mb-2 group-hover:text-[#C4A77D] transition-colors duration-200 line-clamp-2">
                         {article.title}
                       </h4>
                       
@@ -248,7 +198,7 @@ export function ArticlesSection() {
                       <div className="flex items-center gap-2 text-[#999]">
                         <Clock className="w-2.5 sm:w-3 h-2.5 sm:h-3" />
                         <span className="text-[10px] sm:text-xs">{article.readTime}</span>
-                        <ArrowRight className="w-3 h-3 ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#C4A77D] transition-all duration-300 hidden sm:block" />
+                        <ArrowRight className="w-3 h-3 ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#C4A77D] transition-all duration-200 hidden sm:block" />
                       </div>
                     </div>
                   </Link>
@@ -257,17 +207,12 @@ export function ArticlesSection() {
                   {index < sideArticles.length - 1 && (
                     <div className="mt-4 sm:mt-6 h-px bg-[#e5e5e5]" />
                   )}
-                </motion.div>
+                </div>
               ))}
             </div>
             
             {/* Bottom CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#e5e5e5]"
-            >
+            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#e5e5e5]">
               <Link 
                 href="/artykuly"
                 className="group inline-flex items-center gap-3 sm:gap-4"
@@ -276,11 +221,11 @@ export function ArticlesSection() {
                   Zobacz wszystkie artykuły
                 </span>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 sm:w-10 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-14 transition-all duration-500" />
-                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                  <div className="w-8 sm:w-10 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-14 transition-all duration-200" />
+                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-200" />
                 </div>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
