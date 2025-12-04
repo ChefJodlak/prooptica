@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils"
 const smoothEasing = [0.22, 1, 0.36, 1] as const
 const bounceEasing = [0.34, 1.56, 0.64, 1] as const
 
-// GPU acceleration styles
+// GPU acceleration styles - minimal version for Safari compatibility
+// Note: willChange removed as it causes memory issues on Safari macOS
 const gpuStyles = {
-  willChange: "transform, opacity",
   backfaceVisibility: "hidden" as const,
-  transform: "translateZ(0)",
+  WebkitBackfaceVisibility: "hidden" as const,
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -149,7 +149,7 @@ export function TextReveal({ children, className, delay = 0, once = true }: Text
               delay: delay + i * 0.04,
               ease: smoothEasing
             }}
-            style={{ willChange: "transform, opacity" }}
+            style={gpuStyles}
           >
             {word}
           </motion.span>
@@ -187,7 +187,7 @@ export function CharReveal({ children, className, delay = 0, once = true }: Char
             delay: delay + i * 0.015,
             ease: smoothEasing
           }}
-          style={{ willChange: "transform, opacity" }}
+          style={gpuStyles}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
@@ -352,21 +352,19 @@ interface FloatingProps {
 }
 
 export function Floating({ children, className, duration = 6, y = 12 }: FloatingProps) {
+  // Use CSS animation for infinite floating (better Safari performance than JS-driven animations)
   return (
-    <motion.div
-      animate={{
-        y: [-y/2, y/2, -y/2],
-      }}
-      transition={{
-        duration,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-      className={cn("transform-gpu", className)}
-      style={gpuStyles}
+    <div
+      className={cn("transform-gpu animate-float", className)}
+      style={{
+        ...gpuStyles,
+        // CSS custom properties for animation customization
+        "--float-duration": `${duration}s`,
+        "--float-y": `${y}px`,
+      } as React.CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -476,12 +474,15 @@ export function RevealMask({ children, className, delay = 0, once = true }: Reve
   const ref = useRef(null)
   const isInView = useInView(ref, { once, margin: "-10%" })
 
+  // Use transform-based reveal instead of clipPath (clipPath is not GPU-accelerated)
   return (
     <div ref={ref} className={cn("overflow-hidden", className)}>
       <motion.div
-        initial={{ clipPath: "inset(0 100% 0 0)" }}
-        animate={isInView ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
-        transition={{ duration: 1, delay, ease: smoothEasing }}
+        className="transform-gpu"
+        initial={{ x: "-100%" }}
+        animate={isInView ? { x: 0 } : { x: "-100%" }}
+        transition={{ duration: 0.8, delay, ease: smoothEasing }}
+        style={gpuStyles}
       >
         {children}
       </motion.div>
@@ -505,7 +506,7 @@ export function RotatingText({ words, className, interval = 3000 }: RotatingText
       {words.map((word, i) => (
         <motion.span
           key={word}
-          className="absolute left-0"
+          className="absolute left-0 transform-gpu"
           initial={{ opacity: 0, y: 20 }}
           animate={{
             opacity: [0, 1, 1, 0],
@@ -516,8 +517,9 @@ export function RotatingText({ words, className, interval = 3000 }: RotatingText
             delay: i * (interval / 1000),
             repeat: Infinity,
             repeatDelay: (words.length - 1) * (interval / 1000),
-            ease: smoothEasing
+            ease: "linear" // Simpler easing for infinite animations
           }}
+          style={gpuStyles}
         >
           {word}
         </motion.span>
@@ -545,10 +547,12 @@ export function GlowingOrb({ className, color = "red", size = 400 }: GlowingOrbP
     orange: "bg-orange-500/30"
   }
 
+  // Use CSS animation instead of Framer Motion for infinite animations (better Safari performance)
+  // Reduced blur from 60px to 40px for Safari
   return (
-    <motion.div
+    <div
       className={cn(
-        "absolute rounded-full animate-pulse-glow transform-gpu blur-[60px]",
+        "absolute rounded-full animate-pulse transform-gpu blur-2xl",
         colorMap[color] || colorMap.red,
         className
       )}
@@ -556,15 +560,6 @@ export function GlowingOrb({ className, color = "red", size = 400 }: GlowingOrbP
         width: size, 
         height: size,
         ...gpuStyles
-      }}
-      animate={{
-        scale: [1, 1.1, 1],
-        opacity: [0.3, 0.5, 0.3]
-      }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut"
       }}
     />
   )

@@ -115,6 +115,18 @@
       transform: translate3d(0, 0, 0);
     }
   }
+  
+  /* Floating animation - CSS-based for better Safari performance */
+  @keyframes float {
+    0%, 100% {
+      transform: translate3d(0, calc(var(--float-y, 12px) * -0.5), 0);
+    }
+    50% {
+      transform: translate3d(0, calc(var(--float-y, 12px) * 0.5), 0);
+    }
+  }
+  
+  --animate-float: float var(--float-duration, 6s) ease-in-out infinite;
 }
 
 /* Hero logo animation - triggered via data attribute to avoid hydration mismatch */
@@ -381,6 +393,11 @@ html {
 
 .split-line.revealed > span {
   transform: translate3d(0, 0, 0);
+}
+
+/* Float animation class */
+.animate-float {
+  animation: float var(--float-duration, 6s) ease-in-out infinite;
 }
 
 /* Safari-specific optimizations */
