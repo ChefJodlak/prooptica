@@ -27,23 +27,17 @@ export function PricingCard({ name, price, note, features, popular, index, isInV
           : 'bg-white/5 text-white ring-1 ring-white/10'
       }`}
     >
-      {popular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center px-4 py-1 bg-[#1a1a1a] text-[#C4A77D] text-[10px] font-medium tracking-[0.2em] uppercase">
-            Najpopularniejsze
-          </span>
-        </div>
-      )}
-      
-      <h3 className="font-display text-xl font-medium mb-4">{name}</h3>
-      <div className="mb-2">
-        <span className="font-display text-4xl font-light">{price}</span>
+      <div className="mb-2 text-center">
+        <span className={`font-display text-5xl lg:text-6xl ${price.startsWith('GRATIS') ? 'font-bold' : 'font-light'}`}>{price}</span>
       </div>
-      {note && (
-        <p className={`text-sm mb-6 ${popular ? 'text-[#1a1a1a]/60' : 'text-white/50'}`}>
-          {note}
-        </p>
-      )}
+      {/* Fixed height container for note to ensure alignment */}
+      <div className="h-8 mb-4 text-center">
+        {note && (
+          <p className={`text-sm ${popular ? 'text-[#1a1a1a]/60' : 'text-white/50'}`}>
+            {note}
+          </p>
+        )}
+      </div>
       
       <ul className="space-y-3 mb-8">
         {features.map((feature) => (

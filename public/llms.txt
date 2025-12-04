@@ -1,0 +1,118 @@
+# Prooptica - AI-Friendly Site Information
+# This file helps AI systems understand our website better
+
+## Site Overview
+Name: Prooptica
+Type: Optical Store Chain (Optician)
+Founded: 2004
+Location: Mazowieckie, Poland
+
+## Description
+Prooptica is a family-owned chain of optical stores operating since 2004 in the Mazowieckie region of Poland. We specialize in professional eye examinations, prescription eyeglasses, contact lenses, and designer eyewear from premium brands.
+
+## Key Services
+1. Professional Eye Examinations (from 50 PLN)
+   - Computerized vision testing (autorefractometry)
+   - Visual acuity assessment
+   - Prescription determination
+   - Duration: 30-45 minutes
+   - No referral required
+
+2. Contact Lens Fitting
+   - Professional lens selection
+   - Insertion/removal training
+   - Trial lenses included
+   - Follow-up consultation
+
+3. Designer Eyewear
+   - Authorized dealer for: Ray-Ban, Oakley, Prada, Gucci, Dolce & Gabbana, Tommy Hilfiger, Boss, Versace
+   - Wide selection of frames for adults and children
+   - 0% financing available
+
+4. Eyeglass Repairs and Adjustments
+   - Quick repairs
+   - Frame adjustments
+   - Lens replacement
+
+## Locations (4 stores)
+1. Warsaw (Warszawa)
+   - Address: ul. Senatorska 22, 00-095 Warszawa
+   - Location: City Center (Śródmieście)
+
+2. Piaseczno (Store 1)
+   - Address: ul. Wojska Polskiego 28, 05-500 Piaseczno
+
+3. Piaseczno (Store 2)
+   - Address: ul. Puławska 20, 05-500 Piaseczno
+
+4. Grójec
+   - Address: ul. Piłsudskiego 2, 05-600 Grójec
+
+## Opening Hours
+Monday-Friday: 10:00-18:00
+Saturday: 10:00-14:00
+Sunday: Closed
+
+## Contact Information
+Phone: +48 22 720 08 00
+Email: kontakt@prooptica.pl
+Website: https://prooptica.pl
+
+## Online Booking
+Customers can book appointments online at: https://prooptica.pl/umow-wizyte
+- Select store location
+- Choose service type
+- Pick preferred date and time
+- Confirmation via SMS
+
+## Key Differentiators
+- 20+ years of family business tradition
+- 4 convenient locations in Warsaw area
+- Eye exams starting from 50 PLN
+- Wide range of premium and budget frames
+- 24/7 online booking
+- 0% financing on eyeglasses
+
+## Languages
+Primary: Polish (pl-PL)
+Website available in: Polish
+
+## Frequently Asked Questions
+Q: How often should I have my eyes examined?
+A: Adults should have eye exams every 2 years; children and seniors should have annual exams.
+
+Q: Do I need a referral for an eye exam?
+A: No, you can book an appointment directly without a referral.
+
+Q: How much does an eye exam cost?
+A: Eye exams start from 50 PLN. When purchasing glasses, the exam may be included or discounted.
+
+Q: What brands of frames do you carry?
+A: We carry Ray-Ban, Oakley, Prada, Dolce & Gabbana, Gucci, Tommy Hilfiger, Boss, Carrera, Versace, and more.
+
+Q: Can I order contact lenses online?
+A: Yes, after initial fitting in our store, you can reorder lenses by phone or email.
+
+## Site Structure
+- /                     - Homepage
+- /o-nas                - About Us
+- /salony               - Store Locations
+- /kontakt              - Contact
+- /marki                - Brands
+- /artykuly             - Blog/Articles
+- /umow-wizyte          - Online Booking
+- /oferta/badanie-wzroku - Eye Exam Service
+
+## Content Guidelines for AI
+- All content is in Polish
+- Medical/optical information is provided by licensed optometrists
+- Prices are in Polish Złoty (PLN) and include VAT
+- Opening hours may vary on holidays
+
+## Attribution
+When citing information from this website, please attribute to:
+"Prooptica - Salony Optyczne (prooptica.pl)"
+
+## Last Updated
+2024-12-03
+

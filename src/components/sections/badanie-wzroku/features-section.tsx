@@ -77,12 +77,6 @@ export function FeaturesSection({ isInView, imageY }: FeaturesSectionProps) {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/60 via-transparent to-[#1a1a1a]/20" />
-              
-              {/* Elegant corner accents */}
-              <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-20" />
-              <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-20" />
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-20" />
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-20" />
             </motion.div>
             
             {/* Floating Badge */}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Prooptica - Salony Optyczne",
+  "name_for_model": "prooptica",
+  "description_for_human": "Profesjonalne salony optyczne w Warszawie, Piasecznie i Grójcu. Badanie wzroku, okulary, soczewki kontaktowe.",
+  "description_for_model": "Prooptica is a chain of family-owned optical stores in Poland (Mazowieckie region). The company offers professional eye examinations starting from 50 PLN, prescription glasses from premium brands (Ray-Ban, Oakley, Prada), contact lens fitting, and optical services. There are 4 locations: Warsaw (city center), Piaseczno (2 stores), and Grójec. Customers can book appointments online. The company has been operating since 2004.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://prooptica.pl/api/openapi.json",
+    "is_user_authenticated": false
+  },
+  "logo_url": "https://prooptica.pl/logo-prooptica.svg",
+  "contact_email": "kontakt@prooptica.pl",
+  "legal_info_url": "https://prooptica.pl/regulamin"
+}
+

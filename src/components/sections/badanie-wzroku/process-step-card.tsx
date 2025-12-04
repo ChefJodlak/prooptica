@@ -45,10 +45,18 @@ export function ProcessStepCard({ number, title, description, index, isLast, isI
         </p>
       </div>
       
-      {/* Arrow */}
+      {/* Arrow - positioned in the center of the gap between cards */}
       {!isLast && (
-        <div className="hidden lg:block absolute top-1/2 -right-4 z-10">
-          <ArrowRight className="w-6 h-6 text-[#C4A77D]/40" />
+        <div 
+          className="hidden lg:flex absolute top-1/2 z-20 items-center justify-center"
+          style={{ 
+            right: '-16px',
+            transform: 'translateY(-50%) translateX(50%)',
+            width: '32px',
+            height: '32px'
+          }}
+        >
+          <ArrowRight className="w-5 h-5 text-[#C4A77D]" />
         </div>
       )}
     </motion.div>

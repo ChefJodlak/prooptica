@@ -1,0 +1,30 @@
+/* TEAM */
+
+Company: Prooptica Sp. z o.o.
+Site: https://prooptica.pl
+Location: Mazowieckie, Poland
+Founded: 2004
+
+/* SITE */
+
+Standards: HTML5, CSS3, JavaScript ES2024
+Framework: Next.js 16
+Styling: Tailwind CSS 4
+Animation: Framer Motion
+Components: Radix UI
+Fonts: Cormorant Garamond, DM Sans (Google Fonts)
+
+/* THANKS */
+
+React Team - https://react.dev
+Vercel - https://vercel.com
+Tailwind Labs - https://tailwindcss.com
+Framer - https://www.framer.com/motion/
+
+/* LOCATIONS */
+
+Warszawa: ul. Senatorska 22
+Piaseczno: ul. Wojska Polskiego 28
+Piaseczno: ul. Puławska 20
+Grójec: ul. Piłsudskiego 2
+

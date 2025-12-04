@@ -21,7 +21,7 @@ export function PricingSection({ isInView }: PricingSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <SectionLabel text="Cennik" centered />
           <h2 className="font-display text-[2.5rem] lg:text-[4rem] font-extralight text-white leading-[1] tracking-[-0.03em] mb-2">
@@ -32,7 +32,7 @@ export function PricingSection({ isInView }: PricingSectionProps) {
           </h2>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-3xl mx-auto">
           {PRICING_PLANS.map((plan, i) => (
             <PricingCard
               key={plan.name}

@@ -1,74 +1,57 @@
 "use client"
 
 import { motion } from "framer-motion"
-
-const NOISE_TEXTURE = "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")"
+import { TextureOverlay } from "../badanie-wzroku/texture-overlay"
+import { SectionLabel } from "../badanie-wzroku/section-label"
+import { AccentText } from "../badanie-wzroku/accent-text"
 
 export function HeroSection() {
   return (
-    <section className="relative pt-36 pb-20 lg:pt-48 lg:pb-28 bg-[#1a1a1a] overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]" 
-        style={{ backgroundImage: NOISE_TEXTURE }} 
-      />
+    <section className="relative pt-36 pb-20 lg:pt-48 lg:pb-32 bg-[#1a1a1a] overflow-hidden">
+      <TextureOverlay />
       
       {/* Decorative background elements */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-[#C4A77D]/10 rounded-full blur-[120px]"
+        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#C4A77D]/10 rounded-full blur-[150px]"
         animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 8, repeat: Infinity }}
+        transition={{ duration: 10, repeat: Infinity }}
       />
       
       <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex items-center gap-5 mb-8"
-        >
-          <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
-            Blog & Porady
-          </span>
-          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
-        </motion.div>
-        
-        {/* Headline */}
-        <div className="overflow-hidden mb-3">
-          <motion.h1
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="font-display text-[clamp(3rem,9vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+        <div className="max-w-4xl">
+          <SectionLabel text="Blog & Porady" animate />
+          
+          {/* Headline */}
+          <div className="overflow-hidden mb-3">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="font-display text-[clamp(3rem,9vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+            >
+              Artykuły
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden mb-10">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
+            >
+              <AccentText underlineOpacity={0.3}>& Porady</AccentText>
+            </motion.h1>
+          </div>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-white/60 text-lg lg:text-xl leading-[1.8] max-w-2xl mb-12 font-light"
           >
-            Artykuły
-          </motion.h1>
+            Baza wiedzy o zdrowiu Twoich oczu. Porady ekspertów, nowości ze świata optyki i inspiracje.
+          </motion.p>
         </div>
-        <div className="overflow-hidden mb-10">
-          <motion.h1
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
-          >
-            <span className="relative inline-block">
-              <span className="italic text-[#C4A77D]">& Porady</span>
-              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-              </svg>
-            </span>
-          </motion.h1>
-        </div>
-        
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-white/60 text-lg lg:text-xl leading-[1.8] max-w-lg font-light"
-        >
-          Baza wiedzy o zdrowiu Twoich oczu. Porady ekspertów, nowości ze świata optyki i inspiracje.
-        </motion.p>
       </div>
       
       {/* Bottom decorative line */}

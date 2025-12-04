@@ -32,24 +32,17 @@ export const PROCESS_STEPS = [
 
 export const PRICING_PLANS = [
   {
-    name: "Podstawowe",
-    price: "Gratis*",
-    note: "przy zakupie okularów",
-    features: ["Pomiar wady wzroku", "Dobór korekcji", "Konsultacja"],
-    popular: false
-  },
-  {
-    name: "Kompleksowe",
-    price: "149 zł",
-    note: "",
+    name: "",
+    price: "GRATIS*",
+    note: "*przy zakupie okularów",
     features: ["Pełna diagnostyka", "Badanie dna oka", "Pomiar ciśnienia", "Tonometria", "Konsultacja specjalisty"],
     popular: true
   },
   {
-    name: "Premium",
-    price: "249 zł",
+    name: "",
+    price: "149 zł",
     note: "",
-    features: ["Badanie kompleksowe", "OCT siatkówki", "Perymetria", "Raport cyfrowy", "Kontrola po 3 mies."],
+    features: ["Pełna diagnostyka", "Badanie dna oka", "Pomiar ciśnienia", "Tonometria", "Konsultacja specjalisty"],
     popular: false
   }
 ]
