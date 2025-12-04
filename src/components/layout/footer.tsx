@@ -49,6 +49,7 @@ export function Footer() {
       className="relative bg-[#1a1a1a] text-white overflow-hidden"
       role="contentinfo"
       aria-label="Stopka strony"
+      suppressHydrationWarning
     >
       
       {/* Subtle texture overlay like other sections */}
