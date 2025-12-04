@@ -4,9 +4,17 @@ import { motion, useInView, Variants } from "framer-motion"
 import { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
-// Smooth easing curves
-const smoothEasing = [0.16, 1, 0.3, 1] as const
-const bounceEasing = [0.34, 1.56, 0.64, 1] as const
+// Use simpler easing curves that work well on all browsers including Safari
+// This avoids hydration issues from browser detection
+const smoothEasing = [0.25, 0.1, 0.25, 1] as const // CSS ease-out - works great everywhere
+const bounceEasing = [0.34, 1.2, 0.64, 1] as const // Reduced bounce for better performance
+
+// GPU acceleration styles
+const gpuStyles = {
+  willChange: "transform, opacity",
+  backfaceVisibility: "hidden" as const,
+  transform: "translateZ(0)",
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // FADE UP ANIMATION
@@ -20,17 +28,18 @@ interface FadeUpProps {
   once?: boolean
 }
 
-export function FadeUp({ children, delay = 0, duration = 0.8, className, once = true }: FadeUpProps) {
+export function FadeUp({ children, delay = 0, duration = 0.6, className, once = true }: FadeUpProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once, margin: "-10%" })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration, delay, ease: smoothEasing }}
-      className={className}
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
     >
       {children}
     </motion.div>
@@ -86,14 +95,14 @@ interface StaggerItemProps {
   className?: string
 }
 
+// Removed blur animation as it's very expensive
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: smoothEasing
     }
   }
@@ -101,7 +110,11 @@ const itemVariants: Variants = {
 
 export function StaggerItem({ children, className }: StaggerItemProps) {
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div 
+      variants={itemVariants} 
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
+    >
       {children}
     </motion.div>
   )
@@ -129,14 +142,15 @@ export function TextReveal({ children, className, delay = 0, once = true }: Text
       {words.map((word, i) => (
         <span key={i} className="overflow-hidden mr-[0.25em]">
           <motion.span
-            className="inline-block"
+            className="inline-block transform-gpu"
             initial={{ y: "100%", opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }}
             transition={{
-              duration: 0.5,
-              delay: delay + i * 0.05,
+              duration: 0.4,
+              delay: delay + i * 0.04,
               ease: smoothEasing
             }}
+            style={{ willChange: "transform, opacity" }}
           >
             {word}
           </motion.span>
@@ -166,13 +180,15 @@ export function CharReveal({ children, className, delay = 0, once = true }: Char
       {children.split("").map((char, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          className="transform-gpu"
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
           transition={{
-            duration: 0.3,
-            delay: delay + i * 0.02,
+            duration: 0.25,
+            delay: delay + i * 0.015,
             ease: smoothEasing
           }}
+          style={{ willChange: "transform, opacity" }}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>
@@ -198,7 +214,7 @@ export function SlideIn({
   children, 
   direction = "left", 
   delay = 0, 
-  duration = 0.8, 
+  duration = 0.6, 
   className,
   once = true 
 }: SlideInProps) {
@@ -206,10 +222,10 @@ export function SlideIn({
   const isInView = useInView(ref, { once, margin: "-10%" })
 
   const directionMap = {
-    left: { x: -100, y: 0 },
-    right: { x: 100, y: 0 },
-    up: { x: 0, y: 100 },
-    down: { x: 0, y: -100 }
+    left: { x: -60, y: 0 },
+    right: { x: 60, y: 0 },
+    up: { x: 0, y: 60 },
+    down: { x: 0, y: -60 }
   }
 
   return (
@@ -218,7 +234,8 @@ export function SlideIn({
       initial={{ opacity: 0, ...directionMap[direction] }}
       animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...directionMap[direction] }}
       transition={{ duration, delay, ease: smoothEasing }}
-      className={className}
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
     >
       {children}
     </motion.div>
@@ -237,17 +254,18 @@ interface ScaleInProps {
   once?: boolean
 }
 
-export function ScaleIn({ children, delay = 0, duration = 0.6, className, once = true }: ScaleInProps) {
+export function ScaleIn({ children, delay = 0, duration = 0.5, className, once = true }: ScaleInProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once, margin: "-10%" })
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
       transition={{ duration, delay, ease: bounceEasing }}
-      className={className}
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
     >
       {children}
     </motion.div>
@@ -266,17 +284,19 @@ interface BlurInProps {
   once?: boolean
 }
 
-export function BlurIn({ children, delay = 0, duration = 0.8, className, once = true }: BlurInProps) {
+export function BlurIn({ children, delay = 0, duration = 0.5, className, once = true }: BlurInProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once, margin: "-10%" })
 
+  // Use simple fade + subtle scale instead of blur (blur is expensive and causes hydration issues)
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, filter: "blur(20px)" }}
-      animate={isInView ? { opacity: 1, filter: "blur(0px)" } : { opacity: 0, filter: "blur(20px)" }}
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
       transition={{ duration, delay, ease: smoothEasing }}
-      className={className}
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
     >
       {children}
     </motion.div>
@@ -332,7 +352,7 @@ interface FloatingProps {
   y?: number
 }
 
-export function Floating({ children, className, duration = 6, y = 20 }: FloatingProps) {
+export function Floating({ children, className, duration = 6, y = 12 }: FloatingProps) {
   return (
     <motion.div
       animate={{
@@ -343,7 +363,8 @@ export function Floating({ children, className, duration = 6, y = 20 }: Floating
         repeat: Infinity,
         ease: "easeInOut"
       }}
-      className={className}
+      className={cn("transform-gpu", className)}
+      style={gpuStyles}
     >
       {children}
     </motion.div>
@@ -360,15 +381,16 @@ interface ParallaxProps {
   speed?: number
 }
 
-export function Parallax({ children, className, speed = 0.5 }: ParallaxProps) {
+export function Parallax({ children, className }: ParallaxProps) {
   const ref = useRef(null)
+  // Note: speed parameter is reserved for future scroll-based parallax implementation
   
   return (
     <motion.div
       ref={ref}
       initial={{ y: 0 }}
       style={{ y: 0 }}
-      className={className}
+      className={cn("transform-gpu", className)}
     >
       {children}
     </motion.div>
@@ -419,12 +441,15 @@ export function Counter({ from = 0, to, duration = 2, className, suffix = "", pr
   )
 }
 
-function CounterNumber({ from, to, duration }: { from: number; to: number; duration: number }) {
+function CounterNumber({ to, duration }: { from: number; to: number; duration: number }) {
+  // Note: from parameter is reserved for animated counting implementation
   return (
     <motion.span
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
+      className="transform-gpu"
+      style={gpuStyles}
     >
       <motion.span
         initial={{ y: 0 }}
@@ -524,17 +549,21 @@ export function GlowingOrb({ className, color = "red", size = 400 }: GlowingOrbP
   return (
     <motion.div
       className={cn(
-        "absolute rounded-full blur-[100px] animate-pulse-glow",
+        "absolute rounded-full animate-pulse-glow transform-gpu blur-[60px]",
         colorMap[color] || colorMap.red,
         className
       )}
-      style={{ width: size, height: size }}
+      style={{ 
+        width: size, 
+        height: size,
+        ...gpuStyles
+      }}
       animate={{
-        scale: [1, 1.2, 1],
+        scale: [1, 1.1, 1],
         opacity: [0.3, 0.5, 0.3]
       }}
       transition={{
-        duration: 4,
+        duration: 5,
         repeat: Infinity,
         ease: "easeInOut"
       }}

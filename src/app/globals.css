@@ -56,23 +56,23 @@
   --animate-slide-up: slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-50%)); }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(calc(-50%), 0, 0); }
   }
   
   @keyframes marquee-reverse {
-    from { transform: translateX(calc(-50%)); }
-    to { transform: translateX(0); }
+    from { transform: translate3d(calc(-50%), 0, 0); }
+    to { transform: translate3d(0, 0, 0); }
   }
   
   @keyframes fade-up {
     from { 
       opacity: 0;
-      transform: translateY(40px);
+      transform: translate3d(0, 40px, 0);
     }
     to { 
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
@@ -88,11 +88,11 @@
   @keyframes slide-up {
     from {
       opacity: 0;
-      transform: translateY(100%);
+      transform: translate3d(0, 100%, 0);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   }
   
@@ -104,6 +104,27 @@
       stroke-dashoffset: 0;
     }
   }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
+/* Hero logo animation - triggered via data attribute to avoid hydration mismatch */
+.hero-logo-container {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+}
+
+.hero-logo-container[data-mounted="true"] {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
 }
 
 :root {
@@ -170,11 +191,21 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Force GPU acceleration for better scroll performance */
+    -webkit-transform: translateZ(0);
   }
   
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1, "kern" 1;
+  }
+  
+  /* GPU acceleration utility class */
+  .transform-gpu {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   
   ::selection {
@@ -291,29 +322,36 @@ html {
 /* Luxury Image Hover */
 .luxury-image {
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .luxury-image:hover {
-  transform: scale(1.05);
+  transform: scale3d(1.05, 1.05, 1);
 }
 
 /* Stagger Children Animation */
 .stagger-children > * {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translate3d(0, 30px, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-.stagger-children.revealed > *:nth-child(1) { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; }
-.stagger-children.revealed > *:nth-child(2) { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
-.stagger-children.revealed > *:nth-child(3) { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; }
-.stagger-children.revealed > *:nth-child(4) { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; }
-.stagger-children.revealed > *:nth-child(5) { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; }
+.stagger-children.revealed > *:nth-child(1) { animation: fade-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.1s forwards; }
+.stagger-children.revealed > *:nth-child(2) { animation: fade-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.18s forwards; }
+.stagger-children.revealed > *:nth-child(3) { animation: fade-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.26s forwards; }
+.stagger-children.revealed > *:nth-child(4) { animation: fade-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.34s forwards; }
+.stagger-children.revealed > *:nth-child(5) { animation: fade-up 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.42s forwards; }
 
 /* Horizontal Line Animation */
 .line-reveal {
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .line-reveal.revealed {
@@ -334,10 +372,45 @@ html {
 
 .split-line > span {
   display: block;
-  transform: translateY(100%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 100%, 0);
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .split-line.revealed > span {
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+}
+
+/* Safari-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  /* Use native smooth scrolling on Safari */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Reduce animation complexity on Safari/iOS */
+  .stagger-children.revealed > * {
+    animation-duration: 0.5s !important;
+  }
+  
+  .luxury-image {
+    transition-duration: 0.8s;
+  }
+  
+  .line-reveal {
+    transition-duration: 0.8s;
+  }
+  
+  .split-line > span {
+    transition-duration: 0.5s;
+  }
+  
+  /* Reduce motion for better performance */
+  * {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
 }
