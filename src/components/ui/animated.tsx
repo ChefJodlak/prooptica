@@ -4,10 +4,9 @@ import { motion, useInView, Variants } from "framer-motion"
 import { useRef, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
-// Use simpler easing curves that work well on all browsers including Safari
-// This avoids hydration issues from browser detection
-const smoothEasing = [0.25, 0.1, 0.25, 1] as const // CSS ease-out - works great everywhere
-const bounceEasing = [0.34, 1.2, 0.64, 1] as const // Reduced bounce for better performance
+// Smooth easing curves for animations
+const smoothEasing = [0.22, 1, 0.36, 1] as const
+const bounceEasing = [0.34, 1.56, 0.64, 1] as const
 
 // GPU acceleration styles
 const gpuStyles = {
