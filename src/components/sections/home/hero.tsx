@@ -3,13 +3,32 @@
 import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
 
 export function Hero() {
-  const containerRef = useRef<HTMLElement>(null)
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [introPhase, setIntroPhase] = useState<'visible' | 'hiding' | 'hidden'>('visible')
   const [contentReady, setContentReady] = useState(false)
   // Start with null to indicate "not yet determined" - this prevents hydration mismatch
   const [mounted, setMounted] = useState<boolean | null>(null)
+
+  // Pause/play video based on visibility
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    if (isVisible) {
+      // Play video when visible
+      video.play().catch(() => {
+        // Autoplay might be blocked, that's okay
+      })
+    } else {
+      // Pause video when not visible
+      video.pause()
+    }
+  }, [isVisible])
 
   // Mark as mounted after hydration completes
   useEffect(() => {
@@ -74,7 +93,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative h-screen w-full overflow-hidden bg-[#1a1a1a]"
+      className={cn("relative h-screen w-full overflow-hidden bg-[#1a1a1a]", getSectionVisibilityClass(isVisible))}
     >
       {/* Intro Overlay - suppressHydrationWarning for dynamic styles */}
       <div
@@ -111,6 +130,7 @@ export function Hero() {
             suppressHydrationWarning
           >
             <video
+              ref={videoRef}
               autoPlay
               muted
               loop
