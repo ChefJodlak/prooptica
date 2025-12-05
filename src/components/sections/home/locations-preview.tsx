@@ -25,6 +25,7 @@ import { useRef, useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
 
 function LocationCard({ 
   location, 
@@ -338,16 +339,16 @@ function EmbeddedMap({ selectedLocation }: { selectedLocation: Location }) {
 }
 
 export function LocationsPreview() {
-  const containerRef = useRef<HTMLElement>(null)
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
   const [selectedId, setSelectedId] = useState<string>(LOCATIONS[0].id)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null)
   
   const selectedLocation = LOCATIONS.find(loc => loc.id === selectedId) || LOCATIONS[0]
   
-  // Auto-cycling effect
+  // Auto-cycling effect - pause when not visible
   useEffect(() => {
-    if (isAutoPlaying) {
+    if (isAutoPlaying && isVisible) {
       autoPlayIntervalRef.current = setInterval(() => {
         setSelectedId(currentId => {
           const currentIndex = LOCATIONS.findIndex(loc => loc.id === currentId)
@@ -362,7 +363,7 @@ export function LocationsPreview() {
         clearInterval(autoPlayIntervalRef.current)
       }
     }
-  }, [isAutoPlaying])
+  }, [isAutoPlaying, isVisible])
   
   // Handle user selection - stops auto-play
   const handleLocationSelect = (locationId: string) => {
@@ -379,7 +380,7 @@ export function LocationsPreview() {
   }
 
   return (
-    <section ref={containerRef} className="relative min-h-[calc(100vh-88px)] bg-white overflow-hidden flex flex-col justify-center py-10 sm:py-12">
+    <section ref={containerRef} className={cn("relative min-h-[calc(100vh-88px)] bg-white overflow-hidden flex flex-col justify-center py-10 sm:py-12 content-auto-heavy", getSectionVisibilityClass(isVisible))}>
       
       {/* Subtle texture overlay like Intro section */}
       <div className="absolute inset-0 opacity-[0.02]" style={{

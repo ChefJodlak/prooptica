@@ -3,6 +3,8 @@
 import { ArrowRight, Clock, BookOpen } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
 
 const CATEGORIES = [
   { id: "zdrowie", name: "Zdrowie oczu" },
@@ -41,11 +43,12 @@ const ARTICLES = [
 ]
 
 export function ArticlesSection() {
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
   const featuredArticle = ARTICLES[0]
   const sideArticles = ARTICLES.slice(1)
 
   return (
-    <section className="relative min-h-[calc(100vh-88px)] bg-[#fafafa] overflow-hidden flex flex-col justify-center py-10 sm:py-12">
+    <section ref={containerRef} className={cn("relative min-h-[calc(100vh-88px)] bg-[#fafafa] overflow-hidden flex flex-col justify-center py-10 sm:py-12 content-auto", getSectionVisibilityClass(isVisible))}>
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`

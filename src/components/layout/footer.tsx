@@ -4,15 +4,10 @@ import Link from "next/link"
 import { LOCATIONS } from "@/lib/constants/locations"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
 import { ArrowRight, Mail, Phone, MapPin, Clock, Instagram, Facebook, Send, ArrowUpRight } from "lucide-react"
-
-// GPU-optimized styles for Safari
-const gpuStyles = {
-  backfaceVisibility: "hidden" as const,
-  WebkitBackfaceVisibility: "hidden" as const,
-}
+import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 // TikTok icon (not available in lucide-react)
 const TikTokIcon = ({ className }: { className?: string }) => (
@@ -20,7 +15,6 @@ const TikTokIcon = ({ className }: { className?: string }) => (
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
   </svg>
 )
-import Image from "next/image"
 
 const FOOTER_LINKS = {
   company: [
@@ -46,13 +40,15 @@ const SOCIAL_LINKS = [
 ]
 
 export function Footer() {
-  const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-5%" })
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
 
   return (
     <footer 
       ref={containerRef} 
-      className="relative bg-[#1a1a1a] text-white overflow-hidden"
+      className={cn(
+        "relative bg-[#1a1a1a] text-white overflow-hidden content-auto-heavy",
+        getSectionVisibilityClass(isVisible)
+      )}
       role="contentinfo"
       aria-label="Stopka strony"
       suppressHydrationWarning
@@ -81,13 +77,7 @@ export function Footer() {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
             
             {/* Left - Newsletter */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              style={gpuStyles}
-              className="lg:col-span-6 transform-gpu"
-            >
+            <div className="lg:col-span-6 transform-gpu">
               {/* Label */}
               <div className="flex items-center gap-5 mb-8">
                 <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
@@ -134,16 +124,10 @@ export function Footer() {
                   </Button>
                 </div>
               </div>
-            </motion.div>
+            </div>
             
             {/* Right - Quick Locations */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              style={gpuStyles}
-              className="lg:col-span-6 transform-gpu"
-            >
+            <div className="lg:col-span-6 transform-gpu">
               <div className="flex items-center gap-5 mb-8">
                 <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
                   Nasze Salony
@@ -173,7 +157,7 @@ export function Footer() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
         

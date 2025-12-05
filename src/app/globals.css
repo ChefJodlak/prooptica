@@ -400,6 +400,47 @@ html {
   animation: float var(--float-duration, 6s) ease-in-out infinite;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTENT VISIBILITY OPTIMIZATION
+   Tells browser to skip rendering off-screen sections - massive perf boost
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Apply to sections that can be skipped when off-screen */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px; /* Estimated height to prevent layout shift */
+}
+
+/* More aggressive version for heavy sections */
+.content-auto-heavy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+  contain: layout style paint;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATION PAUSE WHEN NOT VISIBLE
+   Stops all animations and transitions when section is off-screen
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* When section is not visible, pause all animations inside it */
+.section-hidden * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Also pause any pseudo-elements */
+.section-hidden *::before,
+.section-hidden *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Visible section - animations run normally */
+.section-visible * {
+  animation-play-state: running;
+}
+
 /* Safari-specific optimizations */
 @supports (-webkit-touch-callout: none) {
   /* Use native smooth scrolling on Safari */

@@ -3,6 +3,8 @@
 import { useRef, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import { Instagram, ArrowUpRight, ExternalLink } from "lucide-react"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
 
 // Configuration
 const INSTAGRAM_URL = "https://www.instagram.com/prooptica_optyk/"
@@ -107,13 +109,14 @@ function SnapWidgetEmbed({ feedId }: { feedId: string }) {
 }
 
 export function InstagramSection() {
-  const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" })
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
+  const contentRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(contentRef, { once: true, margin: "-10%" })
 
   return (
     <section 
       ref={containerRef} 
-      className="relative py-16 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden"
+      className={cn("relative py-16 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden content-auto", getSectionVisibilityClass(isVisible))}
     >
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -132,7 +135,7 @@ export function InstagramSection() {
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent"
       />
       
-      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
+      <div ref={contentRef} className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
         
         {/* Header */}
         <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 mb-8 sm:mb-12 lg:mb-16">

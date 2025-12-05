@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
+import { cn } from "@/lib/utils"
 
 // GPU-optimized styles for Safari
 const gpuStyles = {
@@ -14,11 +16,12 @@ const gpuStyles = {
 }
 
 export function EyeExamSection() {
-  const containerRef = useRef<HTMLElement>(null)
-  const isInView = useInView(containerRef, { once: true, margin: "-10%" })
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
+  const contentRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(contentRef, { once: true, margin: "-10%" })
 
   return (
-    <section ref={containerRef} className="relative bg-[#0A0A0A] overflow-hidden">
+    <section ref={containerRef} className={cn("relative bg-[#0A0A0A] overflow-hidden content-auto-heavy", getSectionVisibilityClass(isVisible))}>
       
       {/* Full-height split layout */}
       <div className="grid lg:grid-cols-2 min-h-screen">
@@ -62,6 +65,7 @@ export function EyeExamSection() {
 
         {/* Right - Content (removed parallax for Safari performance) */}
         <div 
+          ref={contentRef}
           className="relative flex flex-col justify-center px-5 sm:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 lg:py-32 order-1 lg:order-2"
         >
           

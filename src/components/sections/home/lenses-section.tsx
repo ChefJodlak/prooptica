@@ -1,8 +1,9 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { useSectionVisibility, getSectionVisibilityClass } from "@/lib/hooks"
 
 const LENS_TYPES = [
   {
@@ -42,20 +43,20 @@ const PARTNERS = [
 const AUTO_ROTATE_INTERVAL = 4000 // 4 seconds
 
 export function LensesSection() {
-  const containerRef = useRef<HTMLElement>(null)
+  const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
-  // Auto-rotate effect
+  // Auto-rotate effect - pause when not visible
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || !isVisible) return
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % LENS_TYPES.length)
     }, AUTO_ROTATE_INTERVAL)
 
     return () => clearInterval(interval)
-  }, [isPaused])
+  }, [isPaused, isVisible])
 
   const handleCardClick = (index: number) => {
     setActiveIndex(index)
@@ -67,7 +68,7 @@ export function LensesSection() {
   return (
     <section 
       ref={containerRef} 
-      className="relative py-16 sm:py-24 lg:py-32 bg-[#fafafa] overflow-hidden"
+      className={cn("relative py-16 sm:py-24 lg:py-32 bg-[#fafafa] overflow-hidden content-auto", getSectionVisibilityClass(isVisible))}
     >
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
         
