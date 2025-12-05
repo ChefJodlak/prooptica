@@ -56,3 +56,21 @@ export function getSectionVisibilityClass(isVisible: boolean): string {
   return isVisible ? "section-visible" : "section-hidden"
 }
 
+/**
+ * Hook to detect if the current browser is Safari.
+ * Returns true on Safari (macOS/iOS), false on Chrome/Firefox/Edge.
+ * Starts as false during SSR to avoid hydration mismatch.
+ */
+export function useIsSafari(): boolean {
+  const [isSafari, setIsSafari] = useState(false)
+
+  useEffect(() => {
+    // Detect Safari: has Safari in UA but not Chrome/Chromium
+    const ua = navigator.userAgent
+    const isSafariBrowser = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua)
+    setIsSafari(isSafariBrowser)
+  }, [])
+
+  return isSafari
+}
+

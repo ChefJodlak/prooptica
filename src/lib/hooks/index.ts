@@ -1,2 +1,2 @@
-export { useSectionVisibility, getSectionVisibilityClass } from "./use-section-visibility"
+export { useSectionVisibility, getSectionVisibilityClass, useIsSafari } from "./use-section-visibility"
 
