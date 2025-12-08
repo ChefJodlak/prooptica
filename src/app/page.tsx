@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/home/hero";
+import { Intro } from "@/components/sections/home/intro";
 import { LocationsPreview } from "@/components/sections/home/locations-preview";
 import { BrandsMarquee } from "@/components/sections/home/brands-marquee";
 import { LensesSection } from "@/components/sections/home/lenses-section";
@@ -10,10 +11,11 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
       <Hero />
+      <Intro />
+      <LocationsPreview />
       <BrandsMarquee />
       <EyeExamSection />
       <LensesSection />
-      <LocationsPreview />
       <InstagramSection />
       <ArticlesSection />
     </div>

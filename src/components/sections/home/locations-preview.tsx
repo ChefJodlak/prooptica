@@ -19,6 +19,14 @@ declare global {
 }
 
 import { LOCATIONS, Location } from "@/lib/constants/locations"
+
+// Mapping between location IDs (from LOCATIONS) and salon IDs (from booking SALONS)
+const LOCATION_TO_SALON_ID: Record<string, string> = {
+  "warszawa": "warszawa",
+  "piaseczno-1": "piaseczno-wojska",  // Wojska Polskiego 28
+  "piaseczno-2": "piaseczno-pulawska", // Puławska 20
+  "grojec": "grojec",
+}
 import { Button } from "@/components/ui/button"
 import { MapPin, ArrowRight, Phone, Clock, ExternalLink, Calendar } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
@@ -536,7 +544,7 @@ export function LocationsPreview() {
                       <div className="hidden lg:block w-px h-8 bg-white/10" />
                       
                       {/* CTA Button */}
-                      <Link href="/umow-wizyte" className="w-full sm:w-auto">
+                      <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="w-full sm:w-auto">
                         <Button className="w-full sm:w-auto bg-[#C4A77D] text-[#1a1a1a] rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] hover:bg-white transition-all duration-300 px-4 lg:px-6 h-9">
                           <Calendar className="w-3.5 h-3.5 mr-2" />
                           Umów wizytę

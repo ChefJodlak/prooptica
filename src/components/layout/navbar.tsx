@@ -48,7 +48,7 @@ export function Navbar() {
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 1.8 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
         className={cn(
           "fixed top-0 z-50 w-full transition-all duration-700 ease-out",
           isScrolled
@@ -60,7 +60,7 @@ export function Navbar() {
         <motion.div 
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1.2, delay: 2.2, ease: [0.77, 0, 0.175, 1] }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.77, 0, 0.175, 1] }}
           className={cn(
             "absolute top-0 left-0 right-0 h-px origin-left transition-opacity duration-500",
             isScrolled ? "opacity-0" : "opacity-100"
