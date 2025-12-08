@@ -78,16 +78,16 @@ export default function RootLayout({
         )}
         style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif" }}
       >
+        {/* Skip to content link for accessibility */}
+        <SkipToContent />
+        
+        {/* Schema.org structured data */}
+        <HomePageSchema />
+        
+        {/* Navigation - outside SmoothScroll to ensure proper fixed positioning */}
+        <Navbar />
+        
         <SmoothScroll>
-          {/* Skip to content link for accessibility */}
-          <SkipToContent />
-          
-          {/* Schema.org structured data */}
-          <HomePageSchema />
-          
-          {/* Navigation */}
-          <Navbar />
-          
           {/* Main content */}
           <main className="flex-1" id="main-content" role="main">
             {children}

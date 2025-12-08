@@ -203,8 +203,6 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Force GPU acceleration for better scroll performance */
-    -webkit-transform: translateZ(0);
   }
   
   body {
@@ -466,9 +464,9 @@ html {
     transition-duration: 0.5s;
   }
   
-  /* Reduce motion for better performance */
-  * {
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-  }
+  /* NOTE: Removed the blanket transform rule that was breaking position:fixed elements
+   * The rule "* { -webkit-transform: translateZ(0); }" creates new stacking contexts
+   * for all elements, which breaks fixed positioning of the navbar.
+   * Apply GPU acceleration selectively to elements that need it instead.
+   */
 }

@@ -185,11 +185,6 @@ export function LensesSection() {
                 {/* Decorative corner accent */}
                 <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#C4A77D]/40" />
                 <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#C4A77D]/40" />
-                
-                {/* Large number display */}
-                <div className="absolute top-6 right-8 sm:top-8 sm:right-10 font-display text-[6rem] sm:text-[8rem] lg:text-[10rem] font-thin text-[#C4A77D]/10 leading-none pointer-events-none select-none">
-                  0{activeIndex + 1}
-                </div>
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -289,14 +284,6 @@ export function LensesSection() {
 
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    {/* Number */}
-                    <span className={cn(
-                      "block font-display text-2xl sm:text-3xl font-thin mb-1 transition-colors duration-300",
-                      activeIndex === index ? "text-[#C4A77D]" : "text-[#C4A77D]/30 group-hover:text-[#C4A77D]/50"
-                    )}>
-                      0{index + 1}
-                    </span>
-                    
                     {/* Name */}
                     <span className={cn(
                       "block font-display text-xl sm:text-2xl transition-colors duration-300",
@@ -308,14 +295,14 @@ export function LensesSection() {
                     {/* Subtitle */}
                     <span className={cn(
                       "block text-[10px] tracking-[0.2em] uppercase mt-1 transition-colors duration-300",
-                      activeIndex === index ? "text-[#999]" : "text-[#bbb] group-hover:text-[#999]"
+                      activeIndex === index ? "text-[#C4A77D]" : "text-[#bbb] group-hover:text-[#999]"
                     )}>
                       {lens.subtitle}
                     </span>
                   </div>
 
                   <ArrowRight className={cn(
-                    "w-5 h-5 flex-shrink-0 mt-2 transition-all duration-300",
+                    "w-5 h-5 flex-shrink-0 mt-1 transition-all duration-300",
                     activeIndex === index 
                       ? "text-[#C4A77D] translate-x-0 opacity-100" 
                       : "text-[#ccc] -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
