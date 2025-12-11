@@ -40,7 +40,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
             </span>
           </div>
           
-          <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-3 group-hover:text-[#C4A77D] transition-colors duration-300 line-clamp-2 leading-snug">
+          <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-3 group-hover:text-[#E31F25] transition-colors duration-300 line-clamp-2 leading-snug">
             {article.title}
           </h3>
           <p className="text-[#737373] text-sm mb-5 line-clamp-2 font-light leading-relaxed">
@@ -50,10 +50,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
           <div className="flex items-center justify-between pt-4 border-t border-[#f0f0f0]">
             <span className="text-[11px] text-[#999]">{article.date}</span>
             <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-[10px] font-medium text-[#C4A77D] tracking-[0.1em] uppercase">
+              <span className="text-[10px] font-medium text-[#E31F25] tracking-[0.1em] uppercase">
                 Czytaj
               </span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#C4A77D]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#E31F25]" />
             </div>
           </div>
         </div>

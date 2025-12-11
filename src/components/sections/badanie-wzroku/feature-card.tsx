@@ -20,13 +20,13 @@ export function FeatureCard({ icon: Icon, title, description, index, isInView }:
       className="group flex items-start gap-4 p-5 bg-[#F8F7F4] transition-all duration-500 hover:-translate-y-1"
     >
       {/* Elegant border */}
-      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#C4A77D] transition-all duration-500" />
+      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#E31F25] transition-all duration-500" />
       
       <div className="p-3 bg-[#1a1a1a] shrink-0">
-        <Icon className="w-5 h-5 text-[#C4A77D]" />
+        <Icon className="w-5 h-5 text-[#E31F25]" />
       </div>
       <div>
-        <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-1 group-hover:text-[#C4A77D] transition-colors">
+        <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-1 group-hover:text-[#E31F25] transition-colors">
           {title}
         </h3>
         <p className="text-sm text-[#737373] leading-relaxed font-light">

@@ -22,7 +22,7 @@ export function HeroSection() {
       
       {/* Decorative background elements */}
       <motion.div
-        className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-[#C4A77D]/10 rounded-full blur-[150px]"
+        className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-[#E31F25]/10 rounded-full blur-[150px]"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
@@ -35,10 +35,10 @@ export function HeroSection() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-5 mb-8"
         >
-          <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+          <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
             Kolekcja
           </span>
-          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+          <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
         </motion.div>
         
         {/* Headline */}
@@ -60,10 +60,8 @@ export function HeroSection() {
             className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
           >
             <span className="relative inline-block">
-              <span className="italic text-[#C4A77D]">Marki</span>
-              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-              </svg>
+              <span className="italic text-[#E31F25]">Marki</span>
+              <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
             </span>
           </motion.h1>
         </div>
@@ -87,8 +85,8 @@ export function HeroSection() {
         >
           {HERO_STATS.map((stat, i) => (
             <div key={i} className="flex items-center gap-4">
-              <div className="p-3 bg-[#C4A77D]/10">
-                <stat.icon className="w-6 h-6 text-[#C4A77D]" />
+              <div className="p-3 bg-[#E31F25]/10">
+                <stat.icon className="w-6 h-6 text-[#E31F25]" />
               </div>
               <div>
                 <div className="font-display text-3xl font-light text-white tracking-tight">{stat.value}</div>
@@ -104,7 +102,7 @@ export function HeroSection() {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A77D]/30 to-transparent origin-center"
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/30 to-transparent origin-center"
       />
     </section>
   )

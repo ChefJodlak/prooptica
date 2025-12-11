@@ -23,8 +23,8 @@ export function ArticlesGrid({ articles, selectedCategory, isInView }: ArticlesG
             animate={{ opacity: 1, y: 0 }}
             className="text-center py-20"
           >
-            <div className="w-20 h-20 mx-auto mb-6 border border-[#C4A77D]/20 rounded-full flex items-center justify-center">
-              <BookOpen className="w-8 h-8 text-[#C4A77D]" />
+            <div className="w-20 h-20 mx-auto mb-6 border border-[#E31F25]/20 rounded-full flex items-center justify-center">
+              <BookOpen className="w-8 h-8 text-[#E31F25]" />
             </div>
             <h3 className="font-display text-2xl font-medium text-[#1a1a1a] mb-3">Brak artykułów</h3>
             <p className="text-[#737373] font-light">Spróbuj innych kryteriów wyszukiwania</p>
@@ -44,7 +44,7 @@ export function ArticlesGrid({ articles, selectedCategory, isInView }: ArticlesG
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.6 }}
-              className="w-8 h-px bg-[#C4A77D] origin-left" 
+              className="w-8 h-px bg-[#E31F25] origin-left" 
             />
             <h2 className="font-display text-2xl lg:text-3xl font-medium text-[#1a1a1a] tracking-[-0.02em]">
               {selectedCategory === "all" ? "Wszystkie artykuły" : CATEGORIES.find(c => c.id === selectedCategory)?.name}

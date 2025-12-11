@@ -20,7 +20,7 @@ export function FeaturedArticleCard({ article }: FeaturedArticleCardProps) {
       className="group relative"
     >
       {/* Artistic frame */}
-      <div className="absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/15 pointer-events-none" />
+      <div className="absolute -inset-3 lg:-inset-4 border border-[#E31F25]/15 pointer-events-none" />
       
       <Link href={`/artykuly/${article.id}`} className="block bg-white overflow-hidden">
         <div className="relative aspect-[16/10] overflow-hidden">
@@ -36,7 +36,7 @@ export function FeaturedArticleCard({ article }: FeaturedArticleCardProps) {
             <Badge className={`${getCategoryStyle(article.category)} border mb-4 text-[9px] tracking-wider uppercase px-3 py-1`}>
               {CATEGORIES.find(c => c.id === article.category)?.name}
             </Badge>
-            <h3 className="font-display text-xl lg:text-2xl font-medium text-white mb-3 group-hover:text-[#C4A77D] transition-colors duration-300 leading-tight">
+            <h3 className="font-display text-xl lg:text-2xl font-medium text-white mb-3 group-hover:text-[#E31F25] transition-colors duration-300 leading-tight">
               {article.title}
             </h3>
             <p className="text-white/70 mb-4 line-clamp-2 text-sm font-light">

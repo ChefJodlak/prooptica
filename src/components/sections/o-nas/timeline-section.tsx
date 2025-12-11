@@ -24,16 +24,16 @@ export function TimelineSection() {
         >
           <div className="flex items-center justify-center gap-5 mb-8">
             <motion.div 
-              className="h-px w-12 bg-gradient-to-r from-transparent to-[#C4A77D]"
+              className="h-px w-12 bg-gradient-to-r from-transparent to-[#E31F25]"
               initial={{ scaleX: 0 }}
               animate={isTimelineInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             />
-            <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
               Historia
             </span>
             <motion.div 
-              className="h-px w-12 bg-gradient-to-l from-transparent to-[#C4A77D]"
+              className="h-px w-12 bg-gradient-to-l from-transparent to-[#E31F25]"
               initial={{ scaleX: 0 }}
               animate={isTimelineInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -41,7 +41,7 @@ export function TimelineSection() {
           </div>
           <h2 className="font-display text-[clamp(2rem,5vw,4rem)] font-light text-white leading-[1.1] tracking-[-0.02em]">
             Nasza{" "}
-            <span className="italic text-[#C4A77D]">droga</span>
+            <span className="italic text-[#E31F25]">droga</span>
           </h2>
         </motion.div>
         
@@ -52,7 +52,7 @@ export function TimelineSection() {
               initial={{ height: "0%" }}
               animate={isTimelineInView ? { height: "100%" } : {}}
               transition={{ duration: 1.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full bg-[#C4A77D]"
+              className="w-full bg-[#E31F25]"
             />
           </div>
           
@@ -72,8 +72,8 @@ export function TimelineSection() {
             >
               {/* Content */}
               <div className={`w-full lg:w-1/2 ${i % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:pl-16'}`}>
-                <div className="bg-white/[0.03] p-8 border border-white/10 hover:border-[#C4A77D]/30 transition-colors duration-300">
-                  <span className="font-display text-4xl text-[#C4A77D] font-light mb-4 block tracking-tight">{item.year}</span>
+                <div className="bg-white/[0.03] p-8 border border-white/10 hover:border-[#E31F25]/30 transition-colors duration-300">
+                  <span className="font-display text-4xl text-[#E31F25] font-light mb-4 block tracking-tight">{item.year}</span>
                   <h3 className="font-display text-xl font-medium text-white mb-3 tracking-tight">{item.title}</h3>
                   <p className="text-white/50 font-light leading-relaxed">{item.description}</p>
                 </div>
@@ -90,7 +90,7 @@ export function TimelineSection() {
                 }}
                 className="absolute left-[50%] -translate-x-1/2 hidden lg:flex items-center justify-center"
               >
-                <div className="w-4 h-4 bg-[#C4A77D] border-4 border-[#1a1a1a] z-10" />
+                <div className="w-4 h-4 bg-[#E31F25] border-4 border-[#1a1a1a] z-10" />
               </motion.div>
               
               <div className="hidden lg:block w-1/2" />

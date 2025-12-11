@@ -24,21 +24,19 @@ export function PartnersSection({ isInView }: PartnersSectionProps) {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-5 mb-8">
-            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-[#C4A77D] to-transparent" />
-            <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-[#E31F25] to-transparent" />
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
               Wyróżnione
             </span>
-            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+            <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#E31F25] to-transparent" />
           </div>
           <h2 className="font-display text-[2.5rem] lg:text-[4rem] font-extralight text-white leading-[1] tracking-[-0.03em] mb-2">
             Partnerzy
           </h2>
           <h2 className="font-display text-[2.5rem] lg:text-[4rem] font-medium text-white leading-[1] tracking-[-0.03em]">
             <span className="relative inline-block">
-              <span className="italic text-[#C4A77D]">technologiczni</span>
-              <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-              </svg>
+              <span className="italic text-[#E31F25]">technologiczni</span>
+              <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
             </span>
           </h2>
         </motion.div>
@@ -50,11 +48,11 @@ export function PartnersSection({ isInView }: PartnersSectionProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-              className="relative bg-white/5 p-8 ring-1 ring-white/10 hover:ring-[#C4A77D]/50 transition-all duration-500 group"
+              className="relative bg-white/5 p-8 ring-1 ring-white/10 hover:ring-[#E31F25]/50 transition-all duration-500 group"
             >
-              {/* Gold accent corner */}
+              {/* Red accent corner */}
               <div className="absolute top-0 left-0 w-12 h-12 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#C4A77D] rotate-45" />
+                <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#E31F25] rotate-45" />
               </div>
               
               <div className="aspect-video flex items-center justify-center mb-6 bg-white/5">
@@ -62,7 +60,7 @@ export function PartnersSection({ isInView }: PartnersSectionProps) {
                   {partner.name}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-medium text-white mb-3 group-hover:text-[#C4A77D] transition-colors">
+              <h3 className="font-display text-xl font-medium text-white mb-3 group-hover:text-[#E31F25] transition-colors">
                 {partner.name}
               </h3>
               <p className="text-white/50 leading-relaxed font-light">

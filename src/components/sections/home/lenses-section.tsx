@@ -101,14 +101,14 @@ export function LensesSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8"
           >
-            <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
               Technologie
             </span>
             <motion.div 
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent origin-left" 
+              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
             />
           </motion.div>
 
@@ -133,9 +133,9 @@ export function LensesSection() {
                   className="font-display text-[clamp(2rem,6vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1.1] tracking-[-0.03em]"
                 >
                   <span className="relative inline-block">
-                    <span className="italic text-[#C4A77D]">generacji</span>
-                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                      <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                    <span className="italic text-[#E31F25]">generacji</span>
+                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                      <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
                     </svg>
                   </span>
                 </motion.h2>
@@ -169,13 +169,13 @@ export function LensesSection() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -inset-3 sm:-inset-4 border border-[#C4A77D]/30 pointer-events-none hidden sm:block" 
+              className="absolute -inset-3 sm:-inset-4 border border-[#E31F25]/30 pointer-events-none hidden sm:block" 
             />
             <motion.div 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute -inset-6 sm:-inset-8 border border-[#C4A77D]/10 pointer-events-none hidden sm:block" 
+              className="absolute -inset-6 sm:-inset-8 border border-[#E31F25]/10 pointer-events-none hidden sm:block" 
             />
 
             <div className="relative bg-white overflow-hidden">
@@ -183,8 +183,8 @@ export function LensesSection() {
               <div className="relative min-h-[400px] sm:min-h-[450px] lg:min-h-[500px] p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
                 
                 {/* Decorative corner accent */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#C4A77D]/40" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#C4A77D]/40" />
+                <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#E31F25]/40" />
+                <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#E31F25]/40" />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -198,7 +198,7 @@ export function LensesSection() {
                     {/* Content */}
                     <div className="flex-1">
                       {/* Subtitle */}
-                      <span className="inline-block text-[10px] sm:text-xs tracking-[0.3em] text-[#C4A77D] uppercase mb-4">
+                      <span className="inline-block text-[10px] sm:text-xs tracking-[0.3em] text-[#E31F25] uppercase mb-4">
                         {activeLens.subtitle}
                       </span>
                       
@@ -224,7 +224,7 @@ export function LensesSection() {
                             transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
                             className="flex items-center gap-3"
                           >
-                            <div className="w-1.5 h-1.5 bg-[#C4A77D]" />
+                            <div className="w-1.5 h-1.5 bg-[#E31F25]" />
                             <span className="text-[#737373] text-sm font-light">
                               {feature}
                             </span>
@@ -262,15 +262,15 @@ export function LensesSection() {
                 <div className={cn(
                   "absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500",
                   activeIndex === index 
-                    ? "bg-[#C4A77D]" 
-                    : "bg-transparent group-hover:bg-[#C4A77D]/30"
+                    ? "bg-[#E31F25]" 
+                    : "bg-transparent group-hover:bg-[#E31F25]/30"
                 )} />
                 
                 {/* Progress bar for active item */}
                 {activeIndex === index && (
                   <div className="absolute left-0 top-0 w-[3px] h-full bg-[#e0ded8] overflow-hidden">
                     <motion.div
-                      className="w-full bg-[#C4A77D]"
+                      className="w-full bg-[#E31F25]"
                       initial={{ height: "0%" }}
                       animate={{ height: "100%" }}
                       transition={{ 
@@ -295,7 +295,7 @@ export function LensesSection() {
                     {/* Subtitle */}
                     <span className={cn(
                       "block text-[10px] tracking-[0.2em] uppercase mt-1 transition-colors duration-300",
-                      activeIndex === index ? "text-[#C4A77D]" : "text-[#bbb] group-hover:text-[#999]"
+                      activeIndex === index ? "text-[#E31F25]" : "text-[#bbb] group-hover:text-[#999]"
                     )}>
                       {lens.subtitle}
                     </span>
@@ -304,7 +304,7 @@ export function LensesSection() {
                   <ArrowRight className={cn(
                     "w-5 h-5 flex-shrink-0 mt-1 transition-all duration-300",
                     activeIndex === index 
-                      ? "text-[#C4A77D] translate-x-0 opacity-100" 
+                      ? "text-[#E31F25] translate-x-0 opacity-100" 
                       : "text-[#ccc] -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
                   )} />
                 </div>
@@ -353,19 +353,21 @@ export function LensesSection() {
 
             {/* CTA */}
             <div className="flex items-center gap-5 sm:gap-8">
-              <Link href="/umow-wizyte">
-                <button className="bg-[#C4A77D] text-white px-6 sm:px-8 py-3.5 sm:py-4 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] uppercase hover:bg-[#1a1a1a] transition-all duration-500">
-                  Umów konsultację
+              <Link href="/umow-wizyte" className="group/btn">
+                <button className="relative overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white px-6 sm:px-8 py-3.5 sm:py-4 text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.4)] hover:scale-[1.02]">
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                  <span className="absolute inset-0 border border-white/20" />
+                  <span className="relative">Umów konsultację</span>
                 </button>
               </Link>
               
               <Link href="/marki" className="group inline-flex items-center gap-4 sm:gap-6">
-                <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-[#C4A77D] transition-colors duration-300">
+                <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-[#E31F25] transition-colors duration-300">
                   Marki
                 </span>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 sm:w-10 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-14 transition-all duration-500" />
-                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                  <div className="w-8 sm:w-10 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 sm:group-hover:w-14 transition-all duration-500" />
+                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
             </div>

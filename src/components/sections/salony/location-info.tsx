@@ -27,10 +27,10 @@ export function LocationInfo({ location, isInView }: LocationInfoProps) {
       {/* Header */}
       <motion.div variants={fadeUpVariants} className="mb-10">
         <div className="flex items-center gap-5 mb-6">
-          <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+          <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
             {location.postal} {location.city}
           </span>
-          <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+          <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#E31F25] to-transparent" />
         </div>
         
         <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-2">
@@ -45,13 +45,13 @@ export function LocationInfo({ location, isInView }: LocationInfoProps) {
       <motion.div variants={fadeUpVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
         <div className="flex items-start gap-4 p-5 bg-white border border-[#e0ded8]">
           <div className="p-3 bg-[#1a1a1a]">
-            <Phone className="w-4 h-4 text-[#C4A77D]" />
+            <Phone className="w-4 h-4 text-[#E31F25]" />
           </div>
           <div>
             <div className="text-[9px] text-[#999] tracking-[0.2em] uppercase mb-1">Telefon</div>
             <a 
               href={`tel:${location.phone}`}
-              className="text-base font-medium text-[#1a1a1a] hover:text-[#C4A77D] transition-colors"
+              className="text-base font-medium text-[#1a1a1a] hover:text-[#E31F25] transition-colors"
             >
               {location.phone}
             </a>
@@ -60,7 +60,7 @@ export function LocationInfo({ location, isInView }: LocationInfoProps) {
         
         <div className="flex items-start gap-4 p-5 bg-white border border-[#e0ded8]">
           <div className="p-3 bg-[#1a1a1a]">
-            <Clock className="w-4 h-4 text-[#C4A77D]" />
+            <Clock className="w-4 h-4 text-[#E31F25]" />
           </div>
           <div>
             <div className="text-[9px] text-[#999] tracking-[0.2em] uppercase mb-1">Godziny otwarcia</div>
@@ -75,7 +75,7 @@ export function LocationInfo({ location, isInView }: LocationInfoProps) {
       <motion.div variants={fadeUpVariants} className="grid grid-cols-2 gap-4 mb-10">
         {features.map((feature) => (
           <div key={feature} className="flex items-center gap-3 text-[#5a5a5a]">
-            <CheckCircle2 className="w-5 h-5 text-[#C4A77D]" />
+            <CheckCircle2 className="w-5 h-5 text-[#E31F25]" />
             <span className="text-sm font-light">{feature}</span>
           </div>
         ))}

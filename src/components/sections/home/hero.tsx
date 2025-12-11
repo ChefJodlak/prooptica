@@ -74,24 +74,6 @@ export function Hero() {
         <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full">
           <div className="max-w-3xl">
             
-            {/* Eyebrow */}
-            <div 
-              className={cn(
-                "flex items-center gap-3 sm:gap-5 mb-6 sm:mb-10",
-                !isSafari && "transition-all duration-500 ease-out"
-              )}
-              style={isSafari ? {} : {
-                opacity: showContent ? 1 : 0,
-                transform: showContent ? 'translateX(0)' : 'translateX(-2rem)',
-                transitionDelay: '100ms'
-              }}
-            >
-              <span className="text-[#C4A77D] text-[10px] sm:text-xs font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
-                Od 2004 roku
-              </span>
-              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
-            </div>
-
             {/* Headline */}
             <div className="overflow-hidden mb-2 sm:mb-3">
               <h1 
@@ -99,9 +81,10 @@ export function Hero() {
                   "font-display text-[clamp(2.5rem,10vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]",
                   !isSafari && "transition-transform duration-700 ease-out"
                 )}
-                style={isSafari ? {} : {
-                  transform: showContent ? 'translateY(0)' : 'translateY(100%)',
-                  transitionDelay: '200ms'
+                style={{
+                  transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
+                  transitionDelay: !isSafari ? '200ms' : undefined,
+                  textShadow: '0 3px 12px rgba(0, 0, 0, 0.4)'
                 }}
               >
                 Doskonałość
@@ -110,19 +93,19 @@ export function Hero() {
             <div className="overflow-hidden mb-6 sm:mb-10">
               <h1 
                 className={cn(
-                  "font-display text-[clamp(2.5rem,10vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]",
+                  "font-display text-[clamp(2.5rem,10vw,6.5rem)] font-medium leading-[1] tracking-[-0.03em]",
                   !isSafari && "transition-transform duration-700 ease-out"
                 )}
-                style={isSafari ? {} : {
-                  transform: showContent ? 'translateY(0)' : 'translateY(100%)',
-                  transitionDelay: '300ms'
+                style={{
+                  transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
+                  transitionDelay: !isSafari ? '300ms' : undefined
                 }}
               >
-                <span className="relative inline-block">
-                  <span className="italic text-[#C4A77D]">widzenia</span>
-                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                    <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
+                <span 
+                  className="italic text-[#E31F25]"
+                  style={{ textShadow: '0 3px 12px rgba(0, 0, 0, 0.45)' }}
+                >
+                  widzenia
                 </span>
               </h1>
             </div>
@@ -155,9 +138,17 @@ export function Hero() {
                 transitionDelay: '700ms'
               }}
             >
-              <Link href="/umow-wizyte" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto bg-[#C4A77D] text-[#1a1a1a] px-6 sm:px-8 py-4 text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-white transition-all duration-500">
-                  Umów wizytę
+              <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">
+                <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white px-8 sm:px-10 py-4 sm:py-5 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_20px_40px_-12px_rgba(227,31,37,0.5)] hover:scale-[1.02]">
+                  {/* Shine effect on hover */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                  {/* Border glow */}
+                  <span className="absolute inset-0 border border-white/20" />
+                  {/* Text */}
+                  <span className="relative flex items-center justify-center gap-3">
+                    <span>Umów wizytę</span>
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  </span>
                 </button>
               </Link>
               
@@ -166,8 +157,8 @@ export function Hero() {
                   Nasze salony
                 </span>
                 <div className="flex items-center gap-2">
-                  <div className="w-6 sm:w-8 h-px bg-white/30 group-hover:bg-[#C4A77D] group-hover:w-10 sm:group-hover:w-12 transition-all duration-500" />
-                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                  <div className="w-6 sm:w-8 h-px bg-white/30 group-hover:bg-[#E31F25] group-hover:w-10 sm:group-hover:w-12 transition-all duration-500" />
+                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
             </div>

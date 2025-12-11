@@ -33,13 +33,13 @@ export function StorySection() {
               initial={{ opacity: 0 }}
               animate={isStoryInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/30" 
+              className="absolute -inset-3 lg:-inset-4 border border-[#E31F25]/30" 
             />
             <motion.div 
               initial={{ opacity: 0 }}
               animate={isStoryInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -inset-6 lg:-inset-8 border border-[#C4A77D]/10" 
+              className="absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10" 
             />
             
             <div className="relative h-full w-full overflow-hidden">
@@ -60,7 +60,7 @@ export function StorySection() {
                 className="absolute bottom-0 left-0 right-0 p-6 lg:p-8"
               >
                 <div className="flex items-start gap-3">
-                  <span className="font-display text-4xl lg:text-5xl text-[#C4A77D] leading-none">"</span>
+                  <span className="font-display text-4xl lg:text-5xl text-[#E31F25] leading-none">"</span>
                   <div>
                     <p className="font-display text-base lg:text-lg text-white/95 italic leading-relaxed">
                       Okulary to nie tylko korekcja wzroku — to element Twojego stylu.
@@ -76,12 +76,12 @@ export function StorySection() {
             {/* Header */}
             <motion.div variants={fadeUpVariants} className="mb-12 lg:mb-16">
               <div className="flex items-center gap-5 mb-8">
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">Nasza Historia</span>
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">Nasza Historia</span>
                 <motion.div 
                   initial={{ scaleX: 0 }}
                   animate={isStoryInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent origin-left" 
+                  className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
                 />
               </div>
               <h2 className="font-display text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
@@ -90,10 +90,8 @@ export function StorySection() {
               <h2 className="font-display text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mt-2">
                 do sieci{" "}
                 <span className="relative inline-block">
-                  <span className="italic text-[#C4A77D]">premium</span>
-                  <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                    <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
+                  <span className="italic text-[#E31F25]">premium</span>
+                  <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                 </span>
               </h2>
             </motion.div>
@@ -127,8 +125,8 @@ export function StorySection() {
                 </span>
                 <div className="relative overflow-hidden">
                   <div className="flex items-center gap-2">
-                    <div className="w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-16 transition-all duration-500" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                    <div className="w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-16 transition-all duration-500" />
+                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </div>
               </Link>

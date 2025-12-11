@@ -71,15 +71,20 @@ export function EyeExamSection() {
           
           {/* Label */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-10"
+            className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-10"
           >
-            <div className="h-px w-6 sm:w-8 bg-[#E31F25]" />
-            <span className="text-[10px] sm:text-xs font-medium tracking-[0.2em] sm:tracking-[0.3em] text-[#E31F25] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
               Badanie wzroku
             </span>
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+            />
           </motion.div>
 
           {/* Main Headline - Staggered Lines */}
@@ -142,17 +147,21 @@ export function EyeExamSection() {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4"
           >
-            <Button 
-              size="lg"
-              className="w-full sm:w-auto bg-[#E31F25] hover:bg-[#c91b20] text-white rounded-none px-8 sm:px-10 h-12 sm:h-14 text-xs sm:text-sm font-medium tracking-wider uppercase transition-all duration-500"
-            >
-              Umów badanie
-            </Button>
+            <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">
+              <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] text-white rounded-none px-8 sm:px-10 h-12 sm:h-14 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-500 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.5)] hover:scale-[1.02] cursor-pointer">
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                <span className="absolute inset-0 border border-white/20" />
+                <span className="relative flex items-center justify-center gap-2">
+                  <span>Umów badanie</span>
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                </span>
+              </button>
+            </Link>
             <Link href="/oferta/badanie-wzroku" className="w-full sm:w-auto">
               <Button 
                 variant="ghost" 
                 size="lg"
-                className="w-full sm:w-auto text-white/60 hover:text-white hover:bg-transparent rounded-none px-6 sm:px-8 h-12 sm:h-14 text-xs sm:text-sm group tracking-wider uppercase"
+                className="w-full sm:w-auto text-white/60 hover:text-white hover:bg-transparent rounded-none px-6 sm:px-8 h-12 sm:h-14 text-xs sm:text-sm group tracking-wider uppercase cursor-pointer"
               >
                 <span className="relative">
                   Dowiedz się więcej

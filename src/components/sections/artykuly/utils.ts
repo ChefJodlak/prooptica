@@ -4,13 +4,13 @@ import { getStrapiMediaUrl } from "@/lib/strapi"
 export const getCategoryStyle = (category: string): string => {
   switch (category) {
     case 'zdrowie':
-      return 'bg-[#C4A77D]/10 text-[#9A7B5A] border-[#C4A77D]/20'
+      return 'bg-[#E31F25]/10 text-[#9A7B5A] border-[#E31F25]/20'
     case 'technologia':
       return 'bg-[#1a1a1a]/5 text-[#1a1a1a] border-[#1a1a1a]/10'
     case 'styl':
       return 'bg-[#E31F25]/5 text-[#E31F25] border-[#E31F25]/10'
     default:
-      return 'bg-[#C4A77D]/10 text-[#9A7B5A] border-[#C4A77D]/20'
+      return 'bg-[#E31F25]/10 text-[#9A7B5A] border-[#E31F25]/20'
   }
 }
 

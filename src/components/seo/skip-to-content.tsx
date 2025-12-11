@@ -20,7 +20,7 @@ export function SkipToContent({
       href={href}
       className={cn(
         "sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4",
-        "bg-[#C4A77D] text-[#1a1a1a] px-4 py-2 font-medium text-sm",
+        "bg-[#E31F25] text-[#1a1a1a] px-4 py-2 font-medium text-sm",
         "focus:outline-none focus:ring-2 focus:ring-[#1a1a1a] focus:ring-offset-2",
         "transition-all duration-200",
         className

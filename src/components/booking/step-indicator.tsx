@@ -28,7 +28,7 @@ export function StepIndicator({
       <div className={cn(
         "relative w-12 h-12 flex items-center justify-center transition-all duration-300",
         isCompleted 
-          ? "bg-[#C4A77D] group-hover:bg-[#b39669] group-hover:scale-105" 
+          ? "bg-[#E31F25] group-hover:bg-[#b39669] group-hover:scale-105" 
           : isActive 
             ? "bg-[#1a1a1a]" 
             : "bg-[#F5F5F5] group-hover:bg-[#e8e6e2]"
@@ -38,23 +38,23 @@ export function StepIndicator({
         ) : (
           <Icon className={cn(
             "w-5 h-5 transition-all duration-300",
-            isActive ? "text-[#C4A77D]" : "text-[#737373] group-hover:text-[#C4A77D] group-hover:scale-110"
+            isActive ? "text-[#E31F25]" : "text-[#737373] group-hover:text-[#E31F25] group-hover:scale-110"
           )} />
         )}
         {/* Corner accents */}
         <span className={cn(
           "absolute -top-px -left-px w-2 h-2 border-t border-l transition-colors duration-300",
-          isActive ? "border-[#C4A77D]" : isClickable ? "border-transparent group-hover:border-[#C4A77D]/50" : "border-transparent"
+          isActive ? "border-[#E31F25]" : isClickable ? "border-transparent group-hover:border-[#E31F25]/50" : "border-transparent"
         )} />
         <span className={cn(
           "absolute -bottom-px -right-px w-2 h-2 border-b border-r transition-colors duration-300",
-          isActive ? "border-[#C4A77D]" : isClickable ? "border-transparent group-hover:border-[#C4A77D]/50" : "border-transparent"
+          isActive ? "border-[#E31F25]" : isClickable ? "border-transparent group-hover:border-[#E31F25]/50" : "border-transparent"
         )} />
       </div>
       <div>
         <span className={cn(
           "text-[10px] font-medium tracking-[0.2em] uppercase transition-colors duration-300",
-          isClickable ? "text-[#737373] group-hover:text-[#C4A77D]" : "text-[#737373]"
+          isClickable ? "text-[#737373] group-hover:text-[#E31F25]" : "text-[#737373]"
         )}>
           Krok {step}
         </span>

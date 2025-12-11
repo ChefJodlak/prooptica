@@ -110,16 +110,16 @@ export function BookingForm({
       <div className="bg-[#1a1a1a] p-4 lg:p-5">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-[#C4A77D]" />
+            <Calendar className="w-4 h-4 text-[#E31F25]" />
             <span className="text-white capitalize">{formattedDate}</span>
             <span className="text-white/60">godz. {slot.time}</span>
           </div>
           <div className="flex items-center gap-2">
-            <User className="w-4 h-4 text-[#C4A77D]" />
+            <User className="w-4 h-4 text-[#E31F25]" />
             <span className="text-white">{specialist.name}</span>
           </div>
           <div className="flex items-center gap-2">
-            <MapPin className="w-4 h-4 text-[#C4A77D]" />
+            <MapPin className="w-4 h-4 text-[#E31F25]" />
             <span className="text-white/60">{salon.city}, {salon.address}</span>
           </div>
         </div>
@@ -131,7 +131,7 @@ export function BookingForm({
           {/* First Name */}
           <div>
             <label className="block text-sm font-medium text-[#1a1a1a] mb-1.5">
-              Imię <span className="text-[#C4A77D]">*</span>
+              Imię <span className="text-[#E31F25]">*</span>
             </label>
             <input
               type="text"
@@ -139,7 +139,7 @@ export function BookingForm({
               onChange={(e) => handleInputChange('firstName', e.target.value)}
               className={cn(
                 "w-full px-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
-                "focus:outline-none focus:ring-[#C4A77D]",
+                "focus:outline-none focus:ring-[#E31F25]",
                 errors.firstName ? "ring-red-400" : "ring-[#e0ded8]"
               )}
               placeholder="Jan"
@@ -155,7 +155,7 @@ export function BookingForm({
           {/* Last Name */}
           <div>
             <label className="block text-sm font-medium text-[#1a1a1a] mb-1.5">
-              Nazwisko <span className="text-[#C4A77D]">*</span>
+              Nazwisko <span className="text-[#E31F25]">*</span>
             </label>
             <input
               type="text"
@@ -163,7 +163,7 @@ export function BookingForm({
               onChange={(e) => handleInputChange('lastName', e.target.value)}
               className={cn(
                 "w-full px-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
-                "focus:outline-none focus:ring-[#C4A77D]",
+                "focus:outline-none focus:ring-[#E31F25]",
                 errors.lastName ? "ring-red-400" : "ring-[#e0ded8]"
               )}
               placeholder="Kowalski"
@@ -179,7 +179,7 @@ export function BookingForm({
           {/* Phone */}
           <div>
             <label className="flex items-center gap-1.5 text-sm font-medium text-[#1a1a1a] mb-1.5">
-              Telefon Komórkowy <span className="text-[#C4A77D]">*</span>
+              Telefon Komórkowy <span className="text-[#E31F25]">*</span>
               <div className="relative group">
                 <HelpCircle className="w-3.5 h-3.5 text-[#737373] cursor-help" />
                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 p-3 bg-[#1a1a1a] text-white text-xs font-light leading-relaxed opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 pointer-events-none">
@@ -196,7 +196,7 @@ export function BookingForm({
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 className={cn(
                   "w-full pl-11 pr-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
-                  "focus:outline-none focus:ring-[#C4A77D]",
+                  "focus:outline-none focus:ring-[#E31F25]",
                   errors.phone ? "ring-red-400" : "ring-[#e0ded8]"
                 )}
                 placeholder="+48 123 456 789"
@@ -213,7 +213,7 @@ export function BookingForm({
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-[#1a1a1a] mb-1.5">
-              Email <span className="text-[#C4A77D]">*</span>
+              Email <span className="text-[#E31F25]">*</span>
             </label>
             <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" />
@@ -223,7 +223,7 @@ export function BookingForm({
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 className={cn(
                   "w-full pl-11 pr-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
-                  "focus:outline-none focus:ring-[#C4A77D]",
+                  "focus:outline-none focus:ring-[#E31F25]",
                   errors.email ? "ring-red-400" : "ring-[#e0ded8]"
                 )}
                 placeholder="jan.kowalski@email.pl"
@@ -247,7 +247,7 @@ export function BookingForm({
             value={formData.notes}
             onChange={(e) => handleInputChange('notes', e.target.value)}
             rows={2}
-            className="w-full px-4 py-2.5 bg-white ring-1 ring-inset ring-[#e0ded8] transition-all duration-300 focus:outline-none focus:ring-[#C4A77D] resize-none"
+            className="w-full px-4 py-2.5 bg-white ring-1 ring-inset ring-[#e0ded8] transition-all duration-300 focus:outline-none focus:ring-[#E31F25] resize-none"
             placeholder="Dodatkowe informacje lub pytania..."
           />
         </div>
@@ -268,9 +268,9 @@ export function BookingForm({
               />
               <div className={cn(
                 "w-4 h-4 ring-1 ring-inset transition-all duration-300",
-                "peer-checked:bg-[#C4A77D] peer-checked:ring-[#C4A77D]",
+                "peer-checked:bg-[#E31F25] peer-checked:ring-[#E31F25]",
                 errors.acceptTerms ? "ring-red-400" : "ring-[#e0ded8]",
-                "group-hover:ring-[#C4A77D]/50"
+                "group-hover:ring-[#E31F25]/50"
               )}>
                 {formData.acceptTerms && (
                   <Check className="w-3 h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
@@ -278,12 +278,12 @@ export function BookingForm({
               </div>
             </div>
             <span className="text-xs text-[#5a5a5a] font-light leading-relaxed">
-              <span className="text-[#C4A77D]">*</span> Zapoznałem się z{' '}
-              <Link href="/regulamin" className="text-[#C4A77D] hover:underline">
+              <span className="text-[#E31F25]">*</span> Zapoznałem się z{' '}
+              <Link href="/regulamin" className="text-[#E31F25] hover:underline">
                 regulaminem
               </Link>{' '}
               oraz{' '}
-              <Link href="/polityka-prywatnosci" className="text-[#C4A77D] hover:underline">
+              <Link href="/polityka-prywatnosci" className="text-[#E31F25] hover:underline">
                 polityką prywatności
               </Link>
               , i akceptuję postanowienia tych dokumentów.
@@ -301,8 +301,8 @@ export function BookingForm({
               />
               <div className={cn(
                 "w-4 h-4 ring-1 ring-inset ring-[#e0ded8] transition-all duration-300",
-                "peer-checked:bg-[#C4A77D] peer-checked:ring-[#C4A77D]",
-                "group-hover:ring-[#C4A77D]/50"
+                "peer-checked:bg-[#E31F25] peer-checked:ring-[#E31F25]",
+                "group-hover:ring-[#E31F25]/50"
               )}>
                 {formData.acceptSms && (
                   <Check className="w-3 h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
@@ -320,7 +320,7 @@ export function BookingForm({
           <button
             type="button"
             onClick={onBack}
-            className="px-6 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1a1a1a] ring-1 ring-inset ring-[#e0ded8] hover:ring-[#C4A77D] transition-all duration-300"
+            className="px-6 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1a1a1a] ring-1 ring-inset ring-[#e0ded8] hover:ring-[#E31F25] transition-all duration-300"
           >
             <span className="flex items-center justify-center gap-2">
               <ChevronLeft className="w-4 h-4" />
@@ -333,7 +333,7 @@ export function BookingForm({
             disabled={isSubmitting}
             className={cn(
               "flex-1 px-6 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase transition-all duration-500",
-              "bg-[#C4A77D] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white",
+              "bg-[#E31F25] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white",
               isSubmitting && "opacity-50 cursor-wait"
             )}
           >
@@ -353,7 +353,7 @@ export function BookingForm({
 
         {/* External Link Info - inline */}
         <p className="text-[10px] text-[#737373] font-light flex items-center gap-2">
-          <ExternalLink className="w-3 h-3 text-[#C4A77D] flex-shrink-0" />
+          <ExternalLink className="w-3 h-3 text-[#E31F25] flex-shrink-0" />
           Po kliknięciu zostaniesz przekierowany do zewnętrznego systemu rezerwacji.
         </p>
       </form>

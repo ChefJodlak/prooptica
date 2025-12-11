@@ -21,16 +21,16 @@ export function FeaturedArticlesSection({ articles, isInView }: FeaturedArticles
         {/* Section Header */}
         <div className="flex items-center justify-between mb-12">
           <div className="flex items-center gap-4">
-            <BookOpen className="w-5 h-5 text-[#C4A77D]" />
+            <BookOpen className="w-5 h-5 text-[#E31F25]" />
             <h2 className="font-display text-2xl lg:text-3xl font-medium text-[#1a1a1a] tracking-[-0.02em]">
               Wyróżnione
             </h2>
           </div>
           <div className="hidden sm:flex items-center gap-2">
-            <span className="text-[10px] tracking-[0.2em] text-[#C4A77D] uppercase font-medium">
+            <span className="text-[10px] tracking-[0.2em] text-[#E31F25] uppercase font-medium">
               Polecane
             </span>
-            <div className="w-6 h-px bg-[#C4A77D]" />
+            <div className="w-6 h-px bg-[#E31F25]" />
           </div>
         </div>
         

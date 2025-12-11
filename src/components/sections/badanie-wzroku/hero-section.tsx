@@ -19,7 +19,7 @@ export function HeroSection() {
       
       {/* Decorative background elements */}
       <motion.div
-        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#C4A77D]/10 rounded-full blur-[150px]"
+        className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#E31F25]/10 rounded-full blur-[150px]"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
@@ -69,8 +69,8 @@ export function HeroSection() {
           >
             {HERO_STATS.map((item, i) => (
               <div key={i} className="flex items-center gap-4">
-                <div className="p-3 bg-[#C4A77D]/10">
-                  <item.icon className="w-5 h-5 text-[#C4A77D]" />
+                <div className="p-3 bg-[#E31F25]/10">
+                  <item.icon className="w-5 h-5 text-[#E31F25]" />
                 </div>
                 <span className="text-white/70 font-light">{item.text}</span>
               </div>
@@ -84,7 +84,7 @@ export function HeroSection() {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A77D]/30 to-transparent origin-center"
+        className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/30 to-transparent origin-center"
       />
     </section>
   )

@@ -24,8 +24,8 @@ export function TeamSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-5 mb-8"
             >
-              <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">Zespół</span>
-              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">Zespół</span>
+              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </motion.div>
 
             <motion.h2
@@ -36,10 +36,8 @@ export function TeamSection() {
             >
               Poznaj naszych{" "}
               <span className="relative inline-block">
-                <span className="italic text-[#C4A77D]">ekspertów</span>
-                <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                  <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <span className="italic text-[#E31F25]">ekspertów</span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
               </span>
             </motion.h2>
           </div>
@@ -82,7 +80,7 @@ export function TeamSection() {
               {/* Image with artistic frame */}
               <div className="relative mb-6">
                 {/* Outer frame */}
-                <div className="absolute -inset-2 border border-[#C4A77D]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-2 border border-[#E31F25]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <img 
@@ -95,7 +93,7 @@ export function TeamSection() {
                 </div>
               </div>
               
-              <h3 className="font-display text-lg font-medium text-[#1a1a1a] group-hover:text-[#C4A77D] transition-colors tracking-tight">
+              <h3 className="font-display text-lg font-medium text-[#1a1a1a] group-hover:text-[#E31F25] transition-colors tracking-tight">
                 {member.name}
               </h3>
               <p className="text-[#737373] text-sm font-light">{member.role}</p>

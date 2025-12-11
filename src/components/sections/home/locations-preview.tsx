@@ -48,29 +48,22 @@ function LocationCard({
     <button
       onClick={onClick}
       style={{
-        boxShadow: isSelected ? '0 20px 40px -12px rgba(196, 167, 125, 0.35), 0 8px 16px -8px rgba(0, 0, 0, 0.1)' : 'none'
+        boxShadow: isSelected ? '0 8px 24px -8px rgba(0, 0, 0, 0.15)' : 'none'
       }}
       className={cn(
-        "transform-gpu relative w-full text-left overflow-hidden transition-all duration-300 group",
+        "transform-gpu relative w-full text-left overflow-hidden transition-all duration-300 group border",
         isSelected 
-          ? "bg-white scale-[1.02] z-10" 
-          : "bg-white/60 hover:bg-white"
+          ? "bg-white scale-[1.02] z-10 border-[#E31F25]" 
+          : "bg-white/60 hover:bg-white border-transparent hover:border-[#E31F25]/30"
       )}
     >
-      {/* Elegant border */}
-      <div className={cn(
-        "absolute inset-0 transition-all duration-500",
-        isSelected 
-          ? "ring-2 ring-[#C4A77D]" 
-          : "ring-1 ring-[#e0ded8] group-hover:ring-[#C4A77D]/50"
-      )} />
       
-      {/* Selection indicator - golden corner accent */}
+      {/* Selection indicator - red corner accent */}
       <div className={cn(
         "absolute top-0 left-0 w-12 h-12 transition-all duration-500 overflow-hidden z-20",
         isSelected ? "opacity-100" : "opacity-0"
       )}>
-        <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#C4A77D] rotate-45" />
+        <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#E31F25] rotate-45" />
       </div>
       
       {/* Image */}
@@ -97,28 +90,12 @@ function LocationCard({
         
         {/* City name on image */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
-          <div className="flex items-end justify-between">
-            <div>
-              <span className={cn(
-                "block text-[9px] tracking-[0.3em] uppercase mb-1 transition-colors duration-300",
-                isSelected ? "text-[#C4A77D]" : "text-white/60 group-hover:text-[#C4A77D]"
-              )}>
-                Salon optyczny
-              </span>
-              <h3 className={cn(
-                "font-display text-xl font-medium tracking-tight transition-colors duration-300",
-                isSelected ? "text-white" : "text-white/80 group-hover:text-white"
-              )}>
-                {location.city}
-              </h3>
-            </div>
-            <ArrowRight className={cn(
-              "w-5 h-5 transition-all duration-500",
-              isSelected 
-                ? "text-[#C4A77D] translate-x-0 opacity-100" 
-                : "text-white/40 -translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-white/70"
-            )} />
-          </div>
+          <h3 className={cn(
+            "font-display text-xl font-medium tracking-tight transition-colors duration-300",
+            isSelected ? "text-white" : "text-white/80 group-hover:text-white"
+          )}>
+            {location.city}
+          </h3>
         </div>
       </div>
       
@@ -133,7 +110,7 @@ function LocationCard({
         )}>{location.address}</p>
         <span className={cn(
           "text-[10px] sm:text-[11px] tracking-wide transition-colors duration-300 block truncate",
-          isSelected ? "text-[#C4A77D]" : "text-[#aaa] group-hover:text-[#999]"
+          isSelected ? "text-[#E31F25]" : "text-[#aaa] group-hover:text-[#999]"
         )}>{location.postal} {location.city}</span>
       </div>
     </button>
@@ -280,17 +257,17 @@ function GoogleMap({ selectedLocation }: { selectedLocation: Location }) {
       <div ref={mapRef} className="w-full h-full" />
       
       {/* Elegant corner accents */}
-      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-10" />
+      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
       
       {/* Open in Maps button */}
       <a
         href={selectedLocation.map_link}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#C4A77D] hover:text-white transition-all duration-300 shadow-lg z-20"
+        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#E31F25] hover:text-white transition-all duration-300 shadow-lg z-20"
       >
         <ExternalLink className="w-3.5 h-3.5" />
         Google Maps
@@ -327,17 +304,17 @@ function EmbeddedMap({ selectedLocation }: { selectedLocation: Location }) {
       />
       
       {/* Elegant corner accents */}
-      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C4A77D]/40 pointer-events-none z-10" />
+      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
+      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
       
       {/* Open in Maps button */}
       <a
         href={selectedLocation.map_link}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#C4A77D] hover:text-white transition-all duration-300 shadow-lg z-20"
+        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#E31F25] hover:text-white transition-all duration-300 shadow-lg z-20"
       >
         <ExternalLink className="w-3.5 h-3.5" />
         Google Maps
@@ -416,10 +393,10 @@ export function LocationsPreview() {
           <div className="lg:col-span-6">
             {/* Label */}
             <div className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8">
-              <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                 Nasze Salony
               </span>
-              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </div>
             
             {/* Headline */}
@@ -432,9 +409,9 @@ export function LocationsPreview() {
               <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
                 blisko{" "}
                 <span className="relative inline-block">
-                  <span className="italic text-[#C4A77D]">siebie</span>
-                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                    <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <span className="italic text-[#E31F25]">siebie</span>
+                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                    <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
                   </svg>
                 </span>
               </h2>
@@ -442,7 +419,7 @@ export function LocationsPreview() {
           </div>
           
           {/* Right - Description & Stats */}
-          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end">
+          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end lg:items-end lg:text-right">
             <p className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light">
               Cztery eleganckie salony w kluczowych lokalizacjach. 
               Wszędzie ta sama jakość obsługi i pasja do doskonałości.
@@ -473,8 +450,8 @@ export function LocationsPreview() {
             <div className="relative bg-white h-full">
               
               {/* Artistic frame like Intro - Hidden on mobile for cleaner look */}
-              <div className="hidden sm:block absolute -inset-2 lg:-inset-3 border border-[#C4A77D]/20 pointer-events-none" />
-              <div className="hidden sm:block absolute -inset-4 lg:-inset-6 border border-[#C4A77D]/10 pointer-events-none" />
+              <div className="hidden sm:block absolute -inset-2 lg:-inset-3 border border-[#E31F25]/20 pointer-events-none" />
+              <div className="hidden sm:block absolute -inset-4 lg:-inset-6 border border-[#E31F25]/10 pointer-events-none" />
               
               {/* Map Container */}
               <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
@@ -485,8 +462,8 @@ export function LocationsPreview() {
               
               {/* Location Details Bar - Compact Luxurious Design */}
               <div className="relative bg-[#1a1a1a] overflow-hidden">
-                {/* Subtle gold accent line at top */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C4A77D] to-transparent" />
+                {/* Subtle red accent line at top */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
                 
                 {/* Content */}
                 <div className="relative px-4 py-4 sm:px-5 sm:py-4 lg:px-6 lg:py-5">
@@ -494,8 +471,8 @@ export function LocationsPreview() {
                     
                     {/* Location Info */}
                     <div className="flex items-center gap-3 min-w-0 overflow-hidden">
-                      {/* Gold accent marker */}
-                      <div className="w-1 h-10 bg-[#C4A77D] flex-shrink-0" />
+                      {/* Red accent marker */}
+                      <div className="w-1 h-10 bg-[#E31F25] flex-shrink-0" />
                       
                       {/* Text info */}
                       <div className="min-w-0 overflow-hidden transform-gpu">
@@ -512,13 +489,13 @@ export function LocationsPreview() {
                     <div className="flex sm:hidden items-center gap-4 pl-4 border-l border-white/10">
                       <a 
                         href={`tel:${selectedLocation.phone}`}
-                        className="flex items-center gap-2 text-white/60 hover:text-[#C4A77D] transition-colors text-xs"
+                        className="flex items-center gap-2 text-white/60 hover:text-[#E31F25] transition-colors text-xs"
                       >
-                        <Phone className="w-3.5 h-3.5 text-[#C4A77D]" />
+                        <Phone className="w-3.5 h-3.5 text-[#E31F25]" />
                         <span>{selectedLocation.phone}</span>
                       </a>
                       <div className="flex items-center gap-2 text-white/60 text-xs">
-                        <Clock className="w-3.5 h-3.5 text-[#C4A77D]" />
+                        <Clock className="w-3.5 h-3.5 text-[#E31F25]" />
                         <span>Pn-Pt 10-18</span>
                       </div>
                     </div>
@@ -529,13 +506,13 @@ export function LocationsPreview() {
                       <div className="hidden sm:flex items-center gap-4">
                         <a 
                           href={`tel:${selectedLocation.phone}`}
-                          className="flex items-center gap-2 text-white/60 hover:text-[#C4A77D] transition-colors text-xs whitespace-nowrap"
+                          className="flex items-center gap-2 text-white/60 hover:text-[#E31F25] transition-colors text-xs whitespace-nowrap"
                         >
-                          <Phone className="w-3.5 h-3.5 text-[#C4A77D]" />
+                          <Phone className="w-3.5 h-3.5 text-[#E31F25]" />
                           <span className="hidden lg:inline">{selectedLocation.phone}</span>
                         </a>
                         <div className="hidden md:flex items-center gap-2 text-white/60 text-xs whitespace-nowrap">
-                          <Clock className="w-3.5 h-3.5 text-[#C4A77D]" />
+                          <Clock className="w-3.5 h-3.5 text-[#E31F25]" />
                           <span>Pn-Pt 10-18</span>
                         </div>
                       </div>
@@ -544,11 +521,13 @@ export function LocationsPreview() {
                       <div className="hidden lg:block w-px h-8 bg-white/10" />
                       
                       {/* CTA Button */}
-                      <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="w-full sm:w-auto">
-                        <Button className="w-full sm:w-auto bg-[#C4A77D] text-[#1a1a1a] rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] hover:bg-white transition-all duration-300 px-4 lg:px-6 h-9">
-                          <Calendar className="w-3.5 h-3.5 mr-2" />
-                          Umów wizytę
-                        </Button>
+                      <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="w-full sm:w-auto group/loc">
+                        <button className="relative overflow-hidden w-full sm:w-auto bg-[#E31F25] hover:bg-[#c91a1f] text-white rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] cursor-pointer transition-all duration-300 px-4 lg:px-6 h-9 hover:shadow-[0_8px_20px_-6px_rgba(227,31,37,0.4)] hover:scale-[1.02] flex items-center justify-center">
+                          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/loc:translate-x-full transition-transform duration-500 ease-out" />
+                          <span className="absolute inset-0 border border-white/20" />
+                          <Calendar className="relative w-3.5 h-3.5 mr-2" />
+                          <span className="relative">Umów wizytę</span>
+                        </button>
                       </Link>
                     </div>
                   </div>
@@ -570,51 +549,6 @@ export function LocationsPreview() {
               ))}
             </div>
             
-            {/* Auto-play indicator dots */}
-            <div className="flex items-center justify-center gap-2 mt-4 sm:mt-6">
-              {LOCATIONS.map((location) => (
-                <button
-                  key={location.id}
-                  onClick={() => handleLocationSelect(location.id)}
-                  className="relative p-1 group"
-                  aria-label={`Wybierz ${location.city}`}
-                >
-                  <div className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-300",
-                    selectedId === location.id 
-                      ? "bg-[#C4A77D] scale-125" 
-                      : "bg-[#d0d0d0] group-hover:bg-[#C4A77D]/50"
-                  )} />
-                  {/* Progress ring for auto-play */}
-                  {isAutoPlaying && selectedId === location.id && (
-                    <svg className="absolute inset-0 w-4 h-4 -rotate-90" viewBox="0 0 16 16">
-                      <circle
-                        cx="8"
-                        cy="8"
-                        r="6"
-                        fill="none"
-                        stroke="#C4A77D"
-                        strokeWidth="1.5"
-                        strokeDasharray="37.7"
-                        className="animate-[progress_4s_linear_infinite]"
-                        style={{
-                          strokeDashoffset: 37.7,
-                          animation: 'progress 4s linear infinite'
-                        }}
-                      />
-                    </svg>
-                  )}
-                </button>
-              ))}
-              {/* Auto-play status indicator */}
-              <div className={cn(
-                "ml-2 text-[9px] tracking-[0.1em] uppercase transition-opacity duration-200",
-                isAutoPlaying ? "text-[#C4A77D] opacity-100" : "text-[#999] opacity-50"
-              )}>
-                {isAutoPlaying ? "Auto" : "Pauza"}
-              </div>
-            </div>
-            
             {/* CTA Link */}
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#e0ded8]">
               <Link href="/salony" className="group inline-flex items-center gap-4 sm:gap-6">
@@ -623,8 +557,8 @@ export function LocationsPreview() {
                 </span>
                 <div className="relative overflow-hidden">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-16 transition-all duration-200" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-200" />
+                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 sm:group-hover:w-16 transition-all duration-200" />
+                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
                   </div>
                 </div>
               </Link>

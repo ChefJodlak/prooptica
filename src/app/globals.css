@@ -251,7 +251,7 @@
    LUXURY UTILITY CLASSES
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Elegant Gold Scrollbar */
+/* Elegant Red Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -261,18 +261,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #C4A77D 0%, #9A7B5A 100%);
+  background: linear-gradient(180deg, #E31F25 0%, #B01820 100%);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #D4B78D 0%, #C4A77D 100%);
+  background: linear-gradient(180deg, #F02E34 0%, #E31F25 100%);
 }
 
 /* Firefox scrollbar */
 html {
   scrollbar-width: thin;
-  scrollbar-color: #C4A77D #1a1a1a;
+  scrollbar-color: #E31F25 #1a1a1a;
 }
 
 /* Focus States */
@@ -290,6 +290,7 @@ html {
 .accent-red {
   color: #E31F25;
 }
+
 
 .bg-accent-red {
   background-color: #E31F25;

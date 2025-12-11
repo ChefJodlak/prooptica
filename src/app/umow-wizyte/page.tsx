@@ -163,7 +163,7 @@ export default function BookingPage() {
         
         {/* Decorative background elements */}
         <motion.div
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#C4A77D]/10 rounded-full blur-[150px]"
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#E31F25]/10 rounded-full blur-[150px]"
           animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
@@ -176,10 +176,10 @@ export default function BookingPage() {
             transition={{ duration: 0.6 }}
             className="flex items-center gap-5 mb-8"
           >
-            <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
               Rezerwacja online
             </span>
-            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
           </motion.div>
           
           {/* Headline */}
@@ -201,10 +201,8 @@ export default function BookingPage() {
               className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
             >
               <span className="relative inline-block">
-                <span className="italic text-[#C4A77D]">wizytę</span>
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                  <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <span className="italic text-[#E31F25]">wizytę</span>
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
               </span>
             </motion.h1>
           </div>
@@ -224,7 +222,7 @@ export default function BookingPage() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A77D]/30 to-transparent origin-center"
+          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/30 to-transparent origin-center"
         />
       </section>
 
@@ -315,13 +313,13 @@ export default function BookingPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-8 p-5 bg-white ring-1 ring-[#e0ded8]"
                   >
-                    <h4 className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#C4A77D] mb-4">
+                    <h4 className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#E31F25] mb-4">
                       Twój wybór
                     </h4>
                     
                     <div className="space-y-3 text-sm">
                       <div className="flex items-start gap-3">
-                        <Building2 className="w-4 h-4 text-[#C4A77D] mt-0.5" />
+                        <Building2 className="w-4 h-4 text-[#E31F25] mt-0.5" />
                         <div>
                           <p className="font-medium text-[#1a1a1a]">{selectedSalon.city}</p>
                           <p className="text-[#737373] font-light">{selectedSalon.address}</p>
@@ -330,7 +328,7 @@ export default function BookingPage() {
                       
                       {selectedService && (
                         <div className="flex items-start gap-3 pt-3 border-t border-[#e0ded8]">
-                          <Stethoscope className="w-4 h-4 text-[#C4A77D] mt-0.5" />
+                          <Stethoscope className="w-4 h-4 text-[#E31F25] mt-0.5" />
                           <div>
                             <p className="font-medium text-[#1a1a1a]">{selectedService.name}</p>
                           </div>
@@ -339,7 +337,7 @@ export default function BookingPage() {
                       
                       {selectedSpecialist && (
                         <div className="flex items-start gap-3 pt-3 border-t border-[#e0ded8]">
-                          <User className="w-4 h-4 text-[#C4A77D] mt-0.5" />
+                          <User className="w-4 h-4 text-[#E31F25] mt-0.5" />
                           <div>
                             <p className="font-medium text-[#1a1a1a]">{selectedSpecialist.name}</p>
                             <p className="text-[#737373] font-light">{selectedSpecialist.title}</p>
@@ -349,7 +347,7 @@ export default function BookingPage() {
                       
                       {selectedSlot && (
                         <div className="flex items-start gap-3 pt-3 border-t border-[#e0ded8]">
-                          <Clock className="w-4 h-4 text-[#C4A77D] mt-0.5" />
+                          <Clock className="w-4 h-4 text-[#E31F25] mt-0.5" />
                           <div>
                             <p className="font-medium text-[#1a1a1a]">
                               {new Date(selectedSlot.date).toLocaleDateString('pl-PL', { 
@@ -387,10 +385,10 @@ export default function BookingPage() {
                   >
                     {/* Section Label */}
                     <div className="flex items-center gap-5 mb-8">
-                      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                         Krok 1
                       </span>
-                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                     </div>
                     
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-2">
@@ -398,10 +396,8 @@ export default function BookingPage() {
                     </h2>
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-6">
                       <span className="relative inline-block">
-                        <span className="italic text-[#C4A77D]">salon</span>
-                        <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                          <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                        </svg>
+                        <span className="italic text-[#E31F25]">salon</span>
+                        <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                       </span>
                     </h2>
                     
@@ -439,10 +435,10 @@ export default function BookingPage() {
                   >
                     {/* Section Label */}
                     <div className="flex items-center gap-5 mb-8">
-                      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                         Krok 2
                       </span>
-                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                     </div>
                     
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-2">
@@ -450,10 +446,8 @@ export default function BookingPage() {
                     </h2>
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-6">
                       <span className="relative inline-block">
-                        <span className="italic text-[#C4A77D]">usługę</span>
-                        <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                          <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                        </svg>
+                        <span className="italic text-[#E31F25]">usługę</span>
+                        <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                       </span>
                     </h2>
                     
@@ -475,8 +469,8 @@ export default function BookingPage() {
                             "group relative w-full p-5 text-left transition-all duration-300 cursor-pointer",
                             "ring-1 ring-inset",
                             selectedService?.id === service.id
-                              ? "bg-[#1a1a1a] ring-[#C4A77D] shadow-lg"
-                              : "bg-white ring-[#e0ded8] hover:ring-[#C4A77D] hover:shadow-md hover:bg-[#FAFAF8]"
+                              ? "bg-[#1a1a1a] ring-[#E31F25] shadow-lg"
+                              : "bg-white ring-[#e0ded8] hover:ring-[#E31F25] hover:shadow-md hover:bg-[#FAFAF8]"
                           )}
                         >
                           <div className="flex items-center justify-between">
@@ -484,14 +478,14 @@ export default function BookingPage() {
                               <div className={cn(
                                 "p-2.5 transition-all duration-300",
                                 selectedService?.id === service.id
-                                  ? "bg-[#C4A77D]"
-                                  : "bg-[#F5F5F5] group-hover:bg-[#C4A77D]/20 group-hover:scale-110"
+                                  ? "bg-[#E31F25]"
+                                  : "bg-[#F5F5F5] group-hover:bg-[#E31F25]/20 group-hover:scale-110"
                               )}>
                                 <Stethoscope className={cn(
                                   "w-5 h-5 transition-colors duration-300",
                                   selectedService?.id === service.id
                                     ? "text-[#1a1a1a]"
-                                    : "text-[#C4A77D]"
+                                    : "text-[#E31F25]"
                                 )} />
                               </div>
                               <div>
@@ -499,7 +493,7 @@ export default function BookingPage() {
                                   "font-medium text-base transition-colors duration-300",
                                   selectedService?.id === service.id 
                                     ? "text-white" 
-                                    : "text-[#1a1a1a] group-hover:text-[#C4A77D]"
+                                    : "text-[#1a1a1a] group-hover:text-[#E31F25]"
                                 )}>
                                   {service.name}
                                 </h3>
@@ -516,8 +510,8 @@ export default function BookingPage() {
                               <div className={cn(
                                 "flex items-center gap-1.5 px-2 py-1 text-[10px] font-medium tracking-wider uppercase transition-all duration-300",
                                 selectedService?.id === service.id
-                                  ? "bg-[#C4A77D]/20 text-[#C4A77D]"
-                                  : "bg-[#F5F5F5] text-[#737373] group-hover:bg-[#C4A77D]/10 group-hover:text-[#C4A77D]"
+                                  ? "bg-[#E31F25]/20 text-[#E31F25]"
+                                  : "bg-[#F5F5F5] text-[#737373] group-hover:bg-[#E31F25]/10 group-hover:text-[#E31F25]"
                               )}>
                                 <PhoneCall className="w-3 h-3" />
                                 <span>Telefonicznie</span>
@@ -528,7 +522,7 @@ export default function BookingPage() {
                               <motion.div
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
-                                className="w-6 h-6 bg-[#C4A77D] flex items-center justify-center ml-4"
+                                className="w-6 h-6 bg-[#E31F25] flex items-center justify-center ml-4"
                               >
                                 <Check className="w-4 h-4 text-[#1a1a1a]" />
                               </motion.div>
@@ -551,10 +545,10 @@ export default function BookingPage() {
                   >
                     {/* Section Label */}
                     <div className="flex items-center gap-5 mb-8">
-                      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                         Krok 3
                       </span>
-                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                     </div>
                     
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-2">
@@ -562,10 +556,8 @@ export default function BookingPage() {
                     </h2>
                     <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-6">
                       <span className="relative inline-block">
-                        <span className="italic text-[#C4A77D]">specjalistę</span>
-                        <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                          <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                        </svg>
+                        <span className="italic text-[#E31F25]">specjalistę</span>
+                        <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                       </span>
                     </h2>
                     
@@ -584,7 +576,7 @@ export default function BookingPage() {
                             setSelectedService(null)
                             setStep(2)
                           }}
-                          className="mt-4 text-[#C4A77D] text-sm font-medium hover:underline"
+                          className="mt-4 text-[#E31F25] text-sm font-medium hover:underline"
                         >
                           Wybierz inną usługę
                         </button>
@@ -625,10 +617,10 @@ export default function BookingPage() {
                   >
                     {/* Section Label */}
                     <div className="flex items-center gap-5 mb-8">
-                      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                         Krok 4
                       </span>
-                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                     </div>
                     
                     {selectedService.requiresPhoneBooking ? (
@@ -639,10 +631,8 @@ export default function BookingPage() {
                         </h2>
                         <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-6">
                           <span className="relative inline-block">
-                            <span className="italic text-[#C4A77D]">telefoniczna</span>
-                            <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                              <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                            </svg>
+                            <span className="italic text-[#E31F25]">telefoniczna</span>
+                            <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                           </span>
                         </h2>
                         
@@ -652,8 +642,8 @@ export default function BookingPage() {
 
                         <div className="bg-[#1a1a1a] p-8 lg:p-12">
                           <div className="flex flex-col items-center text-center">
-                            <div className="p-4 bg-[#C4A77D]/20 mb-6">
-                              <PhoneCall className="w-10 h-10 text-[#C4A77D]" />
+                            <div className="p-4 bg-[#E31F25]/20 mb-6">
+                              <PhoneCall className="w-10 h-10 text-[#E31F25]" />
                             </div>
                             
                             <h3 className="font-display text-2xl text-white mb-2">
@@ -661,12 +651,12 @@ export default function BookingPage() {
                             </h3>
                             
                             <p className="text-white/60 mb-8 max-w-sm font-light">
-                              Nasi konsultanci pomogą Ci umówić wizytę na <span className="text-[#C4A77D]">{selectedService.name}</span> u specjalisty <span className="text-white">{selectedSpecialist.name}</span>.
+                              Nasi konsultanci pomogą Ci umówić wizytę na <span className="text-[#E31F25]">{selectedService.name}</span> u specjalisty <span className="text-white">{selectedSpecialist.name}</span>.
                             </p>
 
                             <a 
                               href="tel:+48227200800"
-                              className="flex items-center gap-3 px-8 py-4 bg-[#C4A77D] text-[#1a1a1a] font-semibold text-lg tracking-wider hover:bg-white transition-all duration-500"
+                              className="flex items-center gap-3 px-8 py-4 bg-[#E31F25] text-[#1a1a1a] font-semibold text-lg tracking-wider hover:bg-white transition-all duration-500"
                             >
                               <Phone className="w-5 h-5" />
                               +48 22 720 08 00
@@ -680,7 +670,7 @@ export default function BookingPage() {
 
                         <button
                           onClick={() => setStep(3)}
-                          className="mt-6 flex items-center gap-2 text-[#737373] hover:text-[#C4A77D] transition-colors"
+                          className="mt-6 flex items-center gap-2 text-[#737373] hover:text-[#E31F25] transition-colors"
                         >
                           <ChevronLeft className="w-4 h-4" />
                           <span className="text-sm font-light">Wybierz innego specjalistę</span>
@@ -694,10 +684,8 @@ export default function BookingPage() {
                         </h2>
                         <h2 className="font-display text-[2.5rem] lg:text-[3.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-6">
                           <span className="relative inline-block">
-                            <span className="italic text-[#C4A77D]">termin</span>
-                            <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                              <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                            </svg>
+                            <span className="italic text-[#E31F25]">termin</span>
+                            <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                           </span>
                         </h2>
                         
@@ -725,16 +713,16 @@ export default function BookingPage() {
                   >
                     {/* Section Label */}
                     <div className="flex items-center gap-5 mb-4">
-                      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                         Krok 5
                       </span>
-                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                      <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                     </div>
                     
                     <h2 className="font-display text-[2rem] lg:text-[2.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em] mb-1">
                       Twoje{' '}
                       <span className="relative inline-block">
-                        <span className="italic text-[#C4A77D] font-medium">dane</span>
+                        <span className="italic text-[#E31F25] font-medium">dane</span>
                       </span>
                     </h2>
                     
@@ -773,25 +761,25 @@ export default function BookingPage() {
             
             {/* Decorative glow */}
             <motion.div
-              className="absolute -top-20 -left-20 w-64 h-64 bg-[#C4A77D]/15 rounded-full blur-[80px]"
+              className="absolute -top-20 -left-20 w-64 h-64 bg-[#E31F25]/15 rounded-full blur-[80px]"
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 5, repeat: Infinity }}
             />
             
-            {/* Top gold line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C4A77D] to-transparent" />
+            {/* Top red line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
             
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
               <div className="text-center lg:text-left">
                 <div className="flex items-center justify-center lg:justify-start gap-5 mb-6">
-                  <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                  <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                     Wolisz telefonicznie?
                   </span>
-                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#E31F25] to-transparent" />
                 </div>
                 <h3 className="font-display text-3xl lg:text-5xl font-extralight text-white mb-3 tracking-[-0.02em]">
                   Zadzwoń do{" "}
-                  <span className="italic text-[#C4A77D] font-medium">nas</span>
+                  <span className="italic text-[#E31F25] font-medium">nas</span>
                 </h3>
                 <p className="text-white/50 max-w-md font-light">
                   Nasi konsultanci pomogą Ci umówić wizytę telefonicznie.
@@ -800,7 +788,7 @@ export default function BookingPage() {
               
               <a 
                 href="tel:+48227200800"
-                className="flex items-center gap-3 px-8 py-5 bg-[#C4A77D] text-[#1a1a1a] font-semibold text-sm tracking-wider hover:bg-white transition-all duration-500"
+                className="flex items-center gap-3 px-8 py-5 bg-[#E31F25] text-[#1a1a1a] font-semibold text-sm tracking-wider hover:bg-white transition-all duration-500"
               >
                 +48 22 720 08 00
               </a>

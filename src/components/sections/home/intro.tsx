@@ -77,13 +77,13 @@ export function Intro() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="absolute -inset-2 sm:-inset-3 lg:-inset-4 border border-[#C4A77D]/30" 
+              className="absolute -inset-2 sm:-inset-3 lg:-inset-4 border border-[#E31F25]/30" 
             />
             <motion.div 
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -inset-4 sm:-inset-6 lg:-inset-8 border border-[#C4A77D]/10" 
+              className="absolute -inset-4 sm:-inset-6 lg:-inset-8 border border-[#E31F25]/10" 
             />
             
             <div className="relative h-full w-full overflow-hidden">
@@ -104,7 +104,7 @@ export function Intro() {
                 className="absolute bottom-0 left-0 right-0 p-6 lg:p-8"
               >
                 <div className="flex items-start gap-3">
-                  <span className="font-display text-4xl lg:text-5xl text-[#C4A77D] leading-none">"</span>
+                  <span className="font-display text-4xl lg:text-5xl text-[#E31F25] leading-none">"</span>
                   <div>
                     <p className="font-display text-base lg:text-lg text-white/95 italic leading-relaxed">
                       Okulary to nie tylko korekcja wzroku — to element Twojego stylu.
@@ -121,12 +121,12 @@ export function Intro() {
             {/* Header */}
             <motion.div variants={fadeUpVariants} className="mb-8 sm:mb-12 lg:mb-16">
               <div className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8">
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
                 <motion.div 
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent origin-left" 
+                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
                 />
               </div>
               <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
@@ -135,9 +135,9 @@ export function Intro() {
               <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mt-1 sm:mt-2">
                 z pasją do{" "}
                 <span className="relative inline-block">
-                  <span className="italic text-[#C4A77D]">optyki</span>
-                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                    <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                  <span className="italic text-[#E31F25]">optyki</span>
+                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                    <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
                   </svg>
                 </span>
               </h2>
@@ -176,10 +176,10 @@ export function Intro() {
                 >
                   {/* Elegant number */}
                   <div className="mb-3 sm:mb-4 relative">
-                    <span className="font-display text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-thin text-[#C4A77D]/25 leading-none tracking-tighter">
+                    <span className="font-display text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-thin text-[#E31F25]/25 leading-none tracking-tighter">
                       {pillar.number}
                     </span>
-                    <div className="absolute bottom-1 sm:bottom-2 left-0 w-6 sm:w-8 h-px bg-[#C4A77D]/40 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#C4A77D] transition-all duration-500" />
+                    <div className="absolute bottom-1 sm:bottom-2 left-0 w-6 sm:w-8 h-px bg-[#E31F25]/40 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#E31F25] transition-all duration-500" />
                   </div>
                   
                   {/* Content */}
@@ -209,7 +209,7 @@ export function Intro() {
                 >
                   <div className="flex items-baseline justify-center gap-0.5">
                     <span className="font-display text-2xl sm:text-3xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
-                    {stat.suffix && <span className="font-display text-base sm:text-lg text-[#C4A77D] font-light">{stat.suffix}</span>}
+                    {stat.suffix && <span className="font-display text-base sm:text-lg text-[#E31F25] font-light">{stat.suffix}</span>}
                   </div>
                   <span className="block text-[8px] sm:text-[9px] tracking-[0.15em] text-[#737373] uppercase mt-1 font-light">{stat.label}</span>
                 </div>
@@ -225,11 +225,9 @@ export function Intro() {
                 <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.25em] uppercase">
                   Poznaj naszą historię
                 </span>
-                <div className="relative overflow-hidden">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#C4A77D] group-hover:w-12 sm:group-hover:w-16 transition-all duration-500" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
-                  </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 sm:group-hover:w-16 transition-all duration-500" />
+                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
               
@@ -250,7 +248,7 @@ export function Intro() {
                     {i > 0 && <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-px h-8 bg-[#e0ded8]" />}
                     <div className="flex items-baseline justify-center gap-0.5">
                       <span className="font-display text-3xl xl:text-4xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
-                      {stat.suffix && <span className="font-display text-lg xl:text-xl text-[#C4A77D] font-light">{stat.suffix}</span>}
+                      {stat.suffix && <span className="font-display text-lg xl:text-xl text-[#E31F25] font-light">{stat.suffix}</span>}
                     </div>
                     <span className="block text-[9px] tracking-[0.2em] text-[#737373] uppercase mt-2 font-light">{stat.label}</span>
                   </motion.div>

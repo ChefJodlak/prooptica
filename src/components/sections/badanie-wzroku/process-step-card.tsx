@@ -22,22 +22,22 @@ export function ProcessStepCard({ number, title, description, index, isLast, isI
     >
       <div className="bg-white p-8 h-full transition-all duration-500 hover:-translate-y-2 relative">
         {/* Elegant border */}
-        <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#C4A77D] transition-all duration-500" />
+        <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#E31F25] transition-all duration-500" />
         
-        {/* Gold accent corner */}
+        {/* Red accent corner */}
         <div className="absolute top-0 left-0 w-10 h-10 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute -top-5 -left-5 w-10 h-10 bg-[#C4A77D] rotate-45" />
+          <div className="absolute -top-5 -left-5 w-10 h-10 bg-[#E31F25] rotate-45" />
         </div>
         
         {/* Number */}
         <div className="mb-6 relative">
-          <span className="font-display text-[4rem] font-thin text-[#C4A77D]/25 leading-none tracking-tighter">
+          <span className="font-display text-[4rem] font-thin text-[#E31F25]/25 leading-none tracking-tighter">
             {number}
           </span>
-          <div className="absolute bottom-2 left-0 w-8 h-px bg-[#C4A77D]/40 group-hover:w-12 group-hover:bg-[#C4A77D] transition-all duration-500" />
+          <div className="absolute bottom-2 left-0 w-8 h-px bg-[#E31F25]/40 group-hover:w-12 group-hover:bg-[#E31F25] transition-all duration-500" />
         </div>
         
-        <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#C4A77D] transition-colors">
+        <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#E31F25] transition-colors">
           {title}
         </h3>
         <p className="text-[#737373] font-light">
@@ -56,7 +56,7 @@ export function ProcessStepCard({ number, title, description, index, isLast, isI
             height: '32px'
           }}
         >
-          <ArrowRight className="w-5 h-5 text-[#C4A77D]" />
+          <ArrowRight className="w-5 h-5 text-[#E31F25]" />
         </div>
       )}
     </motion.div>

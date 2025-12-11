@@ -53,7 +53,7 @@ function FeaturedBrand({
       onMouseLeave={() => setIsHovered(false)}
       className="relative group cursor-pointer"
     >
-      <span className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light tracking-[-0.02em] text-[#1a1a1a] transition-all duration-500 group-hover:text-[#C4A77D]">
+      <span className="font-display text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light tracking-[-0.02em] text-[#1a1a1a] transition-all duration-500 group-hover:text-[#E31F25]">
         {name}
       </span>
       
@@ -62,7 +62,7 @@ function FeaturedBrand({
         initial={{ scaleX: 0 }}
         animate={{ scaleX: isHovered ? 1 : 0 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#C4A77D] origin-left"
+        className="absolute -bottom-1 left-0 right-0 h-[1px] bg-[#E31F25] origin-left"
       />
     </motion.div>
   )
@@ -84,7 +84,7 @@ export function BrandsMarquee() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-6 left-0 w-[25%] h-[1px] bg-gradient-to-r from-[#C4A77D]/50 via-[#C4A77D]/25 to-transparent origin-left hidden lg:block"
+        className="absolute top-6 left-0 w-[25%] h-[1px] bg-gradient-to-r from-[#E31F25]/50 via-[#E31F25]/25 to-transparent origin-left hidden lg:block"
       />
       
       {/* Vertical accent - left side */}
@@ -92,7 +92,7 @@ export function BrandsMarquee() {
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-6 left-[25%] w-[1px] h-16 bg-gradient-to-b from-[#C4A77D]/25 to-transparent origin-top hidden lg:block"
+        className="absolute top-6 left-[25%] w-[1px] h-16 bg-gradient-to-b from-[#E31F25]/25 to-transparent origin-top hidden lg:block"
       />
       
       {/* Elegant line - bottom right corner accent */}
@@ -100,7 +100,7 @@ export function BrandsMarquee() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-6 right-0 w-[20%] h-[1px] bg-gradient-to-l from-[#C4A77D]/40 via-[#C4A77D]/20 to-transparent origin-right hidden lg:block"
+        className="absolute bottom-6 right-0 w-[20%] h-[1px] bg-gradient-to-l from-[#E31F25]/40 via-[#E31F25]/20 to-transparent origin-right hidden lg:block"
       />
       
       {/* Vertical accent - right side */}
@@ -108,7 +108,7 @@ export function BrandsMarquee() {
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-6 right-[20%] w-[1px] h-16 bg-gradient-to-t from-[#C4A77D]/20 to-transparent origin-bottom hidden lg:block"
+        className="absolute bottom-6 right-[20%] w-[1px] h-16 bg-gradient-to-t from-[#E31F25]/20 to-transparent origin-bottom hidden lg:block"
       />
 
       {/* === MAIN CONTENT === */}
@@ -127,10 +127,15 @@ export function BrandsMarquee() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="flex items-center gap-3 sm:gap-5 mb-4 sm:mb-5"
               >
-                <div className="h-px w-8 sm:w-10 bg-[#C4A77D]" />
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.25em] sm:tracking-[0.4em] uppercase">
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                   Kolekcja Premium
                 </span>
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={isInView ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+                />
               </motion.div>
               
               {/* Main headline */}
@@ -152,7 +157,7 @@ export function BrandsMarquee() {
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
                     className="font-display text-[clamp(1.75rem,6vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
                   >
-                    w naszej <span className="text-[#C4A77D] italic">ofercie</span>
+                    w naszej <span className="text-[#E31F25] italic">ofercie</span>
                   </motion.h2>
                 </div>
               </div>
@@ -169,7 +174,7 @@ export function BrandsMarquee() {
                 Starannie wyselekcjonowana oferta od najbardziej prestiżowych domów mody i producentów okularów.
               </p>
               <div className="mt-2 sm:mt-3 flex items-center gap-2 sm:gap-3 lg:justify-end">
-                <div className="w-1.5 h-1.5 bg-[#C4A77D] rounded-full" />
+                <div className="w-1.5 h-1.5 bg-[#E31F25] rounded-full" />
                 <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#A3A3A3] uppercase">
                   Oryginalne produkty
                 </span>
@@ -194,7 +199,7 @@ export function BrandsMarquee() {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="hidden lg:block mx-12 xl:mx-16 text-[#C4A77D]/30 text-2xl font-light"
+                    className="hidden lg:block mx-12 xl:mx-16 text-[#E31F25]/30 text-2xl font-light"
                   >
                     ·
                   </motion.span>
@@ -217,7 +222,7 @@ export function BrandsMarquee() {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.8, delay: 0.7 }}
-                    className="hidden lg:block mx-12 xl:mx-16 text-[#C4A77D]/30 text-2xl font-light"
+                    className="hidden lg:block mx-12 xl:mx-16 text-[#E31F25]/30 text-2xl font-light"
                   >
                     ·
                   </motion.span>
@@ -245,7 +250,7 @@ export function BrandsMarquee() {
               {[...ALL_BRANDS, ...ALL_BRANDS].map((brand, i) => (
                 <span 
                   key={`row1-${i}`} 
-                  className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10 transition-colors duration-300 hover:text-[#C4A77D]"
+                  className="text-sm font-medium text-[#A3A3A3] uppercase tracking-[0.2em] whitespace-nowrap px-6 lg:px-10 transition-colors duration-300 hover:text-[#E31F25]"
                 >
                   {brand}
                 </span>

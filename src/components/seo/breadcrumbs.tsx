@@ -46,7 +46,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           >
             <Link
               href="/"
-              className="text-[#737373] hover:text-[#C4A77D] transition-colors duration-300"
+              className="text-[#737373] hover:text-[#E31F25] transition-colors duration-300"
               itemProp="item"
             >
               <Home className="w-4 h-4" aria-label="Strona główna" />
@@ -78,7 +78,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
                 // Link to parent page
                 <Link
                   href={item.href}
-                  className="text-[#737373] hover:text-[#C4A77D] transition-colors duration-300"
+                  className="text-[#737373] hover:text-[#E31F25] transition-colors duration-300"
                   itemProp="item"
                 >
                   <span itemProp="name">{item.name}</span>
@@ -106,7 +106,7 @@ export function BreadcrumbsCompact({ items, className }: BreadcrumbsProps) {
       {parentItem ? (
         <Link
           href={parentItem.href}
-          className="flex items-center gap-1 text-[#737373] hover:text-[#C4A77D] transition-colors"
+          className="flex items-center gap-1 text-[#737373] hover:text-[#E31F25] transition-colors"
         >
           <ChevronRight className="w-4 h-4 rotate-180" />
           <span>{parentItem.name}</span>
@@ -114,7 +114,7 @@ export function BreadcrumbsCompact({ items, className }: BreadcrumbsProps) {
       ) : (
         <Link
           href="/"
-          className="flex items-center gap-1 text-[#737373] hover:text-[#C4A77D] transition-colors"
+          className="flex items-center gap-1 text-[#737373] hover:text-[#E31F25] transition-colors"
         >
           <ChevronRight className="w-4 h-4 rotate-180" />
           <span>Strona główna</span>

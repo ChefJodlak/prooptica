@@ -31,8 +31,8 @@ export function ValuesSection() {
               transition={{ duration: 0.6 }}
               className="flex items-center gap-5 mb-8"
             >
-              <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">Nasze Wartości</span>
-              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">Nasze Wartości</span>
+              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </motion.div>
 
             <motion.h2
@@ -43,10 +43,8 @@ export function ValuesSection() {
             >
               Co nas{" "}
               <span className="relative inline-block">
-                <span className="italic text-[#C4A77D]">definiuje</span>
-                <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                  <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <span className="italic text-[#E31F25]">definiuje</span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
               </span>
             </motion.h2>
           </div>
@@ -87,13 +85,13 @@ export function ValuesSection() {
             >
               {/* Icon */}
               <div className="mb-4">
-                <div className="inline-flex p-3 bg-[#C4A77D]/10 group-hover:bg-[#C4A77D]/20 transition-colors duration-300">
-                  <value.icon className="w-5 h-5 text-[#C4A77D]" />
+                <div className="inline-flex p-3 bg-[#E31F25]/10 group-hover:bg-[#E31F25]/20 transition-colors duration-300">
+                  <value.icon className="w-5 h-5 text-[#E31F25]" />
                 </div>
               </div>
               
               {/* Content */}
-              <h3 className="font-display text-lg lg:text-xl font-medium text-[#1a1a1a] mb-2 tracking-[-0.01em] group-hover:text-[#C4A77D] transition-colors duration-300">
+              <h3 className="font-display text-lg lg:text-xl font-medium text-[#1a1a1a] mb-2 tracking-[-0.01em] group-hover:text-[#E31F25] transition-colors duration-300">
                 {value.title}
               </h3>
               <p className="text-[#737373] text-sm leading-relaxed font-light">

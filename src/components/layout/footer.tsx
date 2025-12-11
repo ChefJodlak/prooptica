@@ -61,7 +61,7 @@ export function Footer() {
       
       {/* Top decorative line - static for Safari performance */}
       <div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C4A77D]/40 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/40 to-transparent"
       />
       
       {/* Decorative large text - static for Safari performance */}
@@ -80,10 +80,10 @@ export function Footer() {
             <div className="lg:col-span-6 transform-gpu">
               {/* Label */}
               <div className="flex items-center gap-5 mb-8">
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                   Newsletter
                 </span>
-                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </div>
               
               {/* Headline - static for Safari performance */}
@@ -95,10 +95,8 @@ export function Footer() {
               <div className="mb-8">
                 <h3 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-medium text-white leading-[1] tracking-[-0.03em]">
                   <span className="relative inline-block">
-                    <span className="italic text-[#C4A77D]">bieżąco</span>
-                    <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                      <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
+                    <span className="italic text-[#E31F25]">bieżąco</span>
+                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
                   </span>
                 </h3>
               </div>
@@ -111,17 +109,21 @@ export function Footer() {
               <div className="max-w-md">
                 <div className="flex gap-3">
                   <div className="relative flex-1 group">
-                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-[#C4A77D] transition-colors" />
+                    <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 group-focus-within:text-[#E31F25] transition-colors" />
                     <Input 
                       type="email" 
                       placeholder="Twój adres email" 
-                      className="w-full pl-14 pr-5 py-7 bg-white/5 border border-white/10 rounded-none text-white placeholder:text-white/30 focus:border-[#C4A77D] focus:ring-0 focus:bg-white/[0.07] transition-all duration-300"
+                      className="w-full pl-14 pr-5 py-7 bg-white/5 border border-white/10 rounded-none text-white placeholder:text-white/30 focus:border-[#E31F25] focus:ring-0 focus:bg-white/[0.07] transition-all duration-300"
                     />
                   </div>
-                  <Button className="rounded-none bg-[#C4A77D] text-[#1a1a1a] hover:bg-white px-6 h-[58px] font-semibold tracking-[0.1em] uppercase text-[10px] transition-all duration-500">
-                    <Send className="w-4 h-4 mr-2" />
-                    Zapisz
-                  </Button>
+                  <button className="group/btn relative overflow-hidden bg-[#E31F25] text-white px-6 h-[58px] font-semibold tracking-[0.1em] uppercase text-[10px] transition-all duration-500 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.4)] hover:scale-[1.02]">
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                    <span className="absolute inset-0 border border-white/20" />
+                    <span className="relative flex items-center gap-2">
+                      <Send className="w-4 h-4" />
+                      Zapisz
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -129,10 +131,10 @@ export function Footer() {
             {/* Right - Quick Locations */}
             <div className="lg:col-span-6 transform-gpu">
               <div className="flex items-center gap-5 mb-8">
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                   Nasze Salony
                 </span>
-                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
@@ -140,14 +142,14 @@ export function Footer() {
                   <div key={loc.id}>
                     <Link 
                       href="/salony"
-                      className="group block p-5 border border-white/10 hover:border-[#C4A77D]/40 hover:bg-white/[0.03] transition-all duration-300"
+                      className="group block p-5 border border-white/10 hover:border-[#E31F25]/40 hover:bg-white/[0.03] transition-all duration-300"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="p-2 bg-[#C4A77D]/10 text-[#C4A77D] group-hover:bg-[#C4A77D] group-hover:text-[#1a1a1a] transition-all duration-300">
+                        <div className="p-2 bg-[#E31F25]/10 text-[#E31F25] group-hover:bg-[#E31F25] group-hover:text-[#1a1a1a] transition-all duration-300">
                           <MapPin className="w-4 h-4" />
                         </div>
                         <div>
-                          <span className="block font-display text-lg text-white font-medium tracking-tight mb-1 group-hover:text-[#C4A77D] transition-colors">
+                          <span className="block font-display text-lg text-white font-medium tracking-tight mb-1 group-hover:text-[#E31F25] transition-colors">
                             {loc.city}
                           </span>
                           <span className="text-xs text-white/40 font-light line-clamp-1">{loc.address}</span>
@@ -200,10 +202,10 @@ export function Footer() {
                   aria-label={social.label}
                 >
                   {/* Border frame */}
-                  <div className="absolute inset-0 border border-white/10 group-hover:border-[#C4A77D]/50 transition-colors duration-300" />
+                  <div className="absolute inset-0 border border-white/10 group-hover:border-[#E31F25]/50 transition-colors duration-300" />
                   
                   {/* Background on hover */}
-                  <div className="absolute inset-0 bg-[#C4A77D] scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-[#E31F25] scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-300" />
                   
                   <social.icon className="relative w-5 h-5 text-white/60 group-hover:text-[#1a1a1a] transition-colors duration-300" />
                 </a>
@@ -217,7 +219,7 @@ export function Footer() {
               
               {/* Company Links */}
               <div>
-                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#E31F25] mb-8">
                   Firma
                 </h4>
                 <ul className="space-y-4">
@@ -227,9 +229,9 @@ export function Footer() {
                         href={link.href}
                         className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300"
                       >
-                        <span className="w-0 h-px bg-[#C4A77D] group-hover:w-3 transition-all duration-300" />
+                        <span className="w-0 h-px bg-[#E31F25] group-hover:w-3 transition-all duration-300" />
                         <span className="text-[15px] font-light">{link.label}</span>
-                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#C4A77D]" />
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#E31F25]" />
                       </Link>
                     </li>
                   ))}
@@ -238,7 +240,7 @@ export function Footer() {
 
               {/* Services Links */}
               <div>
-                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+                <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#E31F25] mb-8">
                   Usługi
                 </h4>
                 <ul className="space-y-4">
@@ -248,9 +250,9 @@ export function Footer() {
                         href={link.href}
                         className="group flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300"
                       >
-                        <span className="w-0 h-px bg-[#C4A77D] group-hover:w-3 transition-all duration-300" />
+                        <span className="w-0 h-px bg-[#E31F25] group-hover:w-3 transition-all duration-300" />
                         <span className="text-[15px] font-light">{link.label}</span>
-                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#C4A77D]" />
+                        <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#E31F25]" />
                       </Link>
                     </li>
                   ))}
@@ -261,7 +263,7 @@ export function Footer() {
 
           {/* Contact - 3 columns */}
           <div className="lg:col-span-3">
-            <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#C4A77D] mb-8">
+            <h4 className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#E31F25] mb-8">
               Kontakt
             </h4>
             
@@ -270,8 +272,8 @@ export function Footer() {
                 href="tel:+4822XXXXXXX"
                 className="group flex items-center gap-4 text-white/60 hover:text-white transition-colors"
               >
-                <div className="p-3 border border-white/10 group-hover:border-[#C4A77D]/50 group-hover:bg-[#C4A77D]/10 transition-all duration-300">
-                  <Phone className="w-4 h-4 text-[#C4A77D]" />
+                <div className="p-3 border border-white/10 group-hover:border-[#E31F25]/50 group-hover:bg-[#E31F25]/10 transition-all duration-300">
+                  <Phone className="w-4 h-4 text-[#E31F25]" />
                 </div>
                 <div>
                   <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Telefon</span>
@@ -283,8 +285,8 @@ export function Footer() {
                 href="mailto:kontakt@prooptica.pl"
                 className="group flex items-center gap-4 text-white/60 hover:text-white transition-colors"
               >
-                <div className="p-3 border border-white/10 group-hover:border-[#C4A77D]/50 group-hover:bg-[#C4A77D]/10 transition-all duration-300">
-                  <Mail className="w-4 h-4 text-[#C4A77D]" />
+                <div className="p-3 border border-white/10 group-hover:border-[#E31F25]/50 group-hover:bg-[#E31F25]/10 transition-all duration-300">
+                  <Mail className="w-4 h-4 text-[#E31F25]" />
                 </div>
                 <div>
                   <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Email</span>
@@ -294,7 +296,7 @@ export function Footer() {
               
               <div className="flex items-center gap-4">
                 <div className="p-3 border border-white/10">
-                  <Clock className="w-4 h-4 text-[#C4A77D]" />
+                  <Clock className="w-4 h-4 text-[#E31F25]" />
                 </div>
                 <div>
                   <span className="block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-1">Godziny</span>
@@ -327,7 +329,7 @@ export function Footer() {
                 <span key={link.label} className="flex items-center">
                   <Link 
                     href={link.href}
-                    className="text-[13px] text-white/30 hover:text-[#C4A77D] transition-colors duration-300 font-light px-3 py-1"
+                    className="text-[13px] text-white/30 hover:text-[#E31F25] transition-colors duration-300 font-light px-3 py-1"
                   >
                     {link.label}
                   </Link>
@@ -343,11 +345,11 @@ export function Footer() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="group flex items-center gap-3"
             >
-              <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 group-hover:text-[#C4A77D] transition-colors duration-300">
+              <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 group-hover:text-[#E31F25] transition-colors duration-300">
                 Powrót na górę
               </span>
-              <div className="relative w-10 h-10 border border-white/10 group-hover:border-[#C4A77D]/50 transition-colors duration-300 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[#C4A77D] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              <div className="relative w-10 h-10 border border-white/10 group-hover:border-[#E31F25]/50 transition-colors duration-300 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-[#E31F25] translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <ArrowRight className="relative w-4 h-4 text-white/40 -rotate-90 group-hover:text-[#1a1a1a] transition-colors duration-300" />
               </div>
             </button>
@@ -356,8 +358,8 @@ export function Footer() {
       </div>
       
       {/* Elegant corner accents */}
-      <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-[#C4A77D]/20 pointer-events-none hidden lg:block" />
-      <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-[#C4A77D]/20 pointer-events-none hidden lg:block" />
+      <div className="absolute top-8 left-8 w-16 h-16 border-l border-t border-[#E31F25]/20 pointer-events-none hidden lg:block" />
+      <div className="absolute top-8 right-8 w-16 h-16 border-r border-t border-[#E31F25]/20 pointer-events-none hidden lg:block" />
     </footer>
   )
 }

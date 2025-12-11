@@ -67,8 +67,8 @@ export function FeaturesSection({ isInView, imageY }: FeaturesSectionProps) {
               className="relative aspect-[4/5] overflow-hidden"
             >
               {/* Artistic frame */}
-              <div className="absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/30 pointer-events-none z-10" />
-              <div className="absolute -inset-6 lg:-inset-8 border border-[#C4A77D]/10 pointer-events-none z-10" />
+              <div className="absolute -inset-3 lg:-inset-4 border border-[#E31F25]/30 pointer-events-none z-10" />
+              <div className="absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none z-10" />
               
               <Image 
                 src="/exams/exam1.png"
@@ -89,7 +89,7 @@ export function FeaturesSection({ isInView, imageY }: FeaturesSectionProps) {
               <div className="bg-white p-6 shadow-2xl shadow-[#1a1a1a]/10">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-[#1a1a1a]">
-                    <Eye className="w-8 h-8 text-[#C4A77D]" />
+                    <Eye className="w-8 h-8 text-[#E31F25]" />
                   </div>
                   <div>
                     <div className="font-display text-3xl font-light text-[#1a1a1a]">50k+</div>

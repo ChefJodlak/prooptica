@@ -57,7 +57,7 @@ function AnimatedPlaceholderPost({
       <div className="absolute inset-0 bg-[#f8f7f4]" />
       <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient} opacity-10`} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-        <Instagram className="w-10 h-10 text-[#C4A77D]/40 group-hover:text-[#C13584]/60 transition-colors duration-500" />
+        <Instagram className="w-10 h-10 text-[#E31F25]/40 group-hover:text-[#C13584]/60 transition-colors duration-500" />
         <span className="text-[10px] tracking-[0.2em] text-[#999] uppercase group-hover:text-[#C13584]/80 transition-colors duration-500">
           Zobacz post
         </span>
@@ -89,7 +89,7 @@ function StaticPlaceholderPost({
       <div className="absolute inset-0 bg-[#f8f7f4]" />
       <div className={`absolute inset-0 bg-gradient-to-br ${post.gradient} opacity-10`} />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-        <Instagram className="w-10 h-10 text-[#C4A77D]/40 group-hover:text-[#C13584]/60 transition-colors duration-300" />
+        <Instagram className="w-10 h-10 text-[#E31F25]/40 group-hover:text-[#C13584]/60 transition-colors duration-300" />
         <span className="text-[10px] tracking-[0.2em] text-[#999] uppercase group-hover:text-[#C13584]/80 transition-colors duration-300">
           Zobacz post
         </span>
@@ -171,11 +171,11 @@ export function InstagramSection() {
             {/* Label - animated on Chrome, static on Safari */}
             {isSafari ? (
               <div className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8">
-                <Instagram className="w-4 h-4 text-[#C4A77D]" />
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+                <Instagram className="w-4 h-4 text-[#E31F25]" />
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                   Social Media
                 </span>
-                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </div>
             ) : (
               <motion.div
@@ -184,11 +184,11 @@ export function InstagramSection() {
                 transition={{ duration: 0.8 }}
                 className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8"
               >
-                <Instagram className="w-4 h-4 text-[#C4A77D]" />
-                <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+                <Instagram className="w-4 h-4 text-[#E31F25]" />
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                   Social Media
                 </span>
-                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </motion.div>
             )}
             
@@ -201,9 +201,9 @@ export function InstagramSection() {
                 <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] mb-2 sm:mb-3">
                   na{" "}
                   <span className="relative inline-block">
-                    <span className="italic text-[#C4A77D]">Instagramie</span>
-                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                      <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
+                    <span className="italic text-[#E31F25]">Instagramie</span>
+                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                      <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
                     </svg>
                   </span>
                 </h2>
@@ -229,10 +229,8 @@ export function InstagramSection() {
                   >
                     na{" "}
                     <span className="relative inline-block">
-                      <span className="italic text-[#C4A77D]">Instagramie</span>
-                      <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-[#C4A77D]/20" viewBox="0 0 100 12" preserveAspectRatio="none">
-                        <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                      </svg>
+                      <span className="italic text-[#E31F25]">Instagramie</span>
+                      <span className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/30 via-[#E31F25]/15 to-transparent rounded-full" />
                     </span>
                   </motion.h2>
                 </div>
@@ -241,7 +239,7 @@ export function InstagramSection() {
           </div>
           
           {/* Right - Description & CTA */}
-          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end">
+          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end lg:items-end lg:text-right">
             {isSafari ? (
               <p className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light">
                 Bądź na bieżąco z najnowszymi trendami w optyce. 
@@ -297,8 +295,8 @@ export function InstagramSection() {
         {/* Instagram Posts Grid */}
         {isSafari ? (
           <div className="relative">
-            <div className="hidden sm:block absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/20 pointer-events-none" />
-            <div className="hidden sm:block absolute -inset-6 lg:-inset-8 border border-[#C4A77D]/10 pointer-events-none" />
+            <div className="hidden sm:block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
+            <div className="hidden sm:block absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
             <div className="relative bg-white p-3 sm:p-4 lg:p-6">
               {SNAPWIDGET_FEED_ID ? (
                 <SnapWidgetEmbed feedId={SNAPWIDGET_FEED_ID} />
@@ -318,8 +316,8 @@ export function InstagramSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="hidden sm:block absolute -inset-3 lg:-inset-4 border border-[#C4A77D]/20 pointer-events-none" />
-            <div className="hidden sm:block absolute -inset-6 lg:-inset-8 border border-[#C4A77D]/10 pointer-events-none" />
+            <div className="hidden sm:block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
+            <div className="hidden sm:block absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
             <div className="relative bg-white p-3 sm:p-4 lg:p-6">
               {SNAPWIDGET_FEED_ID ? (
                 <SnapWidgetEmbed feedId={SNAPWIDGET_FEED_ID} />

@@ -46,7 +46,7 @@ export function FiltersSection({
               placeholder="Szukaj marki..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-12 h-12 bg-[#F8F7F4] border-[#e0ded8] rounded-none focus:ring-1 focus:ring-[#C4A77D] focus:border-[#C4A77D] font-light"
+              className="pl-12 h-12 bg-[#F8F7F4] border-[#e0ded8] rounded-none focus:ring-1 focus:ring-[#E31F25] focus:border-[#E31F25] font-light"
             />
           </div>
         </div>

@@ -28,26 +28,26 @@ export function CtaSection({ isInView }: CtaSectionProps) {
           
           {/* Decorative glow */}
           <motion.div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#C4A77D]/15 rounded-full blur-[100px]"
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#E31F25]/15 rounded-full blur-[100px]"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
           
-          {/* Top gold line */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C4A77D] to-transparent" />
+          {/* Top red line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
           
           <div className="relative z-10 max-w-2xl mx-auto">
             <div className="flex items-center justify-center gap-5 mb-8">
-              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-l from-[#C4A77D] to-transparent" />
-              <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-l from-[#E31F25] to-transparent" />
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                 Ekskluzywna oferta
               </span>
-              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </div>
             
             <h2 className="font-display text-3xl lg:text-5xl font-extralight text-white tracking-[-0.02em] mb-4">
               Szukasz konkretnego{" "}
-              <span className="italic text-[#C4A77D] font-medium">modelu?</span>
+              <span className="italic text-[#E31F25] font-medium">modelu?</span>
             </h2>
             <p className="text-lg text-white/50 mb-10 font-light">
               Skontaktuj się z nami — pomożemy znaleźć idealne okulary z naszej bogatej kolekcji.
@@ -55,7 +55,7 @@ export function CtaSection({ isInView }: CtaSectionProps) {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/kontakt">
-                <Button className="rounded-none bg-[#C4A77D] hover:bg-white text-[#1a1a1a] px-8 py-6 font-semibold text-[11px] tracking-[0.2em] uppercase transition-all duration-500">
+                <Button className="rounded-none bg-[#E31F25] hover:bg-white text-[#1a1a1a] px-8 py-6 font-semibold text-[11px] tracking-[0.2em] uppercase transition-all duration-500">
                   Skontaktuj się
                 </Button>
               </Link>
@@ -64,8 +64,8 @@ export function CtaSection({ isInView }: CtaSectionProps) {
                   Odwiedź salon
                 </span>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-px bg-white/30 group-hover:bg-[#C4A77D] group-hover:w-12 transition-all duration-500" />
-                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-[#C4A77D] group-hover:translate-x-1 transition-all duration-300" />
+                  <div className="w-8 h-px bg-white/30 group-hover:bg-[#E31F25] group-hover:w-12 transition-all duration-500" />
+                  <ArrowRight className="w-4 h-4 text-white/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
             </div>

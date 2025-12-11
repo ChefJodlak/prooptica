@@ -32,14 +32,14 @@ export const PROCESS_STEPS = [
 
 export const PRICING_PLANS = [
   {
-    name: "",
+    name: "Przy zakupie okularów",
     price: "GRATIS*",
     note: "*przy zakupie okularów",
     features: ["Pełna diagnostyka", "Badanie dna oka", "Pomiar ciśnienia", "Tonometria", "Konsultacja specjalisty"],
     popular: true
   },
   {
-    name: "",
+    name: "Badanie standardowe",
     price: "149 zł",
     note: "",
     features: ["Pełna diagnostyka", "Badanie dna oka", "Pomiar ciśnienia", "Tonometria", "Konsultacja specjalisty"],

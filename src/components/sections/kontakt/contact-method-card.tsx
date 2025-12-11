@@ -31,25 +31,25 @@ export function ContactMethodCard({
       className="group relative bg-[#F8F7F4] p-8 overflow-hidden transition-all duration-500 hover:-translate-y-2"
     >
       {/* Elegant border */}
-      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#C4A77D] transition-all duration-500" />
+      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#E31F25] transition-all duration-500" />
       
-      {/* Gold accent corner */}
+      {/* Red accent corner */}
       <div className="absolute top-0 left-0 w-12 h-12 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#C4A77D] rotate-45" />
+        <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#E31F25] rotate-45" />
       </div>
       
       {/* Icon */}
       <div className="inline-flex p-4 bg-[#1a1a1a] mb-6">
-        <Icon className="w-6 h-6 text-[#C4A77D]" />
+        <Icon className="w-6 h-6 text-[#E31F25]" />
       </div>
       
-      <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#C4A77D] transition-colors">
+      <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#E31F25] transition-colors">
         {title}
       </h3>
       <p className="text-[#737373] mb-4 text-sm font-light">{description}</p>
       <p className="text-base font-medium text-[#1a1a1a] flex items-center gap-2">
         {value}
-        <ArrowRight className="w-4 h-4 text-[#C4A77D] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+        <ArrowRight className="w-4 h-4 text-[#E31F25] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
       </p>
     </motion.a>
   )

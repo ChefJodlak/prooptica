@@ -12,7 +12,7 @@ export function HeroSection() {
       
       {/* Gradient orb */}
       <motion.div
-        className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#C4A77D]/10 rounded-full blur-[150px]"
+        className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-[#E31F25]/10 rounded-full blur-[150px]"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 10, repeat: Infinity }}
       />
@@ -26,10 +26,10 @@ export function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex items-center gap-5 mb-10"
           >
-            <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
               O Nas
             </span>
-            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#C4A77D] to-transparent" />
+            <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
           </motion.div>
           
           {/* Headline */}
@@ -51,10 +51,8 @@ export function HeroSection() {
               className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
             >
               <span className="relative inline-block">
-                <span className="italic text-[#C4A77D]">pasji i precyzji</span>
-                <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                  <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <span className="italic text-[#E31F25]">pasji i precyzji</span>
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
               </span>
             </motion.h1>
           </div>
@@ -81,7 +79,7 @@ export function HeroSection() {
                 {i > 0 && <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-px h-10 bg-white/10" />}
                 <div className="flex items-baseline justify-center gap-0.5">
                   <span className="font-display text-4xl lg:text-5xl font-light text-white tracking-tight tabular-nums">{stat.value}</span>
-                  {stat.suffix && <span className="font-display text-xl lg:text-2xl text-[#C4A77D] font-light">{stat.suffix}</span>}
+                  {stat.suffix && <span className="font-display text-xl lg:text-2xl text-[#E31F25] font-light">{stat.suffix}</span>}
                 </div>
                 <span className="block text-[9px] tracking-[0.2em] text-white/40 uppercase mt-2 font-light">{stat.label}</span>
               </div>

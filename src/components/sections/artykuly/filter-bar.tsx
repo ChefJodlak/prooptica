@@ -47,7 +47,7 @@ export function FilterBar({
               placeholder="Szukaj artykułu..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-11 h-11 bg-[#f5f5f5] border-0 focus:ring-2 focus:ring-[#C4A77D]/30 text-sm"
+              className="pl-11 h-11 bg-[#f5f5f5] border-0 focus:ring-2 focus:ring-[#E31F25]/30 text-sm"
             />
           </div>
         </div>

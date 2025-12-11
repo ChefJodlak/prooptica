@@ -12,7 +12,7 @@ interface BrandCardProps {
 function getTierStyles(category: string): string {
   switch (category) {
     case 'luxury':
-      return 'bg-[#C4A77D]/20 text-[#8a7355]'
+      return 'bg-[#E31F25]/20 text-[#8a7355]'
     case 'lenses':
     case 'sport':
       return 'bg-[#1a1a1a]/10 text-[#5a5a5a]'
@@ -28,11 +28,11 @@ export function BrandCard({ brand }: BrandCardProps) {
       className="group relative bg-white p-6 lg:p-8 transition-all duration-500 hover:-translate-y-2 cursor-pointer"
     >
       {/* Elegant border */}
-      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#C4A77D] transition-all duration-500" />
+      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#E31F25] transition-all duration-500" />
       
-      {/* Gold accent corner */}
+      {/* Red accent corner */}
       <div className="absolute top-0 left-0 w-10 h-10 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <div className="absolute -top-5 -left-5 w-10 h-10 bg-[#C4A77D] rotate-45" />
+        <div className="absolute -top-5 -left-5 w-10 h-10 bg-[#E31F25] rotate-45" />
       </div>
       
       {/* Tier Badge */}
@@ -50,7 +50,7 @@ export function BrandCard({ brand }: BrandCardProps) {
       </div>
       
       {/* Info */}
-      <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#C4A77D] transition-colors">
+      <h3 className="font-display text-xl font-medium text-[#1a1a1a] mb-2 group-hover:text-[#E31F25] transition-colors">
         {brand.name}
       </h3>
       <p className="text-sm text-[#737373] line-clamp-2 font-light">
@@ -59,7 +59,7 @@ export function BrandCard({ brand }: BrandCardProps) {
       
       {/* Hover Arrow */}
       <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-        <ArrowUpRight className="w-5 h-5 text-[#C4A77D]" />
+        <ArrowUpRight className="w-5 h-5 text-[#E31F25]" />
       </div>
     </motion.div>
   )

@@ -1,8 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { CheckCircle2, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 interface PricingCardProps {
@@ -23,7 +22,7 @@ export function PricingCard({ name, price, note, features, popular, index, isInV
       transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
       className={`relative p-8 ${
         popular 
-          ? 'bg-[#C4A77D] text-[#1a1a1a]' 
+          ? 'bg-[#E31F25] text-[#1a1a1a]' 
           : 'bg-white/5 text-white ring-1 ring-white/10'
       }`}
     >
@@ -42,22 +41,27 @@ export function PricingCard({ name, price, note, features, popular, index, isInV
       <ul className="space-y-3 mb-8">
         {features.map((feature) => (
           <li key={feature} className="flex items-center gap-3">
-            <CheckCircle2 className={`w-5 h-5 ${popular ? 'text-[#1a1a1a]/70' : 'text-[#C4A77D]'}`} />
+            <CheckCircle2 className={`w-5 h-5 ${popular ? 'text-[#1a1a1a]/70' : 'text-[#E31F25]'}`} />
             <span className={popular ? 'text-[#1a1a1a]/80' : 'text-white/70'}>{feature}</span>
           </li>
         ))}
       </ul>
       
-      <Link href="/umow-wizyte" className="block w-full">
-        <Button 
-          className={`w-full rounded-none py-6 font-semibold text-[11px] tracking-[0.2em] uppercase transition-all duration-500 ${
+      <Link href="/umow-wizyte" className="block w-full group/price">
+        <button 
+          className={`relative overflow-hidden w-full rounded-none py-5 font-semibold text-[11px] tracking-[0.2em] uppercase transition-all duration-500 hover:scale-[1.02] ${
             popular 
-              ? 'bg-[#1a1a1a] text-[#C4A77D] hover:bg-white hover:text-[#1a1a1a]' 
-              : 'bg-[#C4A77D] hover:bg-white text-[#1a1a1a]'
+              ? 'bg-[#1a1a1a] text-white hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.4)]' 
+              : 'bg-[#E31F25] text-white hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.4)]'
           }`}
         >
-          Umów wizytę
-        </Button>
+          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover/price:translate-x-full transition-transform duration-700 ease-out" />
+          <span className={`absolute inset-0 border ${popular ? 'border-white/10' : 'border-white/20'}`} />
+          <span className="relative flex items-center justify-center gap-2">
+            Umów wizytę
+            <ArrowRight className="w-4 h-4 group-hover/price:translate-x-1 transition-transform duration-300" />
+          </span>
+        </button>
       </Link>
     </motion.div>
   )

@@ -12,12 +12,12 @@ export function SectionLabel({ text, centered = false, animate = false }: Sectio
   const content = (
     <div className={`flex items-center gap-5 mb-8 ${centered ? 'justify-center' : ''}`}>
       {centered && (
-        <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-[#C4A77D] to-transparent" />
+        <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-[#E31F25] to-transparent" />
       )}
-      <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+      <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
         {text}
       </span>
-      <div className={`h-px flex-1 max-w-[${centered ? '60px' : '80px'}] bg-gradient-to-r from-[#C4A77D] to-transparent`} />
+      <div className={`h-px flex-1 max-w-[${centered ? '60px' : '80px'}] bg-gradient-to-r from-[#E31F25] to-transparent`} />
     </div>
   )
 

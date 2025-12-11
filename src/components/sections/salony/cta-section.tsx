@@ -20,7 +20,7 @@ export function CtaSection({ isInView }: CtaSectionProps) {
       
       {/* Gradient orb */}
       <motion.div
-        className="absolute -top-20 left-1/4 w-64 h-64 bg-[#C4A77D]/20 rounded-full blur-[100px]"
+        className="absolute -top-20 left-1/4 w-64 h-64 bg-[#E31F25]/20 rounded-full blur-[100px]"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 5, repeat: Infinity }}
       />
@@ -35,19 +35,17 @@ export function CtaSection({ isInView }: CtaSectionProps) {
           <div className="text-center lg:text-left">
             {/* Eyebrow */}
             <div className="flex items-center justify-center lg:justify-start gap-5 mb-6">
-              <span className="text-[#C4A77D] text-[10px] font-medium tracking-[0.5em] uppercase">
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
                 Bezpłatna konsultacja
               </span>
-              <div className="h-px w-12 bg-gradient-to-r from-[#C4A77D] to-transparent" />
+              <div className="h-px w-12 bg-gradient-to-r from-[#E31F25] to-transparent" />
             </div>
             
             <h3 className="font-display text-[2rem] lg:text-[3rem] font-extralight text-white leading-[1.1] tracking-[-0.02em] mb-4">
               Nie wiesz, który salon{" "}
               <span className="relative inline-block">
-                <span className="italic text-[#C4A77D] font-medium">wybrać?</span>
-                <svg className="absolute -bottom-1 left-0 w-full h-2 text-[#C4A77D]/30" viewBox="0 0 100 12" preserveAspectRatio="none">
-                  <path d="M0,6 Q25,0 50,6 T100,6" fill="none" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <span className="italic text-[#E31F25] font-medium">wybrać?</span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
               </span>
             </h3>
             <p className="text-white/50 max-w-md font-light leading-relaxed">
@@ -58,13 +56,13 @@ export function CtaSection({ isInView }: CtaSectionProps) {
           <div className="flex flex-col sm:flex-row items-center gap-5">
             <a 
               href="tel:+4822XXXXXXX"
-              className="flex items-center gap-3 px-6 py-4 border border-white/20 text-white hover:border-[#C4A77D] hover:text-[#C4A77D] transition-all duration-300"
+              className="flex items-center gap-3 px-6 py-4 border border-white/20 text-white hover:border-[#E31F25] hover:text-[#E31F25] transition-all duration-300"
             >
               <Phone className="w-5 h-5" />
               <span className="font-medium tracking-wide">+48 22 XXX XX XX</span>
             </a>
             <Link href="/kontakt">
-              <button className="bg-[#C4A77D] text-[#1a1a1a] px-8 py-4 text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-white transition-all duration-500 flex items-center gap-3">
+              <button className="bg-[#E31F25] text-[#1a1a1a] px-8 py-4 text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-white transition-all duration-500 flex items-center gap-3">
                 Kontakt
                 <ArrowRight className="w-4 h-4" />
               </button>

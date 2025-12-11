@@ -81,7 +81,7 @@ export function CalendarView({
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20">
-        <Loader2 className="w-10 h-10 text-[#C4A77D] animate-spin mb-4" />
+        <Loader2 className="w-10 h-10 text-[#E31F25] animate-spin mb-4" />
         <p className="text-[#737373] font-light">Ładowanie kalendarza...</p>
       </div>
     )
@@ -126,7 +126,7 @@ export function CalendarView({
               "flex items-center gap-2 text-sm transition-all duration-300",
               weekNavigating
                 ? "text-[#a3a3a3] cursor-wait"
-                : "text-[#1a1a1a] hover:text-[#C4A77D]"
+                : "text-[#1a1a1a] hover:text-[#E31F25]"
             )}
           >
             {weekNavigating ? (
@@ -140,7 +140,7 @@ export function CalendarView({
           <div className="w-[140px]" /> // Placeholder to maintain layout
         )}
         
-        <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#C4A77D]">
+        <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#E31F25]">
           Wybierz datę
         </span>
         
@@ -150,7 +150,7 @@ export function CalendarView({
           className={cn(
             "flex items-center gap-2 text-sm transition-all duration-300",
             calendarData.nextWeekStart && !weekNavigating
-              ? "text-[#1a1a1a] hover:text-[#C4A77D]" 
+              ? "text-[#1a1a1a] hover:text-[#E31F25]" 
               : "text-[#a3a3a3] cursor-not-allowed"
           )}
         >
@@ -183,15 +183,15 @@ export function CalendarView({
                 "relative py-4 px-2 text-center transition-all duration-300",
                 "ring-1 ring-inset",
                 isSelected
-                  ? "bg-[#1a1a1a] ring-[#C4A77D] shadow-lg"
+                  ? "bg-[#1a1a1a] ring-[#E31F25] shadow-lg"
                   : hasAvailableSlots
-                    ? "bg-white ring-[#e0ded8] hover:ring-[#C4A77D] hover:shadow-md hover:bg-[#FAFAF8] cursor-pointer"
+                    ? "bg-white ring-[#e0ded8] hover:ring-[#E31F25] hover:shadow-md hover:bg-[#FAFAF8] cursor-pointer"
                     : "bg-[#F5F5F5] ring-[#e0ded8] opacity-50 cursor-not-allowed"
               )}
             >
               <span className={cn(
                 "block text-[10px] font-medium tracking-wider uppercase mb-1",
-                isSelected ? "text-[#C4A77D]" : "text-[#737373]"
+                isSelected ? "text-[#E31F25]" : "text-[#737373]"
               )}>
                 {shortDayName}
               </span>
@@ -204,7 +204,7 @@ export function CalendarView({
               {hasAvailableSlots && (
                 <span className={cn(
                   "block text-[10px] mt-1",
-                  isSelected ? "text-white/60" : "text-[#C4A77D]"
+                  isSelected ? "text-white/60" : "text-[#E31F25]"
                 )}>
                   {day.slots.filter(s => s.available).length} term.
                 </span>
@@ -227,7 +227,7 @@ export function CalendarView({
           >
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#e0ded8]">
               <div className="p-3 bg-[#1a1a1a]">
-                <Clock className="w-5 h-5 text-[#C4A77D]" />
+                <Clock className="w-5 h-5 text-[#E31F25]" />
               </div>
               <div>
                 <h4 className="font-display text-lg text-[#1a1a1a]">
@@ -254,7 +254,7 @@ export function CalendarView({
                     "py-3 px-4 text-sm font-medium transition-all duration-300",
                     "ring-1 ring-inset",
                     slot.available
-                      ? "bg-white ring-[#C4A77D]/30 text-[#1a1a1a] hover:bg-[#C4A77D] hover:text-[#1a1a1a] hover:ring-[#C4A77D] hover:shadow-md cursor-pointer"
+                      ? "bg-white ring-[#E31F25]/30 text-[#1a1a1a] hover:bg-[#E31F25] hover:text-[#1a1a1a] hover:ring-[#E31F25] hover:shadow-md cursor-pointer"
                       : "bg-[#F5F5F5] ring-[#e0ded8] text-[#a3a3a3] line-through cursor-not-allowed"
                   )}
                 >

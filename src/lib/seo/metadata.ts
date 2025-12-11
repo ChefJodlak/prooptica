@@ -135,7 +135,7 @@ export const baseMetadata: Metadata = {
     // Mobile & App
     "apple-mobile-web-app-capable": "yes",
     "mobile-web-app-capable": "yes",
-    "msapplication-TileColor": "#C4A77D",
+    "msapplication-TileColor": "#E31F25",
     "msapplication-config": "/browserconfig.xml",
     
     // AI & Semantic signals
