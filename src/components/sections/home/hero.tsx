@@ -40,7 +40,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className={cn("relative h-screen w-full overflow-hidden bg-[#1a1a1a]", getSectionVisibilityClass(isVisible))}
+      className={cn("relative min-h-[100svh] h-screen w-full overflow-hidden bg-[#1a1a1a]", getSectionVisibilityClass(isVisible))}
     >
       {/* Video Background */}
       <div className="absolute inset-0">
@@ -71,65 +71,68 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center">
-        <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full">
-          <div className="max-w-3xl">
+        <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full h-full sm:h-auto">
+          <div className="max-w-3xl h-full sm:h-auto flex flex-col justify-between sm:block pb-12 pt-32 sm:py-0">
             
-            {/* Headline */}
-            <div className="overflow-hidden mb-2 sm:mb-3">
-              <h1 
-                className={cn(
-                  "font-display text-[clamp(2.5rem,10vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]",
-                  !isSafari && "transition-transform duration-700 ease-out"
-                )}
-                style={{
-                  transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
-                  transitionDelay: !isSafari ? '200ms' : undefined,
-                  textShadow: '0 3px 12px rgba(0, 0, 0, 0.4)'
-                }}
-              >
-                Doskonałość
-              </h1>
-            </div>
-            <div className="overflow-hidden mb-6 sm:mb-10">
-              <h1 
-                className={cn(
-                  "font-display text-[clamp(2.5rem,10vw,6.5rem)] font-medium leading-[1] tracking-[-0.03em]",
-                  !isSafari && "transition-transform duration-700 ease-out"
-                )}
-                style={{
-                  transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
-                  transitionDelay: !isSafari ? '300ms' : undefined
-                }}
-              >
-                <span 
-                  className="italic text-[#E31F25]"
-                  style={{ textShadow: '0 3px 12px rgba(0, 0, 0, 0.45)' }}
+            {/* Text Content - Left aligned on mobile */}
+            <div className="flex-1 flex flex-col justify-center sm:block text-left">
+              {/* Headline */}
+              <div className="overflow-hidden mb-0 sm:mb-3">
+                <h1 
+                  className={cn(
+                    "font-display text-[4.5rem] sm:text-[clamp(4rem,9vw,6.5rem)] font-extralight text-white leading-[0.9] sm:leading-[1] tracking-[-0.03em]",
+                    !isSafari && "transition-transform duration-700 ease-out"
+                  )}
+                  style={{
+                    transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
+                    transitionDelay: !isSafari ? '200ms' : undefined,
+                    textShadow: '0 3px 12px rgba(0, 0, 0, 0.4)'
+                  }}
                 >
-                  widzenia
-                </span>
-              </h1>
+                  Doskonałość
+                </h1>
+              </div>
+              <div className="overflow-hidden mb-8 sm:mb-10">
+                <h1 
+                  className={cn(
+                    "font-display text-[4.5rem] sm:text-[clamp(4rem,9vw,6.5rem)] font-medium leading-[0.9] sm:leading-[1] tracking-[-0.03em]",
+                    !isSafari && "transition-transform duration-700 ease-out"
+                  )}
+                  style={{
+                    transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
+                    transitionDelay: !isSafari ? '300ms' : undefined
+                  }}
+                >
+                  <span 
+                    className="italic text-[#E31F25]"
+                    style={{ textShadow: '0 3px 12px rgba(0, 0, 0, 0.45)' }}
+                  >
+                    widzenia
+                  </span>
+                </h1>
+              </div>
+
+              {/* Description */}
+              <p 
+                className={cn(
+                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light sm:mx-0",
+                  !isSafari && "transition-all duration-500 ease-out"
+                )}
+                style={isSafari ? {} : {
+                  opacity: showContent ? 1 : 0,
+                  transform: showContent ? 'translateY(0)' : 'translateY(1.25rem)',
+                  transitionDelay: '500ms'
+                }}
+              >
+                Ponad 50 światowych marek. Najnowocześniejsza diagnostyka. 
+                Cztery ekskluzywne salony w Polsce.
+              </p>
             </div>
 
-            {/* Description */}
-            <p 
-              className={cn(
-                "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.7] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light",
-                !isSafari && "transition-all duration-500 ease-out"
-              )}
-              style={isSafari ? {} : {
-                opacity: showContent ? 1 : 0,
-                transform: showContent ? 'translateY(0)' : 'translateY(1.25rem)',
-                transitionDelay: '500ms'
-              }}
-            >
-              Ponad 50 światowych marek. Najnowocześniejsza diagnostyka. 
-              Cztery ekskluzywne salony w Polsce.
-            </p>
-
-            {/* CTA */}
+            {/* CTA - Bottom on mobile */}
             <div 
               className={cn(
-                "flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6",
+                "flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-6 w-full sm:w-auto",
                 !isSafari && "transition-all duration-500 ease-out"
               )}
               style={isSafari ? {} : {
@@ -152,7 +155,7 @@ export function Hero() {
                 </button>
               </Link>
               
-              <Link href="/salony" className="group inline-flex items-center gap-4">
+              <Link href="/salony" className="group inline-flex items-center justify-center sm:justify-start gap-4 py-2 mb-6 sm:mb-0 sm:py-0">
                 <span className="text-white/70 text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-white transition-colors duration-300">
                   Nasze salony
                 </span>

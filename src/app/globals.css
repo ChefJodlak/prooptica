@@ -400,6 +400,25 @@ html {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE FULL-SCREEN SECTIONS
+   Using svh (small viewport height) for mobile-safe full-screen sections
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Mobile full-screen section - accounts for browser chrome */
+.mobile-full-screen {
+  min-height: 100svh;
+}
+
+@media (max-width: 640px) {
+  .mobile-full-screen {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    CONTENT VISIBILITY OPTIMIZATION
    Tells browser to skip rendering off-screen sections - massive perf boost
    ═══════════════════════════════════════════════════════════════════════════ */

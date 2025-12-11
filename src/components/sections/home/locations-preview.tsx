@@ -67,7 +67,7 @@ function LocationCard({
       </div>
       
       {/* Image */}
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[16/9] sm:aspect-[16/10] overflow-hidden">
         <Image
           src={location.image}
           alt={`Salon ${location.city}`}
@@ -89,9 +89,9 @@ function LocationCard({
         )} />
         
         {/* City name on image */}
-        <div className="absolute bottom-0 left-0 right-0 p-5">
+        <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-5">
           <h3 className={cn(
-            "font-display text-xl font-medium tracking-tight transition-colors duration-300",
+            "font-display text-sm sm:text-xl font-medium tracking-tight transition-colors duration-300",
             isSelected ? "text-white" : "text-white/80 group-hover:text-white"
           )}>
             {location.city}
@@ -101,15 +101,15 @@ function LocationCard({
       
       {/* Content */}
       <div className={cn(
-        "p-4 sm:p-5 transition-colors duration-500",
+        "p-2 sm:p-5 transition-colors duration-500",
         isSelected ? "bg-white" : "bg-[#f5f5f5] group-hover:bg-white"
       )}>
         <p className={cn(
-          "text-xs sm:text-sm mb-1.5 sm:mb-2 font-light truncate transition-colors duration-300",
+          "text-[10px] sm:text-sm mb-0.5 sm:mb-2 font-light truncate transition-colors duration-300",
           isSelected ? "text-[#1a1a1a]" : "text-[#888] group-hover:text-[#5a5a5a]"
         )}>{location.address}</p>
         <span className={cn(
-          "text-[10px] sm:text-[11px] tracking-wide transition-colors duration-300 block truncate",
+          "text-[8px] sm:text-[11px] tracking-wide transition-colors duration-300 block truncate",
           isSelected ? "text-[#E31F25]" : "text-[#aaa] group-hover:text-[#999]"
         )}>{location.postal} {location.city}</span>
       </div>
@@ -365,7 +365,7 @@ export function LocationsPreview() {
   }
 
   return (
-    <section ref={containerRef} className={cn("relative min-h-[calc(100vh-88px)] bg-white overflow-hidden flex flex-col justify-center py-10 sm:py-12 content-auto-heavy", getSectionVisibilityClass(isVisible))}>
+    <section ref={containerRef} className={cn("relative min-h-[100svh] bg-white overflow-hidden flex flex-col justify-center py-8 sm:py-12 content-auto-heavy", getSectionVisibilityClass(isVisible))}>
       
       {/* Subtle texture overlay like Intro section */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -387,95 +387,146 @@ export function LocationsPreview() {
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
         
         {/* Header */}
-        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 mb-8 sm:mb-12 lg:mb-16">
+        <div className="mb-5 sm:mb-12 lg:mb-16 text-center sm:text-left">
+          {/* Label */}
+          <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8">
+            <MapPin className="w-4 h-4 text-[#E31F25]" />
+            <span className="text-[#E31F25] text-[10px] sm:text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
+              Nasze Salony
+            </span>
+            <div className="h-px flex-1 max-w-[50px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
+          </div>
           
-          {/* Left - Title */}
-          <div className="lg:col-span-6">
-            {/* Label */}
-            <div className="flex items-center gap-3 sm:gap-5 mb-5 sm:mb-8">
-              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
-                Nasze Salony
-              </span>
-              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
-            </div>
+          {/* Headline */}
+          <h2 className="font-display text-[1.75rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em]">
+            Znajdź nas{" "}
+            <span className="font-medium">
+              blisko{" "}
+              <span className="italic text-[#E31F25]">siebie</span>
+            </span>
+          </h2>
+        </div>
+
+        {/* === MOBILE LAYOUT === */}
+        <div className="sm:hidden space-y-6">
+          {/* Map on mobile - Enhanced with frames */}
+          <div className="relative h-[50vh] w-full">
+             {/* Artistic frame */}
+            <div className="absolute -inset-2 border border-[#E31F25]/20 pointer-events-none z-20" />
+            <div className="absolute -inset-4 border border-[#E31F25]/10 pointer-events-none z-20" />
             
-            {/* Headline */}
-            <div className="mb-1 sm:mb-2">
-              <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
-                Znajdź nas
-              </h2>
-            </div>
-            <div>
-              <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
-                blisko{" "}
-                <span className="relative inline-block">
-                  <span className="italic text-[#E31F25]">siebie</span>
-                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
-                    <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </h2>
+            <div className="relative h-full w-full overflow-hidden shadow-2xl">
+              <EmbeddedMap selectedLocation={selectedLocation} />
             </div>
           </div>
           
-          {/* Right - Description & Stats */}
-          <div className="lg:col-span-6 lg:flex lg:flex-col lg:justify-end lg:items-end lg:text-right">
-            <p className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light">
-              Cztery eleganckie salony w kluczowych lokalizacjach. 
-              Wszędzie ta sama jakość obsługi i pasja do doskonałości.
-            </p>
+          {/* Selected location info bar - Enhanced */}
+          <div className="relative bg-[#1a1a1a] overflow-hidden p-5">
+             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
             
-            {/* Quick stats */}
-            <div className="flex items-center gap-5 sm:gap-8">
-              {[
-                { value: "4", label: "Lokalizacje" },
-                { value: "3", label: "Miasta" },
-                { value: "20+", label: "Lat tradycji" },
-              ].map((stat, i) => (
-                <div key={stat.label} className="text-center relative">
-                  {i > 0 && <div className="absolute -left-2.5 sm:-left-4 top-1/2 -translate-y-1/2 w-px h-5 sm:h-6 bg-[#e0ded8]" />}
-                  <span className="font-display text-xl sm:text-2xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
-                  <span className="block text-[8px] sm:text-[9px] tracking-[0.12em] sm:tracking-[0.15em] text-[#999] uppercase mt-1">{stat.label}</span>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-1 h-10 bg-[#E31F25]" />
+                  <div>
+                    <h3 className="font-display text-xl text-white font-medium">
+                      {selectedLocation.city}
+                    </h3>
+                    <p className="text-white/50 text-xs">
+                      {selectedLocation.address}
+                    </p>
+                  </div>
                 </div>
-              ))}
+                
+                <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`}>
+                  <button className="bg-[#E31F25] text-white px-5 py-2.5 text-[10px] font-semibold tracking-[0.1em] uppercase flex items-center gap-2 shadow-[0_0_15px_-5px_#E31F25]">
+                    <Calendar className="w-3.5 h-3.5" />
+                    Umów
+                  </button>
+                </Link>
+              </div>
+              
+              {/* Contact info row */}
+              <div className="flex items-center justify-between border-t border-white/10 pt-3">
+                 <a href={`tel:${selectedLocation.phone}`} className="flex items-center gap-2 text-white/60 text-xs">
+                    <Phone className="w-3 h-3 text-[#E31F25]" />
+                    {selectedLocation.phone}
+                 </a>
+                 <div className="flex items-center gap-2 text-white/60 text-xs">
+                    <Clock className="w-3 h-3 text-[#E31F25]" />
+                    Pn-Pt 10-18
+                 </div>
+              </div>
             </div>
+          </div>
+          
+          {/* Location selector - horizontal scroll */}
+          <div className="flex gap-3 overflow-x-auto pb-4 -mx-5 px-5 scrollbar-hide snap-x">
+            {LOCATIONS.map((location) => (
+              <button
+                key={location.id}
+                onClick={() => handleLocationSelect(location.id)}
+                className={cn(
+                  "flex-shrink-0 px-5 py-3 border transition-all duration-300 text-left min-w-[160px] snap-center",
+                  selectedId === location.id 
+                    ? "bg-[#E31F25] border-[#E31F25] text-white shadow-lg scale-105" 
+                    : "bg-white border-[#e0ded8] text-[#1a1a1a]"
+                )}
+              >
+                <span className="block font-display text-sm font-medium">{location.city}</span>
+                <span className={cn(
+                  "block text-[9px] mt-0.5",
+                  selectedId === location.id ? "text-white/70" : "text-[#999]"
+                )}>
+                  {location.address.split(' ').slice(0, 2).join(' ')}
+                </span>
+              </button>
+            ))}
+          </div>
+          
+          {/* CTA Link - mobile */}
+          <div className="pt-4 border-t border-[#e0ded8] flex justify-center">
+            <Link href="/salony" className="group inline-flex items-center gap-4">
+              <span className="text-[#1a1a1a] text-[11px] font-medium tracking-[0.2em] uppercase">
+                Wszystkie lokalizacje
+              </span>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 transition-all duration-200" />
+                <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
+              </div>
+            </Link>
           </div>
         </div>
 
-        {/* Main Content - Map & Cards */}
-        <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
+        {/* === DESKTOP LAYOUT === */}
+        <div className="hidden sm:grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Map - Left (larger) */}
           <div className="lg:col-span-7 order-2 lg:order-1 transform-gpu">
             <div className="relative bg-white h-full">
               
-              {/* Artistic frame like Intro - Hidden on mobile for cleaner look */}
-              <div className="hidden sm:block absolute -inset-2 lg:-inset-3 border border-[#E31F25]/20 pointer-events-none" />
-              <div className="hidden sm:block absolute -inset-4 lg:-inset-6 border border-[#E31F25]/10 pointer-events-none" />
+              {/* Artistic frame */}
+              <div className="absolute -inset-2 lg:-inset-3 border border-[#E31F25]/20 pointer-events-none" />
+              <div className="absolute -inset-4 lg:-inset-6 border border-[#E31F25]/10 pointer-events-none" />
               
               {/* Map Container */}
-              <div className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
+              <div className="relative min-h-[400px] lg:min-h-[500px]">
                 <div className="absolute inset-0 transform-gpu">
                   <EmbeddedMap selectedLocation={selectedLocation} />
                 </div>
               </div>
               
-              {/* Location Details Bar - Compact Luxurious Design */}
+              {/* Location Details Bar */}
               <div className="relative bg-[#1a1a1a] overflow-hidden">
-                {/* Subtle red accent line at top */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
                 
-                {/* Content */}
-                <div className="relative px-4 py-4 sm:px-5 sm:py-4 lg:px-6 lg:py-5">
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="relative px-5 py-4 lg:px-6 lg:py-5">
+                  <div className="flex items-center justify-between gap-4">
                     
                     {/* Location Info */}
                     <div className="flex items-center gap-3 min-w-0 overflow-hidden">
-                      {/* Red accent marker */}
                       <div className="w-1 h-10 bg-[#E31F25] flex-shrink-0" />
-                      
-                      {/* Text info */}
-                      <div className="min-w-0 overflow-hidden transform-gpu">
+                      <div className="min-w-0 overflow-hidden">
                         <h3 className="font-display text-lg text-white font-medium tracking-tight truncate">
                           {selectedLocation.city}
                         </h3>
@@ -485,25 +536,9 @@ export function LocationsPreview() {
                       </div>
                     </div>
                     
-                    {/* Contact info - visible on mobile */}
-                    <div className="flex sm:hidden items-center gap-4 pl-4 border-l border-white/10">
-                      <a 
-                        href={`tel:${selectedLocation.phone}`}
-                        className="flex items-center gap-2 text-white/60 hover:text-[#E31F25] transition-colors text-xs"
-                      >
-                        <Phone className="w-3.5 h-3.5 text-[#E31F25]" />
-                        <span>{selectedLocation.phone}</span>
-                      </a>
-                      <div className="flex items-center gap-2 text-white/60 text-xs">
-                        <Clock className="w-3.5 h-3.5 text-[#E31F25]" />
-                        <span>Pn-Pt 10-18</span>
-                      </div>
-                    </div>
-                    
-                    {/* Contact & CTA - Desktop */}
-                    <div className="flex items-center gap-3 lg:gap-5 flex-shrink-0">
-                      {/* Contact icons - hidden on mobile (shown above) */}
-                      <div className="hidden sm:flex items-center gap-4">
+                    {/* Contact & CTA */}
+                    <div className="flex items-center gap-5 flex-shrink-0">
+                      <div className="hidden md:flex items-center gap-4">
                         <a 
                           href={`tel:${selectedLocation.phone}`}
                           className="flex items-center gap-2 text-white/60 hover:text-[#E31F25] transition-colors text-xs whitespace-nowrap"
@@ -511,18 +546,16 @@ export function LocationsPreview() {
                           <Phone className="w-3.5 h-3.5 text-[#E31F25]" />
                           <span className="hidden lg:inline">{selectedLocation.phone}</span>
                         </a>
-                        <div className="hidden md:flex items-center gap-2 text-white/60 text-xs whitespace-nowrap">
+                        <div className="flex items-center gap-2 text-white/60 text-xs whitespace-nowrap">
                           <Clock className="w-3.5 h-3.5 text-[#E31F25]" />
                           <span>Pn-Pt 10-18</span>
                         </div>
                       </div>
                       
-                      {/* Divider */}
                       <div className="hidden lg:block w-px h-8 bg-white/10" />
                       
-                      {/* CTA Button */}
-                      <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="w-full sm:w-auto group/loc">
-                        <button className="relative overflow-hidden w-full sm:w-auto bg-[#E31F25] hover:bg-[#c91a1f] text-white rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] cursor-pointer transition-all duration-300 px-4 lg:px-6 h-9 hover:shadow-[0_8px_20px_-6px_rgba(227,31,37,0.4)] hover:scale-[1.02] flex items-center justify-center">
+                      <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="group/loc">
+                        <button className="relative overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] cursor-pointer transition-all duration-300 px-4 lg:px-6 h-9 hover:shadow-[0_8px_20px_-6px_rgba(227,31,37,0.4)] hover:scale-[1.02] flex items-center justify-center">
                           <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/loc:translate-x-full transition-transform duration-500 ease-out" />
                           <span className="absolute inset-0 border border-white/20" />
                           <Calendar className="relative w-3.5 h-3.5 mr-2" />
@@ -538,7 +571,13 @@ export function LocationsPreview() {
 
           {/* Location Cards - Right */}
           <div className="lg:col-span-5 order-1 lg:order-2">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
+            {/* Description for tablet */}
+            <p className="lg:hidden text-[#5a5a5a] text-sm leading-[1.7] mb-6 font-light">
+              Cztery eleganckie salony w kluczowych lokalizacjach. 
+              Wszędzie ta sama jakość obsługi i pasja do doskonałości.
+            </p>
+            
+            <div className="grid grid-cols-2 gap-4 lg:gap-5">
               {LOCATIONS.map((location) => (
                 <LocationCard
                   key={location.id}
@@ -550,16 +589,14 @@ export function LocationsPreview() {
             </div>
             
             {/* CTA Link */}
-            <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-[#e0ded8]">
-              <Link href="/salony" className="group inline-flex items-center gap-4 sm:gap-6">
-                <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.25em] uppercase">
+            <div className="mt-8 pt-8 border-t border-[#e0ded8]">
+              <Link href="/salony" className="group inline-flex items-center gap-6">
+                <span className="text-[#1a1a1a] text-[11px] font-medium tracking-[0.25em] uppercase">
                   Wszystkie lokalizacje
                 </span>
-                <div className="relative overflow-hidden">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 sm:group-hover:w-16 transition-all duration-200" />
-                    <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
-                  </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-16 transition-all duration-200" />
+                  <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
                 </div>
               </Link>
             </div>

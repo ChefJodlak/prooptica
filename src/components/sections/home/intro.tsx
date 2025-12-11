@@ -53,24 +53,24 @@ export function Intro() {
   const isInView = useInView(sectionRef, { once: true, margin: "-15%" })
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-20 lg:py-32 bg-[#F8F7F4]">
+    <section ref={sectionRef} className="relative min-h-[100svh] py-10 sm:py-20 lg:py-32 bg-[#F8F7F4] flex flex-col justify-center overflow-x-hidden">
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
       }} />
       
-      <div className="relative z-10 max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full h-full sm:h-auto flex flex-col justify-center">
         <motion.div 
-          className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center"
+          className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center h-auto content-center"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
           
-          {/* Image - Takes 5 columns */}
+          {/* Image - Full width on mobile */}
           <motion.div 
             variants={scaleInVariants}
-            className="lg:col-span-5 relative h-[55vh] sm:h-[50vh] lg:h-[70vh]"
+            className="block lg:col-span-5 relative h-[35vh] sm:h-[50vh] lg:h-[70vh] mb-4 lg:mb-0 w-full"
           >
             {/* Artistic frame */}
             <motion.div 
@@ -115,24 +115,24 @@ export function Intro() {
             </div>
           </motion.div>
 
-          {/* Content - Takes 7 columns */}
-          <div className="lg:col-span-7 lg:pl-8">
+          {/* Content - Full width on mobile, 7 columns on desktop */}
+          <div className="lg:col-span-7 lg:pl-8 flex flex-col justify-between h-auto pb-0">
             
             {/* Header */}
-            <motion.div variants={fadeUpVariants} className="mb-8 sm:mb-12 lg:mb-16">
-              <div className="flex items-center gap-3 sm:gap-5 mb-6 sm:mb-8">
-                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
+            <motion.div variants={fadeUpVariants} className="mb-6 sm:mb-12 lg:mb-16 text-left shrink-0">
+              <div className="flex items-center justify-start gap-3 sm:gap-5 mb-4 sm:mb-8">
+                <span className="text-[#E31F25] text-[10px] sm:text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
                 <motion.div 
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+                  className="h-px flex-1 max-w-[50px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
                 />
               </div>
-              <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-extralight text-[#1a1a1a] leading-[1] tracking-[-0.03em]">
+              <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em]">
                 Rodzinna firma
               </h2>
-              <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-medium text-[#1a1a1a] leading-[1] tracking-[-0.03em] mt-1 sm:mt-2">
+              <h2 className="font-display text-[2rem] sm:text-[2.5rem] lg:text-[4rem] xl:text-[4.5rem] font-medium text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] mt-1 sm:mt-2">
                 z pasją do{" "}
                 <span className="relative inline-block">
                   <span className="italic text-[#E31F25]">optyki</span>
@@ -143,19 +143,50 @@ export function Intro() {
               </h2>
             </motion.div>
 
-            {/* Description */}
+            {/* Mobile description - Full Text restored */}
             <motion.p 
               variants={fadeUpVariants}
-              className="text-[#5a5a5a] text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] mb-6 lg:mb-8 max-w-lg font-light"
+              className="sm:hidden text-[#5a5a5a] text-sm leading-[1.7] mb-6 text-left font-light shrink-0"
+            >
+              Od 2004 roku łączymy precyzję z włoskim designem. Każda para okularów to kompozycja stylu i funkcjonalności.
+            </motion.p>
+
+            {/* Desktop description */}
+            <motion.p 
+              variants={fadeUpVariants}
+              className="hidden sm:block text-[#5a5a5a] text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] mb-6 lg:mb-8 max-w-lg font-light"
             >
               Od 2004 roku łączymy szwajcarską precyzję z włoskim designem. 
               Każda para okularów to starannie dobrana kompozycja stylu i funkcjonalności.
             </motion.p>
             
-            {/* Luxury Pillars - Horizontal elegant layout */}
+            {/* Mobile Stats - Visible on mobile */}
+            <motion.div
+              variants={fadeUpVariants}
+              className="sm:hidden grid grid-cols-3 gap-4 py-6 mb-6 border-y border-[#e0ded8]"
+            >
+              {[
+                { value: "20", suffix: "+", label: "Lat doświadczenia" }, 
+                { value: "4", suffix: "", label: "Salony w Polsce" }, 
+                { value: "50", suffix: "+", label: "Marek premium" }
+              ].map((stat) => (
+                <div 
+                  key={stat.label} 
+                  className="text-center"
+                >
+                  <div className="flex items-baseline justify-center gap-0.5">
+                    <span className="font-display text-3xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
+                    {stat.suffix && <span className="font-display text-lg text-[#E31F25] font-light">{stat.suffix}</span>}
+                  </div>
+                  <span className="block text-[8px] tracking-[0.1em] text-[#737373] uppercase mt-1.5 font-light leading-tight">{stat.label}</span>
+                </div>
+              ))}
+            </motion.div>
+            
+            {/* Luxury Pillars - Horizontal Scroll for Mobile, Grid for Desktop */}
             <motion.div 
               variants={containerVariants}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-6 lg:gap-x-10 gap-y-6 sm:gap-y-8 mb-8 sm:mb-12 lg:mb-16"
+              className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-6 lg:gap-x-10 sm:gap-y-8 mb-6 sm:mb-12 lg:mb-16 shrink-0 overflow-x-auto pb-4 sm:pb-0 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-hide snap-x snap-mandatory pr-5 sm:pr-0"
             >
               {PILLARS.map((pillar, i) => (
                 <motion.div
@@ -172,18 +203,19 @@ export function Intro() {
                       }
                     }
                   }}
-                  className="group"
+                  className="group min-w-[220px] sm:min-w-0 snap-center bg-white sm:bg-transparent p-5 sm:p-0 border sm:border-0 border-[#E31F25]/10 shadow-sm sm:shadow-none first:pl-5 last:pr-5"
                 >
                   {/* Elegant number */}
-                  <div className="mb-3 sm:mb-4 relative">
-                    <span className="font-display text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-thin text-[#E31F25]/25 leading-none tracking-tighter">
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4 sm:block relative">
+                    <span className="font-display text-4xl sm:text-[3.5rem] lg:text-[4.5rem] font-thin text-[#E31F25]/25 leading-none tracking-tighter">
                       {pillar.number}
                     </span>
-                    <div className="absolute bottom-1 sm:bottom-2 left-0 w-6 sm:w-8 h-px bg-[#E31F25]/40 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#E31F25] transition-all duration-500" />
+                    <div className="h-px flex-1 bg-[#E31F25]/20 sm:hidden" />
+                    <div className="hidden sm:block absolute bottom-2 left-0 w-8 h-px bg-[#E31F25]/40 group-hover:w-12 group-hover:bg-[#E31F25] transition-all duration-500" />
                   </div>
                   
                   {/* Content */}
-                  <h3 className="font-display text-base sm:text-lg lg:text-xl font-medium text-[#1a1a1a] mb-1 sm:mb-2 tracking-[-0.01em]">
+                  <h3 className="font-display text-lg sm:text-lg lg:text-xl font-medium text-[#1a1a1a] mb-2 tracking-[-0.01em]">
                     {pillar.title}
                   </h3>
                   <p className="text-[#737373] text-xs sm:text-sm leading-relaxed font-light">
@@ -193,10 +225,10 @@ export function Intro() {
               ))}
             </motion.div>
             
-            {/* Mobile Stats - Visible only on smaller screens */}
+            {/* Tablet Stats - visible only between sm and lg */}
             <motion.div
               variants={fadeUpVariants}
-              className="flex lg:hidden items-center justify-between gap-4 py-6 mb-6 border-y border-[#e0ded8]"
+              className="hidden sm:flex lg:hidden items-center justify-between gap-4 py-6 mb-6 border-y border-[#e0ded8]"
             >
               {[
                 { value: "20", suffix: "+", label: "Lat" }, 
@@ -208,10 +240,10 @@ export function Intro() {
                   className="text-center flex-1"
                 >
                   <div className="flex items-baseline justify-center gap-0.5">
-                    <span className="font-display text-2xl sm:text-3xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
-                    {stat.suffix && <span className="font-display text-base sm:text-lg text-[#E31F25] font-light">{stat.suffix}</span>}
+                    <span className="font-display text-3xl font-light text-[#1a1a1a] tracking-tight">{stat.value}</span>
+                    {stat.suffix && <span className="font-display text-lg text-[#E31F25] font-light">{stat.suffix}</span>}
                   </div>
-                  <span className="block text-[8px] sm:text-[9px] tracking-[0.15em] text-[#737373] uppercase mt-1 font-light">{stat.label}</span>
+                  <span className="block text-[9px] tracking-[0.15em] text-[#737373] uppercase mt-1 font-light">{stat.label}</span>
                 </div>
               ))}
             </motion.div>
@@ -219,14 +251,14 @@ export function Intro() {
             {/* CTA - Refined */}
             <motion.div
               variants={fadeUpVariants}
-              className="flex items-center justify-between pt-6 sm:pt-8 border-t border-[#e0ded8] lg:border-t-0 lg:pt-8 lg:border-t lg:border-[#e0ded8]"
+              className="flex flex-col sm:flex-row items-center sm:justify-between gap-4 pt-6 sm:pt-8 border-t border-[#e0ded8] lg:border-t-0 lg:pt-8 lg:border-t lg:border-[#e0ded8]"
             >
               <Link href="/o-nas" className="group inline-flex items-center gap-4 sm:gap-6">
-                <span className="text-[#1a1a1a] text-[10px] sm:text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.25em] uppercase">
+                <span className="text-[#1a1a1a] text-[11px] sm:text-[11px] font-medium tracking-[0.2em] sm:tracking-[0.25em] uppercase">
                   Poznaj naszą historię
                 </span>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 sm:group-hover:w-16 transition-all duration-500" />
+                  <div className="w-10 sm:w-12 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-14 sm:group-hover:w-16 transition-all duration-500" />
                   <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-300" />
                 </div>
               </Link>
