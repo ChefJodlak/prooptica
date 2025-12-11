@@ -53,7 +53,7 @@ function FeaturedBrand({
       onMouseLeave={() => setIsHovered(false)}
       className="relative group cursor-pointer"
     >
-      <span className="font-display text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light tracking-[-0.02em] text-[#1a1a1a] transition-all duration-500 group-hover:text-[#E31F25]">
+      <span className="font-display text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light tracking-[-0.02em] text-[#1a1a1a] transition-all duration-500 group-hover:text-[#E31F25]">
         {name}
       </span>
       
@@ -75,7 +75,7 @@ export function BrandsMarquee() {
   return (
     <section 
       ref={containerRef} 
-      className="relative min-h-[100svh] bg-[#FAFAFA] overflow-hidden flex items-center"
+      className="relative min-h-0 py-12 lg:py-20 lg:min-h-[100svh] bg-[#FAFAFA] overflow-hidden flex items-center"
     >
       {/* === DECORATIVE LINES === */}
       
@@ -84,7 +84,7 @@ export function BrandsMarquee() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-6 left-0 w-[25%] h-[1px] bg-gradient-to-r from-[#E31F25]/50 via-[#E31F25]/25 to-transparent origin-left block"
+        className="hidden lg:block absolute top-6 left-0 w-[25%] h-[1px] bg-gradient-to-r from-[#E31F25]/50 via-[#E31F25]/25 to-transparent origin-left"
       />
       
       {/* Vertical accent - left side */}
@@ -92,7 +92,7 @@ export function BrandsMarquee() {
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-6 left-[25%] w-[1px] h-16 bg-gradient-to-b from-[#E31F25]/25 to-transparent origin-top block"
+        className="hidden lg:block absolute top-6 left-[25%] w-[1px] h-16 bg-gradient-to-b from-[#E31F25]/25 to-transparent origin-top"
       />
       
       {/* Elegant line - bottom right corner accent */}
@@ -100,7 +100,7 @@ export function BrandsMarquee() {
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 2, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-6 right-0 w-[20%] h-[1px] bg-gradient-to-l from-[#E31F25]/40 via-[#E31F25]/20 to-transparent origin-right block"
+        className="hidden lg:block absolute bottom-6 right-0 w-[20%] h-[1px] bg-gradient-to-l from-[#E31F25]/40 via-[#E31F25]/20 to-transparent origin-right"
       />
       
       {/* Vertical accent - right side */}
@@ -108,33 +108,33 @@ export function BrandsMarquee() {
         initial={{ scaleY: 0 }}
         animate={isInView ? { scaleY: 1 } : {}}
         transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-6 right-[20%] w-[1px] h-16 bg-gradient-to-t from-[#E31F25]/20 to-transparent origin-bottom block"
+        className="hidden lg:block absolute bottom-6 right-[20%] w-[1px] h-16 bg-gradient-to-t from-[#E31F25]/20 to-transparent origin-bottom"
       />
 
       {/* === MAIN CONTENT === */}
-      <div className="relative z-10 w-full py-6 sm:py-16 lg:py-20">
+      <div className="relative z-10 w-full">
         
         {/* Header Section */}
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-6 sm:mb-16 lg:mb-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 mb-8 sm:mb-16 lg:mb-20">
           
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 sm:gap-6 lg:gap-16">
             
-            <div className="flex-1">
+            <div className="flex-1 text-center sm:text-left">
               {/* Elegant label */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="flex items-center gap-2 sm:gap-5 mb-2 sm:mb-5"
+                className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-5"
               >
-                <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                   Kolekcja Premium
                 </span>
                 <motion.div 
                   initial={{ scaleX: 0 }}
                   animate={isInView ? { scaleX: 1 } : {}}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
                 />
               </motion.div>
               
@@ -145,7 +145,7 @@ export function BrandsMarquee() {
                     initial={{ y: "100%" }}
                     animate={isInView ? { y: 0 } : {}}
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="font-display text-[1.5rem] sm:text-[clamp(1.75rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.15] tracking-[-0.02em]"
+                    className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
                   >
                     Światowe marki w naszej <span className="font-medium text-[#E31F25] italic">ofercie</span>
                   </motion.h2>
@@ -158,25 +158,19 @@ export function BrandsMarquee() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="block sm:block lg:max-w-xs lg:text-right mb-6 lg:mb-0"
+              className="block sm:block lg:max-w-xs text-center lg:text-right mb-2 lg:mb-0"
             >
-              <p className="text-[#737373] text-base sm:text-lg leading-[1.7] font-light">
+              <p className="text-[#737373] text-base sm:text-lg leading-[1.6] font-light">
                 Starannie wyselekcjonowana oferta od najbardziej prestiżowych domów mody i producentów okularów.
               </p>
-              <div className="mt-2 sm:mt-3 flex items-center gap-2 sm:gap-3 lg:justify-end">
-                <div className="w-1.5 h-1.5 bg-[#E31F25] rounded-full" />
-                <span className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-[#A3A3A3] uppercase">
-                  Oryginalne produkty
-                </span>
-              </div>
             </motion.div>
           </div>
         </div>
 
         {/* Featured Brands - Elegant Display */}
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-6 sm:mb-16 lg:mb-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 mb-10 sm:mb-16 lg:mb-20">
           {/* First row - 3 brands */}
-          <div className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-8 lg:gap-x-0 gap-y-2 sm:gap-y-6 mb-3 sm:mb-8 lg:mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6 mb-4 sm:mb-8 lg:mb-12">
             {FEATURED_BRANDS.slice(0, 3).map((name, i) => (
               <div key={name} className="flex items-center">
                 <FeaturedBrand 
@@ -199,7 +193,7 @@ export function BrandsMarquee() {
           </div>
           
           {/* Second row - 3 brands */}
-          <div className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-8 lg:gap-x-0 gap-y-2 sm:gap-y-6">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6">
             {FEATURED_BRANDS.slice(3, 6).map((name, i) => (
               <div key={name} className="flex items-center">
                 <FeaturedBrand 

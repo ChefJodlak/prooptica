@@ -142,7 +142,7 @@ export function InstagramSection() {
   return (
     <section 
       ref={containerRef} 
-      className={cn("relative min-h-[100svh] py-6 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden content-auto flex flex-col justify-center", getSectionVisibilityClass(isVisible))}
+      className={cn("relative min-h-0 py-12 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden content-auto flex flex-col justify-center", getSectionVisibilityClass(isVisible))}
     >
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -161,40 +161,46 @@ export function InstagramSection() {
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent"
       />
       
-      <div ref={contentRef} className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
+      <div ref={contentRef} className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 w-full relative z-10">
         
         {/* Header */}
-        <div className="grid lg:grid-cols-12 gap-3 sm:gap-8 lg:gap-16 mb-4 sm:mb-12 lg:mb-16">
+        <div className="grid lg:grid-cols-12 gap-3 sm:gap-8 lg:gap-16 mb-8 sm:mb-12 lg:mb-16">
           
           {/* Left - Title */}
           <div className="lg:col-span-6">
             {/* Label - animated on Chrome, static on Safari */}
             {isSafari ? (
-              <div className="flex items-center gap-2 sm:gap-5 mb-2 sm:mb-8">
-                <Instagram className="w-3 sm:w-4 h-3 sm:h-4 text-[#E31F25]" />
-                <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
-                  Social Media
-                </span>
-                <div className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
+              <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8">
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent sm:hidden" />
+                <div className="flex items-center gap-2">
+                  <Instagram className="w-3 sm:w-4 h-3 sm:h-4 text-[#E31F25]" />
+                  <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase whitespace-nowrap">
+                    Social Media
+                  </span>
+                </div>
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </div>
             ) : (
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8 }}
-                className="flex items-center gap-2 sm:gap-5 mb-2 sm:mb-8"
+                className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8"
               >
-                <Instagram className="w-3 sm:w-4 h-3 sm:h-4 text-[#E31F25]" />
-                <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
-                  Social Media
-                </span>
-                <div className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent sm:hidden" />
+                <div className="flex items-center gap-2">
+                  <Instagram className="w-3 sm:w-4 h-3 sm:h-4 text-[#E31F25]" />
+                  <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase whitespace-nowrap">
+                    Social Media
+                  </span>
+                </div>
+                <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
               </motion.div>
             )}
             
             {/* Headline - compact on mobile */}
             {isSafari ? (
-              <h2 className="font-display text-[1.5rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.15] tracking-[-0.03em]">
+              <h2 className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left">
                 Śledź nas na{" "}
                 <span className="font-medium italic text-[#E31F25]">Instagramie</span>
               </h2>
@@ -204,7 +210,7 @@ export function InstagramSection() {
                   initial={{ y: "110%" }}
                   animate={isInView ? { y: 0 } : {}}
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                  className="font-display text-[1.5rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.15] tracking-[-0.03em]"
+                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left"
                 >
                   Śledź nas na{" "}
                   <span className="font-medium italic text-[#E31F25]">Instagramie</span>
@@ -214,9 +220,9 @@ export function InstagramSection() {
           </div>
           
           {/* Right - Description & CTA - visible on mobile */}
-          <div className="flex flex-col items-start lg:col-span-6 lg:flex-col lg:justify-end lg:items-end lg:text-right mt-4 lg:mt-0">
+          <div className="flex flex-col items-center lg:col-span-6 lg:flex-col lg:justify-end lg:items-end lg:text-right mt-2 lg:mt-0">
             {isSafari ? (
-              <p className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light">
+              <p className="text-[#5a5a5a] text-center lg:text-right text-base sm:text-lg leading-[1.6] sm:leading-[1.8] mb-6 sm:mb-8 max-w-md font-light">
                 Bądź na bieżąco z najnowszymi trendami w optyce. 
                 Pokazujemy inspiracje, nowości i kulisy naszej codziennej pracy.
               </p>
@@ -225,7 +231,7 @@ export function InstagramSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-[#5a5a5a] text-sm sm:text-lg leading-[1.7] sm:leading-[1.8] mb-5 sm:mb-8 max-w-md font-light"
+                className="text-[#5a5a5a] text-center lg:text-right text-base sm:text-lg leading-[1.6] sm:leading-[1.8] mb-6 sm:mb-8 max-w-md font-light"
               >
                 Bądź na bieżąco z najnowszymi trendami w optyce. 
                 Pokazujemy inspiracje, nowości i kulisy naszej codziennej pracy.
@@ -234,16 +240,16 @@ export function InstagramSection() {
             
             {/* Instagram Follow Button */}
             {isSafari ? (
-              <div>
+              <div className="mt-2 w-full flex justify-center lg:justify-end">
                 <a 
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 sm:gap-4 px-5 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#833AB4] via-[#C13584] to-[#E1306C] text-white text-xs sm:text-sm font-medium tracking-[0.1em] uppercase hover:shadow-lg hover:shadow-[#C13584]/30 transition-all duration-300 hover:-translate-y-1"
+                  className="relative group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#e0ded8] hover:border-[#E31F25] text-[#1a1a1a] hover:text-[#E31F25] text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 min-w-[240px] rounded-full"
                 >
-                  <Instagram className="w-4 sm:w-5 h-4 sm:h-5" />
-                  <span>Obserwuj {INSTAGRAM_HANDLE}</span>
-                  <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hidden sm:block" />
+                  <Instagram className="w-5 h-5 text-[#E31F25]" />
+                  <span>Obserwuj nas</span>
+                  <ArrowUpRight className="absolute right-6 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
               </div>
             ) : (
@@ -251,16 +257,17 @@ export function InstagramSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
+                className="mt-2 w-full flex justify-center lg:justify-end"
               >
                 <a 
                   href={INSTAGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-3 sm:gap-4 px-5 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#833AB4] via-[#C13584] to-[#E1306C] text-white text-xs sm:text-sm font-medium tracking-[0.1em] uppercase hover:shadow-lg hover:shadow-[#C13584]/30 transition-all duration-500 hover:-translate-y-1"
+                  className="relative group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white border border-[#e0ded8] hover:border-[#E31F25] text-[#1a1a1a] hover:text-[#E31F25] text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 min-w-[240px] rounded-full"
                 >
-                  <Instagram className="w-4 sm:w-5 h-4 sm:h-5" />
-                  <span>Obserwuj {INSTAGRAM_HANDLE}</span>
-                  <ArrowUpRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hidden sm:block" />
+                  <Instagram className="w-5 h-5 text-[#E31F25]" />
+                  <span>Obserwuj nas</span>
+                  <ArrowUpRight className="absolute right-6 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
               </motion.div>
             )}
@@ -270,13 +277,13 @@ export function InstagramSection() {
         {/* Instagram Posts Grid */}
         {isSafari ? (
           <div className="relative">
-            <div className="block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
-            <div className="block absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
-            <div className="relative bg-white p-2 sm:p-4 lg:p-6">
+            <div className="block absolute -inset-2 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
+            <div className="block absolute -inset-4 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
+            <div className="relative bg-white p-3 sm:p-4 lg:p-6 shadow-xl">
               {SNAPWIDGET_FEED_ID ? (
                 <SnapWidgetEmbed feedId={SNAPWIDGET_FEED_ID} />
               ) : (
-                <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-3 lg:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 lg:gap-4">
                   {PLACEHOLDER_POSTS.map((post) => (
                     <StaticPlaceholderPost key={post.id} post={post} />
                   ))}
@@ -291,13 +298,13 @@ export function InstagramSection() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
-            <div className="block absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
-            <div className="relative bg-white p-2 sm:p-4 lg:p-6">
+            <div className="block absolute -inset-2 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
+            <div className="block absolute -inset-4 lg:-inset-8 border border-[#E31F25]/10 pointer-events-none" />
+            <div className="relative bg-white p-3 sm:p-4 lg:p-6 shadow-xl">
               {SNAPWIDGET_FEED_ID ? (
                 <SnapWidgetEmbed feedId={SNAPWIDGET_FEED_ID} />
               ) : (
-                <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-1.5 sm:gap-3 lg:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3 lg:gap-4">
                   {PLACEHOLDER_POSTS.map((post, index) => (
                     <AnimatedPlaceholderPost key={post.id} post={post} index={index} isInView={isInView} />
                   ))}

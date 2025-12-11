@@ -24,10 +24,10 @@ export function EyeExamSection() {
     <section ref={containerRef} className={cn("relative bg-[#0A0A0A] overflow-hidden content-auto-heavy", getSectionVisibilityClass(isVisible))}>
       
       {/* Full-height split layout */}
-      <div className="grid lg:grid-cols-2 min-h-[100svh]">
+      <div className="grid lg:grid-cols-2 min-h-0 lg:min-h-[100svh]">
         
         {/* Left - Image (removed parallax for Safari performance) */}
-        <div className="relative h-[35vh] sm:h-[60vh] lg:h-auto overflow-hidden order-2 lg:order-1">
+        <div className="relative h-[45vh] sm:h-[60vh] lg:h-auto overflow-hidden order-1 lg:order-1">
           <div className="absolute inset-0 transform-gpu" style={gpuStyles}>
             <Image
               src="/exams/exam2.png"
@@ -53,10 +53,10 @@ export function EyeExamSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="absolute bottom-6 left-5 right-5 sm:bottom-8 sm:left-8 sm:right-8 lg:bottom-16 lg:left-16 lg:right-auto lg:max-w-sm block"
+            className="absolute bottom-6 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 lg:bottom-16 lg:left-16 lg:right-auto lg:max-w-sm block"
           >
-            <div className="bg-white/10 backdrop-blur-md border border-white/10 p-4 sm:p-6 lg:p-8">
-              <p className="font-display text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed italic">
+            <div className="bg-white/10 backdrop-blur-md border border-white/10 p-5 sm:p-6 lg:p-8">
+              <p className="font-display text-lg sm:text-lg lg:text-xl text-white/90 leading-relaxed italic">
                 "Każde badanie to dla nas okazja, by zadbać o coś bezcennego — Twój wzrok."
               </p>
             </div>
@@ -66,7 +66,7 @@ export function EyeExamSection() {
         {/* Right - Content (removed parallax for Safari performance) */}
         <div 
           ref={contentRef}
-          className="relative flex flex-col justify-center px-5 sm:px-8 lg:px-16 xl:px-24 py-6 sm:py-16 lg:py-32 order-1 lg:order-2"
+          className="relative flex flex-col justify-center px-4 sm:px-8 lg:px-16 xl:px-24 py-12 sm:py-16 lg:py-32 order-2 lg:order-2"
         >
           
           {/* Label */}
@@ -74,27 +74,28 @@ export function EyeExamSection() {
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-2 sm:gap-5 mb-3 sm:mb-10"
+            className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-4 sm:mb-10"
           >
-            <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
+            <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent sm:hidden" />
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase whitespace-nowrap">
               Badanie wzroku
             </span>
             <motion.div 
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
             />
           </motion.div>
 
           {/* Main Headline - Compact on mobile */}
-          <div className="mb-4 sm:mb-12">
+          <div className="mb-6 sm:mb-12">
             <div className="overflow-hidden">
               <motion.h2
                 initial={{ y: "110%" }}
                 animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-                className="font-display text-[1.6rem] sm:text-[clamp(2rem,7vw,5rem)] font-light text-white leading-[1.15] tracking-tight"
+                className="font-display text-[2.25rem] sm:text-[clamp(2rem,7vw,5rem)] font-light text-white leading-[1.1] tracking-tight text-center sm:text-left"
               >
                 Precyzja na najwyższym <span className="font-semibold">poziomie<span className="text-[#E31F25]">.</span></span>
               </motion.h2>
@@ -106,7 +107,7 @@ export function EyeExamSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-white/60 text-sm sm:text-lg lg:text-xl leading-relaxed max-w-lg mb-4 sm:mb-12"
+            className="text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] max-w-lg mb-8 sm:mb-12 text-center sm:text-left mx-auto sm:mx-0"
           >
             Wykorzystujemy sprzęt diagnostyczny światowych liderów. 
             Nasi optometryści to certyfikowani specjaliści z wieloletnim doświadczeniem.
@@ -117,7 +118,7 @@ export function EyeExamSection() {
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 1, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="h-px bg-white/20 origin-left mb-4 sm:mb-12"
+            className="h-px bg-white/20 origin-left mb-8 sm:mb-12"
           />
 
           {/* CTA */}
@@ -125,15 +126,15 @@ export function EyeExamSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-start gap-2 sm:gap-4"
+            className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 w-full sm:w-auto"
           >
             <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">
-              <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] text-white rounded-none px-6 sm:px-10 h-10 sm:h-14 text-[10px] sm:text-sm font-semibold tracking-wider uppercase transition-all duration-500 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.5)] hover:scale-[1.02] cursor-pointer">
+              <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] text-white rounded-none px-6 sm:px-10 h-12 sm:h-14 text-[11px] sm:text-sm font-semibold tracking-wider uppercase transition-all duration-500 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.5)] hover:scale-[1.02] cursor-pointer">
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
                 <span className="absolute inset-0 border border-white/20" />
                 <span className="relative flex items-center justify-center gap-2">
                   <span>Umów badanie</span>
-                  <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                 </span>
               </button>
             </Link>
@@ -141,13 +142,13 @@ export function EyeExamSection() {
               <Button 
                 variant="ghost" 
                 size="lg"
-                className="w-full sm:w-auto text-white/60 hover:text-white hover:bg-transparent rounded-none px-4 sm:px-8 h-10 sm:h-14 text-[10px] sm:text-sm group tracking-wider uppercase cursor-pointer"
+                className="w-full sm:w-auto text-white/60 hover:text-white hover:bg-transparent rounded-none px-4 sm:px-8 h-12 sm:h-14 text-[11px] sm:text-sm group tracking-wider uppercase cursor-pointer"
               >
                 <span className="relative">
                   Dowiedz się więcej
                   <span className="absolute bottom-0 left-0 w-full h-px bg-white/40 group-hover:bg-white transition-colors" />
                 </span>
-                <ArrowRight className="w-3 sm:w-4 h-3 sm:h-4 ml-2 sm:ml-3 transition-transform group-hover:translate-x-2" />
+                <ArrowRight className="w-4 h-4 ml-2 sm:ml-3 transition-transform group-hover:translate-x-2" />
               </Button>
             </Link>
           </motion.div>

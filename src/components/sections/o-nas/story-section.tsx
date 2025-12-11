@@ -16,7 +16,7 @@ export function StorySection() {
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
       
-      <div className="relative z-10 max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24">
         <motion.div 
           className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center"
           variants={containerVariants}
@@ -39,7 +39,7 @@ export function StorySection() {
               initial={{ opacity: 0 }}
               animate={isStoryInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute -inset-6 lg:-inset-8 border border-[#E31F25]/10" 
+              className="absolute -inset-4 lg:-inset-8 border border-[#E31F25]/10" 
             />
             
             <div className="relative h-full w-full overflow-hidden">

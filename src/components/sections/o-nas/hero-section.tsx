@@ -17,7 +17,7 @@ export function HeroSection() {
         transition={{ duration: 10, repeat: Infinity }}
       />
       
-      <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
         <div className="max-w-4xl">
           {/* Eyebrow */}
           <motion.div
@@ -38,7 +38,7 @@ export function HeroSection() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display text-[clamp(3rem,9vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+              className="font-display text-[clamp(2.5rem,9vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
             >
               Historia rodzinnej
             </motion.h1>
@@ -48,7 +48,7 @@ export function HeroSection() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
+              className="font-display text-[clamp(2.5rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
             >
               <span className="relative inline-block">
                 <span className="italic text-[#E31F25]">pasji i precyzji</span>

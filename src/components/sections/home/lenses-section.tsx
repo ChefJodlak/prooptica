@@ -76,7 +76,7 @@ export function LensesSection() {
     <section 
       ref={containerRef} 
       className={cn(
-        "relative min-h-[100svh] py-6 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden content-auto flex flex-col justify-center",
+        "relative min-h-0 lg:min-h-[100svh] py-12 sm:py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden content-auto flex flex-col justify-center",
         getSectionVisibilityClass(isVisible)
       )}
     >
@@ -90,25 +90,25 @@ export function LensesSection() {
         OPTYKA
       </div>
 
-      <div ref={contentRef} className="relative z-10 max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full">
+      <div ref={contentRef} className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 w-full">
         
         {/* Header */}
-        <div className="mb-4 sm:mb-16 lg:mb-20">
+        <div className="mb-8 sm:mb-16 lg:mb-20 text-center sm:text-left">
           {/* Label */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="flex items-center gap-2 sm:gap-5 mb-2 sm:mb-8"
+            className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8"
           >
-            <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
+            <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
               Technologie
             </span>
             <motion.div 
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
+              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent origin-left" 
             />
           </motion.div>
 
@@ -120,7 +120,7 @@ export function LensesSection() {
                   initial={{ y: "100%" }}
                   animate={isInView ? { y: 0 } : {}}
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                  className="font-display text-[1.5rem] sm:text-[clamp(2rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.15] tracking-[-0.03em]"
+                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em]"
                 >
                   Soczewki nowej <span className="font-medium italic text-[#E31F25]">generacji</span>
                 </motion.h2>
@@ -132,7 +132,7 @@ export function LensesSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="block text-[#5a5a5a] text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] max-w-sm lg:max-w-md font-light lg:text-right mb-6 lg:mb-0"
+              className="block text-[#5a5a5a] text-base sm:text-base lg:text-lg leading-[1.6] sm:leading-[1.8] max-w-sm lg:max-w-md font-light text-center lg:text-right mb-2 lg:mb-0 mx-auto sm:mx-0"
             >
               Najnowsze technologie od światowych liderów optyki, dobrane precyzyjnie do Twojego stylu życia.
             </motion.p>
@@ -140,14 +140,91 @@ export function LensesSection() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-4 lg:gap-12">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
           
-          {/* Left - Visual showcase with elegant frame - visible on mobile now */}
+          {/* Right - Lens Type Selector - ORDER CHANGE: Selector first on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="lg:col-span-5 space-y-2 sm:space-y-3 col-span-full order-1 lg:order-2"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Grid layout for mobile selector */}
+            <div className="grid grid-cols-2 gap-2 sm:block sm:space-y-3">
+              {LENS_TYPES.map((lens, index) => (
+                <button
+                  key={lens.id}
+                  onClick={() => handleCardClick(index)}
+                  className={cn(
+                    "relative w-full text-left p-3 sm:p-6 transition-all duration-500 group border sm:border-0",
+                    activeIndex === index 
+                      ? "bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border-[#E31F25] sm:border-transparent" 
+                      : "bg-white/50 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] border-transparent"
+                  )}
+                >
+                  {/* Selection indicator - left border (desktop) / bottom border (mobile active) */}
+                  <div className={cn(
+                    "absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500 hidden sm:block",
+                    activeIndex === index 
+                      ? "bg-[#E31F25]" 
+                      : "bg-transparent group-hover:bg-[#E31F25]/30"
+                  )} />
+                  
+                  {/* Progress bar for active item */}
+                  {activeIndex === index && (
+                    <div className="absolute left-0 top-0 w-[3px] h-full bg-[#e0ded8] overflow-hidden hidden sm:block">
+                      <motion.div
+                        className="w-full bg-[#E31F25]"
+                        initial={{ height: "0%" }}
+                        animate={{ height: "100%" }}
+                        transition={{ 
+                          duration: isPaused ? 0 : AUTO_ROTATE_INTERVAL / 1000,
+                          ease: "linear"
+                        }}
+                        key={isPaused ? 'paused' : 'running'}
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-1 sm:gap-4 h-full">
+                    <div className="flex-1">
+                      {/* Name */}
+                      <span className={cn(
+                        "block font-display text-sm sm:text-2xl transition-colors duration-300 font-medium sm:font-normal",
+                        activeIndex === index ? "text-[#1a1a1a]" : "text-[#666] group-hover:text-[#1a1a1a]"
+                      )}>
+                        {lens.name}
+                      </span>
+                      
+                      {/* Subtitle */}
+                      <span className={cn(
+                        "block text-[9px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.2em] uppercase mt-0.5 sm:mt-1 transition-colors duration-300 truncate",
+                        activeIndex === index ? "text-[#E31F25]" : "text-[#bbb] group-hover:text-[#999]"
+                      )}>
+                        {lens.subtitle}
+                      </span>
+                    </div>
+
+                    <ArrowRight className={cn(
+                      "w-4 sm:w-5 h-4 sm:h-5 flex-shrink-0 mt-0.5 sm:mt-1 transition-all duration-300 hidden sm:block",
+                      activeIndex === index 
+                        ? "text-[#E31F25] translate-x-0 opacity-100" 
+                        : "text-[#ccc] -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
+                    )} />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Left - Visual showcase - ORDER CHANGE: Content second on mobile */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="block lg:col-span-7 relative mb-8 lg:mb-0"
+            className="block lg:col-span-7 relative mb-0 lg:mb-0 order-2 lg:order-1"
           >
             {/* Artistic frame like intro section */}
             <motion.div 
@@ -163,13 +240,13 @@ export function LensesSection() {
               className="absolute -inset-6 sm:-inset-8 border border-[#E31F25]/10 pointer-events-none block" 
             />
 
-            <div className="relative bg-white overflow-hidden">
+            <div className="relative bg-white overflow-hidden shadow-xl">
               {/* Main content area */}
-              <div className="relative min-h-[300px] sm:min-h-[450px] lg:min-h-[500px] p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
+              <div className="relative min-h-[350px] sm:min-h-[450px] lg:min-h-[500px] p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
                 
                 {/* Decorative corner accent */}
-                <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-[#E31F25]/40" />
-                <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-[#E31F25]/40" />
+                <div className="absolute top-0 left-0 w-12 sm:w-16 h-12 sm:h-16 border-l-2 border-t-2 border-[#E31F25]/40" />
+                <div className="absolute bottom-0 right-0 w-12 sm:w-16 h-12 sm:h-16 border-r-2 border-b-2 border-[#E31F25]/40" />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -183,34 +260,34 @@ export function LensesSection() {
                     {/* Content */}
                     <div className="flex-1">
                       {/* Subtitle */}
-                      <span className="inline-block text-[10px] sm:text-xs tracking-[0.3em] text-[#E31F25] uppercase mb-4">
+                      <span className="inline-block text-[10px] sm:text-xs tracking-[0.3em] text-[#E31F25] uppercase mb-3 sm:mb-4">
                         {activeLens.subtitle}
                       </span>
                       
                       {/* Title */}
-                      <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light text-[#1a1a1a] mb-6 tracking-[-0.02em]">
+                      <h3 className="font-display text-[2rem] sm:text-4xl lg:text-5xl xl:text-6xl font-light text-[#1a1a1a] mb-4 sm:mb-6 tracking-[-0.02em] leading-tight">
                         {activeLens.name}
                       </h3>
                       
                       {/* Description */}
-                      <p className="text-[#5a5a5a] text-base sm:text-lg leading-relaxed font-light max-w-lg mb-8">
+                      <p className="text-[#5a5a5a] text-sm sm:text-lg leading-relaxed font-light max-w-lg mb-6 sm:mb-8">
                         {activeLens.description}
                       </p>
                     </div>
                     
                     {/* Features */}
-                    <div className="border-t border-[#e0ded8] pt-6">
-                      <div className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-3">
+                    <div className="border-t border-[#e0ded8] pt-5 sm:pt-6">
+                      <div className="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
                         {activeLens.features.map((feature, i) => (
                           <motion.div
                             key={feature}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
-                            className="flex items-center gap-3"
+                            className="flex items-center gap-2 sm:gap-3"
                           >
                             <div className="w-1.5 h-1.5 bg-[#E31F25]" />
-                            <span className="text-[#737373] text-sm font-light">
+                            <span className="text-[#737373] text-xs sm:text-sm font-light">
                               {feature}
                             </span>
                           </motion.div>
@@ -221,80 +298,6 @@ export function LensesSection() {
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
-
-          {/* Right - Lens Type Selector */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="lg:col-span-5 space-y-2 sm:space-y-3 col-span-full"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            {LENS_TYPES.map((lens, index) => (
-              <button
-                key={lens.id}
-                onClick={() => handleCardClick(index)}
-                className={cn(
-                  "relative w-full text-left p-3 sm:p-6 transition-all duration-500 group",
-                  activeIndex === index 
-                    ? "bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]" 
-                    : "bg-white/50 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
-                )}
-              >
-                {/* Selection indicator - left border */}
-                <div className={cn(
-                  "absolute left-0 top-0 bottom-0 w-[3px] transition-all duration-500",
-                  activeIndex === index 
-                    ? "bg-[#E31F25]" 
-                    : "bg-transparent group-hover:bg-[#E31F25]/30"
-                )} />
-                
-                {/* Progress bar for active item */}
-                {activeIndex === index && (
-                  <div className="absolute left-0 top-0 w-[3px] h-full bg-[#e0ded8] overflow-hidden">
-                    <motion.div
-                      className="w-full bg-[#E31F25]"
-                      initial={{ height: "0%" }}
-                      animate={{ height: "100%" }}
-                      transition={{ 
-                        duration: isPaused ? 0 : AUTO_ROTATE_INTERVAL / 1000,
-                        ease: "linear"
-                      }}
-                      key={isPaused ? 'paused' : 'running'}
-                    />
-                  </div>
-                )}
-
-                <div className="flex items-start justify-between gap-2 sm:gap-4">
-                  <div className="flex-1">
-                    {/* Name */}
-                    <span className={cn(
-                      "block font-display text-base sm:text-2xl transition-colors duration-300",
-                      activeIndex === index ? "text-[#1a1a1a]" : "text-[#666] group-hover:text-[#1a1a1a]"
-                    )}>
-                      {lens.name}
-                    </span>
-                    
-                    {/* Subtitle */}
-                    <span className={cn(
-                      "block text-[8px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase mt-0.5 sm:mt-1 transition-colors duration-300",
-                      activeIndex === index ? "text-[#E31F25]" : "text-[#bbb] group-hover:text-[#999]"
-                    )}>
-                      {lens.subtitle}
-                    </span>
-                  </div>
-
-                  <ArrowRight className={cn(
-                    "w-4 sm:w-5 h-4 sm:h-5 flex-shrink-0 mt-0.5 sm:mt-1 transition-all duration-300",
-                    activeIndex === index 
-                      ? "text-[#E31F25] translate-x-0 opacity-100" 
-                      : "text-[#ccc] -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
-                  )} />
-                </div>
-              </button>
-            ))}
           </motion.div>
         </div>
 

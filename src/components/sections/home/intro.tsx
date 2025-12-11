@@ -59,7 +59,7 @@ export function Intro() {
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
       }} />
       
-      <div className="relative z-10 max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full h-full sm:h-auto flex flex-col justify-center">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 w-full h-full sm:h-auto flex flex-col justify-center">
         <motion.div 
           className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center h-auto content-center"
           variants={containerVariants}
@@ -119,8 +119,8 @@ export function Intro() {
           <div className="lg:col-span-7 lg:pl-8 flex flex-col justify-between h-auto pb-0">
             
             {/* Header */}
-            <motion.div variants={fadeUpVariants} className="mb-6 sm:mb-12 lg:mb-16 text-left shrink-0">
-              <div className="flex items-center justify-start gap-3 sm:gap-5 mb-4 sm:mb-8">
+            <motion.div variants={fadeUpVariants} className="mb-6 sm:mb-12 lg:mb-16 text-center sm:text-left shrink-0">
+              <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-4 sm:mb-8">
                 <span className="text-[#E31F25] text-[10px] sm:text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
                 <motion.div 
                   initial={{ scaleX: 0 }}
@@ -146,7 +146,7 @@ export function Intro() {
             {/* Mobile description - Full Text restored */}
             <motion.p 
               variants={fadeUpVariants}
-              className="sm:hidden text-[#5a5a5a] text-sm leading-[1.7] mb-6 text-left font-light shrink-0"
+              className="sm:hidden text-[#5a5a5a] text-sm leading-[1.7] mb-6 text-center font-light shrink-0"
             >
               Od 2004 roku łączymy precyzję z włoskim designem. Każda para okularów to kompozycja stylu i funkcjonalności.
             </motion.p>
@@ -183,10 +183,10 @@ export function Intro() {
               ))}
             </motion.div>
             
-            {/* Luxury Pillars - Horizontal Scroll for Mobile, Grid for Desktop */}
+            {/* Luxury Pillars - Grid for Mobile, Grid for Desktop */}
             <motion.div 
               variants={containerVariants}
-              className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-6 lg:gap-x-10 sm:gap-y-8 mb-6 sm:mb-12 lg:mb-16 shrink-0 overflow-x-auto pb-4 sm:pb-0 -mx-5 px-5 sm:mx-0 sm:px-0 scrollbar-hide snap-x snap-mandatory pr-5 sm:pr-0"
+              className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-6 lg:gap-x-10 sm:gap-y-8 mb-6 sm:mb-12 lg:mb-16 shrink-0"
             >
               {PILLARS.map((pillar, i) => (
                 <motion.div
@@ -203,7 +203,7 @@ export function Intro() {
                       }
                     }
                   }}
-                  className="group min-w-[220px] sm:min-w-0 snap-center bg-white sm:bg-transparent p-5 sm:p-0 border sm:border-0 border-[#E31F25]/10 shadow-sm sm:shadow-none first:pl-5 last:pr-5"
+                  className="group bg-white sm:bg-transparent p-5 sm:p-0 border sm:border-0 border-[#E31F25]/10 shadow-sm sm:shadow-none"
                 >
                   {/* Elegant number */}
                   <div className="flex items-center gap-3 mb-3 sm:mb-4 sm:block relative">

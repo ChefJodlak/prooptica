@@ -48,25 +48,26 @@ export function ArticlesSection() {
   const sideArticles = ARTICLES.slice(1)
 
   return (
-    <section ref={containerRef} className={cn("relative min-h-[100svh] bg-[#fafafa] overflow-hidden flex flex-col justify-center py-6 sm:py-12 content-auto", getSectionVisibilityClass(isVisible))}>
+    <section ref={containerRef} className={cn("relative min-h-0 py-12 sm:py-24 lg:py-32 bg-[#fafafa] overflow-hidden content-auto flex flex-col justify-center", getSectionVisibilityClass(isVisible))}>
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
       }} />
       
-      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 w-full relative z-10">
         
         {/* Header row */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-2 sm:gap-6 mb-4 sm:mb-14 lg:mb-20">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-2 sm:gap-6 mb-8 sm:mb-14 lg:mb-20">
           <div>
-            <div className="flex items-center gap-2 sm:gap-5 mb-2 sm:mb-5">
-              <span className="text-[#E31F25] text-[9px] sm:text-[10px] font-medium tracking-[0.2em] sm:tracking-[0.5em] uppercase">
+            <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-5">
+              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent sm:hidden" />
+              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase whitespace-nowrap">
                 Blog & Porady
               </span>
-              <div className="h-px flex-1 max-w-[40px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
+              <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </div>
 
-            <h2 className="font-display text-[1.5rem] sm:text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.15] tracking-[-0.02em]">
+            <h2 className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left">
               Wiedza o zdrowym{" "}
               <span className="italic text-[#E31F25] font-medium">wzroku</span>
             </h2>
@@ -92,12 +93,12 @@ export function ArticlesSection() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
           
           {/* Featured Article - Left - visible on mobile now */}
-          <div className="block lg:col-span-7 transform-gpu">
+          <div className="block lg:col-span-7 transform-gpu mb-4 lg:mb-0">
             <Link href={`/artykuly/${featuredArticle.id}`} className="group block relative">
               {/* Artistic frame - Visible on mobile */}
               <div className="block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
               
-              <div className="relative overflow-hidden bg-white">
+              <div className="relative overflow-hidden bg-white shadow-lg">
                 {/* Image */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <img 
@@ -105,33 +106,33 @@ export function ArticlesSection() {
                     alt={featuredArticle.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/80 via-transparent to-transparent" />
                   
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4 sm:top-5 sm:left-5">
-                    <Badge className="bg-emerald-500/90 text-white border-0 text-[9px] sm:text-[10px] tracking-wider uppercase px-2 sm:px-3 py-0.5 sm:py-1">
+                    <Badge className="bg-emerald-500/90 text-white border-0 text-[10px] tracking-wider uppercase px-3 py-1">
                       {CATEGORIES.find(c => c.id === featuredArticle.category)?.name}
                     </Badge>
                   </div>
                   
                   {/* Title overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8">
-                    <div className="flex items-center gap-3 sm:gap-4 mb-2 sm:mb-3 text-xs sm:text-sm text-white/70">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 lg:p-8">
+                    <div className="flex items-center gap-3 sm:gap-4 mb-2 text-xs sm:text-sm text-white/80">
                       <span className="flex items-center gap-1.5">
-                        <Clock className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                        <Clock className="w-3.5 h-3.5" />
                         {featuredArticle.readTime}
                       </span>
                       <span>{featuredArticle.date}</span>
                     </div>
-                    <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-medium text-white leading-tight group-hover:text-[#E31F25] transition-colors duration-200">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-display font-medium text-white leading-tight group-hover:text-[#E31F25] transition-colors duration-200">
                       {featuredArticle.title}
                     </h3>
                   </div>
                 </div>
                 
                 {/* Content */}
-                <div className="p-4 sm:p-6 lg:p-8">
-                  <p className="text-[#5a5a5a] text-sm sm:text-base leading-relaxed font-light mb-4 sm:mb-6 line-clamp-3 sm:line-clamp-none">
+                <div className="p-5 sm:p-6 lg:p-8">
+                  <p className="text-[#5a5a5a] text-sm sm:text-base leading-relaxed font-light mb-5 sm:mb-6 line-clamp-3 sm:line-clamp-none">
                     {featuredArticle.excerpt}
                   </p>
                   
@@ -139,7 +140,7 @@ export function ArticlesSection() {
                     <span className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] text-[#1a1a1a] uppercase font-medium group-hover:text-[#E31F25] transition-colors duration-200">
                       Czytaj artykuł
                     </span>
-                    <div className="w-6 sm:w-8 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-10 sm:group-hover:w-12 transition-all duration-200" />
+                    <div className="w-8 sm:w-10 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 transition-all duration-200" />
                     <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
                   </div>
                 </div>
@@ -148,23 +149,23 @@ export function ArticlesSection() {
           </div>
 
           {/* Articles List - Full width on mobile, side on desktop */}
-          <div className="lg:col-span-5 flex flex-col col-span-full sm:col-auto">
+          <div className="lg:col-span-5 flex flex-col col-span-full sm:col-auto mt-4 lg:mt-0">
             
             {/* Section label */}
-            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-6">
-              <BookOpen className="w-3 sm:w-4 h-3 sm:h-4 text-[#E31F25]" />
-              <span className="text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.2em] text-[#999] uppercase font-medium">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <BookOpen className="w-4 h-4 text-[#E31F25]" />
+              <span className="text-[10px] tracking-[0.2em] text-[#999] uppercase font-medium">
                 Najnowsze artykuły
               </span>
             </div>
             
             {/* Article list - show all articles on mobile */}
-            <div className="flex-1 flex flex-col gap-3 sm:gap-6">
+            <div className="flex-1 flex flex-col gap-4 sm:gap-6">
               {sideArticles.map((article, index) => (
                 <div key={article.id} className="transform-gpu">
-                  <Link href={`/artykuly/${article.id}`} className="group flex gap-3 sm:gap-5">
+                  <Link href={`/artykuly/${article.id}`} className="group flex gap-4 sm:gap-5">
                     {/* Thumbnail */}
-                    <div className="relative w-16 h-16 sm:w-28 sm:h-28 lg:w-32 lg:h-32 flex-shrink-0 overflow-hidden">
+                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 flex-shrink-0 overflow-hidden shadow-sm">
                       <img 
                         src={article.image}
                         alt={article.title}
@@ -174,10 +175,10 @@ export function ArticlesSection() {
                     </div>
                     
                     {/* Content */}
-                    <div className="flex-1 py-0">
+                    <div className="flex-1 py-1">
                       {/* Category & Date */}
-                      <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
-                        <Badge className={`border-0 text-[6px] sm:text-[8px] tracking-wider uppercase px-1 sm:px-2 py-0.5 ${
+                      <div className="flex items-center gap-3 mb-1.5">
+                        <Badge className={`border-0 text-[8px] tracking-wider uppercase px-2 py-0.5 ${
                           article.category === 'technologia'
                             ? 'bg-blue-500/90 text-white'
                             : article.category === 'styl'
@@ -186,18 +187,18 @@ export function ArticlesSection() {
                         }`}>
                           {CATEGORIES.find(c => c.id === article.category)?.name}
                         </Badge>
-                        <span className="text-[8px] sm:text-[10px] text-[#999]">{article.date}</span>
+                        <span className="text-[10px] text-[#999]">{article.date}</span>
                       </div>
                       
                       {/* Title */}
-                      <h4 className="font-display text-xs sm:text-base lg:text-lg font-medium text-[#1a1a1a] leading-snug mb-1 sm:mb-2 group-hover:text-[#E31F25] transition-colors duration-200 line-clamp-2">
+                      <h4 className="font-display text-base sm:text-base lg:text-lg font-medium text-[#1a1a1a] leading-tight mb-2 group-hover:text-[#E31F25] transition-colors duration-200 line-clamp-2">
                         {article.title}
                       </h4>
                       
                       {/* Read time & arrow */}
                       <div className="flex items-center gap-2 text-[#999]">
-                        <Clock className="w-2 sm:w-3 h-2 sm:h-3" />
-                        <span className="text-[9px] sm:text-xs">{article.readTime}</span>
+                        <Clock className="w-3 h-3" />
+                        <span className="text-[10px]">{article.readTime}</span>
                         <ArrowRight className="w-3 h-3 ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#E31F25] transition-all duration-200 hidden sm:block" />
                       </div>
                     </div>
@@ -205,7 +206,7 @@ export function ArticlesSection() {
                   
                   {/* Divider */}
                   {index < sideArticles.length - 1 && (
-                    <div className="mt-3 sm:mt-6 h-px bg-[#e5e5e5]" />
+                    <div className="mt-4 sm:mt-6 h-px bg-[#e5e5e5]" />
                   )}
                 </div>
               ))}

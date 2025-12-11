@@ -256,12 +256,6 @@ function GoogleMap({ selectedLocation }: { selectedLocation: Location }) {
     <div className="relative w-full h-full">
       <div ref={mapRef} className="w-full h-full" />
       
-      {/* Elegant corner accents */}
-      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      
       {/* Open in Maps button */}
       <a
         href={selectedLocation.map_link}
@@ -302,12 +296,6 @@ function EmbeddedMap({ selectedLocation }: { selectedLocation: Location }) {
         title={`Mapa - ${selectedLocation.city}`}
         className="w-full h-full"
       />
-      
-      {/* Elegant corner accents */}
-      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
-      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#E31F25]/40 pointer-events-none z-10" />
       
       {/* Open in Maps button */}
       <a
@@ -365,7 +353,7 @@ export function LocationsPreview() {
   }
 
   return (
-    <section ref={containerRef} className={cn("relative min-h-[100svh] bg-white overflow-hidden flex flex-col justify-center py-8 sm:py-12 content-auto-heavy", getSectionVisibilityClass(isVisible))}>
+    <section ref={containerRef} className={cn("relative min-h-[100svh] bg-white overflow-hidden flex flex-col justify-center py-4 sm:py-12 content-auto-heavy", getSectionVisibilityClass(isVisible))}>
       
       {/* Subtle texture overlay like Intro section */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -384,10 +372,10 @@ export function LocationsPreview() {
         className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e0ded8] to-transparent"
       />
       
-      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 w-full relative z-10">
         
         {/* Header */}
-        <div className="mb-5 sm:mb-12 lg:mb-16 text-center sm:text-left">
+        <div className="mb-4 sm:mb-12 lg:mb-16 text-center sm:text-left">
           {/* Label */}
           <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8">
             <MapPin className="w-4 h-4 text-[#E31F25]" />
@@ -408,91 +396,90 @@ export function LocationsPreview() {
         </div>
 
         {/* === MOBILE LAYOUT === */}
-        <div className="sm:hidden space-y-6">
-          {/* Map on mobile - Enhanced with frames */}
-          <div className="relative h-[50vh] w-full">
-             {/* Artistic frame */}
-            <div className="absolute -inset-2 border border-[#E31F25]/20 pointer-events-none z-20" />
-            <div className="absolute -inset-4 border border-[#E31F25]/10 pointer-events-none z-20" />
-            
-            <div className="relative h-full w-full overflow-hidden shadow-2xl">
-              <EmbeddedMap selectedLocation={selectedLocation} />
-            </div>
-          </div>
+        <div className="sm:hidden flex flex-col w-full">
           
-          {/* Selected location info bar - Enhanced */}
-          <div className="relative bg-[#1a1a1a] overflow-hidden p-5">
-             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
-            
-            <div className="flex flex-col gap-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-1 h-10 bg-[#E31F25]" />
-                  <div>
-                    <h3 className="font-display text-xl text-white font-medium">
-                      {selectedLocation.city}
-                    </h3>
-                    <p className="text-white/50 text-xs">
-                      {selectedLocation.address}
-                    </p>
-                  </div>
-                </div>
-                
-                <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`}>
-                  <button className="bg-[#E31F25] text-white px-5 py-2.5 text-[10px] font-semibold tracking-[0.1em] uppercase flex items-center gap-2 shadow-[0_0_15px_-5px_#E31F25]">
-                    <Calendar className="w-3.5 h-3.5" />
-                    Umów
-                  </button>
-                </Link>
-              </div>
-              
-              {/* Contact info row */}
-              <div className="flex items-center justify-between border-t border-white/10 pt-3">
-                 <a href={`tel:${selectedLocation.phone}`} className="flex items-center gap-2 text-white/60 text-xs">
-                    <Phone className="w-3 h-3 text-[#E31F25]" />
-                    {selectedLocation.phone}
-                 </a>
-                 <div className="flex items-center gap-2 text-white/60 text-xs">
-                    <Clock className="w-3 h-3 text-[#E31F25]" />
-                    Pn-Pt 10-18
-                 </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Location selector - horizontal scroll */}
-          <div className="flex gap-3 overflow-x-auto pb-4 -mx-5 px-5 scrollbar-hide snap-x">
+          {/* Location selector - Grid layout */}
+          <div className="grid grid-cols-2 gap-3 w-full z-30 relative mb-4">
             {LOCATIONS.map((location) => (
               <button
                 key={location.id}
                 onClick={() => handleLocationSelect(location.id)}
                 className={cn(
-                  "flex-shrink-0 px-5 py-3 border transition-all duration-300 text-left min-w-[160px] snap-center",
+                  "relative px-3 py-3 border transition-all duration-300 text-center w-full flex flex-col items-center justify-center min-h-[60px]",
                   selectedId === location.id 
-                    ? "bg-[#E31F25] border-[#E31F25] text-white shadow-lg scale-105" 
-                    : "bg-white border-[#e0ded8] text-[#1a1a1a]"
+                    ? "bg-[#E31F25] border-[#E31F25] text-white shadow-md z-10" 
+                    : "bg-white border-[#e0ded8] text-[#1a1a1a] hover:border-[#E31F25]/30"
                 )}
               >
-                <span className="block font-display text-sm font-medium">{location.city}</span>
+                <span className="block font-display text-base font-medium leading-tight mb-0.5">{location.city}</span>
                 <span className={cn(
-                  "block text-[9px] mt-0.5",
-                  selectedId === location.id ? "text-white/70" : "text-[#999]"
+                  "block text-[11px] leading-tight truncate w-full px-1",
+                  selectedId === location.id ? "text-white/80" : "text-[#737373]"
                 )}>
-                  {location.address.split(' ').slice(0, 2).join(' ')}
+                  {location.address.replace('ul. ', '')}
                 </span>
               </button>
             ))}
           </div>
+
+          {/* Unified Map & Info Card */}
+          <div className="relative w-full shadow-2xl mb-8">
+            
+            {/* Map - 35vh */}
+            <div className="relative h-[35vh] w-full overflow-hidden bg-gray-100">
+              <EmbeddedMap selectedLocation={selectedLocation} />
+            </div>
+
+            {/* Selected location info bar - Larger */}
+            <div className="relative bg-[#1a1a1a] overflow-hidden p-5">
+               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent z-10" />
+              
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-1 h-10 bg-[#E31F25]" />
+                    <div>
+                      <h3 className="font-display text-xl text-white font-medium leading-tight">
+                        {selectedLocation.city}
+                      </h3>
+                      <p className="text-white/50 text-xs leading-tight mt-1">
+                        {selectedLocation.address}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`}>
+                    <button className="bg-[#E31F25] text-white px-6 py-3 text-[10px] font-semibold tracking-[0.1em] uppercase flex items-center gap-2 shadow-[0_0_15px_-5px_#E31F25] hover:bg-[#c91a1f] transition-colors">
+                      <Calendar className="w-4 h-4" />
+                      Umów
+                    </button>
+                  </Link>
+                </div>
+                
+                {/* Contact info row */}
+                <div className="flex items-center justify-between border-t border-white/10 pt-4">
+                   <a href={`tel:${selectedLocation.phone}`} className="flex items-center gap-2 text-white/60 text-xs hover:text-[#E31F25] transition-colors">
+                      <Phone className="w-3.5 h-3.5 text-[#E31F25]" />
+                      {selectedLocation.phone}
+                   </a>
+                   <div className="flex items-center gap-2 text-white/60 text-xs">
+                      <Clock className="w-3.5 h-3.5 text-[#E31F25]" />
+                      Pn-Pt 10-18
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
           
           {/* CTA Link - mobile */}
-          <div className="pt-4 border-t border-[#e0ded8] flex justify-center">
-            <Link href="/salony" className="group inline-flex items-center gap-4">
-              <span className="text-[#1a1a1a] text-[11px] font-medium tracking-[0.2em] uppercase">
+          <div className="flex justify-center pb-2">
+            <Link href="/salony" className="group inline-flex items-center gap-3">
+              <span className="text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase">
                 Wszystkie lokalizacje
               </span>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <div className="w-8 h-px bg-[#1a1a1a]/30 group-hover:bg-[#E31F25] group-hover:w-12 transition-all duration-200" />
-                <ArrowRight className="w-4 h-4 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#1a1a1a]/50 group-hover:text-[#E31F25] group-hover:translate-x-1 transition-all duration-200" />
               </div>
             </Link>
           </div>

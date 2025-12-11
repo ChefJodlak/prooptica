@@ -14,7 +14,7 @@ export function TimelineSection() {
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
       
-      <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,7 +66,7 @@ export function TimelineSection() {
                 delay: 0.3 + i * 0.2,
                 ease: [0.16, 1, 0.3, 1]
               }}
-              className={`relative flex items-center mb-16 last:mb-0 ${
+              className={`relative flex flex-col items-center mb-16 last:mb-0 ${
                 i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
               }`}
             >

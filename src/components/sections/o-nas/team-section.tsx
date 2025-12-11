@@ -14,7 +14,7 @@ export function TeamSection() {
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
       
-      <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14 lg:mb-20">
           <div>
