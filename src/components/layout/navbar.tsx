@@ -65,8 +65,8 @@ export function Navbar() {
   // Show CTA button on non-home pages OR after scrolling 70vh on home page
   const showCTA = !isHomePage || effectiveIsScrolled
   
-  // Logo size: big on homepage when not scrolled AND mobile menu is closed
-  const showBigLogo = isHomePage && !effectiveIsScrolled && !isMobileMenuOpen
+  // Logo size: big on homepage when not scrolled (menu open state doesn't affect size to prevent jump)
+  const showBigLogo = isHomePage && !effectiveIsScrolled
   const logoHeight = showBigLogo ? 36 : 28
   const logoWidth = showBigLogo ? 170 : 150
 
@@ -146,7 +146,7 @@ export function Navbar() {
                             <ul className="w-[280px] p-4 bg-[#1a1a1a] border border-[#E31F25]/20">
                               <div className="flex items-center gap-3 mb-4 pb-3 border-b border-[#E31F25]/15">
                                 <span className="text-[9px] font-medium tracking-[0.3em] uppercase text-[#E31F25]">{item.title}</span>
-                                <div className="h-px flex-1 bg-gradient-to-r from-[#E31F25]/30 to-transparent" />
+                                <div className="h-px flex-1 bg-linear-to-r from-[#E31F25]/30 to-transparent" />
                               </div>
                               {item.items.map((subItem) => (
                                 <ListItem key={subItem.title} title={subItem.title} href={subItem.href} />
@@ -195,7 +195,7 @@ export function Navbar() {
                     border: "none",
                   }}
                 >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/nav:translate-x-full transition-transform duration-700 ease-out" />
+                  <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/nav:translate-x-full transition-transform duration-700 ease-out" />
                   <span className="absolute inset-0 border border-white/20" />
                   <span style={{ position: "relative", zIndex: 10, fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "white" }}>
                     Umów wizytę
@@ -210,7 +210,7 @@ export function Navbar() {
             initial={false}
             animate={isMobileMenuOpen ? "open" : "closed"}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden relative p-3 text-white/60 hover:text-[#E31F25] z-[10001]"
+            className="lg:hidden relative p-3 text-white/60 hover:text-[#E31F25] z-50"
             style={{ transition: "color 0.3s ease" }}
           >
             <MotionConfig transition={{ duration: 0.5, ease: "easeInOut" }}>
@@ -391,7 +391,7 @@ export function Navbar() {
                       justifyContent: "center",
                     }}
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
+                    <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
                     <span className="absolute inset-0 border border-white/20" />
                     <span style={{ position: "relative", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
                       Umów wizytę
@@ -434,7 +434,7 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, ListItemProps>(
             <span className="text-[12px] font-medium text-[#ccc] group-hover:text-[#E31F25] whitespace-nowrap" style={{ transition: "color 0.3s ease" }}>
               {title}
             </span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#E31F25] opacity-0 group-hover:opacity-100 flex-shrink-0" style={{ transition: "opacity 0.3s ease" }} />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#E31F25] opacity-0 group-hover:opacity-100 shrink-0" style={{ transition: "opacity 0.3s ease" }} />
           </a>
         </NavigationMenuLink>
       </li>
