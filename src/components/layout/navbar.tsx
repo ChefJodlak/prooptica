@@ -13,8 +13,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { NAV_ITEMS } from "@/lib/constants/navigation"
-import { Menu, Phone, X, ArrowUpRight, MapPin } from "lucide-react"
+import { Phone, ArrowUpRight, MapPin } from "lucide-react"
 import Image from "next/image"
+import { AnimatePresence, motion, MotionConfig } from "framer-motion"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -59,26 +60,26 @@ export function Navbar() {
   // Use scroll state only after hydration to prevent hydration mismatch
   const effectiveIsScrolled = hasMounted && isScrolled
 
-  // Show dark background on non-home pages OR when scrolled on home page
-  const showDarkBg = !isHomePage || effectiveIsScrolled
+  // Show dark background on non-home pages OR when scrolled on home page OR when mobile menu is open
+  const showDarkBg = !isHomePage || effectiveIsScrolled || isMobileMenuOpen
   // Show CTA button on non-home pages OR after scrolling 70vh on home page
   const showCTA = !isHomePage || effectiveIsScrolled
-
-  // Logo size: big on homepage when not scrolled, small otherwise
-  const showBigLogo = isHomePage && !effectiveIsScrolled
+  
+  // Logo size: big on homepage when not scrolled AND mobile menu is closed
+  const showBigLogo = isHomePage && !effectiveIsScrolled && !isMobileMenuOpen
   const logoHeight = showBigLogo ? 36 : 28
   const logoWidth = showBigLogo ? 170 : 150
 
   return (
     <>
-      {/* NAVBAR - Using plain CSS, no animation libraries */}
+      {/* NAVBAR */}
       <header
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 9999,
+          zIndex: 9999, // Higher than mobile menu
           width: "100%",
           backgroundColor: showDarkBg ? "rgba(26, 26, 26, 0.95)" : "transparent",
           backdropFilter: showDarkBg ? "blur(12px)" : "none",
@@ -88,8 +89,8 @@ export function Navbar() {
           transition: "background-color 0.5s ease, padding 0.5s ease, box-shadow 0.5s ease, backdrop-filter 0.5s ease",
         }}
       >
-        {/* Top border line - only on homepage before scroll */}
-        {isHomePage && !effectiveIsScrolled && (
+        {/* Top border line - only on homepage before scroll and when menu is closed */}
+        {isHomePage && !effectiveIsScrolled && !isMobileMenuOpen && (
           <div
             style={{
               position: "absolute",
@@ -104,7 +105,7 @@ export function Navbar() {
 
         <div style={{ maxWidth: "1600px", margin: "0 auto", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           {/* Logo */}
-          <Link href="/" style={{ position: "relative", zIndex: 50, flexShrink: 0 }}>
+          <Link href="/" style={{ position: "relative", zIndex: 10001, flexShrink: 0 }} onClick={() => setIsMobileMenuOpen(false)}>
             <Image
               src="/logo-prooptica.svg"
               alt="Prooptica"
@@ -204,177 +205,210 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(true)}
-            className="lg:hidden relative p-3 text-white/60 hover:text-[#E31F25]"
+          {/* Mobile Menu Toggle - Animated */}
+          <motion.button
+            initial={false}
+            animate={isMobileMenuOpen ? "open" : "closed"}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden relative p-3 text-white/60 hover:text-[#E31F25] z-[10001]"
             style={{ transition: "color 0.3s ease" }}
           >
-            <Menu className="h-5 w-5" />
-          </button>
+            <MotionConfig transition={{ duration: 0.5, ease: "easeInOut" }}>
+              <motion.span
+                style={{
+                  position: "absolute",
+                  height: "2px",
+                  width: "20px",
+                  backgroundColor: "currentColor",
+                  top: "50%",
+                  left: "50%",
+                  x: "-50%",
+                  y: "-50%",
+                }}
+                variants={{
+                  open: { rotate: 45, y: "-50%" },
+                  closed: { rotate: 0, y: -6 },
+                }}
+              />
+              <motion.span
+                style={{
+                  position: "absolute",
+                  height: "2px",
+                  width: "20px",
+                  backgroundColor: "currentColor",
+                  top: "50%",
+                  left: "50%",
+                  x: "-50%",
+                  y: "-50%",
+                }}
+                variants={{
+                  open: { opacity: 0 },
+                  closed: { opacity: 1 },
+                }}
+              />
+              <motion.span
+                style={{
+                  position: "absolute",
+                  height: "2px",
+                  width: "20px",
+                  backgroundColor: "currentColor",
+                  top: "50%",
+                  left: "50%",
+                  x: "-50%",
+                  y: "-50%",
+                }}
+                variants={{
+                  open: { rotate: -45, y: "-50%" },
+                  closed: { rotate: 0, y: 6 },
+                }}
+              />
+            </MotionConfig>
+          </motion.button>
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 10000,
-            display: "block",
-          }}
-          className="lg:hidden"
-        >
-          {/* Backdrop */}
-          <div
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: "0%" }}
+            exit={{ y: "-100%" }}
+            transition={{ type: "tween", duration: 0.4, ease: "easeInOut" }}
             style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
-              backdropFilter: "blur(8px)",
-            }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-
-          {/* Menu Panel */}
-          <div
-            style={{
-              position: "absolute",
-              right: 0,
+              position: "fixed",
               top: 0,
+              left: 0,
+              right: 0,
               bottom: 0,
-              width: "100%",
+              zIndex: 9998, // Just below the navbar
               backgroundColor: "#1a1a1a",
               display: "flex",
               flexDirection: "column",
+              paddingTop: "80px", // Space for the fixed header
             }}
+            className="lg:hidden"
           >
-            {/* Header */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-              <Image src="/logo-prooptica.svg" alt="Prooptica" width={100} height={24} style={{ height: "20px", width: "auto" }} />
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-white/40 hover:text-[#E31F25]" style={{ transition: "color 0.3s ease" }}>
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+            {/* Scrollable Content */}
+            <div style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column" }}>
+              {/* Navigation */}
+              <div style={{ padding: "20px", flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+                  <span style={{ fontSize: "9px", fontWeight: 500, letterSpacing: "0.4em", textTransform: "uppercase", color: "#E31F25" }}>Menu</span>
+                  <div style={{ height: "1px", flex: 1, background: "linear-gradient(to right, rgba(227,31,37,0.3), transparent)" }} />
+                </div>
 
-            {/* Navigation */}
-            <div style={{ flex: 1, overflowY: "auto", padding: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-                <span style={{ fontSize: "9px", fontWeight: 500, letterSpacing: "0.4em", textTransform: "uppercase", color: "#E31F25" }}>Menu</span>
-                <div style={{ height: "1px", flex: 1, background: "linear-gradient(to right, rgba(227,31,37,0.3), transparent)" }} />
+                <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                  {NAV_ITEMS.map((item, i) => (
+                    <div key={item.title}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          padding: "12px 0",
+                          borderBottom: "1px solid rgba(255,255,255,0.05)",
+                          color: pathname === item.href ? "#E31F25" : "rgba(255,255,255,0.8)",
+                          textDecoration: "none",
+                          transition: "color 0.3s ease",
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
+                            {item.title}
+                          </span>
+                        </div>
+                        <ArrowUpRight className="w-4 h-4 opacity-50" />
+                      </Link>
+
+                      {item.items && (
+                        <div style={{ paddingLeft: "40px", paddingTop: "8px", paddingBottom: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                          {item.items.map((subItem) => (
+                            <Link
+                              key={subItem.title}
+                              href={subItem.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "12px",
+                                padding: "6px 0",
+                                fontSize: "13px",
+                                color: "rgba(255,255,255,0.4)",
+                                textDecoration: "none",
+                                transition: "color 0.3s ease",
+                              }}
+                            >
+                              <span style={{ width: "12px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                              {subItem.title}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </nav>
               </div>
 
-              <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                {NAV_ITEMS.map((item, i) => (
-                  <div key={item.title}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "12px 0",
-                        borderBottom: "1px solid rgba(255,255,255,0.05)",
-                        color: pathname === item.href ? "#E31F25" : "rgba(255,255,255,0.8)",
-                        textDecoration: "none",
-                        transition: "color 0.3s ease",
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
-                          {item.title}
-                        </span>
-                      </div>
-                      <ArrowUpRight className="w-4 h-4 opacity-50" />
-                    </Link>
+              {/* Footer */}
+              <div style={{ padding: "20px", borderTop: "1px solid rgba(255,255,255,0.05)", backgroundColor: "#1a1a1a" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "20px" }}>
+                  <a href="tel:+48227200800" style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                    <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                      <Phone className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Zadzwoń</span>
+                      <span style={{ fontWeight: 500, fontSize: "13px" }}>+48 22 720 08 00</span>
+                    </div>
+                  </a>
 
-                    {item.items && (
-                      <div style={{ paddingLeft: "40px", paddingTop: "8px", paddingBottom: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
-                        {item.items.map((subItem) => (
-                          <Link
-                            key={subItem.title}
-                            href={subItem.href}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "12px",
-                              padding: "6px 0",
-                              fontSize: "13px",
-                              color: "rgba(255,255,255,0.4)",
-                              textDecoration: "none",
-                              transition: "color 0.3s ease",
-                            }}
-                          >
-                            <span style={{ width: "12px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
-                            {subItem.title}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </nav>
-            </div>
+                  <Link href="/salony" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                    <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                      <MapPin className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Lokalizacje</span>
+                      <span style={{ fontWeight: 500, fontSize: "13px" }}>4 salony</span>
+                    </div>
+                  </Link>
+                </div>
 
-            {/* Footer */}
-            <div style={{ padding: "20px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "20px" }}>
-                <a href="tel:+48227200800" style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
-                  <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    <Phone className="h-3.5 w-3.5" />
-                  </div>
-                  <div>
-                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Zadzwoń</span>
-                    <span style={{ fontWeight: 500, fontSize: "13px" }}>+48 22 720 08 00</span>
-                  </div>
-                </a>
-
-                <Link href="/salony" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
-                  <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    <MapPin className="h-3.5 w-3.5" />
-                  </div>
-                  <div>
-                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Lokalizacje</span>
-                    <span style={{ fontWeight: 500, fontSize: "13px" }}>4 salony</span>
-                  </div>
+                <Link href="/umow-wizyte" onClick={() => setIsMobileMenuOpen(false)} className="group/mobile block">
+                  <button
+                    className="relative overflow-hidden w-full cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-8px_rgba(227,31,37,0.5)] hover:brightness-110"
+                    style={{
+                      padding: "14px",
+                      backgroundColor: "#E31F25",
+                      border: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
+                    <span className="absolute inset-0 border border-white/20" />
+                    <span style={{ position: "relative", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
+                      Umów wizytę
+                    </span>
+                  </button>
                 </Link>
-              </div>
 
-              <Link href="/umow-wizyte" onClick={() => setIsMobileMenuOpen(false)} className="group/mobile block">
-                <button
-                  className="relative overflow-hidden w-full cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-8px_rgba(227,31,37,0.5)] hover:brightness-110"
-                  style={{
-                    padding: "14px",
-                    backgroundColor: "#E31F25",
-                    border: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
-                  <span className="absolute inset-0 border border-white/20" />
-                  <span style={{ position: "relative", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
-                    Umów wizytę
-                  </span>
-                </button>
-              </Link>
-
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginTop: "16px" }}>
-                <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
-                <span style={{ fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Od 2004 roku</span>
-                <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginTop: "16px" }}>
+                  <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                  <span style={{ fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Od 2004 roku</span>
+                  <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
