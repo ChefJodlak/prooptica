@@ -251,21 +251,21 @@ export function Navbar() {
             }}
           >
             {/* Header */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-              <Image src="/logo-prooptica.svg" alt="Prooptica" width={120} height={28} style={{ height: "24px", width: "auto" }} />
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-3 text-white/40 hover:text-[#E31F25]" style={{ transition: "color 0.3s ease" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+              <Image src="/logo-prooptica.svg" alt="Prooptica" width={100} height={24} style={{ height: "20px", width: "auto" }} />
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-white/40 hover:text-[#E31F25]" style={{ transition: "color 0.3s ease" }}>
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             {/* Navigation */}
-            <div style={{ flex: 1, overflowY: "auto", padding: "40px 32px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "40px" }}>
+            <div style={{ flex: 1, overflowY: "auto", padding: "20px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "9px", fontWeight: 500, letterSpacing: "0.4em", textTransform: "uppercase", color: "#E31F25" }}>Menu</span>
                 <div style={{ height: "1px", flex: 1, background: "linear-gradient(to right, rgba(227,31,37,0.3), transparent)" }} />
               </div>
 
-              <nav style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 {NAV_ITEMS.map((item, i) => (
                   <div key={item.title}>
                     <Link
@@ -275,18 +275,18 @@ export function Navbar() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        padding: "20px 0",
+                        padding: "12px 0",
                         borderBottom: "1px solid rgba(255,255,255,0.05)",
                         color: pathname === item.href ? "#E31F25" : "rgba(255,255,255,0.8)",
                         textDecoration: "none",
                         transition: "color 0.3s ease",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "24px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
                           {String(i + 1).padStart(2, "0")}
                         </span>
-                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "24px", fontWeight: 300, letterSpacing: "0.05em" }}>
+                        <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
                           {item.title}
                         </span>
                       </div>
@@ -294,7 +294,7 @@ export function Navbar() {
                     </Link>
 
                     {item.items && (
-                      <div style={{ paddingLeft: "64px", paddingTop: "16px", paddingBottom: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
+                      <div style={{ paddingLeft: "40px", paddingTop: "8px", paddingBottom: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
                         {item.items.map((subItem) => (
                           <Link
                             key={subItem.title}
@@ -304,14 +304,14 @@ export function Navbar() {
                               display: "flex",
                               alignItems: "center",
                               gap: "12px",
-                              padding: "8px 0",
-                              fontSize: "14px",
+                              padding: "6px 0",
+                              fontSize: "13px",
                               color: "rgba(255,255,255,0.4)",
                               textDecoration: "none",
                               transition: "color 0.3s ease",
                             }}
                           >
-                            <span style={{ width: "16px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                            <span style={{ width: "12px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
                             {subItem.title}
                           </Link>
                         ))}
@@ -323,25 +323,25 @@ export function Navbar() {
             </div>
 
             {/* Footer */}
-            <div style={{ padding: "32px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "32px", marginBottom: "32px" }}>
-                <a href="tel:+48227200800" style={{ display: "flex", alignItems: "center", gap: "16px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
-                  <div style={{ padding: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    <Phone className="h-4 w-4" />
+            <div style={{ padding: "20px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "20px" }}>
+                <a href="tel:+48227200800" style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                  <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    <Phone className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "4px" }}>Zadzwoń</span>
-                    <span style={{ fontWeight: 500, fontSize: "14px" }}>+48 22 720 08 00</span>
+                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Zadzwoń</span>
+                    <span style={{ fontWeight: 500, fontSize: "13px" }}>+48 22 720 08 00</span>
                   </div>
                 </a>
 
-                <Link href="/salony" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "16px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
-                  <div style={{ padding: "12px", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    <MapPin className="h-4 w-4" />
+                <Link href="/salony" onClick={() => setIsMobileMenuOpen(false)} style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.5)", textDecoration: "none" }}>
+                  <div style={{ padding: "10px", border: "1px solid rgba(255,255,255,0.1)" }}>
+                    <MapPin className="h-3.5 w-3.5" />
                   </div>
                   <div>
-                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "4px" }}>Lokalizacje</span>
-                    <span style={{ fontWeight: 500, fontSize: "14px" }}>4 salony</span>
+                    <span style={{ display: "block", fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "2px" }}>Lokalizacje</span>
+                    <span style={{ fontWeight: 500, fontSize: "13px" }}>4 salony</span>
                   </div>
                 </Link>
               </div>
@@ -350,7 +350,7 @@ export function Navbar() {
                 <button
                   className="relative overflow-hidden w-full cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-8px_rgba(227,31,37,0.5)] hover:brightness-110"
                   style={{
-                    padding: "20px",
+                    padding: "14px",
                     backgroundColor: "#E31F25",
                     border: "none",
                     display: "flex",
@@ -360,16 +360,16 @@ export function Navbar() {
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
                   <span className="absolute inset-0 border border-white/20" />
-                  <span style={{ position: "relative", fontSize: "12px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
+                  <span style={{ position: "relative", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
                     Umów wizytę
                   </span>
                 </button>
               </Link>
 
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginTop: "24px" }}>
-                <div style={{ height: "1px", width: "32px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "12px", marginTop: "16px" }}>
+                <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
                 <span style={{ fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>Od 2004 roku</span>
-                <div style={{ height: "1px", width: "32px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                <div style={{ height: "1px", width: "24px", backgroundColor: "rgba(255,255,255,0.1)" }} />
               </div>
             </div>
           </div>
