@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 import { Phone, Clock, Calendar, ExternalLink, ArrowRight, MapPin } from "lucide-react"
 import Link from "next/link"
 import type { Location } from "@/lib/constants/locations"
@@ -24,7 +24,7 @@ function getBookingSalonId(locationId: string): string {
   return mapping[locationId] || locationId
 }
 
-const actionsVariants = {
+const actionsVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
