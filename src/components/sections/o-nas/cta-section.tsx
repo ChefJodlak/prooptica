@@ -4,7 +4,6 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { Sparkles, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { noiseTextureStyle } from "./animation-variants"
 
 export function CtaSection() {
   const ctaRef = useRef<HTMLDivElement>(null)
@@ -17,10 +16,9 @@ export function CtaSection() {
           initial={{ opacity: 0, y: 40, scale: 0.98 }}
           animate={isCtaInView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-[#1a1a1a] p-6 lg:p-20 overflow-hidden text-center"
+          className="relative bg-[#050505] p-6 lg:p-20 overflow-hidden text-center"
         >
-          {/* Subtle texture overlay */}
-          <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
+
           
           {/* Gradient orb */}
           <motion.div

@@ -67,9 +67,14 @@ export function ArticlesSection() {
               <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
             </div>
 
-            <h2 className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left">
+            <h2 className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,5vw,3.5rem)] font-light text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left pb-4 pr-4">
               Wiedza o zdrowym{" "}
-              <span className="italic text-[#E31F25] font-medium">wzroku</span>
+              <span className="relative inline-block">
+                <span className="italic text-[#E31F25] font-medium">wzroku</span>
+                <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                  <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+                </svg>
+              </span>
             </h2>
           </div>
 
@@ -77,15 +82,6 @@ export function ArticlesSection() {
             <p className="text-[#666] text-sm sm:text-base leading-relaxed font-light max-w-xs lg:text-right">
               Porady ekspertów, nowości ze świata optyki i inspiracje dla Twoich oczu.
             </p>
-            <Link 
-              href="/artykuly"
-              className="group inline-flex items-center gap-3"
-            >
-              <span className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] text-[#1a1a1a] uppercase font-medium">
-                Wszystkie
-              </span>
-              <div className="w-5 sm:w-6 h-px bg-[#1a1a1a] group-hover:w-8 sm:group-hover:w-10 group-hover:bg-[#E31F25] transition-all duration-200" />
-            </Link>
           </div>
         </div>
 

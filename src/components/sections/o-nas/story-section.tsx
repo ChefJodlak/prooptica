@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { containerVariants, fadeUpVariants, scaleInVariants, noiseTextureStyle } from "./animation-variants"
+import { containerVariants, fadeUpVariants, scaleInVariants } from "./animation-variants"
 
 export function StorySection() {
   const storyRef = useRef<HTMLDivElement>(null)
@@ -13,8 +13,7 @@ export function StorySection() {
 
   return (
     <section ref={storyRef} className="relative py-20 lg:py-32 bg-[#F8F7F4] overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
+
       
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24">
         <motion.div 

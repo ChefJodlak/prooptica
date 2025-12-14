@@ -101,6 +101,12 @@ export function LensesSection() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8"
           >
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent origin-right lg:hidden" 
+            />
             <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
               Technologie
             </span>
@@ -120,9 +126,15 @@ export function LensesSection() {
                   initial={{ y: "100%" }}
                   animate={isInView ? { y: 0 } : {}}
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em]"
+                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] pb-4 pr-4"
                 >
-                  Soczewki nowej <span className="font-medium italic text-[#E31F25]">generacji</span>
+                  Soczewki nowej{" "}
+                  <span className="relative inline-block">
+                    <span className="font-medium italic text-[#E31F25]">generacji</span>
+                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                      <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+                    </svg>
+                  </span>
                 </motion.h2>
               </div>
             </div>
@@ -341,14 +353,6 @@ export function LensesSection() {
 
             {/* CTA */}
             <div className="flex items-center gap-4 sm:gap-8">
-              <Link href="/umow-wizyte" className="group/btn">
-                <button className="relative overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white px-5 sm:px-8 py-2.5 sm:py-4 text-[9px] sm:text-[11px] font-semibold tracking-[0.1em] sm:tracking-[0.15em] uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.4)] hover:scale-[1.02]">
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
-                  <span className="absolute inset-0 border border-white/20" />
-                  <span className="relative">Umów konsultację</span>
-                </button>
-              </Link>
-              
               <Link href="/marki" className="group inline-flex items-center gap-3 sm:gap-6">
                 <span className="text-[#1a1a1a] text-[9px] sm:text-[11px] font-medium tracking-[0.1em] sm:tracking-[0.2em] uppercase group-hover:text-[#E31F25] transition-colors duration-300">
                   Marki

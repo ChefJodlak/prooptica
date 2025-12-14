@@ -9,7 +9,6 @@ import {
   ArticlesGrid,
   NewsletterCta,
 } from "@/components/sections/artykuly"
-import { TextureOverlay } from "@/components/sections/badanie-wzroku/texture-overlay"
 import type { Article } from "./types"
 
 interface ArticlesClientProps {
@@ -36,7 +35,6 @@ export function ArticlesClient({ articles }: ArticlesClientProps) {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
-      <TextureOverlay fixed />
 
       <HeroSection />
 

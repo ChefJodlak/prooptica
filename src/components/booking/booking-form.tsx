@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import Link from "next/link"
 import { 
   Calendar, 
@@ -25,6 +25,7 @@ interface BookingFormProps {
   specialist: Specialist
   salon: Salon
   onBack: () => void
+  isMobileView?: boolean
 }
 
 export function BookingForm({ 
@@ -32,7 +33,8 @@ export function BookingForm({
   date,
   specialist,
   salon,
-  onBack
+  onBack,
+  isMobileView = false
 }: BookingFormProps) {
   const [formData, setFormData] = useState<BookingFormData>({
     firstName: '',
@@ -45,6 +47,14 @@ export function BookingForm({
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState<Partial<Record<keyof BookingFormData, string>>>({})
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null)
+
+  useEffect(() => {
+    // Only look for portal target if we are in mobile view
+    if (isMobileView) {
+      setPortalTarget(document.getElementById('mobile-footer-portal'))
+    }
+  }, [isMobileView])
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof BookingFormData, string>> = {}
@@ -104,10 +114,70 @@ export function BookingForm({
     year: 'numeric'
   })
 
+  // Action Buttons Component (reused)
+  const ActionButtons = ({ isMobile = false }: { isMobile?: boolean }) => (
+    <div className={cn(
+      "flex gap-3",
+      isMobile ? "flex-row w-full max-w-[1600px] mx-auto" : "flex-col sm:flex-row pt-4"
+    )}>
+      <button
+        type="button"
+        onClick={onBack}
+        className={cn(
+          "font-semibold tracking-[0.2em] uppercase text-[#1a1a1a] ring-1 ring-inset ring-[#e0ded8] hover:ring-[#E31F25] transition-all duration-300",
+          isMobile 
+            ? "px-4 py-3 text-[10px] rounded-lg bg-white" 
+            : "px-6 py-3 text-[10px] lg:rounded-none"
+        )}
+      >
+        <span className="flex items-center justify-center gap-2">
+          <ChevronLeft className="w-4 h-4" />
+          <span className={cn(isMobile ? "hidden sm:inline" : "inline")}>Wróć</span>
+        </span>
+      </button>
+      
+      <button
+        type={isMobile ? "button" : "submit"} // On mobile, we trigger form submit manually via ID referencing or programmatic submit if outside form
+        onClick={isMobile ? (e) => {
+          // Manually trigger submit on the form
+          const form = document.getElementById('booking-form') as HTMLFormElement;
+          if (form) {
+            // Create a synthetic event to pass to handleSubmit or requestSubmit
+            if (form.requestSubmit) {
+              form.requestSubmit();
+            } else {
+              form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+            }
+          }
+        } : undefined}
+        disabled={isSubmitting}
+        className={cn(
+          "flex-1 font-semibold tracking-[0.2em] uppercase transition-all duration-500",
+          "bg-[#E31F25] text-white hover:bg-[#1a1a1a] hover:text-white",
+          isSubmitting && "opacity-50 cursor-wait",
+          isMobile 
+            ? "px-6 py-3 text-[10px] rounded-lg" 
+            : "px-6 py-3 text-[10px] lg:rounded-none"
+        )}
+      >
+        {isSubmitting ? (
+          <span className="flex items-center justify-center gap-2">
+            <Loader2 className="w-4 h-4 animate-spin" />
+            Rezerwuję...
+          </span>
+        ) : (
+          <span className="flex items-center justify-center gap-2">
+            Zarezerwuj wizytę
+          </span>
+        )}
+      </button>
+    </div>
+  )
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 pb-8 lg:pb-0">
       {/* Compact Appointment Summary */}
-      <div className="bg-[#1a1a1a] p-4 lg:p-5">
+      <div className="bg-[#1a1a1a] p-4 lg:p-5 rounded-lg lg:rounded-none shadow-md lg:shadow-none">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#E31F25]" />
@@ -126,7 +196,7 @@ export function BookingForm({
       </div>
 
       {/* Compact Booking Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form id="booking-form" onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* First Name */}
           <div>
@@ -138,8 +208,9 @@ export function BookingForm({
               value={formData.firstName}
               onChange={(e) => handleInputChange('firstName', e.target.value)}
               className={cn(
-                "w-full px-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
+                "w-full px-4 py-3 lg:py-2.5 bg-white ring-1 ring-inset transition-all duration-300 rounded-md lg:rounded-none",
                 "focus:outline-none focus:ring-[#E31F25]",
+                "text-base lg:text-sm", // Prevent zoom on mobile
                 errors.firstName ? "ring-red-400" : "ring-[#e0ded8]"
               )}
               placeholder="Jan"
@@ -162,8 +233,9 @@ export function BookingForm({
               value={formData.lastName}
               onChange={(e) => handleInputChange('lastName', e.target.value)}
               className={cn(
-                "w-full px-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
+                "w-full px-4 py-3 lg:py-2.5 bg-white ring-1 ring-inset transition-all duration-300 rounded-md lg:rounded-none",
                 "focus:outline-none focus:ring-[#E31F25]",
+                "text-base lg:text-sm",
                 errors.lastName ? "ring-red-400" : "ring-[#e0ded8]"
               )}
               placeholder="Kowalski"
@@ -195,8 +267,9 @@ export function BookingForm({
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
                 className={cn(
-                  "w-full pl-11 pr-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
+                  "w-full pl-11 pr-4 py-3 lg:py-2.5 bg-white ring-1 ring-inset transition-all duration-300 rounded-md lg:rounded-none",
                   "focus:outline-none focus:ring-[#E31F25]",
+                  "text-base lg:text-sm",
                   errors.phone ? "ring-red-400" : "ring-[#e0ded8]"
                 )}
                 placeholder="+48 123 456 789"
@@ -222,8 +295,9 @@ export function BookingForm({
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 className={cn(
-                  "w-full pl-11 pr-4 py-2.5 bg-white ring-1 ring-inset transition-all duration-300",
+                  "w-full pl-11 pr-4 py-3 lg:py-2.5 bg-white ring-1 ring-inset transition-all duration-300 rounded-md lg:rounded-none",
                   "focus:outline-none focus:ring-[#E31F25]",
+                  "text-base lg:text-sm",
                   errors.email ? "ring-red-400" : "ring-[#e0ded8]"
                 )}
                 placeholder="jan.kowalski@email.pl"
@@ -247,16 +321,19 @@ export function BookingForm({
             value={formData.notes}
             onChange={(e) => handleInputChange('notes', e.target.value)}
             rows={2}
-            className="w-full px-4 py-2.5 bg-white ring-1 ring-inset ring-[#e0ded8] transition-all duration-300 focus:outline-none focus:ring-[#E31F25] resize-none"
+            className={cn(
+              "w-full px-4 py-3 lg:py-2.5 bg-white ring-1 ring-inset ring-[#e0ded8] transition-all duration-300 focus:outline-none focus:ring-[#E31F25] resize-none rounded-md lg:rounded-none",
+              "text-base lg:text-sm"
+            )}
             placeholder="Dodatkowe informacje lub pytania..."
           />
         </div>
 
         {/* Checkboxes */}
-        <div className="space-y-3 pt-3 border-t border-[#e0ded8]">
+        <div className="space-y-4 pt-4 border-t border-[#e0ded8] pb-4 lg:pb-0">
           {/* Terms Checkbox */}
           <label className={cn(
-            "flex items-start gap-2.5 cursor-pointer group",
+            "flex items-start gap-3 cursor-pointer group",
             errors.acceptTerms && "text-red-500"
           )}>
             <div className="relative mt-0.5">
@@ -267,13 +344,13 @@ export function BookingForm({
                 className="sr-only peer"
               />
               <div className={cn(
-                "w-4 h-4 ring-1 ring-inset transition-all duration-300",
+                "w-5 h-5 lg:w-4 lg:h-4 ring-1 ring-inset transition-all duration-300 rounded lg:rounded-none",
                 "peer-checked:bg-[#E31F25] peer-checked:ring-[#E31F25]",
                 errors.acceptTerms ? "ring-red-400" : "ring-[#e0ded8]",
                 "group-hover:ring-[#E31F25]/50"
               )}>
                 {formData.acceptTerms && (
-                  <Check className="w-3 h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
+                  <Check className="w-4 h-4 lg:w-3 lg:h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
                 )}
               </div>
             </div>
@@ -291,7 +368,7 @@ export function BookingForm({
           </label>
 
           {/* SMS Checkbox */}
-          <label className="flex items-start gap-2.5 cursor-pointer group">
+          <label className="flex items-start gap-3 cursor-pointer group">
             <div className="relative mt-0.5">
               <input
                 type="checkbox"
@@ -300,12 +377,12 @@ export function BookingForm({
                 className="sr-only peer"
               />
               <div className={cn(
-                "w-4 h-4 ring-1 ring-inset ring-[#e0ded8] transition-all duration-300",
+                "w-5 h-5 lg:w-4 lg:h-4 ring-1 ring-inset ring-[#e0ded8] transition-all duration-300 rounded lg:rounded-none",
                 "peer-checked:bg-[#E31F25] peer-checked:ring-[#E31F25]",
                 "group-hover:ring-[#E31F25]/50"
               )}>
                 {formData.acceptSms && (
-                  <Check className="w-3 h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
+                  <Check className="w-4 h-4 lg:w-3 lg:h-3 text-[#1a1a1a] absolute top-0.5 left-0.5" />
                 )}
               </div>
             </div>
@@ -315,49 +392,18 @@ export function BookingForm({
           </label>
         </div>
 
-        {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 pt-4">
-          <button
-            type="button"
-            onClick={onBack}
-            className="px-6 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase text-[#1a1a1a] ring-1 ring-inset ring-[#e0ded8] hover:ring-[#E31F25] transition-all duration-300"
-          >
-            <span className="flex items-center justify-center gap-2">
-              <ChevronLeft className="w-4 h-4" />
-              Wróć
-            </span>
-          </button>
-          
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={cn(
-              "flex-1 px-6 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase transition-all duration-500",
-              "bg-[#E31F25] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white",
-              isSubmitting && "opacity-50 cursor-wait"
-            )}
-          >
-            {isSubmitting ? (
-              <span className="flex items-center justify-center gap-2">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                Rezerwuję...
-              </span>
-            ) : (
-              <span className="flex items-center justify-center gap-2">
-                Zarezerwuj wizytę
-                <ExternalLink className="w-4 h-4" />
-              </span>
-            )}
-          </button>
-        </div>
-
-        {/* External Link Info - inline */}
-        <p className="text-[10px] text-[#737373] font-light flex items-center gap-2">
-          <ExternalLink className="w-3 h-3 text-[#E31F25] flex-shrink-0" />
-          Po kliknięciu zostaniesz przekierowany do zewnętrznego systemu rezerwacji.
-        </p>
+        {/* Actions - Rendered via Portal on Mobile, inline on Desktop */}
+        {portalTarget ? (
+          createPortal(
+            <div className="p-4 bg-white border-t border-[#e0ded8] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] w-full">
+              <ActionButtons isMobile={true} />
+            </div>,
+            portalTarget
+          )
+        ) : (
+          <ActionButtons />
+        )}
       </form>
     </div>
   )
 }
-

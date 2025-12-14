@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Calendar, Clock, ChevronLeft, ChevronRight, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -21,6 +21,8 @@ export function CalendarView({
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [isCurrentWeek, setIsCurrentWeek] = useState(true)
   const [weekNavigating, setWeekNavigating] = useState(false)
+  
+  const daysContainerRef = useRef<HTMLDivElement>(null)
 
   const fetchCalendar = async (weekStart?: string, direction?: 'next' | 'prev') => {
     setLoading(true)
@@ -66,16 +68,52 @@ export function CalendarView({
     fetchCalendar()
   }, [specialistId])
 
+  // Scroll handling effect
+  useEffect(() => {
+    if (!loading && calendarData && daysContainerRef.current) {
+      if (calendarData.isCurrentWeek) {
+        // If current week, try to scroll to selected day (which is usually today or first available)
+        // Or if today exists in the list
+        const todayStr = new Date().toISOString().split('T')[0];
+        const dayIndex = calendarData.days.findIndex(d => d.date === todayStr);
+        
+        // If today is found, scroll to it. If not found (e.g. today is Sunday and not in list, or just fall back to selectedDate)
+        // Let's prioritize selectedDate since that's what's active
+        const targetDate = selectedDate || todayStr;
+        const targetIndex = calendarData.days.findIndex(d => d.date === targetDate);
+        
+        if (targetIndex !== -1) {
+          // Calculate scroll position to center the element if possible, or just ensure it's visible
+          // For mobile where items are ~80px wide (min-w-[80px])
+          // We can just scroll to the element's offsetLeft minus some padding
+          const container = daysContainerRef.current;
+          const children = container.children;
+          if (children[targetIndex]) {
+            const element = children[targetIndex] as HTMLElement;
+            // Scroll to center: element.offsetLeft - (container.width / 2) + (element.width / 2)
+            const scrollLeft = element.offsetLeft - (container.clientWidth / 2) + (element.clientWidth / 2);
+            container.scrollTo({ left: Math.max(0, scrollLeft), behavior: 'smooth' });
+          }
+        }
+      } else {
+        // Not current week - reset scroll to start
+        daysContainerRef.current.scrollTo({ left: 0, behavior: 'smooth' })
+      }
+    }
+  }, [calendarData, loading, selectedDate]) // Re-run when data loads or selected date changes significantly (though initially selectedDate is set right after data)
+
   const handleNextWeek = async () => {
     if (!calendarData?.nextWeekStart || weekNavigating) return
     setWeekNavigating(true)
     await fetchCalendar(calendarData.nextWeekStart, 'next')
+    // Scroll reset is handled by useEffect now
   }
 
   const handlePrevWeek = async () => {
     if (!calendarData?.prevWeekStart || isCurrentWeek || weekNavigating) return
     setWeekNavigating(true)
     await fetchCalendar(calendarData.prevWeekStart, 'prev')
+    // Scroll reset is handled by useEffect now
   }
 
   if (loading) {
@@ -114,31 +152,27 @@ export function CalendarView({
   const selectedDay = calendarData.days.find(day => day.date === selectedDate)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 lg:space-y-8">
       {/* Week Navigation */}
       <div className="flex items-center justify-between">
         {/* Previous week button - only show if NOT current week */}
-        {!isCurrentWeek ? (
-          <button
-            onClick={handlePrevWeek}
-            disabled={weekNavigating}
-            className={cn(
-              "flex items-center gap-2 text-sm transition-all duration-300",
-              weekNavigating
-                ? "text-[#a3a3a3] cursor-wait"
-                : "text-[#1a1a1a] hover:text-[#E31F25]"
-            )}
-          >
-            {weekNavigating ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <ChevronLeft className="w-4 h-4" />
-            )}
-            <span className="hidden sm:inline font-light">Poprzedni tydzień</span>
-          </button>
-        ) : (
-          <div className="w-[140px]" /> // Placeholder to maintain layout
-        )}
+        <button
+          onClick={handlePrevWeek}
+          disabled={isCurrentWeek || weekNavigating}
+          className={cn(
+            "flex items-center gap-2 text-sm transition-all duration-300 px-2 py-1",
+            isCurrentWeek || weekNavigating
+              ? "text-[#e0ded8] cursor-not-allowed opacity-50"
+              : "text-[#1a1a1a] hover:text-[#E31F25]"
+          )}
+        >
+          {weekNavigating && !calendarData.nextWeekStart ? ( // odd logic just to show spinner somewhere
+             <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <ChevronLeft className="w-4 h-4" />
+          )}
+          <span className="hidden sm:inline font-light">Poprzedni</span>
+        </button>
         
         <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#E31F25]">
           Wybierz datę
@@ -148,13 +182,13 @@ export function CalendarView({
           onClick={handleNextWeek}
           disabled={!calendarData.nextWeekStart || weekNavigating}
           className={cn(
-            "flex items-center gap-2 text-sm transition-all duration-300",
+            "flex items-center gap-2 text-sm transition-all duration-300 px-2 py-1",
             calendarData.nextWeekStart && !weekNavigating
               ? "text-[#1a1a1a] hover:text-[#E31F25]" 
               : "text-[#a3a3a3] cursor-not-allowed"
           )}
         >
-          <span className="hidden sm:inline font-light">Następny tydzień</span>
+          <span className="hidden sm:inline font-light">Następny</span>
           {weekNavigating ? (
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
@@ -163,8 +197,11 @@ export function CalendarView({
         </button>
       </div>
 
-      {/* Day Selector */}
-      <div className="grid grid-cols-7 gap-2">
+      {/* Day Selector - Horizontal Scroll on Mobile */}
+      <div 
+        ref={daysContainerRef}
+        className="flex lg:grid lg:grid-cols-7 gap-2 overflow-x-auto pb-4 lg:pb-0 snap-x hide-scrollbar"
+      >
         {calendarData.days.map((day) => {
           const hasAvailableSlots = day.slots.some(slot => slot.available)
           const isSelected = selectedDate === day.date
@@ -179,8 +216,9 @@ export function CalendarView({
               whileHover={hasAvailableSlots ? { scale: 1.05, y: -2 } : {}}
               whileTap={hasAvailableSlots ? { scale: 0.95 } : {}}
               disabled={!hasAvailableSlots}
+              id={`day-${day.date}`} // Add ID for easier selection if needed, though index works too
               className={cn(
-                "relative py-4 px-2 text-center transition-all duration-300",
+                "relative py-4 px-2 text-center transition-all duration-300 min-w-[80px] lg:min-w-0 flex-shrink-0 lg:flex-shrink snap-center rounded-lg lg:rounded-none",
                 "ring-1 ring-inset",
                 isSelected
                   ? "bg-[#1a1a1a] ring-[#E31F25] shadow-lg"
@@ -223,10 +261,10 @@ export function CalendarView({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="bg-white ring-1 ring-[#e0ded8] p-6"
+            className="bg-white ring-1 ring-[#e0ded8] p-4 lg:p-6 rounded-lg lg:rounded-none"
           >
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#e0ded8]">
-              <div className="p-3 bg-[#1a1a1a]">
+              <div className="p-3 bg-[#1a1a1a] rounded-lg lg:rounded-none">
                 <Clock className="w-5 h-5 text-[#E31F25]" />
               </div>
               <div>
@@ -242,7 +280,7 @@ export function CalendarView({
               </div>
             </div>
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+            <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-2">
               {selectedDay.slots.map((slot, idx) => (
                 <motion.button
                   key={`${slot.time}-${idx}`}
@@ -251,7 +289,7 @@ export function CalendarView({
                   whileHover={slot.available ? { scale: 1.08, y: -2 } : {}}
                   whileTap={slot.available ? { scale: 0.95 } : {}}
                   className={cn(
-                    "py-3 px-4 text-sm font-medium transition-all duration-300",
+                    "py-3 px-2 text-sm font-medium transition-all duration-300 rounded-md lg:rounded-none",
                     "ring-1 ring-inset",
                     slot.available
                       ? "bg-white ring-[#E31F25]/30 text-[#1a1a1a] hover:bg-[#E31F25] hover:text-[#1a1a1a] hover:ring-[#E31F25] hover:shadow-md cursor-pointer"
@@ -274,4 +312,3 @@ export function CalendarView({
     </div>
   )
 }
-

@@ -72,10 +72,10 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center">
         <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full h-full sm:h-auto">
-          <div className="max-w-3xl h-full sm:h-auto flex flex-col justify-between sm:block pb-12 pt-32 sm:py-0">
+          <div className="max-w-3xl h-full sm:h-auto flex flex-col justify-between sm:block pb-12 pt-96 sm:py-0">
             
             {/* Text Content - Left aligned on mobile */}
-            <div className="flex-1 flex flex-col justify-center sm:block text-left">
+            <div className="flex-1 flex flex-col justify-center sm:block text-center sm:text-left">
               {/* Headline */}
               <div className="overflow-hidden mb-0 sm:mb-3">
                 <h1 
@@ -115,7 +115,7 @@ export function Hero() {
               {/* Description */}
               <p 
                 className={cn(
-                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light sm:mx-0",
+                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light mx-auto sm:mx-0",
                   !isSafari && "transition-all duration-500 ease-out"
                 )}
                 style={isSafari ? {} : {
@@ -142,11 +142,9 @@ export function Hero() {
               }}
             >
               <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">
-                <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white px-8 sm:px-10 py-4 sm:py-5 text-[11px] font-semibold tracking-[0.2em] uppercase cursor-pointer transition-all duration-300 hover:shadow-[0_20px_40px_-12px_rgba(227,31,37,0.5)] hover:scale-[1.02]">
+                <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] hover:bg-[#C91A1F] text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] font-semibold tracking-[0.2em] uppercase cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-md shadow-sm rounded-full">
                   {/* Shine effect on hover */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
-                  {/* Border glow */}
-                  <span className="absolute inset-0 border border-white/20" />
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
                   {/* Text */}
                   <span className="relative flex items-center justify-center gap-3">
                     <span>Umów wizytę</span>

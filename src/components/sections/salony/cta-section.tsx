@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Phone, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { noiseTextureStyle } from "./animation-variants"
 
 interface CtaSectionProps {
   isInView: boolean
@@ -11,12 +10,8 @@ interface CtaSectionProps {
 
 export function CtaSection({ isInView }: CtaSectionProps) {
   return (
-    <section className="py-20 lg:py-32 bg-[#1a1a1a] relative overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]" 
-        style={noiseTextureStyle} 
-      />
+    <section className="py-20 lg:py-32 bg-[#050505] relative overflow-hidden">
+
       
       {/* Gradient orb */}
       <motion.div

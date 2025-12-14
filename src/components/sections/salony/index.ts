@@ -1,10 +1,11 @@
 export { HeroSection } from "./hero-section"
+export { SalonMap } from "./salon-map"
 export { LocationSelector } from "./location-selector"
 export { LocationCard } from "./location-card"
 export { LocationImage } from "./location-image"
 export { LocationInfo } from "./location-info"
-export { LocationActions } from "./location-actions"
 export { LocationsList } from "./locations-list"
 export { CtaSection } from "./cta-section"
+export { WhyVisitSection } from "./why-visit-section"
+export { LocationsScroll } from "./locations-scroll"
 export { containerVariants, fadeUpVariants, noiseTextureStyle } from "./animation-variants"
-

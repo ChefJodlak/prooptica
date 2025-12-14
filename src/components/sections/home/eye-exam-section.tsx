@@ -76,7 +76,7 @@ export function EyeExamSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-4 sm:mb-10"
           >
-            <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent sm:hidden" />
+            <div className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent lg:hidden" />
             <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase whitespace-nowrap">
               Badanie wzroku
             </span>
@@ -129,10 +129,9 @@ export function EyeExamSection() {
             className="flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 w-full sm:w-auto"
           >
             <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">
-              <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] text-white rounded-none px-6 sm:px-10 h-12 sm:h-14 text-[11px] sm:text-sm font-semibold tracking-wider uppercase transition-all duration-500 hover:shadow-[0_15px_30px_-10px_rgba(227,31,37,0.5)] hover:scale-[1.02] cursor-pointer">
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
-                <span className="absolute inset-0 border border-white/20" />
-                <span className="relative flex items-center justify-center gap-2">
+              <button className="relative w-full sm:w-auto overflow-hidden bg-[#E31F25] hover:bg-[#C91A1F] text-white rounded-full px-5 sm:px-8 h-10 sm:h-12 text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition-all duration-500 shadow-sm hover:shadow-md hover:scale-[1.02] cursor-pointer">
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                <span className="relative flex items-center justify-center gap-2 z-10">
                   <span>Umów badanie</span>
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                 </span>

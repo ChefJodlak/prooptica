@@ -8,7 +8,6 @@ import {
   ProcessSection,
   PricingSection,
   CtaSection,
-  TextureOverlay
 } from "@/components/sections/badanie-wzroku"
 
 export default function EyeExamPage() {
@@ -24,7 +23,6 @@ export default function EyeExamPage() {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
-      <TextureOverlay fixed />
       <HeroSection />
       <FeaturesSection isInView={isInView} imageY={imageY} />
       <ProcessSection isInView={isInView} />

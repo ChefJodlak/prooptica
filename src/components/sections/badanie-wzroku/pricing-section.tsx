@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { TextureOverlay } from "./texture-overlay"
 import { SectionLabel } from "./section-label"
 import { AccentText } from "./accent-text"
 import { PricingCard } from "./pricing-card"
@@ -13,8 +12,7 @@ interface PricingSectionProps {
 
 export function PricingSection({ isInView }: PricingSectionProps) {
   return (
-    <section className="relative py-24 lg:py-32 bg-[#1a1a1a] overflow-hidden">
-      <TextureOverlay />
+    <section className="relative py-24 lg:py-32 bg-[#050505] overflow-hidden">
       
       <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
         <motion.div
@@ -24,11 +22,11 @@ export function PricingSection({ isInView }: PricingSectionProps) {
           className="text-center mb-10"
         >
           <SectionLabel text="Cennik" centered />
-          <h2 className="font-display text-[2.5rem] lg:text-[4rem] font-extralight text-white leading-[1] tracking-[-0.03em] mb-2">
-            Przejrzyste
-          </h2>
-          <h2 className="font-display text-[2.5rem] lg:text-[4rem] font-medium text-white leading-[1] tracking-[-0.03em]">
-            <AccentText underlineOpacity={0.3}>ceny</AccentText>
+          <h2 className="font-display text-[2.5rem] lg:text-[4rem] text-white leading-none tracking-[-0.03em]">
+            <span className="font-extralight">Przejrzyste</span>{" "}
+            <span className="font-medium">
+              <AccentText underlineOpacity={0.3}>ceny</AccentText>
+            </span>
           </h2>
         </motion.div>
         
@@ -50,4 +48,3 @@ export function PricingSection({ isInView }: PricingSectionProps) {
     </section>
   )
 }
-

@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Phone, Calendar, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import { TextureOverlay } from "./texture-overlay"
 import { SectionLabel } from "./section-label"
 
 interface CtaSectionProps {
@@ -18,9 +17,8 @@ export function CtaSection({ isInView }: CtaSectionProps) {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative bg-[#1a1a1a] p-10 lg:p-16 overflow-hidden"
+          className="relative bg-[#050505] p-10 lg:p-16 overflow-hidden"
         >
-          <TextureOverlay />
           
           {/* Decorative glow */}
           <motion.div

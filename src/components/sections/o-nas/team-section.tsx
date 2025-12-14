@@ -3,7 +3,7 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { TEAM } from "./constants"
-import { containerVariants, noiseTextureStyle } from "./animation-variants"
+import { containerVariants } from "./animation-variants"
 
 export function TeamSection() {
   const teamRef = useRef<HTMLDivElement>(null)
@@ -11,8 +11,7 @@ export function TeamSection() {
 
   return (
     <section ref={teamRef} className="relative py-24 lg:py-32 bg-[#F8F7F4] overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
+
       
       <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
         {/* Header */}

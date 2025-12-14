@@ -2,11 +2,11 @@
 
 import { useRef } from "react"
 import { useInView } from "framer-motion"
-import { LOCATIONS } from "@/lib/constants/locations"
 import { 
   HeroSection, 
-  LocationsList, 
-  CtaSection 
+  CtaSection,
+  WhyVisitSection,
+  LocationsScroll
 } from "@/components/sections/salony"
 
 export default function LocationsPage() {
@@ -16,15 +16,14 @@ export default function LocationsPage() {
   const isInView = useInView(containerRef, { once: true, margin: "-10%" })
 
   return (
-    <div ref={containerRef} className="flex flex-col w-full overflow-x-hidden">
+    <div ref={containerRef} className="flex flex-col w-full bg-[#F8F7F4]">
       <div ref={heroRef as React.RefObject<HTMLDivElement>}>
         <HeroSection isInView={isHeroInView} />
       </div>
 
-      <LocationsList 
-        locations={LOCATIONS} 
-        isInView={isInView} 
-      />
+      <WhyVisitSection />
+
+      <LocationsScroll />
 
       <CtaSection isInView={isInView} />
     </div>

@@ -188,16 +188,15 @@ export function Navbar() {
             {showCTA && (
               <Link href="/umow-wizyte" className="group/nav">
                 <button
-                  className="relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_15px_30px_-8px_rgba(227,31,37,0.5)] hover:brightness-110"
+                  className="relative overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.03] shadow-sm hover:shadow-md hover:brightness-110 rounded-full"
                   style={{
-                    padding: "10px 24px",
+                    padding: "8px 20px",
                     backgroundColor: "#E31F25",
                     border: "none",
                   }}
                 >
-                  <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/nav:translate-x-full transition-transform duration-700 ease-out" />
-                  <span className="absolute inset-0 border border-white/20" />
-                  <span style={{ position: "relative", zIndex: 10, fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "white" }}>
+                  <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/nav:translate-x-full transition-transform duration-700 ease-out" />
+                  <span style={{ position: "relative", zIndex: 10, fontSize: "10px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "white" }}>
                     Umów wizytę
                   </span>
                 </button>
@@ -381,9 +380,9 @@ export function Navbar() {
 
                 <Link href="/umow-wizyte" onClick={() => setIsMobileMenuOpen(false)} className="group/mobile block">
                   <button
-                    className="relative overflow-hidden w-full cursor-pointer transition-all duration-300 hover:shadow-[0_15px_30px_-8px_rgba(227,31,37,0.5)] hover:brightness-110"
+                    className="relative overflow-hidden w-full cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md hover:brightness-110 rounded-full"
                     style={{
-                      padding: "14px",
+                      padding: "12px",
                       backgroundColor: "#E31F25",
                       border: "none",
                       display: "flex",
@@ -391,9 +390,8 @@ export function Navbar() {
                       justifyContent: "center",
                     }}
                   >
-                    <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
-                    <span className="absolute inset-0 border border-white/20" />
-                    <span style={{ position: "relative", fontSize: "11px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
+                    <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/mobile:translate-x-full transition-transform duration-700 ease-out" />
+                    <span style={{ position: "relative", fontSize: "10px", fontWeight: 700, letterSpacing: "0.25em", textTransform: "uppercase", color: "white" }}>
                       Umów wizytę
                     </span>
                   </button>

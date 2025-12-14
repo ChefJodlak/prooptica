@@ -29,7 +29,7 @@ export function LocationImage({ location, index, isInView }: LocationImageProps)
       />
       
       {/* Image */}
-      <div className="relative aspect-[4/3] overflow-hidden group">
+      <div className="relative aspect-[4/3] lg:aspect-[3/4] overflow-hidden group">
         <Image
           src={location.image}
           alt={`Salon ${location.city}`}
@@ -38,50 +38,7 @@ export function LocationImage({ location, index, isInView }: LocationImageProps)
         />
         
         {/* Elegant vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/70 via-transparent to-[#1a1a1a]/10" />
-        
-        {/* Location badge */}
-        <div className="absolute top-6 left-6">
-          <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a]/80 backdrop-blur-sm">
-            <span className="text-[#E31F25] text-[9px] font-medium tracking-[0.3em] uppercase">
-              Salon {String(index + 1).padStart(2, '0')}
-            </span>
-          </div>
-        </div>
-        
-        {/* CTA overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <a 
-            href={location.map_link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-6 py-3 bg-white text-[#1a1a1a] text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-[#E31F25] transition-all duration-300"
-          >
-            <Navigation className="w-4 h-4" />
-            Wyznacz trasę
-          </a>
-        </div>
-      </div>
-      
-      {/* Map below image */}
-      <div className="relative mt-4 aspect-[16/9] overflow-hidden">
-        <iframe 
-          width="100%" 
-          height="100%" 
-          frameBorder="0" 
-          style={{ border: 0 }} 
-          src={`https://maps.google.com/maps?q=${encodeURIComponent('Prooptica ' + location.city + ' ' + location.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-          allowFullScreen
-          loading="lazy"
-          title={`Mapa ${location.city}`}
-          className="w-full h-full grayscale-[50%] hover:grayscale-0 transition-all duration-700"
-        />
-        
-        {/* Elegant corner accents */}
-        <div className="absolute top-3 left-3 w-6 h-6 border-l-2 border-t-2 border-[#E31F25]/40 pointer-events-none" />
-        <div className="absolute top-3 right-3 w-6 h-6 border-r-2 border-t-2 border-[#E31F25]/40 pointer-events-none" />
-        <div className="absolute bottom-3 left-3 w-6 h-6 border-l-2 border-b-2 border-[#E31F25]/40 pointer-events-none" />
-        <div className="absolute bottom-3 right-3 w-6 h-6 border-r-2 border-b-2 border-[#E31F25]/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/40 via-transparent to-[#1a1a1a]/10" />
       </div>
     </div>
   )

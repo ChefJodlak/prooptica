@@ -121,6 +121,12 @@ export function Intro() {
             {/* Header */}
             <motion.div variants={fadeUpVariants} className="mb-6 sm:mb-12 lg:mb-16 text-center sm:text-left shrink-0">
               <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-4 sm:mb-8">
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={isInView ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="h-px flex-1 max-w-[50px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent origin-right lg:hidden" 
+                />
                 <span className="text-[#E31F25] text-[10px] sm:text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">Nasza Historia</span>
                 <motion.div 
                   initial={{ scaleX: 0 }}

@@ -24,7 +24,7 @@ export function SpecialistCard({
       whileHover={{ y: -4, scale: 1.01 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "group relative w-full text-left p-6 transition-all duration-300 cursor-pointer",
+        "group relative w-full text-left p-4 lg:p-6 transition-all duration-300 cursor-pointer rounded-lg lg:rounded-none",
         "ring-1 ring-inset",
         isSelected 
           ? "bg-[#1a1a1a] ring-[#E31F25] shadow-lg" 
@@ -33,14 +33,14 @@ export function SpecialistCard({
     >
       {/* Red accent corner when selected */}
       {isSelected && (
-        <div className="absolute top-0 left-0 w-12 h-12 overflow-hidden">
+        <div className="absolute top-0 left-0 w-12 h-12 overflow-hidden rounded-tl-lg lg:rounded-tl-none">
           <div className="absolute -top-6 -left-6 w-12 h-12 bg-[#E31F25] rotate-45" />
         </div>
       )}
       
       <div className="flex items-start gap-4">
         <div className={cn(
-          "w-14 h-14 flex items-center justify-center transition-all duration-300",
+          "w-14 h-14 flex items-center justify-center transition-all duration-300 rounded-md lg:rounded-none",
           isSelected ? "bg-[#E31F25]" : "bg-[#F5F5F5] group-hover:bg-[#E31F25]/20 group-hover:scale-110"
         )}>
           <User className={cn(
@@ -75,7 +75,7 @@ export function SpecialistCard({
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="w-6 h-6 bg-[#E31F25] flex items-center justify-center"
+            className="w-6 h-6 bg-[#E31F25] flex items-center justify-center rounded-full lg:rounded-none"
           >
             <Check className="w-4 h-4 text-[#1a1a1a]" />
           </motion.div>
@@ -84,4 +84,3 @@ export function SpecialistCard({
     </motion.button>
   )
 }
-

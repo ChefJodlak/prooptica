@@ -200,9 +200,14 @@ export function InstagramSection() {
             
             {/* Headline - compact on mobile */}
             {isSafari ? (
-              <h2 className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left">
+              <h2 className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left pb-4 pr-4">
                 Śledź nas na{" "}
-                <span className="font-medium italic text-[#E31F25]">Instagramie</span>
+                <span className="relative inline-block">
+                  <span className="font-medium italic text-[#E31F25]">Instagramie</span>
+                  <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                    <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+                  </svg>
+                </span>
               </h2>
             ) : (
               <div className="overflow-hidden">
@@ -210,10 +215,15 @@ export function InstagramSection() {
                   initial={{ y: "110%" }}
                   animate={isInView ? { y: 0 } : {}}
                   transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left"
+                  className="font-display text-[2.25rem] sm:text-[clamp(2rem,5vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.03em] text-center sm:text-left pb-4 pr-4"
                 >
                   Śledź nas na{" "}
-                  <span className="font-medium italic text-[#E31F25]">Instagramie</span>
+                  <span className="relative inline-block">
+                    <span className="font-medium italic text-[#E31F25]">Instagramie</span>
+                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                      <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+                    </svg>
+                  </span>
                 </motion.h2>
               </div>
             )}

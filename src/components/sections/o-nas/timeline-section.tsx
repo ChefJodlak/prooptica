@@ -3,16 +3,14 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { TIMELINE } from "./constants"
-import { noiseTextureStyle } from "./animation-variants"
 
 export function TimelineSection() {
   const timelineRef = useRef<HTMLDivElement>(null)
   const isTimelineInView = useInView(timelineRef, { once: true, margin: "-15%" })
 
   return (
-    <section ref={timelineRef} className="py-24 lg:py-32 bg-[#1a1a1a] overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={noiseTextureStyle} />
+    <section ref={timelineRef} className="py-24 lg:py-32 bg-[#050505] overflow-hidden">
+
       
       <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
         {/* Header */}

@@ -378,6 +378,7 @@ export function LocationsPreview() {
         <div className="mb-4 sm:mb-12 lg:mb-16 text-center sm:text-left">
           {/* Label */}
           <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-8">
+            <div className="h-px flex-1 max-w-[50px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent lg:hidden" />
             <MapPin className="w-4 h-4 text-[#E31F25]" />
             <span className="text-[#E31F25] text-[10px] sm:text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
               Nasze Salony
@@ -449,9 +450,10 @@ export function LocationsPreview() {
                   </div>
                   
                   <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`}>
-                    <button className="bg-[#E31F25] text-white px-6 py-3 text-[10px] font-semibold tracking-[0.1em] uppercase flex items-center gap-2 shadow-[0_0_15px_-5px_#E31F25] hover:bg-[#c91a1f] transition-colors">
-                      <Calendar className="w-4 h-4" />
-                      Umów
+                    <button className="bg-[#E31F25] hover:bg-[#C91A1F] text-white px-5 py-2.5 text-[10px] font-semibold tracking-[0.1em] uppercase flex items-center gap-2 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300 rounded-full relative overflow-hidden group/btn">
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
+                      <Calendar className="w-4 h-4 relative z-10" />
+                      <span className="relative z-10">Umów</span>
                     </button>
                   </Link>
                 </div>
@@ -542,11 +544,10 @@ export function LocationsPreview() {
                       <div className="hidden lg:block w-px h-8 bg-white/10" />
                       
                       <Link href={`/umow-wizyte?salon=${LOCATION_TO_SALON_ID[selectedLocation.id]}`} className="group/loc">
-                        <button className="relative overflow-hidden bg-[#E31F25] hover:bg-[#c91a1f] text-white rounded-none font-semibold tracking-[0.1em] uppercase text-[9px] cursor-pointer transition-all duration-300 px-4 lg:px-6 h-9 hover:shadow-[0_8px_20px_-6px_rgba(227,31,37,0.4)] hover:scale-[1.02] flex items-center justify-center">
-                          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/loc:translate-x-full transition-transform duration-500 ease-out" />
-                          <span className="absolute inset-0 border border-white/20" />
-                          <Calendar className="relative w-3.5 h-3.5 mr-2" />
-                          <span className="relative">Umów wizytę</span>
+                        <button className="relative overflow-hidden bg-[#E31F25] hover:bg-[#C91A1F] text-white rounded-full font-semibold tracking-[0.1em] uppercase text-[9px] cursor-pointer transition-all duration-300 px-4 lg:px-6 h-9 shadow-sm hover:shadow-md hover:scale-[1.02] flex items-center justify-center">
+                          <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/loc:translate-x-full transition-transform duration-500 ease-out" />
+                          <Calendar className="relative w-3.5 h-3.5 mr-2 z-10" />
+                          <span className="relative z-10">Umów wizytę</span>
                         </button>
                       </Link>
                     </div>

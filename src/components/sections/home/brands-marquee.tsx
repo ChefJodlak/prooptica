@@ -75,7 +75,7 @@ export function BrandsMarquee() {
   return (
     <section 
       ref={containerRef} 
-      className="relative min-h-0 py-12 lg:py-20 lg:min-h-[100svh] bg-[#FAFAFA] overflow-hidden flex items-center"
+      className="relative min-h-[100svh] py-12 lg:py-20 bg-[#FAFAFA] overflow-hidden flex flex-col justify-between"
     >
       {/* === DECORATIVE LINES === */}
       
@@ -112,10 +112,10 @@ export function BrandsMarquee() {
       />
 
       {/* === MAIN CONTENT === */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full flex-1 flex flex-col">
         
         {/* Header Section */}
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 mb-8 sm:mb-16 lg:mb-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 mb-auto pt-8 sm:pt-12">
           
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 sm:gap-6 lg:gap-16">
             
@@ -127,6 +127,12 @@ export function BrandsMarquee() {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mb-3 sm:mb-5"
               >
+                <motion.div 
+                  initial={{ scaleX: 0 }}
+                  animate={isInView ? { scaleX: 1 } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="h-px flex-1 max-w-[60px] sm:max-w-[80px] bg-gradient-to-l from-[#E31F25] to-transparent origin-right lg:hidden" 
+                />
                 <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.3em] sm:tracking-[0.5em] uppercase">
                   Kolekcja Premium
                 </span>
@@ -140,16 +146,22 @@ export function BrandsMarquee() {
               
               {/* Main headline */}
               <div className="space-y-0">
-                <div className="overflow-hidden">
-                  <motion.h2
-                    initial={{ y: "100%" }}
-                    animate={isInView ? { y: 0 } : {}}
-                    transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.02em]"
-                  >
-                    Światowe marki w naszej <span className="font-medium text-[#E31F25] italic">ofercie</span>
-                  </motion.h2>
-                </div>
+              <div className="overflow-hidden">
+                <motion.h2
+                  initial={{ y: "100%" }}
+                  animate={isInView ? { y: 0 } : {}}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                  className="font-display text-[2.25rem] sm:text-[clamp(1.75rem,6vw,4.5rem)] font-extralight text-[#1a1a1a] leading-[1.1] tracking-[-0.02em] pb-4 pr-4"
+                >
+                  Światowe marki w naszej{" "}
+                  <span className="relative inline-block">
+                    <span className="font-medium text-[#E31F25] italic">ofercie</span>
+                    <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-[6px] sm:h-[8px]" viewBox="0 0 100 8" preserveAspectRatio="none">
+                      <path d="M0 4 Q 12.5 0, 25 4 T 50 4 T 75 4 T 100 4" fill="none" stroke="#E31F25" strokeWidth="2" strokeOpacity="0.4" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </motion.h2>
+              </div>
               </div>
             </div>
             
@@ -168,9 +180,9 @@ export function BrandsMarquee() {
         </div>
 
         {/* Featured Brands - Elegant Display */}
-        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 mb-10 sm:mb-16 lg:mb-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-12 lg:px-24 my-auto">
           {/* First row - 3 brands */}
-          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6 mb-4 sm:mb-8 lg:mb-12">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-10 sm:gap-y-12 mb-10 sm:mb-12 lg:mb-12">
             {FEATURED_BRANDS.slice(0, 3).map((name, i) => (
               <div key={name} className="flex items-center">
                 <FeaturedBrand 
@@ -193,7 +205,7 @@ export function BrandsMarquee() {
           </div>
           
           {/* Second row - 3 brands */}
-          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-4 sm:gap-y-6">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 lg:gap-x-0 gap-y-10 sm:gap-y-12">
             {FEATURED_BRANDS.slice(3, 6).map((name, i) => (
               <div key={name} className="flex items-center">
                 <FeaturedBrand 
@@ -216,8 +228,10 @@ export function BrandsMarquee() {
           </div>
         </div>
 
-        {/* Marquee Section - Infinite Flowing Elegance */}
-        <div className="relative">
+        {/* Bottom Section */}
+        <div className="mt-auto pb-8 sm:pb-12">
+          {/* Marquee Section - Infinite Flowing Elegance */}
+          <div className="relative mb-6 sm:mb-8 lg:mb-10">
           
           {/* Fade edges */}
           <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 lg:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent" />
@@ -280,19 +294,20 @@ export function BrandsMarquee() {
               ))}
             </div>
           </motion.div>
+          </div>
+          
+          {/* Footer Note */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="text-center px-5 sm:px-6"
+          >
+            <p className="text-[10px] sm:text-sm text-[#A3A3A3] tracking-[0.08em] sm:tracking-[0.15em] uppercase">
+              Wszystkie oprawy oryginalne · Pełna gwarancja producenta
+            </p>
+          </motion.div>
         </div>
-
-        {/* Footer Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="text-center px-5 sm:px-6 mt-6 sm:mt-16 lg:mt-20"
-        >
-          <p className="text-[10px] sm:text-sm text-[#A3A3A3] tracking-[0.08em] sm:tracking-[0.15em] uppercase">
-            Wszystkie oprawy oryginalne · Pełna gwarancja producenta
-          </p>
-        </motion.div>
       </div>
     </section>
   )
