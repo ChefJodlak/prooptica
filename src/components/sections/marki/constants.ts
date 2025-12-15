@@ -27,11 +27,13 @@ export const BRANDS: Brand[] = [
   { name: "Michael Kors", category: "premium", description: "Amerykański glamour i luksus", tier: "Premium" }
 ]
 
+import { NOISE_TEXTURE } from "@/lib/constants/ui"
+
 export const TECH_PARTNERS: TechPartner[] = [
   { name: "ZEISS", description: "Lider w precyzyjnej optyce i rozwiązaniach wizyjnych. Niemiecka jakość od 1846 roku." },
   { name: "HOYA", description: "Japońska innowacja w produkcji soczewek okularowych i rozwiązań medycznych." },
   { name: "Essilor", description: "Francuski gigant optyczny. Twórcy soczewek Varilux i Transitions." }
 ]
 
-export const NOISE_TEXTURE_BG = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+export const NOISE_TEXTURE_BG = NOISE_TEXTURE
 

@@ -34,8 +34,8 @@ export function FadeUp({ children, delay = 0, duration = 0.6, className, once = 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 30, z: 0 }}
+      animate={isInView ? { opacity: 1, y: 0, z: 0 } : { opacity: 0, y: 30, z: 0 }}
       transition={{ duration, delay, ease: smoothEasing }}
       className={cn("transform-gpu", className)}
       style={gpuStyles}
@@ -96,10 +96,11 @@ interface StaggerItemProps {
 
 // Removed blur animation as it's very expensive
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 30, z: 0 },
   visible: {
     opacity: 1,
     y: 0,
+    z: 0,
     transition: {
       duration: 0.5,
       ease: smoothEasing
@@ -142,8 +143,8 @@ export function TextReveal({ children, className, delay = 0, once = true }: Text
         <span key={i} className="overflow-hidden mr-[0.25em]">
           <motion.span
             className="inline-block transform-gpu"
-            initial={{ y: "100%", opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }}
+            initial={{ y: "100%", opacity: 0, z: 0 }}
+            animate={isInView ? { y: 0, opacity: 1, z: 0 } : { y: "100%", opacity: 0, z: 0 }}
             transition={{
               duration: 0.4,
               delay: delay + i * 0.04,
@@ -180,8 +181,8 @@ export function CharReveal({ children, className, delay = 0, once = true }: Char
         <motion.span
           key={i}
           className="transform-gpu"
-          initial={{ opacity: 0, y: 15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 15, z: 0 }}
+          animate={isInView ? { opacity: 1, y: 0, z: 0 } : { opacity: 0, y: 15, z: 0 }}
           transition={{
             duration: 0.25,
             delay: delay + i * 0.015,
@@ -230,8 +231,8 @@ export function SlideIn({
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, ...directionMap[direction] }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...directionMap[direction] }}
+      initial={{ opacity: 0, ...directionMap[direction], z: 0 }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0, z: 0 } : { opacity: 0, ...directionMap[direction], z: 0 }}
       transition={{ duration, delay, ease: smoothEasing }}
       className={cn("transform-gpu", className)}
       style={gpuStyles}
@@ -260,8 +261,8 @@ export function ScaleIn({ children, delay = 0, duration = 0.5, className, once =
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.95, z: 0 }}
+      animate={isInView ? { opacity: 1, scale: 1, z: 0 } : { opacity: 0, scale: 0.95, z: 0 }}
       transition={{ duration, delay, ease: bounceEasing }}
       className={cn("transform-gpu", className)}
       style={gpuStyles}
@@ -291,8 +292,8 @@ export function BlurIn({ children, delay = 0, duration = 0.5, className, once = 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, scale: 0.98 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.98 }}
+      initial={{ opacity: 0, scale: 0.98, z: 0 }}
+      animate={isInView ? { opacity: 1, scale: 1, z: 0 } : { opacity: 0, scale: 0.98, z: 0 }}
       transition={{ duration, delay, ease: smoothEasing }}
       className={cn("transform-gpu", className)}
       style={gpuStyles}
@@ -385,7 +386,7 @@ export function Parallax({ children, className }: ParallaxProps) {
   return (
     <motion.div
       ref={ref}
-      initial={{ y: 0 }}
+      initial={{ y: 0, z: 0 }}
       style={{ y: 0 }}
       className={cn("transform-gpu", className)}
     >
@@ -442,15 +443,15 @@ function CounterNumber({ to, duration }: { from: number; to: number; duration: n
   // Note: from parameter is reserved for animated counting implementation
   return (
     <motion.span
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, z: 0 }}
+      animate={{ opacity: 1, z: 0 }}
       transition={{ duration: 0.3 }}
       className="transform-gpu"
       style={gpuStyles}
     >
       <motion.span
-        initial={{ y: 0 }}
-        animate={{ y: 0 }}
+        initial={{ y: 0, z: 0 }}
+        animate={{ y: 0, z: 0 }}
         transition={{ duration }}
       >
         {to}
@@ -479,8 +480,8 @@ export function RevealMask({ children, className, delay = 0, once = true }: Reve
     <div ref={ref} className={cn("overflow-hidden", className)}>
       <motion.div
         className="transform-gpu"
-        initial={{ x: "-100%" }}
-        animate={isInView ? { x: 0 } : { x: "-100%" }}
+        initial={{ x: "-100%", z: 0 }}
+        animate={isInView ? { x: 0, z: 0 } : { x: "-100%", z: 0 }}
         transition={{ duration: 0.8, delay, ease: smoothEasing }}
         style={gpuStyles}
       >
@@ -507,10 +508,11 @@ export function RotatingText({ words, className, interval = 3000 }: RotatingText
         <motion.span
           key={word}
           className="absolute left-0 transform-gpu"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 20, z: 0 }}
           animate={{
             opacity: [0, 1, 1, 0],
-            y: [20, 0, 0, -20]
+            y: [20, 0, 0, -20],
+            z: [0, 0, 0, 0]
           }}
           transition={{
             duration: interval / 1000,
@@ -564,5 +566,3 @@ export function GlowingOrb({ className, color = "red", size = 400 }: GlowingOrbP
     />
   )
 }
-
-

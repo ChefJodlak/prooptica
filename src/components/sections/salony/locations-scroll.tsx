@@ -6,6 +6,7 @@ import { LOCATIONS } from "@/lib/constants/locations"
 import Image from "next/image"
 import { MapPin, Phone, Clock, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { NOISE_TEXTURE } from "@/lib/constants/ui"
 
 export function LocationsScroll() {
   const [activeCard, setActiveCard] = useState(0)
@@ -28,7 +29,7 @@ export function LocationsScroll() {
     <section className="bg-[#F8F7F4] relative">
       {/* Subtle texture overlay from Home Page */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        backgroundImage: NOISE_TEXTURE
       }} />
 
       {/* Mobile View (Simple Stack) */}
