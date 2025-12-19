@@ -22,7 +22,7 @@ export function FeaturedArticleCard({ article }: FeaturedArticleCardProps) {
       {/* Artistic frame */}
       <div className="absolute -inset-3 lg:-inset-4 border border-[#E31F25]/15 pointer-events-none" />
       
-      <Link href={`/artykuly/${article.id}`} className="block bg-white overflow-hidden">
+      <Link href={`/artykuly/${article.slug || article.id}`} className="block bg-white overflow-hidden">
         <div className="relative aspect-[16/10] overflow-hidden">
           <img 
             src={article.image}

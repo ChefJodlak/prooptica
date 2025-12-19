@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Building2, Calendar } from "lucide-react"
+import { MapPin, Building2 } from "lucide-react"
 import { SectionLabel } from "@/components/sections/badanie-wzroku/section-label"
 import { NOISE_TEXTURE } from "@/lib/constants/ui"
 
@@ -12,7 +12,6 @@ interface HeroSectionProps {
 const stats = [
   { value: "4", label: "Salony", icon: Building2 },
   { value: "3", label: "Miasta", icon: MapPin },
-  { value: "20+", label: "Lat tradycji", icon: Calendar },
 ]
 
 export function HeroSection({ isInView }: HeroSectionProps) {

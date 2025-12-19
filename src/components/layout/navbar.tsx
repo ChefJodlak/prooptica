@@ -209,8 +209,8 @@ export function Navbar() {
             initial={false}
             animate={isMobileMenuOpen ? "open" : "closed"}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden relative p-3 text-white/60 hover:text-[#E31F25] z-50"
-            style={{ transition: "color 0.3s ease" }}
+            className="lg:hidden relative p-3 text-white hover:text-[#E31F25]"
+            style={{ transition: "color 0.3s ease", zIndex: 10002 }}
           >
             <MotionConfig transition={{ duration: 0.5, ease: "easeInOut" }}>
               <motion.span
@@ -298,59 +298,85 @@ export function Navbar() {
                 </div>
 
                 <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                  {NAV_ITEMS.map((item, i) => (
-                    <div key={item.title}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          padding: "12px 0",
-                          borderBottom: "1px solid rgba(255,255,255,0.05)",
-                          color: pathname === item.href ? "#E31F25" : "rgba(255,255,255,0.8)",
-                          textDecoration: "none",
-                          transition: "color 0.3s ease",
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                          <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
-                            {item.title}
-                          </span>
-                        </div>
-                        <ArrowUpRight className="w-4 h-4 opacity-50" />
-                      </Link>
+                  {NAV_ITEMS.map((item, i) => {
+                    const isOferta = item.title === "Oferta"
+                    return (
+                      <div key={item.title}>
+                        {isOferta ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              padding: "12px 0",
+                              borderBottom: "1px solid rgba(255,255,255,0.05)",
+                              color: "rgba(255,255,255,0.5)",
+                              cursor: "default",
+                            }}
+                          >
+                            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                              <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
+                                {String(i + 1).padStart(2, "0")}
+                              </span>
+                              <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
+                                {item.title}
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              padding: "12px 0",
+                              borderBottom: "1px solid rgba(255,255,255,0.05)",
+                              color: pathname === item.href ? "#E31F25" : "rgba(255,255,255,0.8)",
+                              textDecoration: "none",
+                              transition: "color 0.3s ease",
+                            }}
+                          >
+                            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                              <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "18px", fontWeight: 300, color: "rgba(255,255,255,0.2)" }}>
+                                {String(i + 1).padStart(2, "0")}
+                              </span>
+                              <span style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "20px", fontWeight: 300, letterSpacing: "0.05em" }}>
+                                {item.title}
+                              </span>
+                            </div>
+                            <ArrowUpRight className="w-4 h-4 opacity-50" />
+                          </Link>
+                        )}
 
-                      {item.items && (
-                        <div style={{ paddingLeft: "40px", paddingTop: "8px", paddingBottom: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
-                          {item.items.map((subItem) => (
-                            <Link
-                              key={subItem.title}
-                              href={subItem.href}
-                              onClick={() => setIsMobileMenuOpen(false)}
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "12px",
-                                padding: "6px 0",
-                                fontSize: "13px",
-                                color: "rgba(255,255,255,0.4)",
-                                textDecoration: "none",
-                                transition: "color 0.3s ease",
-                              }}
-                            >
-                              <span style={{ width: "12px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
-                              {subItem.title}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                        {item.items && (
+                          <div style={{ paddingLeft: "40px", paddingTop: "8px", paddingBottom: "12px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                            {item.items.map((subItem) => (
+                              <Link
+                                key={subItem.title}
+                                href={subItem.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "12px",
+                                  padding: "6px 0",
+                                  fontSize: "13px",
+                                  color: "rgba(255,255,255,0.4)",
+                                  textDecoration: "none",
+                                  transition: "color 0.3s ease",
+                                }}
+                              >
+                                <span style={{ width: "12px", height: "1px", backgroundColor: "rgba(255,255,255,0.1)" }} />
+                                {subItem.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })}
                 </nav>
               </div>
 

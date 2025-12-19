@@ -1,5 +1,5 @@
-import { Article, StrapiArticle } from "./types"
-import { getStrapiMediaUrl } from "@/lib/strapi"
+import { Article } from "./types"
+import { SanityArticle, getSanityImageUrl } from "@/lib/sanity"
 
 export const getCategoryStyle = (category: string): string => {
   switch (category) {
@@ -15,42 +15,36 @@ export const getCategoryStyle = (category: string): string => {
 }
 
 /**
- * Transform Strapi article to frontend Article format
+ * Transform Sanity article to frontend Article format
  */
-export function transformStrapiArticle(strapiArticle: StrapiArticle): Article {
-  const date = new Date(strapiArticle.publishedAt)
+export function transformSanityArticle(sanityArticle: SanityArticle): Article {
+  const publishedDate = sanityArticle.publishedAt || sanityArticle._createdAt
+  const date = new Date(publishedDate)
   const formattedDate = date.toLocaleDateString('pl-PL', {
     day: 'numeric',
     month: 'short',
     year: 'numeric'
   })
 
-  // Get the best available image
-  const imageUrl = strapiArticle.cover 
-    ? getStrapiMediaUrl(
-        strapiArticle.cover.formats?.medium?.url || 
-        strapiArticle.cover.formats?.small?.url || 
-        strapiArticle.cover.url
-      )
-    : null
+  // Get image URL from Sanity
+  const imageUrl = getSanityImageUrl(sanityArticle.cover)
 
   return {
-    id: strapiArticle.id,
-    title: strapiArticle.title,
-    excerpt: strapiArticle.excerpt || '',
-    category: strapiArticle.category || 'zdrowie',
-    readTime: strapiArticle.readTime || '5 min',
+    id: sanityArticle._id,
+    title: sanityArticle.title,
+    excerpt: sanityArticle.excerpt || '',
+    category: sanityArticle.category || 'zdrowie',
+    readTime: sanityArticle.readTime || '5 min',
     date: formattedDate,
-    featured: strapiArticle.featured || false,
+    featured: sanityArticle.featured || false,
     image: imageUrl || 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?q=80&w=800',
-    slug: strapiArticle.slug
+    slug: sanityArticle.slug?.current
   }
 }
 
 /**
- * Transform array of Strapi articles
+ * Transform array of Sanity articles
  */
-export function transformStrapiArticles(strapiArticles: StrapiArticle[]): Article[] {
-  return strapiArticles.map(transformStrapiArticle)
+export function transformSanityArticles(sanityArticles: SanityArticle[]): Article[] {
+  return sanityArticles.map(transformSanityArticle)
 }
-

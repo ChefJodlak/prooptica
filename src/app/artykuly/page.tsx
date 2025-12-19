@@ -1,31 +1,25 @@
-import { fetchStrapi } from "@/lib/strapi"
+import { getArticles } from "@/lib/sanity"
 import {
   ArticlesClient,
-  transformStrapiArticles,
+  transformSanityArticles,
   ARTICLES,
-  type StrapiArticle,
 } from "@/components/sections/artykuly"
 
-async function getArticles() {
+async function fetchArticles() {
   try {
-    const { data } = await fetchStrapi<StrapiArticle[]>('/articles', {
-      populate: ['cover'],
-      sort: 'publishedAt:desc',
-      pagination: { pageSize: 100 },
-      revalidate: 60, // Revalidate every 60 seconds
-    })
+    const sanityArticles = await getArticles()
     
-    // Transform Strapi data to frontend format
-    return transformStrapiArticles(data)
+    // Transform Sanity data to frontend format
+    return transformSanityArticles(sanityArticles)
   } catch (error) {
-    console.error('Error fetching articles from Strapi:', error)
-    // Fallback to mock data if Strapi is not available
+    console.error('Error fetching articles from Sanity:', error)
+    // Fallback to mock data if Sanity is not available
     return ARTICLES
   }
 }
 
 export default async function ArticlesPage() {
-  const articles = await getArticles()
+  const articles = await fetchArticles()
 
   return <ArticlesClient articles={articles} />
 }

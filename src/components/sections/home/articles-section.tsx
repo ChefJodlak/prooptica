@@ -16,6 +16,7 @@ const CATEGORIES = [
 const ARTICLES = [
   {
     id: 1,
+    slug: "jak-dbac-o-wzrok-pracujac-przy-komputerze",
     title: "Jak dbać o wzrok pracując przy komputerze?",
     excerpt: "Praktyczne porady dla osób spędzających dużo czasu przed ekranem. Dowiedz się, jak chronić swoje oczy i unikać zmęczenia wzroku podczas pracy zdalnej.",
     category: "zdrowie",
@@ -25,6 +26,7 @@ const ARTICLES = [
   },
   {
     id: 2,
+    slug: "trendy-w-oprawach-okularowych-na-2025-rok",
     title: "Trendy w oprawach okularowych na 2025 rok",
     excerpt: "Poznaj najmodniejsze style i kształty opraw, które będą dominować w nadchodzącym sezonie.",
     category: "styl",
@@ -34,6 +36,7 @@ const ARTICLES = [
   },
   {
     id: 3,
+    slug: "soczewki-progresywne-wszystko-co-musisz-wiedziec",
     title: "Soczewki progresywne - wszystko co musisz wiedzieć",
     excerpt: "Kompletny przewodnik po soczewkach wieloogniskowych. Dla kogo są odpowiednie i jak się do nich przyzwyczaić.",
     category: "technologia",
@@ -91,7 +94,7 @@ export function ArticlesSection() {
           
           {/* Featured Article - Left - visible on mobile now */}
           <div className="block lg:col-span-7 transform-gpu mb-4 lg:mb-0">
-            <Link href={`/artykuly/${featuredArticle.id}`} className="group block relative">
+            <Link href={`/artykuly/${featuredArticle.slug}`} className="group block relative">
               {/* Artistic frame - Visible on mobile */}
               <div className="block absolute -inset-3 lg:-inset-4 border border-[#E31F25]/20 pointer-events-none" />
               
@@ -160,7 +163,7 @@ export function ArticlesSection() {
             <div className="flex-1 flex flex-col gap-4 sm:gap-6">
               {sideArticles.map((article, index) => (
                 <div key={article.id} className="transform-gpu">
-                  <Link href={`/artykuly/${article.id}`} className="group flex gap-4 sm:gap-5">
+                  <Link href={`/artykuly/${article.slug}`} className="group flex gap-4 sm:gap-5">
                     {/* Thumbnail */}
                     <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 flex-shrink-0 overflow-hidden shadow-sm">
                       <img 

@@ -22,12 +22,12 @@ export function FilterBar({
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           {/* Category Pills */}
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 lg:pb-0 -mx-6 px-6 lg:mx-0 lg:px-0 scrollbar-hide">
+          <div className="flex flex-nowrap items-center gap-3 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide w-screen ml-[calc(50%-50vw)] px-6 md:px-12 lg:w-auto lg:ml-0 lg:px-0">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-5 py-2.5 font-medium whitespace-nowrap transition-all duration-300 text-sm ${
+                className={`shrink-0 flex items-center gap-2 px-5 py-2.5 font-medium whitespace-nowrap transition-all duration-300 text-sm ${
                   selectedCategory === cat.id
                     ? 'bg-[#1a1a1a] text-white'
                     : 'bg-[#f5f5f5] text-[#5a5a5a] hover:bg-[#e5e5e5]'
