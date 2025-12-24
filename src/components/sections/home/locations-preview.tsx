@@ -28,7 +28,7 @@ const LOCATION_TO_SALON_ID: Record<string, string> = {
   "grojec": "grojec",
 }
 import { Button } from "@/components/ui/button"
-import { MapPin, ArrowRight, Phone, Clock, ExternalLink, Calendar } from "lucide-react"
+import { MapPin, ArrowRight, Phone, Clock, Calendar } from "lucide-react"
 import { useRef, useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
@@ -256,17 +256,6 @@ function GoogleMap({ selectedLocation }: { selectedLocation: Location }) {
   return (
     <div className="relative w-full h-full">
       <div ref={mapRef} className="w-full h-full" />
-      
-      {/* Open in Maps button */}
-      <a
-        href={selectedLocation.map_link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#E31F25] hover:text-white transition-all duration-300 shadow-lg z-20"
-      >
-        <ExternalLink className="w-3.5 h-3.5" />
-        Google Maps
-      </a>
     </div>
   )
 }
@@ -297,17 +286,6 @@ function EmbeddedMap({ selectedLocation }: { selectedLocation: Location }) {
         title={`Mapa - ${selectedLocation.city}`}
         className="w-full h-full"
       />
-      
-      {/* Open in Maps button */}
-      <a
-        href={selectedLocation.map_link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-6 right-6 flex items-center gap-2 px-5 py-3 bg-white text-[#1a1a1a] text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-[#E31F25] hover:text-white transition-all duration-300 shadow-lg z-20"
-      >
-        <ExternalLink className="w-3.5 h-3.5" />
-        Google Maps
-      </a>
     </div>
   )
 }
