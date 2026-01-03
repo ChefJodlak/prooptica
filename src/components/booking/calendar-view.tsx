@@ -210,18 +210,16 @@ export function CalendarView({
           const shortDayName = day.dayName.slice(0, 3)
 
           return (
-            <motion.button
+            <button
               key={day.date}
               onClick={() => hasAvailableSlots && setSelectedDate(day.date)}
-              whileHover={hasAvailableSlots ? { scale: 1.05, y: -2 } : {}}
-              whileTap={hasAvailableSlots ? { scale: 0.95 } : {}}
               disabled={!hasAvailableSlots}
-              id={`day-${day.date}`} // Add ID for easier selection if needed, though index works too
+              id={`day-${day.date}`}
               className={cn(
                 "relative py-4 px-2 text-center transition-all duration-300 min-w-[80px] lg:min-w-0 flex-shrink-0 lg:flex-shrink snap-center rounded-lg lg:rounded-none",
                 "ring-1 ring-inset",
                 isSelected
-                  ? "bg-[#1a1a1a] ring-[#E31F25] shadow-lg"
+                  ? "bg-[#e8e6e2] ring-[#E31F25] shadow-lg"
                   : hasAvailableSlots
                     ? "bg-white ring-[#e0ded8] hover:ring-[#E31F25] hover:shadow-md hover:bg-[#FAFAF8] cursor-pointer"
                     : "bg-[#F5F5F5] ring-[#e0ded8] opacity-50 cursor-not-allowed"
@@ -235,19 +233,19 @@ export function CalendarView({
               </span>
               <span className={cn(
                 "block font-display text-xl",
-                isSelected ? "text-white" : hasAvailableSlots ? "text-[#1a1a1a]" : "text-[#a3a3a3]"
+                isSelected ? "text-[#1a1a1a]" : hasAvailableSlots ? "text-[#1a1a1a]" : "text-[#a3a3a3]"
               )}>
                 {dayNum}
               </span>
               {hasAvailableSlots && (
                 <span className={cn(
                   "block text-[10px] mt-1",
-                  isSelected ? "text-white/60" : "text-[#E31F25]"
+                  isSelected ? "text-[#737373]" : "text-[#E31F25]"
                 )}>
                   {day.slots.filter(s => s.available).length} term.
                 </span>
               )}
-            </motion.button>
+            </button>
           )
         })}
       </div>
@@ -264,7 +262,7 @@ export function CalendarView({
             className="bg-white ring-1 ring-[#e0ded8] p-4 lg:p-6 rounded-lg lg:rounded-none"
           >
             <div className="flex items-center gap-4 mb-6 pb-4 border-b border-[#e0ded8]">
-              <div className="p-3 bg-[#1a1a1a] rounded-lg lg:rounded-none">
+              <div className="p-3 bg-[#e8e6e2] rounded-lg lg:rounded-none">
                 <Clock className="w-5 h-5 text-[#E31F25]" />
               </div>
               <div>

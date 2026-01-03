@@ -69,10 +69,8 @@ export function HeroSection() {
             className="flex flex-wrap gap-8"
           >
             {HERO_STATS.map((item, i) => (
-              <div key={i} className="flex items-center gap-4">
-                <div className="p-3 bg-[#E31F25]/10">
-                  <item.icon className="w-5 h-5 text-[#E31F25]" />
-                </div>
+              <div key={i} className="flex items-center gap-3">
+                <item.icon className="w-5 h-5 text-[#E31F25]" />
                 <span className="text-white/70 font-light">{item.text}</span>
               </div>
             ))}

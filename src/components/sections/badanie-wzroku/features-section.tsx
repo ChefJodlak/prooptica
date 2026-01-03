@@ -1,7 +1,6 @@
 "use client"
 
 import { motion, MotionValue } from "framer-motion"
-import { Eye } from "lucide-react"
 import Image from "next/image"
 import { containerVariants, fadeUpVariants } from "./animation-variants"
 import { SectionLabel } from "./section-label"
@@ -79,25 +78,6 @@ export function FeaturesSection({ isInView, imageY }: FeaturesSectionProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/60 via-transparent to-[#1a1a1a]/20" />
             </motion.div>
             
-            {/* Floating Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="absolute -bottom-6 -left-6 lg:-left-12"
-            >
-              <div className="bg-white p-6 shadow-2xl shadow-[#1a1a1a]/10">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-[#1a1a1a]">
-                    <Eye className="w-8 h-8 text-[#E31F25]" />
-                  </div>
-                  <div>
-                    <div className="font-display text-3xl font-light text-[#1a1a1a]">50k+</div>
-                    <div className="text-sm text-[#737373] font-light">Badań wykonanych</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </motion.div>
       </div>

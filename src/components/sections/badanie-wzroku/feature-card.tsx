@@ -17,16 +17,11 @@ export function FeatureCard({ icon: Icon, title, description, index, isInView }:
       initial={{ opacity: 0, x: -20 }}
       animate={isInView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-      className="group flex items-start gap-4 p-5 bg-[#F8F7F4] transition-all duration-500 hover:-translate-y-1"
+      className="flex items-start gap-4 p-5 bg-[#F8F7F4] ring-1 ring-[#e0ded8] rounded-lg"
     >
-      {/* Elegant border */}
-      <div className="absolute inset-0 ring-1 ring-[#e0ded8] group-hover:ring-[#E31F25] transition-all duration-500" />
-      
-      <div className="p-3 bg-[#1a1a1a] shrink-0">
-        <Icon className="w-5 h-5 text-[#E31F25]" />
-      </div>
+      <Icon className="w-5 h-5 text-[#E31F25] shrink-0 mt-1" />
       <div>
-        <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-1 group-hover:text-[#E31F25] transition-colors">
+        <h3 className="font-display text-lg font-medium text-[#1a1a1a] mb-1">
           {title}
         </h3>
         <p className="text-sm text-[#737373] leading-relaxed font-light">

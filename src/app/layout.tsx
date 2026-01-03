@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
@@ -17,6 +17,13 @@ const cormorant = Cormorant_Garamond({
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -74,7 +81,8 @@ export default function RootLayout({
         className={cn(
           "min-h-screen bg-background font-sans antialiased flex flex-col",
           cormorant.variable,
-          dmSans.variable
+          dmSans.variable,
+          inter.variable
         )}
         style={{ fontFamily: "var(--font-dm-sans), system-ui, sans-serif" }}
       >

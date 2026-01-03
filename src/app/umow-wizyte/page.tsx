@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect, Suspense } from "react"
+import { useState, useRef, useEffect, Suspense, useCallback } from "react"
 import { useSearchParams } from "next/navigation"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { 
@@ -19,6 +19,7 @@ import {
   ArrowRight
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { NOISE_TEXTURE } from "@/lib/constants/ui"
 
 // Import booking components directly
 import { StepIndicator } from "@/components/booking/step-indicator"
@@ -33,31 +34,41 @@ import type { Salon, Specialist, Service, TimeSlot } from "@/components/booking/
 // SEARCH PARAMS HANDLER
 // ═══════════════════════════════════════════════════════════════════════════
 
-function SearchParamsHandler({ 
+function SearchParamsHandler({
   onSalonSelect,
-  formSectionRef 
-}: { 
+  formSectionRef,
+  onOpenMobileBooking
+}: {
   onSalonSelect: (salon: Salon) => void
   formSectionRef: React.RefObject<HTMLElement | null>
+  onOpenMobileBooking: () => void
 }) {
   const searchParams = useSearchParams()
-  
+  const hasProcessedRef = useRef(false)
+
   useEffect(() => {
+    // Only process URL params once on initial load
+    if (hasProcessedRef.current) return
+
     const salonId = searchParams.get('salon')
     if (salonId) {
       const salon = SALONS.find(s => s.id === salonId)
       if (salon) {
+        hasProcessedRef.current = true
         onSalonSelect(salon)
-        // Desktop scroll only
+        // Desktop: scroll to form section
+        // Mobile: auto-open the booking modal
         if (window.innerWidth >= 1024) {
            setTimeout(() => {
             formSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }, 100)
+        } else {
+          onOpenMobileBooking()
         }
       }
     }
-  }, [searchParams, onSalonSelect, formSectionRef])
-  
+  }, [searchParams, onSalonSelect, formSectionRef, onOpenMobileBooking])
+
   return null
 }
 
@@ -89,12 +100,10 @@ export default function BookingPage() {
   }, [isMobileBookingOpen])
 
   // Handle salon pre-selection from URL parameter
-  const handleSalonFromUrl = (salon: Salon) => {
+  const handleSalonFromUrl = useCallback((salon: Salon) => {
     setSelectedSalon(salon)
     setStep(2)
-    // On mobile, if url param exists, we might want to auto-open modal?
-    // For now, let's just set state, user opens modal manually.
-  }
+  }, [])
 
   // Filter services by selected salon
   const availableServices = selectedSalon
@@ -544,9 +553,10 @@ export default function BookingPage() {
     <div ref={containerRef} className="min-h-screen bg-[#F8F7F4]">
       {/* Handle URL search params in Suspense boundary */}
       <Suspense fallback={null}>
-        <SearchParamsHandler 
-          onSalonSelect={handleSalonFromUrl} 
+        <SearchParamsHandler
+          onSalonSelect={handleSalonFromUrl}
           formSectionRef={formSectionRef}
+          onOpenMobileBooking={() => setIsMobileBookingOpen(true)}
         />
       </Suspense>
       
@@ -665,72 +675,65 @@ export default function BookingPage() {
          ════════════════════════════════════════════════════════════════════════ */}
       <div className="hidden lg:block">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 bg-[#050505] overflow-hidden">
+        <section className="relative pt-28 pb-16 lg:pt-32 lg:pb-24 bg-[#1a1a1a] overflow-hidden">
 
-          
-          {/* Decorative background elements */}
+          {/* Subtle texture overlay */}
+          <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{
+            backgroundImage: NOISE_TEXTURE
+          }} />
+
+          {/* Gradient orb */}
           <motion.div
-            className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#E31F25]/10 rounded-full blur-[150px]"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.15, 0.1] }}
+            className="absolute top-1/3 left-1/4 w-[600px] h-[600px] rounded-full blur-[100px] opacity-60"
+            style={{
+              background: "radial-gradient(circle, rgba(227,31,37,0.3) 0%, rgba(227,31,37,0) 70%)",
+              willChange: "transform"
+            }}
+            animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
-          
-          <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
-            {/* Label */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-5 mb-6"
-            >
-              <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
-                Rezerwacja online
-              </span>
-              <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
-            </motion.div>
-            
-            {/* Headline */}
-            <div className="overflow-hidden mb-3">
-              <motion.h1
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-display text-[clamp(3rem,9vw,6.5rem)] font-extralight text-white leading-[1] tracking-[-0.03em]"
+
+          <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
+            <div className="max-w-4xl">
+              {/* Eyebrow */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="flex items-center gap-5 mb-6"
               >
-                Umów
-              </motion.h1>
-            </div>
-            <div className="overflow-hidden mb-6">
-              <motion.h1
-                initial={{ y: "100%" }}
-                animate={{ y: 0 }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="font-display text-[clamp(3rem,9vw,6.5rem)] font-medium text-white leading-[1] tracking-[-0.03em]"
-              >
-                <span className="relative inline-block">
-                  <span className="italic text-[#E31F25]">wizytę</span>
-                  <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
+                <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
+                  Rezerwacja online
                 </span>
-              </motion.h1>
+                <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
+              </motion.div>
+
+              {/* Headline */}
+              <div className="overflow-hidden pb-4 mb-6">
+                <motion.h1
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                  className="font-display text-[clamp(2.5rem,9vw,6.5rem)] text-white leading-none tracking-[-0.03em]"
+                >
+                  <span className="font-extralight">Umów </span>
+                  <span className="relative inline-block font-medium">
+                    <span className="italic text-[#E31F25]">wizytę</span>
+                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
+                  </span>
+                </motion.h1>
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-white/60 text-lg lg:text-xl leading-[1.8] mb-8 max-w-xl font-light"
+              >
+                Wybierz salon, specjalistę i dogodny termin wizyty. Rezerwacja online zajmuje tylko chwilę.
+              </motion.p>
             </div>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-white/60 text-lg lg:text-xl leading-[1.8] max-w-lg font-light"
-            >
-              Wybierz salon, specjalistę i dogodny termin wizyty. Rezerwacja online zajmuje tylko chwilę.
-            </motion.p>
           </div>
-          
-          {/* Bottom decorative line */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/30 to-transparent origin-center"
-          />
         </section>
 
         {/* Booking Steps Section */}
@@ -888,46 +891,55 @@ export default function BookingPage() {
         </section>
 
         {/* Contact CTA */}
-        <section className="relative py-24">
-          <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
+        <section className="py-20 lg:py-32 bg-[#050505] relative overflow-hidden">
+          {/* Gradient orb */}
+          <motion.div
+            className="absolute -top-20 left-1/4 w-64 h-64 bg-[#E31F25]/20 rounded-full blur-[100px]"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 5, repeat: Infinity }}
+          />
+
+          <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative bg-[#050505] p-16 overflow-hidden"
+              transition={{ duration: 0.8 }}
+              className="flex flex-col lg:flex-row items-center justify-between gap-12"
             >
-
-              
-              <motion.div
-                className="absolute -top-20 -left-20 w-64 h-64 bg-[#E31F25]/15 rounded-full blur-[80px]"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 5, repeat: Infinity }}
-              />
-              
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E31F25] to-transparent" />
-              
-              <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-                <div className="text-center lg:text-left">
-                  <div className="flex items-center justify-center lg:justify-start gap-5 mb-6">
-                    <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
-                      Wolisz telefonicznie?
-                    </span>
-                    <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-[#E31F25] to-transparent" />
-                  </div>
-                  <h3 className="font-display text-3xl lg:text-5xl font-extralight text-white mb-3 tracking-[-0.02em]">
-                    Zadzwoń do{" "}
-                    <span className="italic text-[#E31F25] font-medium">nas</span>
-                  </h3>
-                  <p className="text-white/50 max-w-md font-light">
-                    Nasi konsultanci pomogą Ci umówić wizytę telefonicznie.
-                  </p>
+              <div className="text-center lg:text-left">
+                {/* Eyebrow */}
+                <div className="flex items-center justify-center lg:justify-start gap-5 mb-6">
+                  <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
+                    Wolisz telefonicznie?
+                  </span>
+                  <div className="h-px w-12 bg-gradient-to-r from-[#E31F25] to-transparent" />
                 </div>
-                
-                <a 
+
+                <h3 className="font-display text-[2rem] lg:text-[3rem] font-extralight text-white leading-[1.1] tracking-[-0.02em] mb-4">
+                  Zadzwoń do{" "}
+                  <span className="relative inline-block">
+                    <span className="italic text-[#E31F25] font-medium">nas</span>
+                    <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
+                  </span>
+                </h3>
+                <p className="text-white/50 max-w-md font-light leading-relaxed">
+                  Nasi konsultanci pomogą Ci umówić wizytę telefonicznie.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-5">
+                <a
                   href="tel:+48227200800"
-                  className="flex items-center gap-3 px-8 py-5 bg-[#E31F25] text-[#1a1a1a] font-semibold text-sm tracking-wider hover:bg-white transition-all duration-500 w-full lg:w-auto justify-center"
+                  className="flex items-center gap-3 px-6 py-4 border border-white/20 text-white hover:border-[#E31F25] hover:text-[#E31F25] transition-all duration-300"
                 >
-                  +48 22 720 08 00
+                  <Phone className="w-5 h-5" />
+                  <span className="font-medium tracking-wide">+48 22 720 08 00</span>
+                </a>
+                <a href="/kontakt">
+                  <button className="bg-[#E31F25] text-white px-8 py-4 text-[11px] font-semibold tracking-[0.2em] uppercase hover:bg-white hover:text-[#1a1a1a] transition-all duration-500 flex items-center gap-3">
+                    Kontakt
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </a>
               </div>
             </motion.div>

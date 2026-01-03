@@ -1,18 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { MapPin, Building2 } from "lucide-react"
 import { SectionLabel } from "@/components/sections/badanie-wzroku/section-label"
 import { NOISE_TEXTURE } from "@/lib/constants/ui"
 
 interface HeroSectionProps {
   isInView: boolean
 }
-
-const stats = [
-  { value: "4", label: "Salony", icon: Building2 },
-  { value: "3", label: "Miasta", icon: MapPin },
-]
 
 export function HeroSection({ isInView }: HeroSectionProps) {
   return (
@@ -77,30 +71,6 @@ export function HeroSection({ isInView }: HeroSectionProps) {
               Stworzyliśmy miejsca, w których profesjonalna diagnostyka łączy się 
               z komfortem i wyjątkową atmosferą.
             </motion.p>
-
-            {/* Quick stats with Icons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-wrap gap-8 lg:gap-12"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                    <stat.icon className="w-5 h-5 text-white" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <span className="block font-display text-2xl font-medium text-white tracking-tight leading-none mb-1">
-                      {stat.value}
-                    </span>
-                    <span className="block text-[10px] tracking-[0.1em] text-white/50 uppercase font-medium">
-                      {stat.label}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
           </div>
         </div>
       </div>

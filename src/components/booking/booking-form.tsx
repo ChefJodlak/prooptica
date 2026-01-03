@@ -137,12 +137,10 @@ export function BookingForm({
       </button>
       
       <button
-        type={isMobile ? "button" : "submit"} // On mobile, we trigger form submit manually via ID referencing or programmatic submit if outside form
+        type={isMobile ? "button" : "submit"}
         onClick={isMobile ? (e) => {
-          // Manually trigger submit on the form
           const form = document.getElementById('booking-form') as HTMLFormElement;
           if (form) {
-            // Create a synthetic event to pass to handleSubmit or requestSubmit
             if (form.requestSubmit) {
               form.requestSubmit();
             } else {
@@ -152,21 +150,22 @@ export function BookingForm({
         } : undefined}
         disabled={isSubmitting}
         className={cn(
-          "flex-1 font-semibold tracking-[0.2em] uppercase transition-all duration-500",
-          "bg-[#E31F25] text-white hover:bg-[#1a1a1a] hover:text-white",
+          "group/btn relative flex-1 font-semibold tracking-[0.2em] uppercase transition-all duration-500 overflow-hidden",
+          "bg-[#E31F25] text-white",
           isSubmitting && "opacity-50 cursor-wait",
-          isMobile 
-            ? "px-6 py-3 text-[10px] rounded-lg" 
+          isMobile
+            ? "px-6 py-3 text-[10px] rounded-lg"
             : "px-6 py-3 text-[10px] lg:rounded-none"
         )}
       >
+        <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-out" />
         {isSubmitting ? (
-          <span className="flex items-center justify-center gap-2">
+          <span className="relative z-10 flex items-center justify-center gap-2">
             <Loader2 className="w-4 h-4 animate-spin" />
             Rezerwuję...
           </span>
         ) : (
-          <span className="flex items-center justify-center gap-2">
+          <span className="relative z-10 flex items-center justify-center gap-2">
             Zarezerwuj wizytę
           </span>
         )}
@@ -175,22 +174,22 @@ export function BookingForm({
   )
 
   return (
-    <div className="space-y-5 pb-8 lg:pb-0">
-      {/* Compact Appointment Summary */}
-      <div className="bg-[#1a1a1a] p-4 lg:p-5 rounded-lg lg:rounded-none shadow-md lg:shadow-none">
+    <div className="space-y-6 lg:space-y-10 pb-8 lg:pb-0">
+      {/* Appointment Summary */}
+      <div className="bg-white ring-1 ring-[#e0ded8] p-4 lg:p-5 rounded-lg lg:rounded-none">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#E31F25]" />
-            <span className="text-white capitalize">{formattedDate}</span>
-            <span className="text-white/60">godz. {slot.time}</span>
+            <span className="text-[#1a1a1a] capitalize">{formattedDate}</span>
+            <span className="text-[#737373]">godz. {slot.time}</span>
           </div>
           <div className="flex items-center gap-2">
             <User className="w-4 h-4 text-[#E31F25]" />
-            <span className="text-white">{specialist.name}</span>
+            <span className="text-[#1a1a1a]">{specialist.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="w-4 h-4 text-[#E31F25]" />
-            <span className="text-white/60">{salon.city}, {salon.address}</span>
+            <span className="text-[#737373]">{salon.city}, {salon.address}</span>
           </div>
         </div>
       </div>

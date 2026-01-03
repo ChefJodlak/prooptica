@@ -76,36 +76,39 @@ export function Hero() {
             
             {/* Text Content - Left aligned on mobile */}
             <div className="flex-1 flex flex-col justify-center sm:block text-center sm:text-left">
-              {/* Headline */}
-              <div className="overflow-hidden mb-0 sm:mb-3">
-                <h1 
+              {/* Headline - First line: "Doskonałość" */}
+              <div className="overflow-hidden mb-0 sm:mb-2">
+                <h1
                   className={cn(
-                    "font-display text-[4.5rem] sm:text-[clamp(4rem,9vw,6.5rem)] font-extralight text-white leading-[0.9] sm:leading-[1] tracking-[-0.03em]",
-                    !isSafari && "transition-transform duration-700 ease-out"
+                    "font-display text-[5rem] sm:text-[clamp(5rem,12vw,9rem)] font-light text-white leading-[0.85] sm:leading-[0.88] tracking-[-0.04em]",
+                    !isSafari && "transition-transform duration-[800ms] ease-out"
                   )}
                   style={{
                     transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
                     transitionDelay: !isSafari ? '200ms' : undefined,
-                    textShadow: '0 3px 12px rgba(0, 0, 0, 0.4)'
+                    textShadow: '0 1px 2px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.2)'
                   }}
                 >
                   Doskonałość
                 </h1>
               </div>
-              <div className="overflow-hidden mb-8 sm:mb-10">
-                <h1 
+              {/* Headline - Second line: "widzenia" */}
+              <div className="overflow-hidden mb-10 sm:mb-12">
+                <h1
                   className={cn(
-                    "font-display text-[4.5rem] sm:text-[clamp(4rem,9vw,6.5rem)] font-medium leading-[0.9] sm:leading-[1] tracking-[-0.03em]",
-                    !isSafari && "transition-transform duration-700 ease-out"
+                    "font-display text-[5rem] sm:text-[clamp(5rem,12vw,9rem)] font-bold leading-[0.85] sm:leading-[0.88] tracking-[-0.04em]",
+                    !isSafari && "transition-transform duration-[800ms] ease-out"
                   )}
                   style={{
                     transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
-                    transitionDelay: !isSafari ? '300ms' : undefined
+                    transitionDelay: !isSafari ? '350ms' : undefined
                   }}
                 >
-                  <span 
+                  <span
                     className="italic text-[#E31F25]"
-                    style={{ textShadow: '0 3px 12px rgba(0, 0, 0, 0.45)' }}
+                    style={{
+                      textShadow: '0 1px 2px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.25)'
+                    }}
                   >
                     widzenia
                   </span>
@@ -113,15 +116,15 @@ export function Hero() {
               </div>
 
               {/* Description */}
-              <p 
+              <p
                 className={cn(
-                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-8 sm:mb-10 max-w-lg font-light mx-auto sm:mx-0",
+                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-10 sm:mb-12 max-w-lg font-light mx-auto sm:mx-0",
                   !isSafari && "transition-all duration-500 ease-out"
                 )}
                 style={isSafari ? {} : {
                   opacity: showContent ? 1 : 0,
                   transform: showContent ? 'translateY(0)' : 'translateY(1.25rem)',
-                  transitionDelay: '500ms'
+                  transitionDelay: '550ms'
                 }}
               >
                 Ponad 50 światowych marek. Najnowocześniejsza diagnostyka. 
@@ -130,7 +133,7 @@ export function Hero() {
             </div>
 
             {/* CTA - Bottom on mobile */}
-            <div 
+            <div
               className={cn(
                 "flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-6 w-full sm:w-auto",
                 !isSafari && "transition-all duration-500 ease-out"
@@ -138,7 +141,7 @@ export function Hero() {
               style={isSafari ? {} : {
                 opacity: showContent ? 1 : 0,
                 transform: showContent ? 'translateY(0)' : 'translateY(1.25rem)',
-                transitionDelay: '700ms'
+                transitionDelay: '750ms'
               }}
             >
               <Link href="/umow-wizyte" className="w-full sm:w-auto group/btn">

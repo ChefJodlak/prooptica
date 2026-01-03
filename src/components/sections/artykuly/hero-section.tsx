@@ -30,7 +30,7 @@ export function HeroSection() {
           <SectionLabel text="Blog & Porady" animate />
           
           {/* Headline */}
-          <div className="overflow-hidden mb-6">
+          <div className="overflow-hidden pb-4 mb-6">
             <motion.h1
               initial={{ y: "100%" }}
               animate={{ y: 0 }}

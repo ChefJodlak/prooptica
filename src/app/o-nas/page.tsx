@@ -4,7 +4,6 @@ import {
   HeroSection,
   StorySection,
   ValuesSection,
-  TimelineSection,
   TeamSection,
   CtaSection
 } from "@/components/sections/o-nas"
@@ -15,7 +14,6 @@ export default function AboutPage() {
       <HeroSection />
       <StorySection />
       <ValuesSection />
-      <TimelineSection />
       <TeamSection />
       <CtaSection />
     </div>

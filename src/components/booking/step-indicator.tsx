@@ -27,10 +27,10 @@ export function StepIndicator({
     )}>
       <div className={cn(
         "relative w-12 h-12 flex items-center justify-center transition-all duration-300",
-        isCompleted 
-          ? "bg-[#E31F25] group-hover:bg-[#b39669] group-hover:scale-105" 
-          : isActive 
-            ? "bg-[#1a1a1a]" 
+        isCompleted
+          ? "bg-[#E31F25] group-hover:bg-[#b39669] group-hover:scale-105"
+          : isActive
+            ? "bg-[#e8e6e2]"
             : "bg-[#F5F5F5] group-hover:bg-[#e8e6e2]"
       )}>
         {isCompleted ? (

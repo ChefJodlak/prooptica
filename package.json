@@ -7,9 +7,13 @@
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "studio": "cd studio && npm run dev",
+    "studio:build": "cd studio && npm run build",
+    "studio:deploy": "cd studio && npm run deploy"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.8",
@@ -17,6 +21,8 @@
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
     "@react-google-maps/api": "^2.20.7",
+    "@sanity/client": "^7.13.2",
+    "@sanity/image-url": "^2.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
@@ -25,6 +31,7 @@
     "lucide-react": "^0.555.0",
     "motion": "^12.23.24",
     "next": "^16.0.8",
+    "next-sanity": "^11.6.10",
     "next-sitemap": "^4.2.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
