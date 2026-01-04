@@ -302,7 +302,7 @@ export function Footer() {
                   <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E31F25]" />
                 </div>
                 <div className="text-left">
-                  <span className="block text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-white/40 mb-0.5 sm:mb-1">Godziny</span>
+                  <span className="block text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-white/40 mb-0.5 sm:mb-1">Godziny otwarcia</span>
                   <div className="flex flex-col sm:block">
                     <span className="text-white/70 text-xs sm:text-sm font-light whitespace-nowrap">Pn-Pt: 10:00 - 18:00</span>
                     <span className="text-white/70 text-xs sm:text-sm font-light sm:ml-3 whitespace-nowrap">Sob: 10:00 - 14:00</span>
