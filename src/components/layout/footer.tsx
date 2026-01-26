@@ -143,14 +143,12 @@ export function Footer() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {LOCATIONS.map((loc) => (
                   <div key={loc.id}>
-                    <Link 
+                    <Link
                       href="/salony"
                       className="group block p-4 sm:p-5 border border-white/10 hover:border-[#E31F25]/40 hover:bg-white/[0.03] transition-all duration-300 bg-white/[0.02]"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="p-2 bg-[#E31F25]/10 text-[#E31F25] group-hover:bg-[#E31F25] group-hover:text-[#1a1a1a] transition-all duration-300 shrink-0 w-8 h-8 flex items-center justify-center">
-                          <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                        </div>
+                      <div className="flex items-center gap-3">
+                        <MapPin className="w-4 h-4 text-[#E31F25] shrink-0" />
                         <div className="text-left">
                           <span className="block font-display text-base sm:text-lg text-white font-medium tracking-tight mb-0.5 sm:mb-1 group-hover:text-[#E31F25] transition-colors">
                             {loc.city}
