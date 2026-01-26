@@ -67,8 +67,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-white/60 text-lg lg:text-xl leading-[1.8] max-w-2xl mb-8 font-light"
         >
-          Współpracujemy z najlepszymi producentami na świecie. 
-          Tylko oryginalne produkty z pełną gwarancją.
+          Współpracujemy z renomowanymi producentami zagranicznymi oraz cenionymi polskimi markami, oferując wyłącznie oryginalne produkty objęte pełną gwarancją.
         </motion.p>
         
         {/* Stats */}

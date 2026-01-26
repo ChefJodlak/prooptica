@@ -158,7 +158,7 @@ export function BrandsMarquee() {
               className="lg:max-w-xs text-center lg:text-right"
             >
               <p className="text-white/50 text-base sm:text-lg leading-[1.7] font-light">
-                Starannie wyselekcjonowana oferta od najbardziej prestiżowych domów mody.
+                Starannie wyselekcjonowana oferta od najbardziej prestiżowych domów mody oraz polskich producentów.
               </p>
             </motion.div>
           </div>

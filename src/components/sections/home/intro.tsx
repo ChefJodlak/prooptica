@@ -150,21 +150,12 @@ export function Intro() {
               </h2>
             </motion.div>
 
-            {/* Mobile description - Full Text restored */}
-            <motion.p 
+            {/* Description */}
+            <motion.p
               variants={fadeUpVariants}
-              className="sm:hidden text-[#5a5a5a] text-sm leading-[1.7] mb-6 text-center font-light shrink-0"
+              className="text-[#5a5a5a] text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] mb-6 lg:mb-8 max-w-lg font-light text-center sm:text-left"
             >
-              Od 2004 roku łączymy precyzję z włoskim designem. Każda para okularów to kompozycja stylu i funkcjonalności.
-            </motion.p>
-
-            {/* Desktop description */}
-            <motion.p 
-              variants={fadeUpVariants}
-              className="hidden sm:block text-[#5a5a5a] text-sm sm:text-base lg:text-lg leading-[1.7] sm:leading-[1.8] mb-6 lg:mb-8 max-w-lg font-light"
-            >
-              Od 2004 roku łączymy szwajcarską precyzję z włoskim designem. 
-              Każda para okularów to starannie dobrana kompozycja stylu i funkcjonalności.
+              Od 2004 roku Prooptica to coś więcej niż salon optyczny. Prowadzimy własne gabinety optometryczne, pracownię optyczną i świadome doradztwo stylistyczne, dzięki czemu każda para okularów powstaje jako przemyślany efekt wiedzy, doświadczenia i indywidualnych potrzeb klienta.
             </motion.p>
             
             {/* Mobile Stats - Visible on mobile */}

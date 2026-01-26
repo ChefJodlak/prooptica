@@ -11,32 +11,46 @@ import { NOISE_TEXTURE } from "@/lib/constants/ui"
 
 const LENS_TYPES = [
   {
+    id: "single-vision",
+    name: "Jednoogniskowe",
+    subtitle: "Indywidualne",
+    description: "Nowa era soczewek jednoogniskowych indywidualnych. Dzięki zaawansowanemu skanerowi DNEye® mierzymy ponad 7000 punktów oka, tworząc soczewki idealnie dopasowane do Twojej unikalnej anatomii i stylu życia.",
+    features: ["Pomiar 7000+ punktów oka", "Indywidualny profil widzenia", "Maksymalna ostrość"],
+  },
+  {
     id: "progressive",
     name: "Progresywne",
-    subtitle: "Wieloogniskowe",
-    description: "Płynna korekcja na każdą odległość. Jedno rozwiązanie zamiast kilku par okularów — idealne dla osób po 40. roku życia.",
-    features: ["Widzenie na każdą odległość", "Komfort przez cały dzień", "Naturalna korekta"],
+    subtitle: "Szyte na miarę",
+    description: "Indywidualne soczewki progresywne tworzone z wykorzystaniem skanerów Impressionist i DNEye®. Każda para to okulary szyte na miarę — precyzyjnie dopasowane do Twoich oczu, twarzy i nawyków wzrokowych.",
+    features: ["Technologia Impressionist", "Skan DNEye®", "Perfekcyjne dopasowanie"],
+  },
+  {
+    id: "office",
+    name: "Biurowe",
+    subtitle: "Do pracy",
+    description: "Indywidualne soczewki biurowe stworzone dla osób spędzających długie godziny przed monitorem. Zapewniają komfortowe widzenie ekranu i dokumentów, eliminując napięcie oczu podczas wielogodzinnej pracy.",
+    features: ["Komfort przy komputerze", "Ostrość na dokumenty", "Redukcja zmęczenia"],
   },
   {
     id: "photochromic",
     name: "Fotochromowe",
     subtitle: "Adaptacyjne",
-    description: "Inteligentne soczewki reagujące na intensywność światła. Automatycznie przyciemniają się na słońcu i rozjaśniają w pomieszczeniach.",
-    features: ["Automatyczna adaptacja", "100% ochrony UV", "Idealne na co dzień"],
-  },
-  {
-    id: "bluecontrol",
-    name: "Blue Control",
-    subtitle: "Ochronne",
-    description: "Zaawansowana filtracja niebieskiego światła z ekranów. Redukcja zmęczenia oczu podczas pracy przy komputerze i korzystania ze smartfona.",
-    features: ["Ochrona przed ekranami", "Mniej zmęczenia oczu", "Lepszy sen"],
+    description: "Najnowsze technologicznie soczewki fotochromowe, wielokrotnie nagradzane za innowacyjność. Sensity Fast i Colormatic X to rekordziści szybkości — przyciemniają się błyskawicznie i odbarwiają w kilkadziesiąt sekund.",
+    features: ["Sensity Fast & Colormatic X", "Błyskawiczne odbarwianie", "100% ochrony UV"],
   },
   {
     id: "antireflective",
-    name: "Antyrefleksyjne",
-    subtitle: "Klarowne",
-    description: "Eliminacja odbić i odblasków dla krystalicznie czystego widzenia. Szczególnie przydatne podczas prowadzenia samochodu nocą.",
-    features: ["Zero odbić", "Ostry obraz", "Bezpieczna jazda nocą"],
+    name: "Antyrefleks",
+    subtitle: "Powłoki premium",
+    description: "Najnowsze powłoki antyrefleksyjne dostępne na rynku. Wyjątkowo śliskie, odporne na zarysowania i łatwe w utrzymaniu czystości. Eliminują odbicia, zapewniając krystalicznie czysty obraz w każdych warunkach.",
+    features: ["Łatwe czyszczenie", "Wysoka twardość", "Efekt antystatyczny"],
+  },
+  {
+    id: "relaxation",
+    name: "Relaksacyjne",
+    subtitle: "Wsparcie akomodacji",
+    description: "Soczewki relaksacyjne wspierają naturalną akomodację oka, idealne dla osób w wieku 30-45 lat odczuwających pierwsze oznaki zmęczenia wzroku. Łagodne wsparcie strefy bliskiej redukuje napięcie podczas pracy z bliska.",
+    features: ["Wsparcie akomodacji", "Redukcja zmęczenia", "Profilaktyka prezbiopi"],
   },
 ]
 
@@ -45,10 +59,10 @@ const PARTNERS = [
   { id: "rodenstock", name: "RODENSTOCK", logo: "/lenses/rodenstock.png" },
   { id: "coopervision", name: "COOPER VISION", logo: "/lenses/cooper-vision.png" },
   { id: "acuvue", name: "ACUVUE", logo: "/lenses/acuvue.png" },
-  { id: "alcon", name: "ALCON", logo: "/lenses/alcon.jpg" },
+  { id: "alcon", name: "ALCON", logo: "/lenses/alcon.png" },
 ]
 
-const AUTO_ROTATE_INTERVAL = 5000
+const AUTO_ROTATE_INTERVAL = 8000
 
 export function LensesSection() {
   const [containerRef, isVisible] = useSectionVisibility<HTMLElement>()
@@ -153,7 +167,7 @@ export function LensesSection() {
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 lg:items-stretch">
           
           {/* Right - Lens Type Selector - ORDER CHANGE: Selector first on mobile */}
           <motion.div
@@ -237,7 +251,7 @@ export function LensesSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="block lg:col-span-7 relative mb-0 lg:mb-0 order-2 lg:order-1"
+            className="block lg:col-span-7 relative mb-0 lg:mb-0 order-2 lg:order-1 flex flex-col"
           >
             {/* Artistic frame like intro section */}
             <motion.div 
@@ -253,13 +267,13 @@ export function LensesSection() {
               className="absolute -inset-6 sm:-inset-8 border border-[#E31F25]/10 pointer-events-none block" 
             />
 
-            <div className="relative bg-white overflow-hidden shadow-xl">
+            <div className="relative bg-white overflow-hidden shadow-xl flex-1 flex flex-col">
               {/* Main content area */}
-              <div className="relative min-h-[350px] sm:min-h-[450px] lg:min-h-[500px] p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
-                
+              <div className="relative min-h-[420px] sm:min-h-[500px] lg:min-h-0 lg:flex-1 p-6 sm:p-10 lg:p-14 xl:p-16 flex flex-col justify-between">
+
                 {/* Decorative corner accent */}
-                <div className="absolute top-0 left-0 w-12 sm:w-16 h-12 sm:h-16 border-l-2 border-t-2 border-[#E31F25]/40" />
-                <div className="absolute bottom-0 right-0 w-12 sm:w-16 h-12 sm:h-16 border-r-2 border-b-2 border-[#E31F25]/40" />
+                <div className="absolute top-0 left-0 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 border-l-2 lg:border-l-[3px] border-t-2 lg:border-t-[3px] border-[#E31F25]/40" />
+                <div className="absolute bottom-0 right-0 w-12 sm:w-16 lg:w-24 h-12 sm:h-16 lg:h-24 border-r-2 lg:border-r-[3px] border-b-2 lg:border-b-[3px] border-[#E31F25]/40" />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -268,29 +282,29 @@ export function LensesSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative z-10 flex flex-col h-full"
+                    className="relative z-10 flex flex-col h-full justify-between"
                   >
                     {/* Content */}
-                    <div className="flex-1">
+                    <div className="flex-1 flex flex-col justify-center">
                       {/* Subtitle */}
-                      <span className="inline-block text-[10px] sm:text-xs tracking-[0.3em] text-[#E31F25] uppercase mb-3 sm:mb-4">
+                      <span className="inline-block text-[10px] sm:text-xs lg:text-sm tracking-[0.3em] text-[#E31F25] uppercase mb-3 sm:mb-4 lg:mb-6">
                         {activeLens.subtitle}
                       </span>
-                      
+
                       {/* Title */}
-                      <h3 className="font-display text-[2rem] sm:text-4xl lg:text-5xl xl:text-6xl font-light text-[#1a1a1a] mb-4 sm:mb-6 tracking-[-0.02em] leading-tight">
+                      <h3 className="font-display text-[2rem] sm:text-4xl lg:text-6xl xl:text-7xl font-light text-[#1a1a1a] mb-4 sm:mb-6 lg:mb-8 tracking-[-0.02em] leading-tight">
                         {activeLens.name}
                       </h3>
-                      
+
                       {/* Description */}
-                      <p className="text-[#5a5a5a] text-sm sm:text-lg leading-relaxed font-light max-w-lg mb-6 sm:mb-8">
+                      <p className="text-[#5a5a5a] text-sm sm:text-lg lg:text-xl leading-relaxed lg:leading-[1.8] font-light max-w-xl mb-6 sm:mb-8">
                         {activeLens.description}
                       </p>
                     </div>
-                    
+
                     {/* Features */}
-                    <div className="border-t border-[#e0ded8] pt-5 sm:pt-6">
-                      <div className="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
+                    <div className="border-t border-[#e0ded8] pt-5 sm:pt-6 lg:pt-8 mt-auto">
+                      <div className="flex flex-wrap gap-x-4 sm:gap-x-8 lg:gap-x-10 gap-y-2 sm:gap-y-3 lg:gap-y-4">
                         {activeLens.features.map((feature, i) => (
                           <motion.div
                             key={feature}
@@ -299,8 +313,8 @@ export function LensesSection() {
                             transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
                             className="flex items-center gap-2 sm:gap-3"
                           >
-                            <div className="w-1.5 h-1.5 bg-[#E31F25]" />
-                            <span className="text-[#737373] text-xs sm:text-sm font-light">
+                            <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-[#E31F25]" />
+                            <span className="text-[#737373] text-xs sm:text-sm lg:text-base font-light">
                               {feature}
                             </span>
                           </motion.div>
@@ -336,16 +350,13 @@ export function LensesSection() {
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    className="relative h-5 sm:h-6 w-16 sm:w-20 grayscale opacity-40 hover:grayscale-0 hover:opacity-70 transition-all duration-500"
+                    className="relative h-6 sm:h-8 lg:h-10 w-20 sm:w-24 lg:w-28 opacity-70"
                   >
                     <Image
                       src={partner.logo}
                       alt={partner.name}
                       fill
-                      className={cn(
-                        "object-contain",
-                        partner.id === 'acuvue' && "invert opacity-60"
-                      )}
+                      className="object-contain"
                     />
                   </motion.div>
                 ))}

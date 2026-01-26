@@ -96,20 +96,24 @@ export function StorySection() {
             </motion.div>
 
             {/* Description */}
-            <motion.div 
+            <motion.div
               variants={fadeUpVariants}
               className="space-y-6 text-[#5a5a5a] text-base lg:text-lg leading-[1.8] mb-10 max-w-xl font-light"
             >
               <p>
-                Prooptica powstała z pasji do optyki i chęci niesienia pomocy osobom 
-                z wadami wzroku. Założyciele, rodzina z wieloletnim doświadczeniem 
-                w branży, postanowili stworzyć miejsce, gdzie najnowsza technologia 
-                spotyka się z ciepłą, rodzinną atmosferą.
+                ProOptica to rodzinna firma, która powstała z pasji do optyki. Od lat tworzymy miejsce, w którym profesjonalna opieka nad wzrokiem łączy się z estetyką i świadomym wyborem.
               </p>
               <p>
-                Dziś, po dwóch dekadach, Prooptica to cztery ekskluzywne salony 
-                w Warszawie, Piasecznie i Grójcu. Każdy z nich utrzymuje te same 
-                standardy jakości i obsługi, które definiują naszą markę od samego początku.
+                W naszych salonach pracują optometryści, optycy i styliści, którzy prowadzą klienta przez cały proces od precyzyjnego badania wzroku, przez dobór opraw, po wykonanie okularów w naszej własnej pracowni optycznej.
+              </p>
+              <p>
+                Oferujemy kompleksowe badania optometryczne i okulistyczne oraz starannie wyselekcjonowane kolekcje opraw renomowanych marek zagranicznych i cenionych polskich producentów.
+              </p>
+              <p>
+                Pracujemy na najwyższej klasy, zaawansowanym sprzęcie i dbamy o najlepszy standard wykonania, dzięki czemu każda realizacja spełnia nasze wymagania dotyczące jakości, komfortu i precyzji.
+              </p>
+              <p>
+                Dziś, po dwóch dekadach, Prooptica to cztery ekskluzywne salony w Warszawie, Piasecznie i Grójcu. Każdy z nich utrzymuje te same standardy jakości i obsługi, które definiują naszą markę od samego początku. ProOptica to przemyślana optyka, bez kompromisów.
               </p>
             </motion.div>
             
