@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useSectionVisibility, getSectionVisibilityClass, useIsSafari } from "@/lib/hooks"
 import { cn } from "@/lib/utils"
@@ -72,53 +73,36 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-center">
         <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-16 lg:px-24 w-full h-full sm:h-auto">
-          <div className="max-w-3xl h-full sm:h-auto flex flex-col justify-between sm:block pb-12 pt-96 sm:py-0">
-            
-            {/* Text Content - Left aligned on mobile */}
-            <div className="flex-1 flex flex-col justify-center sm:block text-center sm:text-left">
-              {/* Headline - First line: "Doskonałość" */}
-              <div className="overflow-hidden mb-0 sm:mb-2">
-                <h1
-                  className={cn(
-                    "font-display text-[5rem] sm:text-[clamp(5rem,12vw,9rem)] font-light text-white leading-[0.85] sm:leading-[0.88] tracking-[-0.04em]",
-                    !isSafari && "transition-transform duration-[800ms] ease-out"
-                  )}
-                  style={{
-                    transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
-                    transitionDelay: !isSafari ? '200ms' : undefined,
-                    textShadow: '0 1px 2px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.2)'
-                  }}
-                >
-                  Doskonałość
-                </h1>
-              </div>
-              {/* Headline - Second line: "widzenia" */}
-              <div className="overflow-hidden mb-10 sm:mb-12">
-                <h1
-                  className={cn(
-                    "font-display text-[5rem] sm:text-[clamp(5rem,12vw,9rem)] font-bold leading-[0.85] sm:leading-[0.88] tracking-[-0.04em]",
-                    !isSafari && "transition-transform duration-[800ms] ease-out"
-                  )}
-                  style={{
-                    transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(100%)') : undefined,
-                    transitionDelay: !isSafari ? '350ms' : undefined
-                  }}
-                >
-                  <span
-                    className="italic text-[#E31F25]"
-                    style={{
-                      textShadow: '0 1px 2px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.25)'
-                    }}
-                  >
-                    widzenia
-                  </span>
-                </h1>
+          <div className="h-full sm:h-auto flex flex-col justify-between sm:block pb-12 pt-96 sm:py-0">
+
+            {/* Text Content - Centered */}
+            <div className="flex-1 flex flex-col justify-center items-center text-center">
+              {/* Logo */}
+              <div
+                className={cn(
+                  "mb-10 sm:mb-12",
+                  !isSafari && "transition-all duration-[800ms] ease-out"
+                )}
+                style={{
+                  opacity: !isSafari ? (showContent ? 1 : 0) : 1,
+                  transform: !isSafari ? (showContent ? 'translateY(0)' : 'translateY(1rem)') : undefined,
+                  transitionDelay: !isSafari ? '200ms' : undefined,
+                }}
+              >
+                <Image
+                  src="/logo-prooptica.svg"
+                  alt="Prooptica"
+                  width={400}
+                  height={88}
+                  className="w-[280px] sm:w-[350px] md:w-[400px] h-auto mx-auto"
+                  priority
+                />
               </div>
 
               {/* Description */}
               <p
                 className={cn(
-                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-10 sm:mb-12 max-w-lg font-light mx-auto sm:mx-0",
+                  "text-white/60 text-base sm:text-lg lg:text-xl leading-[1.6] sm:leading-[1.8] mb-10 sm:mb-12 max-w-lg font-light mx-auto",
                   !isSafari && "transition-all duration-500 ease-out"
                 )}
                 style={isSafari ? {} : {
@@ -127,15 +111,15 @@ export function Hero() {
                   transitionDelay: '550ms'
                 }}
               >
-                Ponad 50 światowych marek. Najnowocześniejsza diagnostyka. 
+                Ponad 50 światowych marek. Najnowocześniejsza diagnostyka.
                 Cztery ekskluzywne salony w Polsce.
               </p>
             </div>
 
-            {/* CTA - Bottom on mobile */}
+            {/* CTA - Centered */}
             <div
               className={cn(
-                "flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-6 w-full sm:w-auto",
+                "flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-6",
                 !isSafari && "transition-all duration-500 ease-out"
               )}
               style={isSafari ? {} : {
@@ -155,8 +139,8 @@ export function Hero() {
                   </span>
                 </button>
               </Link>
-              
-              <Link href="/salony" className="group inline-flex items-center justify-center sm:justify-start gap-4 py-2 mb-6 sm:mb-0 sm:py-0">
+
+              <Link href="/salony" className="group inline-flex items-center justify-center gap-4 py-2 mb-6 sm:mb-0 sm:py-0">
                 <span className="text-white/70 text-[11px] font-medium tracking-[0.15em] sm:tracking-[0.2em] uppercase group-hover:text-white transition-colors duration-300">
                   Nasze salony
                 </span>

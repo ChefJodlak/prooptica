@@ -228,13 +228,13 @@ export default function BookingPage() {
       {step === 1 && (
         <motion.div
           key="step1"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className={cn(isMobile && "px-1 pb-20")}
         >
-          <StepHeader 
+          <StepHeader
             stepNumber={1}
             titleRegular="Wybierz"
             titleAccent="salon"
@@ -245,9 +245,9 @@ export default function BookingPage() {
             {SALONS.map((salon, i) => (
               <motion.div
                 key={salon.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.15, delay: i * 0.03 }}
               >
                 <SalonCard
                   salon={salon}
@@ -264,14 +264,14 @@ export default function BookingPage() {
       {step === 2 && selectedSalon && (
         <motion.div
           key="step2"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className={cn(isMobile && "px-1 pb-20")}
         >
           {isMobile && (
-            <button 
+            <button
               onClick={handleMobileBack}
               className="flex items-center gap-2 text-[#737373] mb-6 text-sm hover:text-[#E31F25] transition-colors"
             >
@@ -280,7 +280,7 @@ export default function BookingPage() {
             </button>
           )}
 
-          <StepHeader 
+          <StepHeader
             stepNumber={2}
             titleRegular="Wybierz"
             titleAccent="usługę"
@@ -291,9 +291,9 @@ export default function BookingPage() {
             {availableServices.map((service, i) => (
               <motion.button
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.15, delay: i * 0.03 }}
                 whileHover={{ scale: 1.01, y: -2 }}
                 whileTap={{ scale: 0.99 }}
                 onClick={() => handleServiceSelect(service)}
@@ -352,8 +352,9 @@ export default function BookingPage() {
                   
                   {selectedService?.id === service.id && (
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.15 }}
                       className="w-6 h-6 bg-[#E31F25] flex items-center justify-center ml-4 rounded-full lg:rounded-none"
                     >
                       <Check className="w-4 h-4 text-[#1a1a1a]" />
@@ -370,14 +371,14 @@ export default function BookingPage() {
       {step === 3 && selectedService && (
         <motion.div
           key="step3"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className={cn(isMobile && "px-1 pb-20")}
         >
           {isMobile && (
-            <button 
+            <button
               onClick={handleMobileBack}
               className="flex items-center gap-2 text-[#737373] mb-6 text-sm hover:text-[#E31F25] transition-colors"
             >
@@ -386,7 +387,7 @@ export default function BookingPage() {
             </button>
           )}
 
-          <StepHeader 
+          <StepHeader
             stepNumber={3}
             titleRegular="Wybierz"
             titleAccent="specjalistę"
@@ -399,7 +400,7 @@ export default function BookingPage() {
               <p className="text-[#737373] font-light">
                 Brak dostępnych specjalistów dla wybranej usługi.
               </p>
-              <button 
+              <button
                 onClick={() => {
                   setSelectedService(null)
                   setStep(2)
@@ -416,9 +417,9 @@ export default function BookingPage() {
                 return (
                   <motion.div
                     key={specialist.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.15, delay: i * 0.03 }}
                   >
                     <SpecialistCard
                       specialist={specialist}
@@ -438,14 +439,14 @@ export default function BookingPage() {
       {step === 4 && selectedSpecialist && selectedService && (
         <motion.div
           key="step4"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className={cn(isMobile && "px-1 pb-20")}
         >
           {isMobile && (
-            <button 
+            <button
               onClick={handleMobileBack}
               className="flex items-center gap-2 text-[#737373] mb-6 text-sm hover:text-[#E31F25] transition-colors"
             >
@@ -513,14 +514,14 @@ export default function BookingPage() {
       {step === 5 && selectedSpecialist && selectedSlot && selectedSalon && selectedService && (
         <motion.div
           key="step5"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className={cn(isMobile && "px-1 pb-20")}
         >
           {isMobile && (
-            <button 
+            <button
               onClick={handleMobileBack}
               className="flex items-center gap-2 text-[#737373] mb-6 text-sm hover:text-[#E31F25] transition-colors"
             >
@@ -579,8 +580,9 @@ export default function BookingPage() {
         {/* Content */}
         <div className="flex-1 flex flex-col justify-center px-8 relative z-10 pt-20">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="flex items-center gap-4 mb-6"
           >
             <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
@@ -697,9 +699,9 @@ export default function BookingPage() {
             <div className="max-w-4xl">
               {/* Eyebrow */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
                 className="flex items-center gap-5 mb-6"
               >
                 <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
@@ -709,25 +711,25 @@ export default function BookingPage() {
               </motion.div>
 
               {/* Headline */}
-              <div className="overflow-hidden pb-4 mb-6">
-                <motion.h1
-                  initial={{ y: "100%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                  className="font-display text-[clamp(2.5rem,9vw,6.5rem)] text-white leading-none tracking-[-0.03em]"
-                >
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.05 }}
+                className="pb-4 mb-6"
+              >
+                <h1 className="font-display text-[clamp(2.5rem,9vw,6.5rem)] text-white leading-none tracking-[-0.03em]">
                   <span className="font-extralight">Umów </span>
                   <span className="relative inline-block font-medium">
                     <span className="italic text-[#E31F25]">wizytę</span>
                     <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
                   </span>
-                </motion.h1>
-              </div>
+                </h1>
+              </motion.div>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
                 className="text-white/60 text-lg lg:text-xl leading-[1.8] mb-8 max-w-xl font-light"
               >
                 Wybierz salon, specjalistę i dogodny termin wizyty. Rezerwacja online zajmuje tylko chwilę.
@@ -743,9 +745,9 @@ export default function BookingPage() {
               
               {/* Steps Sidebar */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6 }}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.3 }}
                 className="lg:col-span-3"
               >
                 <div className="sticky top-32 space-y-4">
@@ -820,8 +822,9 @@ export default function BookingPage() {
                   {/* Selected Summary */}
                   {selectedSalon && (
                     <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
                       className="mt-8 p-5 bg-white ring-1 ring-[#e0ded8]"
                     >
                       <h4 className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#E31F25] mb-4">
@@ -901,9 +904,9 @@ export default function BookingPage() {
 
           <div className="max-w-[1600px] mx-auto px-4 md:px-16 lg:px-24 relative z-10">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.3 }}
               className="flex flex-col lg:flex-row items-center justify-between gap-12"
             >
               <div className="text-center lg:text-left">

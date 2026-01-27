@@ -231,41 +231,6 @@ export function LocationsScroll() {
         style={{ height: `${LOCATIONS.length * 100}vh` }}
       >
         <div className="sticky top-0 h-screen w-full flex items-center overflow-hidden">
-          {/* Progress indicator */}
-          <div className="absolute left-8 xl:left-12 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
-            {LOCATIONS.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (!containerRef.current) return
-                  const rect = containerRef.current.getBoundingClientRect()
-                  const containerAbsoluteTop = rect.top + window.scrollY
-                  // Each location occupies 100vh of scroll, so scroll index * 100vh from container top
-                  const scrollTarget = containerAbsoluteTop + (index * window.innerHeight)
-                  window.scrollTo({ top: scrollTarget, behavior: 'smooth' })
-                }}
-                className="group flex items-center gap-3"
-              >
-                <div className={`
-                  w-2 h-2 rounded-full transition-all duration-500
-                  ${activeCard === index
-                    ? 'bg-[#E31F25] scale-125'
-                    : 'bg-[#1a1a1a]/20 group-hover:bg-[#1a1a1a]/40'
-                  }
-                `} />
-                <span className={`
-                  text-[10px] font-medium tracking-[0.15em] uppercase transition-all duration-300
-                  ${activeCard === index
-                    ? 'text-[#E31F25]'
-                    : 'text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/60'
-                  }
-                `}>
-                  {LOCATIONS[index].city}
-                </span>
-              </button>
-            ))}
-          </div>
-
           <div className="w-full max-w-[1600px] mx-auto px-20 xl:px-32 grid grid-cols-12 gap-12 xl:gap-20 items-center h-full">
 
             {/* Left Side: Content */}

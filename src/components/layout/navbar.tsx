@@ -111,8 +111,8 @@ export function Navbar() {
               alt="Prooptica"
               width={logoWidth}
               height={logoHeight}
-              style={{ 
-                height: `${logoHeight}px`, 
+              style={{
+                height: `${logoHeight}px`,
                 width: "auto",
                 transition: "height 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
               }}

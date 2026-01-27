@@ -34,9 +34,9 @@ export function HeroSection() {
       <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
         {/* Label */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className="flex items-center gap-5 mb-6"
         >
           <span className="text-[#E31F25] text-[10px] font-medium tracking-[0.5em] uppercase">
@@ -44,37 +44,37 @@ export function HeroSection() {
           </span>
           <div className="h-px flex-1 max-w-[80px] bg-gradient-to-r from-[#E31F25] to-transparent" />
         </motion.div>
-        
+
         {/* Headline */}
-        <div className="overflow-hidden mb-8">
-          <motion.h1
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="font-display text-[clamp(3rem,9vw,6.5rem)] text-white leading-none tracking-[-0.03em]"
-          >
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.05 }}
+          className="mb-8"
+        >
+          <h1 className="font-display text-[clamp(3rem,9vw,6.5rem)] text-white leading-none tracking-[-0.03em]">
             <span className="font-extralight">Nasze </span>
             <span className="relative inline-block font-medium">
               <span className="italic text-[#E31F25]">Marki</span>
               <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-[#E31F25]/40 via-[#E31F25]/20 to-transparent rounded-full" />
             </span>
-          </motion.h1>
-        </div>
-        
+          </h1>
+        </motion.div>
+
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
           className="text-white/60 text-lg lg:text-xl leading-[1.8] max-w-2xl mb-8 font-light"
         >
           Współpracujemy z renomowanymi producentami zagranicznymi oraz cenionymi polskimi markami, oferując wyłącznie oryginalne produkty objęte pełną gwarancją.
         </motion.p>
-        
+
         {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
           className="flex flex-wrap gap-10"
         >
           {HERO_STATS.map((stat, i) => (
@@ -90,12 +90,12 @@ export function HeroSection() {
           ))}
         </motion.div>
       </div>
-      
+
       {/* Bottom decorative line */}
       <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
         className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E31F25]/30 to-transparent origin-center"
       />
     </section>

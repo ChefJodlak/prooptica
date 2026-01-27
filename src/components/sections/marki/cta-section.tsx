@@ -15,9 +15,9 @@ export function CtaSection({ isInView }: CtaSectionProps) {
     <section className="relative py-20 lg:py-32 bg-white">
       <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.3 }}
           className="relative bg-[#1a1a1a] p-10 lg:p-16 overflow-hidden text-center"
         >
           {/* Subtle texture overlay */}

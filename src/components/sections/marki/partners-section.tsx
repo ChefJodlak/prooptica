@@ -18,9 +18,9 @@ export function PartnersSection({ isInView }: PartnersSectionProps) {
       
       <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.3 }}
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-5 mb-8">
@@ -45,9 +45,9 @@ export function PartnersSection({ isInView }: PartnersSectionProps) {
           {TECH_PARTNERS.map((partner, i) => (
             <motion.div
               key={partner.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.15, delay: i * 0.03 }}
               className="relative bg-white/5 p-8 ring-1 ring-white/10 hover:ring-[#E31F25]/50 transition-all duration-500 group"
             >
               {/* Red accent corner */}
